@@ -134,19 +134,6 @@ export default function AITestsPage() {
     }
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'testing':
-        return 'border-blue-200 bg-blue-50'
-      case 'success':
-        return 'border-green-200 bg-green-50'
-      case 'error':
-        return 'border-red-200 bg-red-50'
-      default:
-        return 'border-gray-200 bg-gray-50'
-    }
-  }
-
   return (
     <ProtectedRoute>
       <DashboardLayout>
