@@ -79,9 +79,9 @@ export async function GET(request: NextRequest) {
 
         // Agrupar por dia
         const dailyCosts: Record<string, number> = {}
-        recentInteractions.forEach(interaction => {
+        recentInteractions.forEach((interaction: { createdAt: Date; costUSD: number | null }) => {
           const day = interaction.createdAt.toISOString().split('T')[0]
-          dailyCosts[day] = (dailyCosts[day] || 0) + interaction.costUSD
+          dailyCosts[day] = (dailyCosts[day] || 0) + (interaction.costUSD || 0)
         })
 
         const trend = Object.entries(dailyCosts).map(([date, cost]) => ({

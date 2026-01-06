@@ -66,7 +66,7 @@ export async function GET(
 
     return NextResponse.json({
       success: true,
-      data: messages.map(m => ({
+      data: messages.map((m: { id: string; sessionId: string; role: string; content: string; tokens: number | null; provider: string | null; model: string | null; aiInteractionId: string | null; ragSources: string | null; ragMetadata: string | null; createdAt: Date }) => ({
         id: m.id,
         sessionId: m.sessionId,
         role: m.role,

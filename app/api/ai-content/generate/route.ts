@@ -347,8 +347,9 @@ async function generateContentAsync(
       
       // Processar cada placeholder
       for (const placeholder of placeholders) {
-        const description = placeholder[1]
-        const fullMatch = placeholder[0]
+        if (!Array.isArray(placeholder) || placeholder.length < 2) continue
+        const description = placeholder[1] as string
+        const fullMatch = placeholder[0] as string
         
         try {
           // Criar AIService específico para DALL-E (geração de imagens)

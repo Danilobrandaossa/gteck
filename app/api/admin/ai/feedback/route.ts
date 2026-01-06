@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 6. Buscar informações das interações (sample)
-    const interactionIds = feedbacks.slice(0, 10).map(f => f.aiInteractionId)
+    const interactionIds = feedbacks.slice(0, 10).map((f: { aiInteractionId: string }) => f.aiInteractionId)
     const interactions = await db.aIInteraction.findMany({
       where: {
         id: {
@@ -112,8 +112,8 @@ export async function GET(request: NextRequest) {
     })
 
     // 7. Enriquecer feedbacks com dados da interação
-    const enrichedFeedbacks = feedbacks.map(feedback => {
-      const interaction = interactions.find(i => i.id === feedback.aiInteractionId)
+    const enrichedFeedbacks = feedbacks.map((feedback: { aiInteractionId: string; [key: string]: any }) => {
+      const interaction = interactions.find((i: { id: string }) => i.id === feedback.aiInteractionId)
       if (!interaction) return feedback
 
       const context = interaction.context ? (typeof interaction.context === 'string' ? JSON.parse(interaction.context) : interaction.context) : {}

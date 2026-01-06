@@ -53,6 +53,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar senha
+    if (!user.password) {
+      return NextResponse.json(
+        { success: false, error: 'Usuário sem senha configurada' },
+        { status: 401 }
+      )
+    }
     const passwordMatch = await bcrypt.compare(password, user.password)
     
     if (!passwordMatch) {

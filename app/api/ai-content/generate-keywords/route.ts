@@ -99,8 +99,8 @@ Responda APENAS com as palavras-chave separadas por vírgula, sem numeração, s
     const keywordsText = result.data.content.trim()
     const keywords = keywordsText
       .split(',')
-      .map(k => k.trim())
-      .filter(k => k.length > 0)
+      .map((k: string) => k.trim())
+      .filter((k: string) => k.length > 0)
 
     return NextResponse.json({
       success: true,

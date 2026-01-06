@@ -45,6 +45,11 @@ export async function GET(request: NextRequest) {
         }, { status: 400 })
       }
       const [, bucket, object] = gsMatch
+      if (!object) {
+        return NextResponse.json({
+          error: 'URL do Google Storage inválida (objeto não encontrado)'
+        }, { status: 400 })
+      }
       // Encode cada segmento do path separadamente (suporta paths com /)
       const safeObject = object.split('/').map(encodeURIComponent).join('/')
       downloadUrl = `https://storage.googleapis.com/${bucket}/${safeObject}`

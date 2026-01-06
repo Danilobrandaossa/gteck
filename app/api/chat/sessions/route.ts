@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      data: sessions.map(s => ({
+      data: sessions.map((s: { id: string; title: string | null; organizationId: string; siteId: string; userId: string | null; metadata: string | null; createdAt: Date; updatedAt: Date; lastMessageAt: Date | null; _count: { messages: number } }) => ({
         id: s.id,
         title: s.title,
         organizationId: s.organizationId,
