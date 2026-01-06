@@ -109,10 +109,10 @@ export class AuthService {
     // Validação de senha para usuários mock (case-sensitive)
     let validPassword = false
     
-    // Mapeamento de senhas por email
+    // Mapeamento de senhas por email (fallback apenas - não deve ser usado se API funcionar)
     const passwordMap: Record<string, string> = {
       'admin@cms.local': 'password',
-      'contato@danilobrandao.com.br': 'Zy598859D@n2',
+      'contato@danilobrandao.com.br': 'Zy598859D@n',
       'admin@cms.com': '123456',
       'editor@cms.com': '123456'
     }

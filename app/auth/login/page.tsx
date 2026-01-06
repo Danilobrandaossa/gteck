@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/auth-context'
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
+import { Logo } from '@/components/logo'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -72,26 +73,14 @@ export default function LoginPage() {
         <div className="cms-card-content" style={{ padding: '2rem' }}>
           {/* Logo */}
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{
-              width: '4rem',
-              height: '4rem',
-              background: 'linear-gradient(135deg, var(--primary), var(--primary-hover))',
-              borderRadius: 'var(--radius-lg)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1rem',
-              color: 'var(--white)',
-              fontWeight: 'bold',
-              fontSize: '1.5rem'
-            }}>
-              CMS
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+              <Logo size="large" />
             </div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--gray-900)', marginBottom: '0.5rem' }}>
               Bem-vindo de volta
             </h1>
             <p style={{ color: 'var(--gray-600)' }}>
-              Faça login para acessar o CMS Moderno
+              Faça login para acessar
             </p>
           </div>
 
@@ -131,6 +120,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu@email.com"
+                  autoComplete="email"
                   required
                   style={{
                     width: '100%',
@@ -163,6 +153,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Sua senha"
+                  autoComplete="current-password"
                   required
                   style={{
                     width: '100%',
@@ -192,7 +183,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
               <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: 'var(--gray-600)', cursor: 'pointer' }}>
                 <input 
                   type="checkbox" 
@@ -202,9 +193,6 @@ export default function LoginPage() {
                 />
                 Lembrar de mim
               </label>
-              <a href="#" style={{ fontSize: '0.875rem', color: 'var(--primary)', textDecoration: 'none' }}>
-                Esqueceu a senha?
-              </a>
             </div>
 
             <button
@@ -221,16 +209,6 @@ export default function LoginPage() {
               {isLoading ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
-
-          {/* Footer */}
-          <div style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--gray-200)' }}>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-500)' }}>
-              Não tem uma conta?{' '}
-              <a href="#" style={{ color: 'var(--primary)', textDecoration: 'none' }}>
-                Criar conta
-              </a>
-            </p>
-          </div>
         </div>
       </div>
     </main>

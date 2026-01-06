@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { OrganizationSelector } from './organization-selector'
+import { Logo } from '@/components/logo'
 import { 
   LayoutDashboard, 
   FileText, 
@@ -22,7 +24,9 @@ import {
   BookOpen,
   FlaskConical,
   HardDrive,
-  Sparkles
+  Sparkles,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 
 const navigation = [
@@ -51,48 +55,59 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <div className="cms-sidebar">
+    <div className={`cms-sidebar ${isCollapsed ? 'cms-sidebar-collapsed' : ''}`}>
       {/* Logo */}
       <div className="cms-logo">
-        <div className="cms-logo-icon">CMS</div>
-        <div className="cms-logo-text">
-          <h1>CMS Moderno</h1>
-          <p>Sistema de Conteúdo</p>
-        </div>
+        {isCollapsed ? (
+          <Logo size="small" showText={false} />
+        ) : (
+          <Logo size="small" showText={true} />
+        )}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="cms-sidebar-toggle"
+          title={isCollapsed ? 'Expandir menu' : 'Colapsar menu'}
+        >
+          {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+        </button>
       </div>
 
-              {/* Organization Selector */}
-              <OrganizationSelector />
+      {/* Organization Selector - Oculto quando colapsado */}
+      {!isCollapsed && <OrganizationSelector />}
 
-              {/* Navigation */}
-              <nav className="cms-nav">
-                {navigation.map((item) => {
-                  const isActive = pathname === item.href
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`cms-nav-item ${isActive ? 'active' : ''}`}
-                    >
-                      <item.icon />
-                      {item.name}
-                    </Link>
-                  )
-                })}
-              </nav>
+      {/* Navigation */}
+      <nav className="cms-nav">
+        {navigation.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`cms-nav-item ${isActive ? 'active' : ''}`}
+              title={isCollapsed ? item.name : ''}
+            >
+              <item.icon />
+              {!isCollapsed && <span>{item.name}</span>}
+            </Link>
+          )
+        })}
+      </nav>
 
-      {/* Footer */}
-      <div style={{ borderTop: '1px solid var(--gray-200)', padding: '1rem' }}>
-        <div className="cms-header-user">
-          <div className="cms-user-avatar">U</div>
-          <div className="cms-user-info">
-            <p>Usuário Admin</p>
-            <p>admin@cms.com</p>
+      {/* Footer - Oculto quando colapsado */}
+      {!isCollapsed && (
+        <div style={{ borderTop: '1px solid var(--gray-200)', padding: '1rem' }}>
+          <div className="cms-header-user">
+            <div className="cms-user-avatar">U</div>
+            <div className="cms-user-info">
+              <p>Usuário Admin</p>
+              <p>admin@cms.com</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
