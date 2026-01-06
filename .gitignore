@@ -91,3 +91,9 @@ uploads/**/*
 *.min.js
 *.min.css
 
+# Large media files
+*.mp4
+*.mov
+*.avi
+videoplayback.mp4
+
