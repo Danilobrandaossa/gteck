@@ -10,7 +10,6 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { safeQueryRaw } from '@/lib/tenant-security'
 import { Prisma } from '@prisma/client'
 
 export async function GET(request: NextRequest) {
