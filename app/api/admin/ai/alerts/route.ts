@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
       MEDIUM: 2,
       LOW: 1
     }
-    alerts.sort((a, b) => severityOrder[b.severity] - severityOrder[a.severity])
+    alerts.sort((a, b) => (severityOrder[b.severity] || 0) - (severityOrder[a.severity] || 0))
 
     logger.info('Alerts check completed', {
       action: 'alerts_check',
