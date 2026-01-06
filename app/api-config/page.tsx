@@ -19,7 +19,6 @@ import {
   Trash2,
   Edit,
   RefreshCw,
-  DollarSign,
   Activity
 } from 'lucide-react'
 
