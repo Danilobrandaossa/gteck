@@ -199,7 +199,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Adicionar export GET para debug (pode ser removido depois)
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   console.log('📥 GET /api/ai-content/generate recebido (debug)')
   return NextResponse.json({
     success: true,
