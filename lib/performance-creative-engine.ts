@@ -66,6 +66,15 @@ export interface PerformanceCreativeRequest {
   // Additional context
   mainPrompt?: string
   imageRatio?: '1:1' | '4:5' | '9:16' | '16:9'
+  
+  // Tenant context (optional for admins)
+  organizationId?: string
+  siteId?: string
+  
+  // Image generation options
+  generateImages?: boolean
+  imageModel?: 'nano' | 'pro'
+  includeTextInImage?: boolean
 }
 
 export interface CreativeVersion {
