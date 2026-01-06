@@ -251,3 +251,164 @@ model AIResponseFeedback {
   @@index([createdAt], name: "ai_feedback_created_at_idx")
   @@map("ai_response_feedback")
 }
+
+model AIContent {
+  id                  String   @id @default(cuid())
+  title               String
+  slug                String?
+  excerpt             String?
+  content             String?
+  status              String   @default("draft")
+  language            String   @default("pt-BR")
+  category            String?
+  tags                String?
+  keywords            String?
+  secondaryKeywords   String?
+  aiModel             String?
+  prompt              String?
+  additionalInstructions String?
+  generationConfig    String   @default("{}")
+  wordCount           Int?
+  errorMessage        String?
+  wordpressPostId     Int?
+  wordpressUrl        String?
+  metaDescription     String?
+  featuredImage       String?
+  featuredImageAlt    String?
+  siteId              String
+  authorId            String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  publishedAt         DateTime?
+  scheduledAt         DateTime?
+
+  @@map("ai_content")
+}
+
+model AIContentHistory {
+  id        String   @id @default(cuid())
+  contentId String
+  action    String
+  prompt    String?
+  metadata  String?
+  createdAt DateTime @default(now())
+
+  @@map("ai_content_history")
+}
+
+model AIPluginConfig {
+  id           String   @id @default(cuid())
+  siteId       String   @unique
+  apiKey       String?
+  webhookUrl   String?
+  webhookSecret String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("ai_plugin_config")
+}
+
+model ChatSession {
+  id           String   @id @default(cuid())
+  organizationId String
+  siteId       String
+  userId       String?
+  title        String?
+  metadata     String?  @default("{}")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  lastMessageAt DateTime?
+
+  @@index([organizationId, siteId, createdAt], name: "chat_session_org_site_created_idx")
+  @@index([userId, createdAt], name: "chat_session_user_created_idx")
+  @@index([lastMessageAt], name: "chat_session_last_message_idx")
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id             String   @id @default(cuid())
+  sessionId      String
+  role           String
+  content        String
+  tokens         Int?
+  provider       String?
+  model          String?
+  aiInteractionId String?
+  ragSources     String?  @default("[]")
+  ragMetadata    String?  @default("{}")
+  createdAt      DateTime @default(now())
+
+  @@index([sessionId, createdAt], name: "chat_message_session_created_idx")
+  @@index([aiInteractionId], name: "chat_message_ai_interaction_idx")
+  @@map("chat_messages")
+}
+
+model Embedding {
+  id            String   @id @default(cuid())
+  pageId        String?
+  aiContentId   String?
+  templateId    String?
+  siteId        String
+  organizationId String
+  embedding     String   // vector(1536) - stored as string in SQLite
+  model         String   @default("text-embedding-ada-002")
+  dimensions    Int      @default(1536)
+  sourceType    String
+  contentHash   String
+  language      String   @default("pt-BR")
+  version       Int      @default(1)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("embeddings")
+}
+
+model EmbeddingChunk {
+  id            String   @id @default(cuid())
+  pageId        String?
+  aiContentId   String?
+  templateId    String?
+  siteId        String
+  organizationId String
+  sourceType    String
+  sourceId      String
+  chunkIndex    Int
+  chunkText     String
+  chunkHash     String
+  embedding     String   // vector(1536) - stored as string in SQLite
+  model         String   @default("text-embedding-ada-002")
+  dimensions    Int      @default(1536)
+  provider      String   @default("openai")
+  version       Int      @default(1)
+  isActive      Boolean  @default(true)
+  language      String   @default("pt-BR")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([siteId, sourceType, sourceId, isActive], name: "embedding_chunk_site_source_active_idx")
+  @@index([organizationId, siteId, sourceType], name: "embedding_chunk_org_site_source_idx")
+  @@index([chunkHash, model, version], name: "embedding_chunk_hash_model_version_idx")
+  @@index([sourceId, chunkIndex], name: "embedding_chunk_source_index_idx")
+  @@map("embedding_chunks")
+}
+
+model AIResponseCache {
+  id            String   @id @default(cuid())
+  organizationId String
+  siteId        String
+  cacheKey      String
+  response      String
+  provider      String
+  model         String
+  expiresAt     DateTime
+  hitCount      Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([organizationId, siteId, cacheKey], name: "ai_response_cache_key_tenant_idx")
+  @@index([expiresAt], name: "ai_response_cache_expires_idx")
+  @@index([organizationId, siteId, createdAt], name: "ai_response_cache_org_site_created_idx")
+  @@map("ai_response_cache")
+}
