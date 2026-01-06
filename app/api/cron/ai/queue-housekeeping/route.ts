@@ -93,7 +93,8 @@ export async function GET(request: NextRequest) {
     logger.info('Recovered stuck jobs', {
       action: 'recover_stuck_jobs',
       component: 'cron',
-      recoveredCount: recoveredJobs.length
+      recoveredCount: recoveredJobs.recovered,
+      movedToFailedCount: recoveredJobs.movedToFailed
     })
 
     // 6. Estatísticas de jobs
@@ -158,6 +159,7 @@ export async function GET(request: NextRequest) {
     }, { status: 500 })
   }
 }
+
 
 
 
