@@ -81,7 +81,9 @@ export async function GET(request: NextRequest) {
         const dailyCosts: Record<string, number> = {}
         recentInteractions.forEach((interaction: { createdAt: Date; costUSD: number | null }) => {
           const day = interaction.createdAt.toISOString().split('T')[0]
-          dailyCosts[day] = (dailyCosts[day] || 0) + (interaction.costUSD || 0)
+          if (day) {
+            dailyCosts[day] = (dailyCosts[day] || 0) + (interaction.costUSD || 0)
+          }
         })
 
         const trend = Object.entries(dailyCosts).map(([date, cost]) => ({

@@ -79,11 +79,10 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
     aiModel: content.aiModel || 'gpt-4',
     prompt: newPrompt || content.prompt || `Crie um artigo completo sobre: ${content.title}`,
     additionalInstructions: additionalInstructions || content.additionalInstructions || undefined
-  }).catch(error => {
+  }).catch((error: unknown) => {
     logger.error('Erro ao regenerar conteúdo em background', {
-      route: 'ai-content.regenerate',
       requestId,
-      error: error as Error
+      error: error instanceof Error ? error : new Error(String(error))
     })
     db.aIContent.update({
       where: { id },
@@ -91,11 +90,10 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
         status: 'error',
         errorMessage: error instanceof Error ? error.message : 'Erro desconhecido ao regenerar conteúdo'
       }
-    }).catch(err => {
+    }).catch((err: unknown) => {
       logger.error('Falha ao atualizar status de erro do conteúdo', {
-        route: 'ai-content.regenerate',
         requestId,
-        error: err as Error
+        error: err instanceof Error ? err : new Error(String(err))
       })
     })
   })
