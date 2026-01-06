@@ -244,7 +244,7 @@ export default function AITestsPage() {
                 </h2>
 
                 <div className="cms-grid cms-gap-4">
-                  {testAPIs.map((api, index) => {
+                  {testAPIs.map((api) => {
                     const result = testResults.find(r => r.api === api.name)
                     const IconComponent = api.icon
 
