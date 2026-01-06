@@ -122,7 +122,8 @@ export async function GET(request: NextRequest) {
       result: {
         archivedCompleted: completedResult.count,
         archivedFailed: failedResult.count,
-        recoveredStuck: recoveredJobs.length,
+        recoveredStuck: recoveredJobs.recovered,
+        movedToFailed: recoveredJobs.movedToFailed,
         currentStats: stats.reduce((acc, stat) => {
           acc[stat.status] = stat._count.id
           return acc
