@@ -79,9 +79,10 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
     prompt: newPrompt || content.prompt || `Crie um artigo completo sobre: ${content.title}`,
     additionalInstructions: additionalInstructions || content.additionalInstructions || undefined
   }).catch((error: unknown) => {
+    const errorMessage = error instanceof Error ? error.message : String(error)
     logger.error('Erro ao regenerar conteúdo em background', {
       requestId,
-      error: error instanceof Error ? error : new Error(String(error))
+      error: errorMessage
     })
     db.aIContent.update({
       where: { id },
@@ -90,9 +91,10 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
         errorMessage: error instanceof Error ? error.message : 'Erro desconhecido ao regenerar conteúdo'
       }
     }).catch((err: unknown) => {
+      const errMessage = err instanceof Error ? err.message : String(err)
       logger.error('Falha ao atualizar status de erro do conteúdo', {
         requestId,
-        error: err instanceof Error ? err : new Error(String(err))
+        error: errMessage
       })
     })
   })
