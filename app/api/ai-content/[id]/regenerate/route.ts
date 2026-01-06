@@ -1,4 +1,3 @@
-import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { AIService } from '@/lib/ai-services'
 import { HttpError, jsonResponse, withApiHandler } from '@/lib/api-handler'

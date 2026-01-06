@@ -23,6 +23,7 @@ model Organization {
   // Relations
   users User[]
   sites Site[]
+  aiContent AIContent[]
   chatSessions ChatSession[]
   aiInteractions AIInteraction[]
   aiResponseCache AIResponseCache[]
@@ -313,6 +314,7 @@ model AIContent {
   metaDescription     String?
   featuredImage       String?
   featuredImageAlt    String?
+  organizationId      String
   siteId              String
   authorId            String?
   createdAt           DateTime @default(now())
@@ -321,6 +323,7 @@ model AIContent {
   scheduledAt         DateTime?
 
   // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   site    Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
   author  User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
   history AIContentHistory[]
