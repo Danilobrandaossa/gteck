@@ -626,7 +626,7 @@ export class RagService {
     const vectorQueryDurationMs = Date.now() - vectorSearchStartTime
 
     // Buscar conteúdo completo e metadados dos candidatos
-    const candidateChunks = await Promise.all(
+    const candidateChunksRaw = await Promise.all(
       results.map(async (result) => {
         let content = ''
         let sourceId = ''
@@ -651,7 +651,7 @@ export class RagService {
           })
 
           if (!chunk) {
-            continue // Pular se chunk não encontrado
+            return null // Retornar null se chunk não encontrado
           }
 
           sourceId = chunk.sourceId
@@ -738,7 +738,8 @@ export class RagService {
       })
     )
 
-    // Filtrar chunks vazios
+    // Filtrar chunks nulos e vazios
+    const candidateChunks = candidateChunksRaw.filter((c): c is RerankChunk => c !== null)
     const validCandidates = candidateChunks.filter(c => c.content.trim().length > 0)
 
     // FASE 7 ETAPA 2: Aplicar rerank e selecionar top-K com diversidade

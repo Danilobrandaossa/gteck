@@ -140,22 +140,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-      
-      return NextResponse.json({
-        success: false,
-        error: `Erro na API ${model}: ${apiError instanceof Error ? apiError.message : 'Erro desconhecido'}`,
-        model,
-        duration: Date.now() - startTime
-      }, { status: 500 })
-    }
-
-  } catch (error) {
-    console.error('Erro no endpoint de teste de IA:', error)
-    
-    return NextResponse.json({
-      success: false,
-      error: 'Erro interno do servidor',
-      details: error instanceof Error ? error.message : 'Erro desconhecido'
-    }, { status: 500 })
-  }
-}

@@ -58,17 +58,6 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
     throw new HttpError(403, 'CONTENT_OWNERSHIP_MISMATCH', 'Conteúdo não pertence ao tenant especificado')
   }
 
-  let body: unknown
-  try {
-    body = await request.json()
-  } catch {
-    throw new HttpError(400, 'INVALID_BODY', 'Body JSON inválido')
-  }
-
-  if (typeof body !== 'object' || body === null) {
-    throw new HttpError(400, 'INVALID_BODY', 'Body JSON inválido')
-  }
-
   const { prompt: newPrompt, additionalInstructions } = body as {
     prompt?: string
     additionalInstructions?: string
