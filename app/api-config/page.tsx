@@ -23,7 +23,7 @@ import {
 } from 'lucide-react'
 
 export default function APIConfigPage() {
-  const { configs, isLoading, error, addConfig, updateConfig, deleteConfig, testConnection } = useAPIConfig()
+  const { configs, error, addConfig, updateConfig, deleteConfig, testConnection } = useAPIConfig()
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState<string | null>(null)
   const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
