@@ -9,7 +9,6 @@ import {
   XCircle, 
   Loader, 
   TestTube,
-  Zap,
   Brain,
   Search,
   FileText,
