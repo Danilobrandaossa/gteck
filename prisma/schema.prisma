@@ -189,3 +189,65 @@ model WordPressDiagnostic {
 
   @@map("wordpress_diagnostics")
 }
+
+model AIInteraction {
+  id            String   @id @default(cuid())
+  organizationId String
+  siteId        String?
+  userId        String?
+  aiContentId   String?
+  pageId        String?
+  type          String
+  status        String   @default("pending")
+  prompt        String
+  promptVersion String?
+  context       String?  @default("{}")
+  provider      String
+  model         String
+  temperature   Float?   @default(0.7)
+  maxTokens     Int?
+  response      String?
+  finishReason  String?
+  promptTokens      Int?
+  completionTokens  Int?
+  totalTokens       Int?
+  costUSD           Float?
+  costBRL           Float?
+  durationMs        Int?
+  embeddingDurationMs Int?
+  aiCallDurationMs  Int?
+  ragUsed           Boolean @default(false)
+  ragChunksCount    Int?
+  ragSimilarityThreshold Float? @default(0.7)
+  errorMessage      String?
+  errorCode         String?
+  retryCount        Int     @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  completedAt       DateTime?
+
+  @@index([organizationId, type, status], name: "ai_interaction_org_type_status_idx")
+  @@index([siteId, createdAt], name: "ai_interaction_site_created_idx")
+  @@index([userId, createdAt], name: "ai_interaction_user_created_idx")
+  @@index([provider, model], name: "ai_interaction_provider_model_idx")
+  @@index([createdAt], name: "ai_interaction_created_at_idx")
+  @@map("ai_interactions")
+}
+
+model AIResponseFeedback {
+  id              String   @id @default(cuid())
+  organizationId  String
+  siteId          String
+  aiInteractionId String
+  userId          String?
+  rating          Int
+  reason          String?
+  commentTag      String?
+  createdAt       DateTime @default(now())
+
+  @@index([organizationId, siteId], name: "ai_feedback_org_site_idx")
+  @@index([aiInteractionId], name: "ai_feedback_interaction_idx")
+  @@index([rating], name: "ai_feedback_rating_idx")
+  @@index([createdAt], name: "ai_feedback_created_at_idx")
+  @@map("ai_response_feedback")
+}
