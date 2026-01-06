@@ -25,13 +25,6 @@ interface TestResult {
   isRealAPI?: boolean
 }
 
-interface APIUsage {
-  requests: number
-  tokens: number
-  cost: number
-  lastUsed: Date
-}
-
 export default function AITestsPage() {
   const [activeTab, setActiveTab] = useState<'tests' | 'usage' | 'settings'>('tests')
   const [testResults, setTestResults] = useState<TestResult[]>([])
