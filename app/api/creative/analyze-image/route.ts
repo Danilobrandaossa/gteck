@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { AIService } from '@/lib/ai-services'
 import { requireTenantContext } from '@/lib/tenant-security'
 import { StructuredLogger } from '@/lib/observability/logger'
 import { getOrCreateCorrelationId, addCorrelationIdToResponse } from '@/lib/observability/correlation'
@@ -40,12 +39,14 @@ export async function POST(request: NextRequest) {
     const role = formData.get('role') as string || 'inspiração'
     
     // ✅ CORREÇÃO CRÍTICA: Validar contexto de tenant (FormData)
+    // Permitir siteId opcional (para admins)
     const organizationId = formData.get('organizationId') as string | null
     const siteId = formData.get('siteId') as string | null
+    const allowSiteIdOptional = !siteId // Se siteId não foi fornecido, permitir (admin)
     
     let tenantContext
     try {
-      tenantContext = requireTenantContext(organizationId, siteId)
+      tenantContext = requireTenantContext(organizationId, siteId, allowSiteIdOptional)
     } catch (error) {
       logger.warn('Tenant validation failed', { 
         error: error instanceof Error ? error.message : 'Unknown error'
@@ -53,7 +54,9 @@ export async function POST(request: NextRequest) {
       return addCorrelationIdToResponse(
         NextResponse.json({
           success: false,
-          error: 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
+          error: allowSiteIdOptional 
+            ? 'organizationId é obrigatório e deve ser um CUID válido'
+            : 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
           errorCode: 'INVALID_TENANT_CONTEXT'
         }, { status: 400 }),
         correlationId
@@ -92,15 +95,23 @@ export async function POST(request: NextRequest) {
     const mimeType = imageFile.type
 
     // Configurar Gemini API
-    const rawApiKey = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GOOGLE_API_KEY || ''
+    const rawApiKey = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || ''
     const apiKey = rawApiKey.trim().replace(/^["']|["']$/g, '') // Remove aspas se houver
     
     if (!apiKey) {
       console.error('[Analyze Image] API key não encontrada')
-      return NextResponse.json({
-        success: false,
-        error: 'Google Gemini API key não configurada (GOOGLE_AI_STUDIO_API_KEY ou GOOGLE_API_KEY)'
-      }, { status: 500 })
+      return addCorrelationIdToResponse(
+        NextResponse.json({
+          success: false,
+          error: 'Google Gemini API key não configurada. Configure GOOGLE_AI_STUDIO_API_KEY, GOOGLE_API_KEY ou GEMINI_API_KEY no arquivo .env'
+        }, { status: 500 }),
+        correlationId
+      )
+    }
+    
+    // Validar formato da API key (deve começar com "AIza")
+    if (!apiKey.startsWith('AIza')) {
+      console.warn('[Analyze Image] API key com formato suspeito (não começa com "AIza")')
     }
     
     console.log('[Analyze Image] Iniciando análise com Gemini Vision...')
@@ -122,60 +133,30 @@ export async function POST(request: NextRequest) {
     }
 
     // Chamar Gemini Vision API
-    // Usar gemini-2.5-flash conforme documentação oficial
-    let model = 'gemini-2.5-flash' // Gemini 2.5 Flash com suporte a visão
-    let url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
+    // Tentar modelos em ordem de estabilidade: gemini-pro (v1) primeiro, depois v1beta
+    const modelsToTry = [
+      { model: 'gemini-pro', endpoint: 'https://generativelanguage.googleapis.com/v1', version: 'v1' },
+      { model: 'gemini-1.5-flash', endpoint: 'https://generativelanguage.googleapis.com/v1beta', version: 'v1beta' },
+      { model: 'gemini-1.5-pro', endpoint: 'https://generativelanguage.googleapis.com/v1beta', version: 'v1beta' },
+      { model: 'gemini-2.5-flash', endpoint: 'https://generativelanguage.googleapis.com/v1beta', version: 'v1beta' },
+    ]
     
-    console.log('[Analyze Image] Chamando Gemini Vision API...', { model, role, imageSize: base64Image.length })
+    console.log('[Analyze Image] Chamando Gemini Vision API...', { role, imageSize: base64Image.length })
+    
+    let response: Response | null = null
+    let lastError: any = null
     
     try {
-      let response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': apiKey
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: analysisPrompt
-                },
-                {
-                  inlineData: {
-                    mimeType: mimeType,
-                    data: base64Image
-                  }
-                }
-              ]
-            }
-          ],
-          generationConfig: {
-            maxOutputTokens: 300,
-            temperature: 0.7
-          }
-        })
-      })
-
-      // Se der 404, tentar fallbacks
-      if (!response.ok && response.status === 404) {
-        console.log('[Analyze Image] Modelo não encontrado, tentando fallbacks...')
-        const fallbacks = [
-          ['gemini-2.5-flash-lite', 'https://generativelanguage.googleapis.com/v1beta'],
-          ['gemini-1.5-flash', 'https://generativelanguage.googleapis.com/v1beta'],
-          ['gemini-1.5-pro', 'https://generativelanguage.googleapis.com/v1beta'],
-        ]
+      // Tentar cada modelo até encontrar um que funcione
+      for (const { model: tryModel, endpoint } of modelsToTry) {
+        console.log(`[Analyze Image] Tentando modelo ${tryModel}...`)
+        const url = `${endpoint}/models/${tryModel}:generateContent?key=${apiKey}`
         
-        for (const [fallbackModel, fallbackEndpoint] of fallbacks) {
-          console.log(`[Analyze Image] Tentando ${fallbackModel}...`)
-          url = `${fallbackEndpoint}/models/${fallbackModel}:generateContent`
-          
+        try {
           response = await fetch(url, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'x-goog-api-key': apiKey
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify({
               contents: [
@@ -201,15 +182,25 @@ export async function POST(request: NextRequest) {
           })
           
           if (response.ok) {
-            console.log(`[Analyze Image] ✅ Sucesso com ${fallbackModel}`)
-            model = fallbackModel
+            console.log(`[Analyze Image] ✅ Sucesso com ${tryModel}`)
             break
+          } else {
+            const errorText = await response.text()
+            console.warn(`[Analyze Image] Modelo ${tryModel} falhou: ${response.status} ${response.statusText}`, errorText.substring(0, 200))
+            lastError = { status: response.status, statusText: response.statusText, error: errorText }
+            // Continuar para o próximo modelo
+            continue
           }
+        } catch (fetchError) {
+          console.warn(`[Analyze Image] Erro ao chamar ${tryModel}:`, fetchError instanceof Error ? fetchError.message : 'Erro desconhecido')
+          lastError = fetchError
+          continue
         }
       }
-
-      if (!response.ok) {
-        const errorText = await response.text()
+      
+      // Se nenhum modelo funcionou
+      if (!response || !response.ok) {
+        const errorText = lastError?.error || await response?.text().catch(() => 'Erro desconhecido') || 'Erro desconhecido'
         let errorData: any = {}
         try {
           errorData = JSON.parse(errorText)
@@ -218,16 +209,29 @@ export async function POST(request: NextRequest) {
         }
         
         console.error('[Analyze Image] Erro na API Gemini:', {
-          status: response.status,
-          statusText: response.statusText,
-          error: errorData
+          status: lastError?.status || response?.status || 500,
+          statusText: lastError?.statusText || response?.statusText || 'Internal Server Error',
+          error: errorData,
+          modelsTried: modelsToTry.map(m => m.model).join(', ')
         })
         
-        return NextResponse.json({
-          success: false,
-          error: `Erro na análise: ${response.status} ${response.statusText}`,
-          details: process.env.NODE_ENV === 'development' ? errorData : undefined
-        }, { status: 500 })
+        // Mensagem mais amigável para 403
+        let errorMessage = `Erro na análise: ${lastError?.status || response?.status || 500} ${lastError?.statusText || response?.statusText || 'Internal Server Error'}`
+        if (lastError?.status === 403 || response?.status === 403) {
+          errorMessage = 'Erro de autenticação (403). Verifique se a API key do Google Gemini está configurada corretamente e tem permissão para usar os modelos de visão.'
+        }
+        
+        return addCorrelationIdToResponse(
+          NextResponse.json({
+            success: false,
+            error: errorMessage,
+            details: process.env.NODE_ENV === 'development' ? {
+              ...errorData,
+              modelsTried: modelsToTry.map(m => m.model)
+            } : undefined
+          }, { status: 500 }),
+          correlationId
+        )
       }
 
       const data = await response.json()

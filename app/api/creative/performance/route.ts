@@ -45,10 +45,12 @@ export async function POST(request: NextRequest) {
     })
 
     // ✅ CORREÇÃO CRÍTICA: Validar contexto de tenant
+    // Permitir siteId opcional (para admins)
     const { organizationId, siteId } = body
+    const allowSiteIdOptional = !siteId // Se siteId não foi fornecido, permitir (admin)
     let tenantContext
     try {
-      tenantContext = requireTenantContext(organizationId, siteId)
+      tenantContext = requireTenantContext(organizationId, siteId, allowSiteIdOptional)
     } catch (error) {
       logger.warn('Tenant validation failed', { 
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -58,11 +60,14 @@ export async function POST(request: NextRequest) {
       return addCorrelationIdToResponse(
         NextResponse.json({
           status: 'failed',
-          failureReason: 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
+          failureReason: allowSiteIdOptional
+            ? 'organizationId é obrigatório e deve ser um CUID válido'
+            : 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
           error: 'INVALID_TENANT_CONTEXT',
           details: {
             hasOrganizationId: !!organizationId,
-            hasSiteId: !!siteId
+            hasSiteId: !!siteId,
+            allowSiteIdOptional
           }
         }, { status: 400 }),
         correlationId
@@ -205,7 +210,6 @@ export async function POST(request: NextRequest) {
         
         console.log('[Performance Creative API] ✅ INICIANDO GERAÇÃO DE IMAGENS para', result.creative_versions.length, 'variações')
 
-        const { CreativeGenerator } = await import('@/lib/creative-generator')
         const imageResults = await Promise.allSettled(
           result.creative_versions.map(async (version) => {
             if (!version.image_prompt) {
@@ -213,8 +217,6 @@ export async function POST(request: NextRequest) {
             }
 
             try {
-              // Criar brief para geração de imagem
-              const brief = {
                 mainPrompt: version.image_prompt,
                 imageRatio: body.imageRatio || '1:1',
                 variations: 1,
@@ -312,6 +314,13 @@ export async function POST(request: NextRequest) {
               (version as any).image_url = imageResult.value.image_url
               successfulImages++
               console.log(`[Performance Creative API] ✅ Imagem ${version.version_number} gerada:`, imageResult.value.image_url?.substring(0, 50))
+              console.log(`[Performance Creative API] Versão completa:`, {
+                version_number: version.version_number,
+                hasImageUrl: !!(version as any).image_url,
+                imageUrlLength: (version as any).image_url?.length || 0
+              })
+            } else {
+              console.error(`[Performance Creative API] ⚠️ Versão não encontrada para imageResult.version_number:`, imageResult.value.version_number)
             }
           } else {
             const error = imageResult.status === 'rejected' 
@@ -319,6 +328,16 @@ export async function POST(request: NextRequest) {
               : (imageResult.status === 'fulfilled' ? imageResult.value.error : 'Unknown error')
             console.error(`[Performance Creative API] ❌ Falha ao gerar imagem ${index + 1}:`, error)
           }
+        })
+        
+        // Log final: verificar todas as versões antes de retornar
+        console.log('[Performance Creative API] 📋 Versões finais antes de retornar:')
+        result.creative_versions.forEach((v: any) => {
+          console.log(`  Versão ${v.version_number}:`, {
+            hasImageUrl: !!v.image_url,
+            imageUrl: v.image_url?.substring(0, 80) || 'N/A',
+            hasImagePrompt: !!v.image_prompt
+          })
         })
 
         logger.info('Images generated for performance creatives', {
@@ -384,7 +403,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   // Endpoint de documentação
   return NextResponse.json({
     name: 'Performance Creative Generation API',

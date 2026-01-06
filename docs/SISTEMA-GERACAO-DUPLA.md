@@ -62,9 +62,9 @@ Adicione no seu `.env.local`:
 OPENAI_API_KEY="sk-proj-..."
 
 # Google AI Studio (para Gemini)
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 # OU
-GEMINI_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GEMINI_API_KEY="your-google-ai-studio-api-key-here"
 ```
 
 ---

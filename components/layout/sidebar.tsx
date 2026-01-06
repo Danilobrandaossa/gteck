@@ -62,14 +62,9 @@ export function Sidebar() {
   const userRole = user?.role
 
   // Filtrar funcionalidades: admin vê tudo, outros apenas liberadas
-  const filteredNavigation = useMemo(() => {
-    if (userRole === 'admin') {
-      // Admin vê todas as funcionalidades
-      return allNavigation
-    }
-    // Usuários normais veem apenas funcionalidades liberadas
-    return allNavigation.filter(item => isPathEnabled(item.href, userRole))
-  }, [userRole])
+  const filteredNavigation = userRole === 'admin'
+    ? allNavigation // Admin vê todas as funcionalidades
+    : allNavigation.filter(item => isPathEnabled(item.href, userRole)) // Usuários normais veem apenas funcionalidades liberadas
 
   return (
     <div className={`cms-sidebar ${isCollapsed ? 'cms-sidebar-collapsed' : ''}`}>

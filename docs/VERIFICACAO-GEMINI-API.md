@@ -90,7 +90,7 @@ Para testar se a implementação está funcionando:
 
 1. **Configure a API Key**:
    ```env
-   GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+   GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
    ```
 
 2. **Teste via Dashboard**:

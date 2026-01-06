@@ -38,7 +38,7 @@ DATABASE_URL="postgres://..."  # Funciona, mas postgresql:// é preferido
 DATABASE_URL="file:./dev.db"
 
 # Google AI Studio API Key
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 
 # Feature Flags
 FEATURE_VIDEO_VEO3="true"
@@ -115,7 +115,7 @@ DATABASE_URL="file:./dev.db"
 # DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco"
 
 # Google AI Studio
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 
 # Feature Flags
 FEATURE_VIDEO_VEO3="true"

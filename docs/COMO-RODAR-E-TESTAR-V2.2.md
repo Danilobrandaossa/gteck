@@ -12,7 +12,7 @@ cat .env.local | grep -E "(GOOGLE_AI_STUDIO_API_KEY|OPENAI_API_KEY|DEFAULT_QUALI
 **Variáveis obrigatórias:**
 ```env
 # Gemini (obrigatório para geração de imagens)
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 
 # OpenAI (obrigatório para copy e scoring)
 OPENAI_API_KEY="sk-..."

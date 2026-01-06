@@ -4,7 +4,7 @@
 
 1. **Variáveis de ambiente configuradas** (`.env.local`):
 ```bash
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 FEATURE_VIDEO_VEO3="true"
 VEO_MODEL_NAME="veo-3.1-generate-preview"
 VIDEO_DOWNLOAD_ALLOWED_HOSTS="storage.googleapis.com,*.googleapis.com,*.googleusercontent.com"

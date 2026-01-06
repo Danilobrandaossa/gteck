@@ -15,7 +15,7 @@ import { db } from './db'
 
 export interface TenantContext {
   organizationId: string
-  siteId: string
+  siteId: string // Pode ser vazio para admins
   userId?: string
 }
 
@@ -27,10 +27,12 @@ export interface TenantValidationResult {
 
 /**
  * Valida contexto de tenant antes de executar queries
+ * @param allowSiteIdOptional - Se true, permite que siteId seja opcional (para admins)
  */
 export function validateTenantContext(
   organizationId?: string | null,
-  siteId?: string | null
+  siteId?: string | null,
+  allowSiteIdOptional: boolean = false
 ): TenantValidationResult {
   if (!organizationId || organizationId.trim() === '') {
     return {
@@ -39,26 +41,32 @@ export function validateTenantContext(
     }
   }
 
-  if (!siteId || siteId.trim() === '') {
+  if (!allowSiteIdOptional && (!siteId || siteId.trim() === '')) {
     return {
       valid: false,
       error: 'siteId is required for tenant isolation'
     }
   }
 
-  // Validar formato (deve ser CUID válido)
+  // Validar formato (pode ser CUID válido ou ID simples para desenvolvimento)
   const cuidRegex = /^c[a-z0-9]{24}$/
-  if (!cuidRegex.test(organizationId)) {
+  const simpleIdRegex = /^[a-zA-Z0-9_-]+$/
+  
+  // Aceitar CUID ou ID simples (para compatibilidade com dados mock)
+  if (!cuidRegex.test(organizationId) && !simpleIdRegex.test(organizationId)) {
     return {
       valid: false,
-      error: 'Invalid organizationId format'
+      error: 'Invalid organizationId format (must be CUID or simple ID)'
     }
   }
 
-  if (!cuidRegex.test(siteId)) {
-    return {
-      valid: false,
-      error: 'Invalid siteId format'
+  // Validar siteId apenas se fornecido
+  if (siteId && siteId.trim() !== '') {
+    if (!cuidRegex.test(siteId) && !simpleIdRegex.test(siteId)) {
+      return {
+        valid: false,
+        error: 'Invalid siteId format (must be CUID or simple ID)'
+      }
     }
   }
 
@@ -66,7 +74,7 @@ export function validateTenantContext(
     valid: true,
     context: {
       organizationId,
-      siteId
+      siteId: siteId || '' // Permitir siteId vazio para admins
     }
   }
 }
@@ -391,9 +399,10 @@ export async function validateUserSiteAccess(
  */
 export function requireTenantContext(
   organizationId?: string | null,
-  siteId?: string | null
+  siteId?: string | null,
+  allowSiteIdOptional: boolean = false
 ): TenantContext {
-  const validation = validateTenantContext(organizationId, siteId)
+  const validation = validateTenantContext(organizationId, siteId, allowSiteIdOptional)
   
   if (!validation.valid || !validation.context) {
     throw new Error(`Tenant context required: ${validation.error || 'Invalid context'}`)

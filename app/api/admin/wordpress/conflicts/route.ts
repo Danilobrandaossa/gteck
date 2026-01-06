@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const organizationId = searchParams.get('organizationId')
     const siteId = searchParams.get('siteId')
-    const status = searchParams.get('status') || 'open'
+    // const status = searchParams.get('status') || 'open' // Not used yet
 
     if (!organizationId) {
       return addCorrelationIdToResponse(

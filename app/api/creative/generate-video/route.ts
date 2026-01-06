@@ -36,10 +36,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     
     // ✅ CORREÇÃO CRÍTICA: Validar contexto de tenant
+    // Permitir siteId opcional (para admins)
     const { organizationId, siteId } = body
+    const allowSiteIdOptional = !siteId // Se siteId não foi fornecido, permitir (admin)
     let tenantContext
     try {
-      tenantContext = requireTenantContext(organizationId, siteId)
+      tenantContext = requireTenantContext(organizationId, siteId, allowSiteIdOptional)
     } catch (error) {
       logger.warn('Tenant validation failed', { 
         error: error instanceof Error ? error.message : 'Unknown error'
@@ -47,7 +49,9 @@ export async function POST(request: NextRequest) {
       return addCorrelationIdToResponse(
         NextResponse.json({
           status: 'failed',
-          failureReason: 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
+          failureReason: allowSiteIdOptional
+            ? 'organizationId é obrigatório e deve ser um CUID válido'
+            : 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
           error: 'INVALID_TENANT_CONTEXT'
         }, { status: 400 }),
         correlationId

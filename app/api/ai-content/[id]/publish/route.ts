@@ -3,7 +3,7 @@ import { db } from '@/lib/db'
 
 // POST /api/ai-content/[id]/publish - Publicar/Despublicar conteúdo
 export async function POST(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {

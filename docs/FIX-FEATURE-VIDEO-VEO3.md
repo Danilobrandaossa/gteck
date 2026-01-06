@@ -22,7 +22,7 @@ FEATURE_VIDEO_VEO3="true"
 
 ```bash
 # Google AI Studio API Key (obrigatório)
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 
 # Feature Flags - Video Generation (Veo 3)
 FEATURE_VIDEO_VEO3="true"

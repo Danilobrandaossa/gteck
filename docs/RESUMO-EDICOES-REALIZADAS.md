@@ -52,7 +52,7 @@ Get-Content ".env.local" | Select-String -Pattern "FEATURE_VIDEO_VEO3|DATABASE_U
 **Deve retornar:**
 ```
 DATABASE_URL="file:./dev.db"
-GOOGLE_AI_STUDIO_API_KEY="AIzaSyCK9e1ejkgwyyQDOswJ28dA6sLlsUR-Qvo"
+GOOGLE_AI_STUDIO_API_KEY="your-google-ai-studio-api-key-here"
 FEATURE_VIDEO_VEO3="true"
 ```
 

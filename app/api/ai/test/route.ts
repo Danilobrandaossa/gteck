@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     // Verificar se as chaves estão disponíveis
     const openaiKey = process.env.OPENAI_API_KEY
     const geminiKey = process.env.GOOGLE_API_KEY
-    const koalaKey = process.env.KOALA_API_KEY
+    // const koalaKey = process.env.KOALA_API_KEY // Not used yet
 
     let response
     let isRealAPI = false

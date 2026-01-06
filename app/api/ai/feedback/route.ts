@@ -6,7 +6,6 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { FeedbackService, FEEDBACK_REASONS } from '@/lib/feedback/feedback-service'
-import { createCorrelationContext } from '@/lib/observability/correlation'
 import { StructuredLogger } from '@/lib/observability/logger'
 import crypto from 'crypto'
 

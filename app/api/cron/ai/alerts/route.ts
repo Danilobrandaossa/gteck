@@ -18,7 +18,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { HealthSnapshotService } from '@/lib/observability/health-snapshot'
 import { AlertService } from '@/lib/observability/alerts'
 import { StructuredLogger } from '@/lib/observability/logger'
-import { db } from '@/lib/db'
 import crypto from 'crypto'
 
 /**
