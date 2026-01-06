@@ -217,15 +217,6 @@ export async function POST(request: NextRequest) {
             }
 
             try {
-                mainPrompt: version.image_prompt,
-                imageRatio: body.imageRatio || '1:1',
-                variations: 1,
-                qualityTier: (body.imageModel === 'pro' ? 'production' : 'draft') as 'draft' | 'production',
-                includeTextInImage: body.includeTextInImage || false,
-                platform: body.platform === 'meta-ads' ? 'instagram' : 'facebook'
-              }
-
-              // Gerar imagem usando CreativeGenerator
               // ✅ CORREÇÃO: Usar GeminiImageService diretamente para evitar gerar copy desnecessária
               const { GeminiImageServiceV2 } = await import('@/lib/gemini-image-service-v2')
               const { selectImageModel } = await import('@/lib/image-model-selector')
