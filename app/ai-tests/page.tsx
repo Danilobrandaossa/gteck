@@ -10,16 +10,10 @@ import {
   Loader, 
   TestTube,
   Brain,
-  Search,
-  FileText,
-  Image,
   Sparkles,
   Settings,
   Play,
-  BarChart3,
-  Clock,
-  DollarSign,
-  Activity
+  BarChart3
 } from 'lucide-react'
 
 interface TestResult {
