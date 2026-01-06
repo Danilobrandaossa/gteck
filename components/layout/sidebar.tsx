@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { OrganizationSelector } from './organization-selector'
 import { Logo } from '@/components/logo'
+import { useAuth } from '@/contexts/auth-context'
+import { isPathEnabled } from '@/lib/feature-access'
 import { 
   LayoutDashboard, 
   FileText, 
@@ -29,7 +31,7 @@ import {
   ChevronRight
 } from 'lucide-react'
 
-const navigation = [
+const allNavigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Páginas', href: '/pages', icon: FileText },
   { name: 'Conteúdo', href: '/conteudo', icon: Sparkles },
@@ -56,6 +58,18 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const { user } = useAuth()
+  const userRole = user?.role
+
+  // Filtrar funcionalidades: admin vê tudo, outros apenas liberadas
+  const filteredNavigation = useMemo(() => {
+    if (userRole === 'admin') {
+      // Admin vê todas as funcionalidades
+      return allNavigation
+    }
+    // Usuários normais veem apenas funcionalidades liberadas
+    return allNavigation.filter(item => isPathEnabled(item.href, userRole))
+  }, [userRole])
 
   return (
     <div className={`cms-sidebar ${isCollapsed ? 'cms-sidebar-collapsed' : ''}`}>
@@ -80,7 +94,7 @@ export function Sidebar() {
 
       {/* Navigation */}
       <nav className="cms-nav">
-        {navigation.map((item) => {
+        {filteredNavigation.map((item) => {
           const isActive = pathname === item.href
           return (
             <Link
