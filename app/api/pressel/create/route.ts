@@ -88,6 +88,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // ✅ CORREÇÃO: Validar data antes de usar (guard clause)
+    if (!wordpressResponse.data) {
+      return addCorrelationIdToResponse(
+        NextResponse.json(
+          { error: 'Resposta inválida do WordPress: data ausente' },
+          { status: 502 }
+        ),
+        correlationId
+      )
+    }
+
     // ✅ CORREÇÃO: Retornar 201 Created para criação de recurso
     return addCorrelationIdToResponse(
       NextResponse.json({
