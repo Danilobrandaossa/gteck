@@ -74,9 +74,9 @@ export async function GET(request: NextRequest) {
 
     const metrics = metricsResult[0] || {
       total_cost_usd: 0,
-      total_requests: 0n,
-      successful_requests: 0n,
-      failed_requests: 0n,
+      total_requests: BigInt(0),
+      successful_requests: BigInt(0),
+      failed_requests: BigInt(0),
       fallback_rate: 0,
       avg_similarity: 0,
       p50_latency: 0,
