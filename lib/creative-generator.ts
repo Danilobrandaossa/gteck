@@ -9,6 +9,8 @@
  * - Retornar JSON válido apenas
  */
 
+import { AIService } from './ai-services'
+
 export interface CreativeBrief {
   // PROMPT PRINCIPAL (FONTE DA VERDADE)
   mainPrompt: string // Prompt principal que nunca é sobrescrito (obrigatório)
@@ -53,6 +55,7 @@ export interface CreativeBrief {
   enableScoring?: boolean
   enableOverlay?: boolean
   imageModel?: 'nano' | 'pro' // Modelo de imagem (nano/pro)
+  aiProvider?: 'openai' | 'gemini' // IA para gerar criativos (padrão: gemini)
 }
 
 export interface CreativeOutput {
@@ -510,6 +513,54 @@ export class CreativeGenerator {
   }
 
   /**
+   * Gera explicação das diferenças entre as variações (DALL-E 3)
+   */
+  private static generateExplanationForDalle(
+    conceptualImages?: CreativeOutput['conceptualImages'],
+    commercialImages?: CreativeOutput['commercialImages'],
+    brief?: CreativeBrief
+  ): string {
+    const parts: string[] = []
+    
+    const conceptualGenerated = conceptualImages?.filter(img => img.url && img.url.trim() !== '').length || 0
+    const commercialGenerated = commercialImages?.filter(img => img.url && img.url.trim() !== '').length || 0
+    const totalGenerated = conceptualGenerated + commercialGenerated
+    
+    parts.push('📊 VARIAÇÕES GERADAS COM DALL-E 3:')
+    parts.push('')
+    
+    if (totalGenerated > 0) {
+      parts.push(`✅ Total de ${totalGenerated} imagem(ns) gerada(s) com sucesso`)
+    }
+    
+    parts.push('')
+    
+    if (conceptualImages && conceptualImages.length > 0) {
+      parts.push(`🎨 Imagens Conceituais: ${conceptualImages.length} variação(ões)`)
+      parts.push('- Estilo: foco em estética profissional e storytelling visual')
+      parts.push('- Composição: limpa e minimalista')
+      parts.push('- Ideal para: awareness, consideração, topo de funil')
+      parts.push('')
+    }
+    
+    if (commercialImages && commercialImages.length > 0) {
+      parts.push(`💼 Imagens Comerciais: ${commercialImages.length} variação(ões)`)
+      parts.push('- Estilo: foco em conversão e ação imediata')
+      parts.push('- Design: agressivo com CTA forte')
+      parts.push('- Ideal para: conversão, bottom de funil, vendas diretas')
+      parts.push('')
+    }
+    
+    parts.push('🧪 RECOMENDAÇÃO PARA TESTE A/B:')
+    if (totalGenerated > 0) {
+      parts.push('Teste todas as variações geradas para identificar qual performa melhor com seu público-alvo.')
+    }
+    parts.push('Cada variação tem um estilo e composição ligeiramente diferentes.')
+    
+    return parts.join('\n')
+  }
+
+  /**
    * Gera explicação das diferenças entre as variações (apenas Gemini)
    */
   private static generateExplanationForGemini(
@@ -634,14 +685,188 @@ export class CreativeGenerator {
         }
       }
 
-      // Gerar 4 variações de imagens usando APENAS Gemini (Nano Banana)
+      // Gerar imagens usando a IA selecionada (Gemini ou OpenAI/DALL-E)
       if (generateImage) {
-        const numVariations = Math.min(brief.variations || 2, 4) // Máximo 4 variações com Gemini
+        const numVariations = Math.min(brief.variations || 2, 4) // Máximo 4 variações
         output.conceptualImages = []
         output.commercialImages = []
 
-        // Gerar todas as imagens com Gemini V2 (se production) ou serviço antigo (compat)
+        const imageProvider = brief.aiProvider || 'gemini' // Padrão: Gemini
+        
         try {
+          // Se OpenAI foi selecionado, usar DALL-E 3
+          if (imageProvider === 'openai') {
+            const openaiApiKey = process.env.OPENAI_API_KEY
+            if (!openaiApiKey || openaiApiKey.trim() === '' || openaiApiKey.startsWith('sk-mock')) {
+              throw new Error('OpenAI API key não configurada para geração de imagens.')
+            }
+
+            // Criar AIService para DALL-E
+            const dalleService = new AIService({
+              id: 'creative-image-generation-dalle',
+              name: 'Creative Image Generation Service (DALL-E)',
+              type: 'openai',
+              status: 'active',
+              credentials: {
+                apiKey: openaiApiKey.trim().replace(/^["']|["']$/g, ''),
+                endpoint: 'https://api.openai.com/v1'
+              },
+              settings: {
+                model: 'gpt-4o'
+              },
+              usage: { requests: 0, tokens: 0, cost: 0 },
+              lastUsed: new Date(),
+              createdAt: new Date(),
+              updatedAt: new Date()
+            })
+
+            // Gerar imagens com DALL-E 3
+            let allImages: Array<{ url: string; prompt: string; variation: number; imageType: 'conceptual' | 'commercial'; timing?: any; model?: string }> = []
+            
+            for (let i = 1; i <= numVariations; i++) {
+              try {
+                const isConceptual = i % 2 === 1
+                const variationNum = isConceptual ? Math.ceil(i / 2) : Math.floor(i / 2)
+                const imageType: 'conceptual' | 'commercial' = isConceptual ? 'conceptual' : 'commercial'
+                
+                // Gerar prompt base
+                const useV2Prompts = flags.qualityTier === 'production'
+                let basePrompt = useV2Prompts 
+                  ? await this.generateImagePromptV2(brief, flags, imageType, variationNum)
+                  : (isConceptual 
+                      ? this.generateConceptualImagePrompt(brief, variationNum)
+                      : this.generateCommercialImagePrompt(brief, variationNum))
+                
+                // Otimizar prompt para DALL-E 3 seguindo melhores práticas da OpenAI
+                const { optimizePromptForDalle3, cleanPromptForDalle3 } = await import('@/lib/dalle3-prompt-optimizer')
+                const optimizedPrompt = optimizePromptForDalle3(basePrompt, {
+                  imageType,
+                  qualityTier: flags.qualityTier,
+                  aspectRatio: brief.imageRatio || this.getRatioFromPlatform(brief.platform),
+                  includeTextInImage: flags.includeTextInImage,
+                  tone: brief.tone,
+                  objective: brief.objective
+                })
+                const prompt = cleanPromptForDalle3(optimizedPrompt)
+                
+                console.log(`[CreativeGenerator] Gerando imagem ${imageType} ${i}/${numVariations} com DALL-E 3...`)
+                console.log(`[CreativeGenerator] Prompt otimizado (${prompt.length} chars):`, prompt.substring(0, 200) + '...')
+                
+                // Determinar tamanho baseado em aspectRatio
+                let size: '1024x1024' | '1792x1024' | '1024x1792' = '1024x1024'
+                const aspectRatio = brief.imageRatio || this.getRatioFromPlatform(brief.platform)
+                if (aspectRatio === '9:16' || aspectRatio === '4:5') {
+                  size = '1024x1792' // Vertical
+                } else if (aspectRatio === '16:9') {
+                  size = '1792x1024' // Horizontal
+                }
+                
+                // Gerar imagem com DALL-E 3
+                const dalleResult = await dalleService.generateContent({
+                  prompt: prompt,
+                  type: 'image',
+                  model: 'dall-e-3'
+                })
+                
+                if (dalleResult.success && dalleResult.data) {
+                  // DALL-E retorna data.images[0].url (estrutura do AIService)
+                  const data = dalleResult.data as any
+                  
+                  // Verificar se tem images array
+                  if (data?.images && Array.isArray(data.images) && data.images.length > 0) {
+                    const imageData = data.images[0]
+                    const imageUrl = imageData?.url
+                    const revisedPrompt = imageData?.revisedPrompt || prompt
+                    
+                    if (imageUrl) {
+                      allImages.push({
+                        url: imageUrl,
+                        prompt: revisedPrompt,
+                        variation: i,
+                        imageType,
+                        model: 'dall-e-3'
+                      })
+                      
+                      console.log(`[CreativeGenerator] ✅ Imagem ${i} gerada com DALL-E 3`)
+                    } else {
+                      console.warn(`[CreativeGenerator] DALL-E 3 não retornou URL para variação ${i}. ImageData:`, JSON.stringify(imageData).substring(0, 200))
+                    }
+                  } else {
+                    // Fallback: tentar acessar diretamente
+                    const imageUrl = data?.url || data?.imageUrl
+                    const revisedPrompt = data?.revisedPrompt || prompt
+                    
+                    if (imageUrl) {
+                      allImages.push({
+                        url: imageUrl,
+                        prompt: revisedPrompt,
+                        variation: i,
+                        imageType,
+                        model: 'dall-e-3'
+                      })
+                      
+                      console.log(`[CreativeGenerator] ✅ Imagem ${i} gerada com DALL-E 3 (fallback)`)
+                    } else {
+                      console.warn(`[CreativeGenerator] DALL-E 3 não retornou URL para variação ${i}. Data structure:`, JSON.stringify(data).substring(0, 300))
+                    }
+                  }
+                } else {
+                  console.warn(`[CreativeGenerator] DALL-E 3 não retornou imagem para variação ${i}:`, dalleResult.error || dalleResult)
+                }
+              } catch (variationError) {
+                console.warn(`[CreativeGenerator] Erro ao gerar imagem ${i} com DALL-E:`, variationError)
+              }
+            }
+            
+            // Separar em conceptual e commercial
+            for (const img of allImages) {
+              const imageData = {
+                url: img.url,
+                prompt: img.prompt,
+                model: 'dall-e-3' as const,
+                variation: img.variation
+              }
+
+              if (img.imageType === 'conceptual') {
+                output.conceptualImages.push({
+                  ...imageData,
+                  revisedPrompt: img.prompt
+                })
+                if (img.variation === 1) {
+                  output.conceptualImage = {
+                    url: imageData.url,
+                    prompt: imageData.prompt,
+                    revisedPrompt: img.prompt,
+                    model: 'dall-e-3'
+                  }
+                  output.imageUrl = imageData.url
+                  output.revisedPrompt = img.prompt
+                }
+              } else {
+                output.commercialImages.push(imageData)
+                if (img.variation === 2) {
+                  output.commercialImage = {
+                    url: imageData.url,
+                    prompt: imageData.prompt,
+                    model: 'dall-e-3'
+                  }
+                }
+              }
+            }
+            
+            // Gerar explicação
+            if (output.conceptualImages.length > 0 || output.commercialImages.length > 0) {
+              output.explanation = this.generateExplanationForDalle(
+                output.conceptualImages,
+                output.commercialImages,
+                brief
+              )
+            }
+            
+            return output
+          }
+          
+          // Se Gemini foi selecionado (padrão), usar Gemini
           const geminiApiKey = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GEMINI_API_KEY
           if (!geminiApiKey || geminiApiKey.startsWith('mock')) {
             throw new Error('Google AI Studio API key não configurada para geração de imagens.')
@@ -693,16 +918,16 @@ export class CreativeGenerator {
                     variation: i,
                     imageType,
                     timing: geminiResult.timing,
-                    model: geminiResult.model
+                    model: geminiResult.model || selectedModel || 'gemini-imagen'
                   })
                   
                   // Atualizar metadata com timing e custo
                   if (geminiResult.timing && !output.metadata?.timing) {
                     output.metadata = {
-                      ...output.metadata,
+                      ...(output.metadata || {}),
                       timing: geminiResult.timing,
                       estimatedCost: geminiResult.estimatedCost,
-                      model: geminiResult.model,
+                      model: geminiResult.model || selectedModel || 'gemini-imagen',
                       fallbackApplied: geminiResult.fallbackApplied
                     }
                   }

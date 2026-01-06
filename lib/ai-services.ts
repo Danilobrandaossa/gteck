@@ -41,6 +41,11 @@ export class AIService {
     }
   }
 
+  // Getter para acessar settings
+  get settings() {
+    return this.config.settings || {}
+  }
+
   async generateContent(request: AIGenerationRequest): Promise<AIGenerationResponse> {
     try {
       // Se for geração de imagem, usar DALL-E (ou stable-diffusion se configurado)
@@ -467,8 +472,8 @@ export class AIService {
           model: 'dall-e-3',
           n: 1,
           size: size,
-          quality: 'hd', // Alta qualidade (HD) em vez de standard
-          style: 'vivid' // Estilo mais vibrante e detalhado
+          quality: 'hd', // Alta qualidade (HD) - melhor para criativos profissionais
+          style: 'vivid' // Estilo vivid para imagens mais vibrantes e detalhadas (melhor para publicidade)
         })
       })
 

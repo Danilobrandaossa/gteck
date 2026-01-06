@@ -40,10 +40,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     
     // ✅ CORREÇÃO CRÍTICA: Validar contexto de tenant
+    // Permitir siteId opcional (para admins)
     const { organizationId, siteId } = body
+    const allowSiteIdOptional = !siteId // Se siteId não foi fornecido, permitir (admin)
     let tenantContext
     try {
-      tenantContext = requireTenantContext(organizationId, siteId)
+      tenantContext = requireTenantContext(organizationId, siteId, allowSiteIdOptional)
     } catch (error) {
       logger.warn('Tenant validation failed', { 
         error: error instanceof Error ? error.message : 'Unknown error'
@@ -51,7 +53,9 @@ export async function POST(request: NextRequest) {
       return addCorrelationIdToResponse(
         NextResponse.json({
           status: 'failed',
-          failureReason: 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
+          failureReason: allowSiteIdOptional
+            ? 'organizationId é obrigatório e deve ser um CUID válido'
+            : 'organizationId e siteId são obrigatórios e devem ser CUIDs válidos',
           error: 'INVALID_TENANT_CONTEXT'
         }, { status: 400 }),
         correlationId
@@ -113,44 +117,88 @@ export async function POST(request: NextRequest) {
       enableRefinePass: flagsWithSource.enableRefinePass.value,
       enableScoring: flagsWithSource.enableScoring.value,
       enableOverlay: flagsWithSource.enableOverlay.value,
-      imageModel: flagsWithSource.imageModel?.value || body.imageModel
+      imageModel: flagsWithSource.imageModel?.value || body.imageModel,
+      aiProvider: body.aiProvider || 'gemini' // IA selecionada pelo usuário
     }
 
-    // Configurar AIService (Gemini para geração de imagens)
-    const apiKey = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GOOGLE_API_KEY || ''
-    if (!apiKey || apiKey.trim() === '') {
-      return addCorrelationIdToResponse(
-        NextResponse.json({
-          status: 'failed',
-          failureReason: 'Google AI Studio API key não configurada (GOOGLE_AI_STUDIO_API_KEY ou GOOGLE_API_KEY)'
-        }, { status: 500 }),
-        correlationId
-      )
-    }
+    // Configurar AIService baseado na seleção do usuário
+    const aiProvider = body.aiProvider || 'gemini' // Padrão: Gemini
+    
+    let aiService: AIService
+    
+    if (aiProvider === 'openai') {
+      // Usar OpenAI para geração de copy/texto
+      const openaiApiKey = process.env.OPENAI_API_KEY || ''
+      if (!openaiApiKey || openaiApiKey.trim() === '') {
+        return addCorrelationIdToResponse(
+          NextResponse.json({
+            status: 'failed',
+            failureReason: 'OpenAI API key não configurada (OPENAI_API_KEY)'
+          }, { status: 500 }),
+          correlationId
+        )
+      }
 
-    const aiService = new AIService({
-      id: 'creative-image-generation',
-      name: 'Creative Image Generation Service',
-      type: 'gemini',
-      status: 'active',
-      credentials: {
-        apiKey: apiKey.trim().replace(/^["']|["']$/g, ''),
-        endpoint: 'https://generativelanguage.googleapis.com/v1beta'
-      },
-      settings: {
-        model: 'gemini-2.5-flash'
-      },
-      usage: { requests: 0, tokens: 0, cost: 0 },
-      lastUsed: new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date()
+      aiService = new AIService({
+        id: 'creative-image-generation-openai',
+        name: 'Creative Image Generation Service (OpenAI)',
+        type: 'openai',
+        status: 'active',
+        credentials: {
+          apiKey: openaiApiKey.trim().replace(/^["']|["']$/g, ''),
+          endpoint: 'https://api.openai.com/v1'
+        },
+        settings: {
+          model: 'gpt-4o' // Usar GPT-4o para melhor qualidade
+        },
+        usage: { requests: 0, tokens: 0, cost: 0 },
+        lastUsed: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+    } else {
+      // Usar Gemini para geração de imagens (padrão)
+      const geminiApiKey = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GOOGLE_API_KEY || ''
+      if (!geminiApiKey || geminiApiKey.trim() === '') {
+        return addCorrelationIdToResponse(
+          NextResponse.json({
+            status: 'failed',
+            failureReason: 'Google AI Studio API key não configurada (GOOGLE_AI_STUDIO_API_KEY ou GOOGLE_API_KEY)'
+          }, { status: 500 }),
+          correlationId
+        )
+      }
+
+      aiService = new AIService({
+        id: 'creative-image-generation-gemini',
+        name: 'Creative Image Generation Service (Gemini)',
+        type: 'gemini',
+        status: 'active',
+        credentials: {
+          apiKey: geminiApiKey.trim().replace(/^["']|["']$/g, ''),
+          endpoint: 'https://generativelanguage.googleapis.com/v1beta'
+        },
+        settings: {
+          model: 'gemini-2.5-flash'
+        },
+        usage: { requests: 0, tokens: 0, cost: 0 },
+        lastUsed: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+    }
+    
+    logger.info('AI Service configured', {
+      provider: aiProvider,
+      model: aiService.settings?.model || 'unknown'
     })
 
     console.log('[Creative Image API] Request', requestId, '- Iniciando geração...', {
       generateImage: true,
       qualityTier: brief.qualityTier,
       variations: brief.variations,
-      imageModel: flagsWithSource.imageModel?.value || 'nano'
+      imageModel: flagsWithSource.imageModel?.value || 'nano',
+      aiProvider: aiProvider
     })
 
     // Gerar criativo com imagens

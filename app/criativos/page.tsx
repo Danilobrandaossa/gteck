@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useOrganization } from '@/contexts/organization-context'
+import { useAuth } from '@/contexts/auth-context'
 import { 
   Sparkles, 
   Image, 
@@ -88,7 +89,9 @@ interface CreativeResult {
 }
 
 export default function CriativosPage() {
-  const { currentSite } = useOrganization()
+  const { currentSite, currentOrganization } = useOrganization()
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [isGenerating, setIsGenerating] = useState(false)
   const [result, setResult] = useState<CreativeResult | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -108,6 +111,7 @@ export default function CriativosPage() {
   const [creativeType, setCreativeType] = useState<'image' | 'video'>('image')
   const [imageModel, setImageModel] = useState<'nano' | 'pro'>('nano')
   const [videoModel, setVideoModel] = useState<'veo3' | 'veo31'>('veo3')
+  const [aiProvider, setAiProvider] = useState<'openai' | 'gemini'>('gemini') // IA para gerar criativos
   const [videoDuration, setVideoDuration] = useState<4 | 6 | 8>(6)
   const [videoAspectRatio, setVideoAspectRatio] = useState<'9:16' | '16:9'>('9:16')
   const [videoVariations, setVideoVariations] = useState(1)
@@ -171,7 +175,7 @@ export default function CriativosPage() {
     const ref = imageReferences[index]
     if (!ref.file) return
 
-    if (!currentSite) {
+    if (!isAdmin && !currentSite) {
       setError('Site não selecionado. Selecione um site antes de analisar imagens.')
       return
     }
@@ -182,14 +186,40 @@ export default function CriativosPage() {
       formData.append('image', ref.file)
       formData.append('role', ref.role)
       
-      // Adicionar contexto de tenant (obrigatório)
-      formData.append('organizationId', currentSite.organizationId)
-      formData.append('siteId', currentSite.id)
+      // Adicionar contexto de tenant
+      // Para admin: usar organizationId da organização atual ou do usuário, siteId opcional
+      // Para não-admin: exigir site selecionado
+      if (isAdmin) {
+        const orgId = currentOrganization?.id || user?.organizationId
+        if (orgId) {
+          formData.append('organizationId', orgId)
+          // siteId é opcional para admin
+        } else {
+          setError('Organização não encontrada. Selecione uma organização ou site.')
+          setIsGenerating(false)
+          return
+        }
+      } else if (currentSite) {
+        formData.append('organizationId', currentSite.organizationId)
+        formData.append('siteId', currentSite.id)
+      } else {
+        setError('Site não selecionado. Selecione um site antes de analisar imagens.')
+        setIsGenerating(false)
+        return
+      }
 
       const response = await fetch('/api/creative/analyze-image', {
         method: 'POST',
         body: formData
       })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }))
+        console.error('Erro ao analisar imagem:', errorData)
+        setError(`Erro ao analisar imagem: ${errorData.error || errorData.message || 'Erro desconhecido'}`)
+        setIsGenerating(false)
+        return
+      }
 
       const data = await response.json()
 
@@ -339,8 +369,17 @@ export default function CriativosPage() {
     try {
       // Modo Performance
       if (usePerformanceMode) {
-        if (!currentSite) {
+        if (!isAdmin && !currentSite) {
           setError('Site não selecionado. Selecione um site antes de gerar criativos.')
+          setIsGenerating(false)
+          return
+        }
+
+        // Para admin: usar organizationId da organização atual ou do usuário, siteId opcional
+        // Para não-admin: exigir site selecionado
+        const orgId = isAdmin ? (currentOrganization?.id || user?.organizationId) : currentSite?.organizationId
+        if (!orgId) {
+          setError('Organização não encontrada. Selecione uma organização ou site.')
           setIsGenerating(false)
           return
         }
@@ -352,8 +391,8 @@ export default function CriativosPage() {
             'Origin': window.location.origin
           },
           body: JSON.stringify({
-            organizationId: currentSite.organizationId,
-            siteId: currentSite.id,
+            organizationId: orgId,
+            ...(currentSite && !isAdmin ? { siteId: currentSite.id } : {}),
             language: performanceLanguage,
             niche: performanceNiche,
             platform: performancePlatform,
@@ -370,6 +409,20 @@ export default function CriativosPage() {
         })
 
         const data = await response.json()
+        console.log('Resultado Performance da API:', data) // Debug
+        console.log('Creative versions:', data.creative_versions) // Debug
+        if (data.creative_versions) {
+          data.creative_versions.forEach((v: any, idx: number) => {
+            console.log(`Versão ${idx + 1}:`, {
+              version_number: v.version_number,
+              hasImageUrl: !!v.image_url,
+              imageUrlType: typeof v.image_url,
+              imageUrlLength: v.image_url?.length || 0,
+              imageUrl: v.image_url?.substring(0, 100) || 'N/A',
+              allKeys: Object.keys(v)
+            })
+          })
+        }
         
         if (data.status === 'failed') {
           setError(data.failureReason || 'Erro ao gerar criativos de performance')
@@ -378,14 +431,24 @@ export default function CriativosPage() {
         }
 
         setPerformanceResult(data)
+        setError(null) // Limpar erro se sucesso
         setIsGenerating(false)
         return
       }
 
       // Modo tradicional
       if (creativeType === 'video') {
-        if (!currentSite) {
+        if (!isAdmin && !currentSite) {
           setError('Site não selecionado. Selecione um site antes de gerar criativos.')
+          setIsGenerating(false)
+          return
+        }
+
+        // Para admin: usar organizationId da organização atual ou do usuário, siteId opcional
+        // Para não-admin: exigir site selecionado
+        const orgId = isAdmin ? (currentOrganization?.id || user?.organizationId) : currentSite?.organizationId
+        if (!orgId) {
+          setError('Organização não encontrada. Selecione uma organização ou site.')
           setIsGenerating(false)
           return
         }
@@ -398,8 +461,8 @@ export default function CriativosPage() {
             'Origin': window.location.origin
           },
           body: JSON.stringify({
-            organizationId: currentSite.organizationId,
-            siteId: currentSite.id,
+            organizationId: orgId,
+            ...(currentSite && !isAdmin ? { siteId: currentSite.id } : {}),
             mainPrompt: prompt.trim(),
             videoModel: videoModel,
             aspectRatio: videoAspectRatio,
@@ -433,19 +496,29 @@ export default function CriativosPage() {
       }
 
       // Geração de imagem
-      if (!currentSite) {
+      if (!isAdmin && !currentSite) {
         setError('Site não selecionado. Selecione um site antes de gerar criativos.')
         setIsGenerating(false)
         return
       }
 
+      // Para admin: usar organizationId da organização atual ou do usuário, siteId opcional
+      // Para não-admin: exigir site selecionado
+      const orgId = isAdmin ? (currentOrganization?.id || user?.organizationId) : currentSite?.organizationId
+      if (!orgId) {
+        setError('Organização não encontrada. Selecione uma organização ou site.')
+        setIsGenerating(false)
+        return
+      }
+
       const body = {
-        organizationId: currentSite.organizationId,
-        siteId: currentSite.id,
+        organizationId: orgId,
+        ...(currentSite && !isAdmin ? { siteId: currentSite.id } : {}),
         mainPrompt: prompt.trim(),
         imageRatio,
         variations,
         imageModel: imageModel,
+        aiProvider: aiProvider, // IA selecionada pelo usuário
         imageReferences: imageReferences.filter(ref => (ref.url?.trim() || ref.file)).length > 0
           ? imageReferences.filter(ref => (ref.url?.trim() || ref.file)).map(ref => ({
               url: ref.url?.trim() || undefined,
@@ -468,10 +541,14 @@ export default function CriativosPage() {
       })
 
       const data = await response.json()
+      console.log('Resultado da API:', data) // Debug
       setResult(data)
 
       if (data.status === 'failed') {
         setError(data.failureReason || 'Erro ao gerar criativo')
+      } else if (data.status === 'success') {
+        // Limpar erro se sucesso
+        setError(null)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro desconhecido')
@@ -635,7 +712,7 @@ export default function CriativosPage() {
                       onChange={(e) => setUsePerformanceMode(e.target.checked)}
                       style={{ width: '1rem', height: '1rem' }}
                     />
-                    <span>🚀 Modo Performance (Otimizado para Conversão)</span>
+                    <span>📊 Criativos de Performance (Marketing)</span>
                   </label>
                   {usePerformanceMode && (
                     <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -756,6 +833,32 @@ export default function CriativosPage() {
                       </div>
                     </div>
                   )}
+                </div>
+
+                {/* Seletor de IA */}
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: 'var(--gray-700)', marginBottom: '0.5rem' }}>
+                    IA para Gerar Criativo
+                  </label>
+                  <select
+                    value={aiProvider}
+                    onChange={(e) => setAiProvider(e.target.value as 'openai' | 'gemini')}
+                    style={{
+                      width: '100%',
+                      padding: '0.5rem',
+                      border: '1px solid var(--gray-300)',
+                      borderRadius: 'var(--radius)',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    <option value="gemini">Gemini (Google) - Recomendado para imagens</option>
+                    <option value="openai">ChatGPT (OpenAI) - Recomendado para texto</option>
+                  </select>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--gray-500)', marginTop: '0.25rem' }}>
+                    {aiProvider === 'gemini' 
+                      ? 'Ideal para geração de imagens e criativos visuais'
+                      : 'Ideal para geração de copy e textos publicitários'}
+                  </p>
                 </div>
 
                 {/* Seletor de tipo */}
@@ -1093,7 +1196,7 @@ export default function CriativosPage() {
             {/* Results */}
             <div className="cms-card">
               <div className="cms-card-content" style={{ padding: '1.5rem' }}>
-                {!result && !isGenerating && !videoJobId && (
+                {!result && !performanceResult && !isGenerating && !videoJobId && (
                   <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--gray-500)' }}>
                     <Image style={{ width: '3rem', height: '3rem', margin: '0 auto 1rem', opacity: 0.3 }} />
                     <p>Digite um prompt e clique em "Gerar {creativeType === 'video' ? 'Vídeo' : 'Imagens'}"</p>
@@ -1118,7 +1221,8 @@ export default function CriativosPage() {
                 )}
 
                 {/* Resultados Performance Mode */}
-                {performanceResult && performanceResult.status === 'success' && (
+                {/* Exibir resultado mesmo sem status explícito (para debug e compatibilidade) */}
+                {performanceResult && (performanceResult.status === 'success' || !performanceResult.status) && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div style={{ padding: '1rem', backgroundColor: 'var(--green-50)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--green-200)' }}>
                       <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--gray-900)', marginBottom: '0.5rem' }}>
@@ -1129,7 +1233,15 @@ export default function CriativosPage() {
                       </p>
                     </div>
 
-                    {performanceResult.creative_versions.map((version: any, idx: number) => (
+                    {performanceResult.creative_versions.map((version: any, idx: number) => {
+                      // Debug: verificar se image_url existe
+                      console.log(`Renderizando versão ${version.version_number}:`, {
+                        hasImageUrl: !!version.image_url,
+                        imageUrl: version.image_url?.substring(0, 50) || 'N/A',
+                        hasImagePrompt: !!version.image_prompt
+                      })
+                      
+                      return (
                       <div key={idx} style={{
                         border: '1px solid var(--gray-200)',
                         borderRadius: 'var(--radius-lg)',
@@ -1175,7 +1287,7 @@ export default function CriativosPage() {
                         )}
 
                         {/* Exibir imagem gerada se existir */}
-                        {version.image_url && (
+                        {version.image_url ? (
                           <div style={{ marginBottom: '1rem' }}>
                             <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '600', color: 'var(--gray-600)', marginBottom: '0.5rem' }}>
                               🖼️ Imagem Gerada
@@ -1191,6 +1303,14 @@ export default function CriativosPage() {
                               <img
                                 src={version.image_url}
                                 alt={`Variação ${version.version_number} - Imagem gerada`}
+                                onError={(e) => {
+                                  console.error('Erro ao carregar imagem:', version.image_url)
+                                  const target = e.target as HTMLImageElement
+                                  target.style.display = 'none'
+                                }}
+                                onLoad={() => {
+                                  console.log('Imagem carregada com sucesso:', version.image_url?.substring(0, 50))
+                                }}
                                 style={{
                                   width: '100%',
                                   height: 'auto',
@@ -1228,7 +1348,16 @@ export default function CriativosPage() {
                               Baixar Imagem
                             </button>
                           </div>
-                        )}
+                        ) : version.image_prompt ? (
+                          <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'var(--yellow-50)', borderRadius: 'var(--radius)', border: '1px solid var(--yellow-200)' }}>
+                            <p style={{ fontSize: '0.75rem', color: 'var(--yellow-800)', marginBottom: '0.5rem', fontWeight: '600' }}>
+                              ⚠️ Imagem ainda não gerada
+                            </p>
+                            <p style={{ fontSize: '0.7rem', color: 'var(--yellow-700)' }}>
+                              A imagem está sendo gerada em segundo plano. Aguarde alguns segundos ou clique no botão abaixo para gerar manualmente.
+                            </p>
+                          </div>
+                        ) : null}
 
                         {version.image_prompt && (
                           <div style={{ marginBottom: '1rem' }}>
@@ -1286,7 +1415,8 @@ export default function CriativosPage() {
                           </div>
                         )}
                       </div>
-                    ))}
+                      )
+                    })}
 
                     {performanceResult.notes && (
                       <div style={{
@@ -1326,26 +1456,82 @@ export default function CriativosPage() {
                       )}
                       {videoStatus === 'done' && (
                         <div>
-                          <p style={{ fontSize: '0.875rem', color: 'var(--success)', marginBottom: '0.5rem', fontWeight: '600' }}>
+                          <p style={{ fontSize: '0.875rem', color: 'var(--success)', marginBottom: '0.75rem', fontWeight: '600' }}>
                             ✓ Vídeo pronto!
                           </p>
                           {videoUrl ? (
-                            <a
-                              href={videoUrl}
-                              download
-                              style={{
-                                display: 'inline-block',
-                                padding: '0.5rem 1rem',
-                                backgroundColor: 'var(--primary)',
-                                color: 'white',
-                                borderRadius: 'var(--radius)',
-                                textDecoration: 'none',
-                                fontSize: '0.875rem',
-                                fontWeight: '500'
-                              }}
-                            >
-                              Baixar Vídeo
-                            </a>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                              {/* Preview do vídeo */}
+                              <div style={{ 
+                                width: '100%', 
+                                maxWidth: '600px',
+                                borderRadius: 'var(--radius-lg)',
+                                overflow: 'hidden',
+                                backgroundColor: 'var(--gray-900)',
+                                marginBottom: '0.5rem'
+                              }}>
+                                <video
+                                  src={videoUrl}
+                                  controls
+                                  style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block'
+                                  }}
+                                >
+                                  Seu navegador não suporta a tag de vídeo.
+                                </video>
+                              </div>
+                              
+                              {/* Botões de ação */}
+                              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                <a
+                                  href={videoUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    padding: '0.5rem 1rem',
+                                    backgroundColor: 'var(--primary)',
+                                    color: 'white',
+                                    borderRadius: 'var(--radius)',
+                                    textDecoration: 'none',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '500',
+                                    transition: 'opacity 0.2s'
+                                  }}
+                                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                                >
+                                  <ExternalLink style={{ width: '1rem', height: '1rem' }} />
+                                  Abrir em Nova Aba
+                                </a>
+                                <a
+                                  href={videoUrl}
+                                  download
+                                  style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    padding: '0.5rem 1rem',
+                                    backgroundColor: 'var(--gray-700)',
+                                    color: 'white',
+                                    borderRadius: 'var(--radius)',
+                                    textDecoration: 'none',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '500',
+                                    transition: 'opacity 0.2s'
+                                  }}
+                                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                                >
+                                  <Download style={{ width: '1rem', height: '1rem' }} />
+                                  Baixar Vídeo
+                                </a>
+                              </div>
+                            </div>
                           ) : (
                             <span style={{ fontSize: '0.75rem', color: 'var(--gray-600)' }}>
                               Aguardando URL do vídeo...
@@ -1362,7 +1548,8 @@ export default function CriativosPage() {
                   </div>
                 )}
 
-                {result && result.status === 'success' && (
+                {/* Exibir resultado mesmo sem status explícito (para debug e compatibilidade) */}
+                {result && (result.status === 'success' || !result.status) && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {/* Imagens Conceituais */}
                     {result.conceptualImages && result.conceptualImages.length > 0 && (
