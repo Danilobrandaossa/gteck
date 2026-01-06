@@ -13,7 +13,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/contexts/auth-context'
 
 interface AIMetrics {
   totalCostUSD: number
@@ -38,7 +38,7 @@ interface AIMetrics {
 }
 
 export default function AIDashboardPage() {
-  const { data: session } = useSession()
+  const { user } = useAuth()
   const [metrics, setMetrics] = useState<AIMetrics | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -47,14 +47,14 @@ export default function AIDashboardPage() {
   const [siteId, setSiteId] = useState<string>('')
 
   useEffect(() => {
-    if (session?.user?.role !== 'admin') {
+    if (user?.role !== 'admin') {
       setError('Acesso negado. Apenas administradores podem acessar este dashboard.')
       setLoading(false)
       return
     }
 
     loadMetrics()
-  }, [session, dateRange, organizationId, siteId])
+  }, [user, dateRange, organizationId, siteId])
 
   const loadMetrics = async () => {
     try {
@@ -80,7 +80,7 @@ export default function AIDashboardPage() {
     }
   }
 
-  if (session?.user?.role !== 'admin') {
+  if (user?.role !== 'admin') {
     return (
       <div className="container mx-auto p-6">
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">

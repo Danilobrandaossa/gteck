@@ -12,14 +12,14 @@ import {
   saveWordPressCredentials,
   getWordPressCredentials
 } from '@/lib/wordpress/wordpress-credentials-service'
-import { getCorrelationIdFromRequest, addCorrelationIdToResponse } from '@/lib/observability/correlation'
+import { getOrCreateCorrelationId, addCorrelationIdToResponse } from '@/lib/observability/correlation'
 import { StructuredLogger } from '@/lib/observability/logger'
 
 export async function POST(
   request: NextRequest,
   { params }: { params: { siteId: string } }
 ) {
-  const correlationId = getCorrelationIdFromRequest(request)
+  const correlationId = getOrCreateCorrelationId(request.headers)
   const logger = StructuredLogger.withCorrelation({ correlationId }, 'api')
 
   try {
@@ -165,7 +165,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { siteId: string } }
 ) {
-  const correlationId = getCorrelationIdFromRequest(request)
+  const correlationId = getOrCreateCorrelationId(request.headers)
   const logger = StructuredLogger.withCorrelation({ correlationId }, 'api')
 
   try {
@@ -239,7 +239,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { siteId: string } }
 ) {
-  const correlationId = getCorrelationIdFromRequest(request)
+  const correlationId = getOrCreateCorrelationId(request.headers)
   const logger = StructuredLogger.withCorrelation({ correlationId }, 'api')
 
   try {

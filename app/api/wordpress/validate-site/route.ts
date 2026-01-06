@@ -11,11 +11,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getWordPressCredentials } from '@/lib/wordpress/wordpress-credentials-service'
 import { WordPressCredentialsValidator } from '@/lib/wordpress-credentials-validator'
-import { getCorrelationIdFromRequest, addCorrelationIdToResponse } from '@/lib/observability/correlation'
+import { getOrCreateCorrelationId, addCorrelationIdToResponse } from '@/lib/observability/correlation'
 import { StructuredLogger } from '@/lib/observability/logger'
 
 export async function POST(request: NextRequest) {
-  const correlationId = getCorrelationIdFromRequest(request)
+  const correlationId = getOrCreateCorrelationId(request.headers)
   const logger = StructuredLogger.withCorrelation({ correlationId }, 'api')
 
   try {
