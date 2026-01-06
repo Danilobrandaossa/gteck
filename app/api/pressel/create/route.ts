@@ -125,8 +125,8 @@ export async function POST(request: NextRequest) {
 // Função para enviar dados para WordPress
 async function sendToWordPress({
   url,
-  authType,
-  credentials,
+  authType: _authType,
+  credentials: _credentials,
   data
 }: {
   url: string
