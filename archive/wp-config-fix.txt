@@ -1,0 +1,43 @@
+// ... código anterior até a linha 87 ...
+
+/* Add any custom values between this line and the "stop editing" line. */
+
+// Ativar debug (MOVIDO PARA CÁ - ANTES DO BLOCO if)
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+@ini_set('display_errors', 0);
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * For information on other constants that can be used for debugging,
+ * visit the documentation.
+ *
+ * @link https://wordpress.org/support/article/debugging-in-wordpress/
+ */
+
+// COMENTAR ESTE BLOCO, pois já definimos WP_DEBUG acima
+/*
+if ( ! defined( 'WP_DEBUG' ) ) {
+	define( 'WP_DEBUG', false );
+}
+*/
+
+define( 'WP_REDIS_PREFIX', 'atlz.online:' );
+// ... resto do código continua igual ...
+
+define('DISALLOW_FILE_EDIT', false);
+
+// REMOVER estas linhas que estão duplicadas aqui:
+// define('WP_DEBUG', true);
+// define('WP_DEBUG_LOG', true);
+// define('WP_DEBUG_DISPLAY', false);
+// @ini_set('display_errors', 0);
+
+/* That's all, stop editing! Happy publishing. */
+

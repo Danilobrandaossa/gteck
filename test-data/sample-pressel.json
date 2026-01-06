@@ -1,0 +1,43 @@
+{
+  "page_title": "Teste de Página Automatizada",
+  "page_content": "Esta é uma página criada automaticamente pelo sistema Pressel Automation para testar a integração com WordPress.",
+  "page_excerpt": "Página de teste criada via JSON",
+  "page_status": "publish",
+  "page_template": "page.php",
+  "acf_fields": {
+    "hero_title": "Título Principal da Página",
+    "hero_subtitle": "Subtítulo explicativo",
+    "hero_image": "https://via.placeholder.com/1200x600/FF6B35/FFFFFF?text=Hero+Image",
+    "content_sections": [
+      {
+        "title": "Seção 1",
+        "content": "Conteúdo da primeira seção",
+        "image": "https://via.placeholder.com/600x400/66BB6A/FFFFFF?text=Section+1"
+      },
+      {
+        "title": "Seção 2", 
+        "content": "Conteúdo da segunda seção",
+        "image": "https://via.placeholder.com/600x400/90CAF9/FFFFFF?text=Section+2"
+      }
+    ],
+    "cta_button_text": "Saiba Mais",
+    "cta_button_link": "#contact",
+    "seo_title": "Teste SEO - Página Automatizada",
+    "seo_description": "Descrição SEO para teste de página automatizada",
+    "seo_keywords": "teste, automatização, wordpress, cms"
+  },
+  "meta_data": {
+    "created_by": "Pressel Automation",
+    "creation_date": "2024-01-01",
+    "test_mode": true,
+    "source": "cms_pressel_automation"
+  }
+}
+
+
+
+
+
+
+
+

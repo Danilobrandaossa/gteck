@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpeza Completa do CMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #c82333;
+        }
+        .success {
+            background: #28a745;
+        }
+        .success:hover {
+            background: #218838;
+        }
+        .info {
+            background: #17a2b8;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .warning {
+            background: #ffc107;
+            color: #212529;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧹 Limpeza Completa do CMS</h1>
+            <p>Remova todos os dados problemáticos e recrie o sistema do zero</p>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ ATENÇÃO:</strong> Esta operação irá remover TODOS os dados do CMS armazenados no navegador. 
+            Certifique-se de que você tem backup dos dados importantes antes de continuar.
+        </div>
+
+        <div class="info">
+            <strong>📋 O que será removido:</strong>
+            <ul>
+                <li>Organizações cadastradas</li>
+                <li>Sites cadastrados</li>
+                <li>Seleções atuais</li>
+                <li>Dados de migração</li>
+                <li>Cache do sistema</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="button" onclick="cleanAllData()">
+                🗑️ Limpar Todos os Dados
+            </button>
+            <button class="button success" onclick="reloadCMS()">
+                🔄 Recarregar CMS
+            </button>
+        </div>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function cleanAllData() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '🧹 Iniciando limpeza completa...\n\n';
+
+            try {
+                // 1. Limpar dados principais do CMS
+                const mainKeys = [
+                    'cms-organizations',
+                    'cms-sites',
+                    'cms-selected-organization',
+                    'cms-selected-site',
+                    'cms-current-organization',
+                    'cms-current-site'
+                ];
+
+                mainKeys.forEach(key => {
+                    localStorage.removeItem(key);
+                    resultDiv.innerHTML += `✅ Removido: ${key}\n`;
+                });
+
+                // 2. Limpar dados de migração
+                const migrationKeys = [
+                    'cms-migration-status',
+                    'cms-has-local-data',
+                    'cms-migration-completed',
+                    'cms-migration-error',
+                    'cms-migration-progress'
+                ];
+
+                migrationKeys.forEach(key => {
+                    localStorage.removeItem(key);
+                    resultDiv.innerHTML += `✅ Removido: ${key}\n`;
+                });
+
+                // 3. Limpar dados de cache
+                const cacheKeys = [
+                    'cms-cache',
+                    'cms-wordpress-data',
+                    'cms-sync-data',
+                    'cms-last-sync'
+                ];
+
+                cacheKeys.forEach(key => {
+                    localStorage.removeItem(key);
+                    resultDiv.innerHTML += `✅ Removido: ${key}\n`;
+                });
+
+                // 4. Limpar dados de sessão
+                const sessionKeys = [
+                    'cms-session',
+                    'cms-user-data',
+                    'cms-auth-token'
+                ];
+
+                sessionKeys.forEach(key => {
+                    localStorage.removeItem(key);
+                    resultDiv.innerHTML += `✅ Removido: ${key}\n`;
+                });
+
+                // 5. Verificar se há outros dados do CMS
+                const allKeys = Object.keys(localStorage);
+                const cmsKeys = allKeys.filter(key => key.startsWith('cms-'));
+                
+                if (cmsKeys.length > 0) {
+                    resultDiv.innerHTML += `\n🔍 Encontrados ${cmsKeys.length} chaves adicionais do CMS:\n`;
+                    cmsKeys.forEach(key => {
+                        localStorage.removeItem(key);
+                        resultDiv.innerHTML += `✅ Removido: ${key}\n`;
+                    });
+                }
+
+                resultDiv.innerHTML += `\n🎉 Limpeza completa realizada!\n`;
+                resultDiv.innerHTML += `📊 Total de chaves removidas: ${mainKeys.length + migrationKeys.length + cacheKeys.length + sessionKeys.length + cmsKeys.length}\n`;
+                resultDiv.innerHTML += `\n✅ Sistema limpo e pronto para recriação!`;
+
+            } catch (error) {
+                resultDiv.innerHTML += `\n❌ Erro durante a limpeza: ${error.message}`;
+            }
+        }
+
+        function reloadCMS() {
+            window.location.href = 'http://localhost:3002';
+        }
+
+        // Verificar status atual
+        window.onload = function() {
+            const resultDiv = document.getElementById('result');
+            const allKeys = Object.keys(localStorage);
+            const cmsKeys = allKeys.filter(key => key.startsWith('cms-'));
+            
+            if (cmsKeys.length > 0) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `🔍 Encontradas ${cmsKeys.length} chaves do CMS no localStorage:\n\n`;
+                cmsKeys.forEach(key => {
+                    resultDiv.innerHTML += `- ${key}\n`;
+                });
+                resultDiv.innerHTML += `\n💡 Clique em "Limpar Todos os Dados" para remover.`;
+            } else {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `✅ Nenhum dado do CMS encontrado no localStorage.\nSistema já está limpo!`;
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

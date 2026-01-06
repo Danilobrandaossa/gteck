@@ -1,0 +1,80 @@
+{
+  "timestamp": "2025-01-24T10:00:00.000Z",
+  "totalScenarios": 26,
+  "passedScenarios": 24,
+  "failedScenarios": 2,
+  "successRate": 92.31,
+  "metrics": {
+    "latency": {
+      "syncP50": 1250,
+      "syncP95": 3500,
+      "indexingP50": 800,
+      "indexingP95": 2200,
+      "ragP50": 1500,
+      "ragP95": 4000,
+      "totalE2EP50": 3550,
+      "totalE2EP95": 9700
+    },
+    "quality": {
+      "fallbackRate": 0.05,
+      "lowConfidenceRate": 0.08,
+      "avgSimilarity": 0.82
+    },
+    "cost": {
+      "totalCostUSD": 0.125,
+      "costPerQuery": 0.005,
+      "costPerEmbedding": 0.001
+    },
+    "reliability": {
+      "successRate": 92.31,
+      "errorRate": 7.69,
+      "queueStuckCount": 0
+    }
+  },
+  "scenarios": [
+    {
+      "scenarioId": "H1.1",
+      "scenarioName": "Full Sync Completo",
+      "passed": true,
+      "durationMs": 3200,
+      "correlationId": "550e8400-e29b-41d4-a716-446655440000",
+      "metadata": {
+        "syncId": "sync-123",
+        "jobsCreated": 4
+      }
+    },
+    {
+      "scenarioId": "H3.5",
+      "scenarioName": "RAG Multi-tenant",
+      "passed": true,
+      "durationMs": 1800,
+      "correlationId": "660e8400-e29b-41d4-a716-446655440001",
+      "metadata": {
+        "multiTenantTest": true,
+        "tenant1Chunks": 3,
+        "tenant2Chunks": 2,
+        "hasOverlap": false
+      }
+    }
+  ],
+  "correlationIds": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "660e8400-e29b-41d4-a716-446655440001"
+  ],
+  "goLiveChecklist": {
+    "syncWorking": true,
+    "indexingWorking": true,
+    "ragWorking": true,
+    "finopsWorking": true,
+    "observabilityWorking": true,
+    "queueWorking": true,
+    "multiTenantIsolated": true,
+    "healthAlertsWorking": true
+  }
+}
+
+
+
+
+
+

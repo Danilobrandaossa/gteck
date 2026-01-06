@@ -1,0 +1,91 @@
+[
+  {
+    "id": "test-001",
+    "organizationId": "org-example-001",
+    "siteId": "site-example-001",
+    "question": "Qual é o horário de funcionamento?",
+    "expected": {
+      "mustIncludeAny": ["horário", "funcionamento", "aberto", "fechado"],
+      "mustNotInclude": ["não sei", "não tenho informação"],
+      "minConfidenceLevel": "medium",
+      "maxFallbackAllowed": false,
+      "minAvgSimilarity": 0.70,
+      "maxTotalMs": 5000,
+      "maxCostUsd": 0.02,
+      "minChunks": 1
+    }
+  },
+  {
+    "id": "test-002",
+    "organizationId": "org-example-001",
+    "siteId": "site-example-001",
+    "question": "Como faço para entrar em contato?",
+    "expected": {
+      "mustIncludeAny": ["contato", "telefone", "email", "whatsapp", "suporte"],
+      "mustNotInclude": [],
+      "minConfidenceLevel": "medium",
+      "maxFallbackAllowed": false,
+      "minAvgSimilarity": 0.72,
+      "maxTotalMs": 5000,
+      "maxCostUsd": 0.02,
+      "minChunks": 1
+    }
+  },
+  {
+    "id": "test-003",
+    "organizationId": "org-example-001",
+    "siteId": "site-example-001",
+    "question": "Qual é o preço do produto X que não existe?",
+    "expected": {
+      "mustIncludeAny": [],
+      "mustNotInclude": ["preço", "produto X"],
+      "minConfidenceLevel": "low",
+      "maxFallbackAllowed": true,
+      "minAvgSimilarity": 0.0,
+      "maxTotalMs": 3000,
+      "maxCostUsd": 0.01,
+      "minChunks": 0
+    }
+  },
+  {
+    "id": "test-004",
+    "organizationId": "org-example-001",
+    "siteId": "site-example-001",
+    "question": "Quais são os métodos de pagamento aceitos?",
+    "expected": {
+      "mustIncludeAny": ["pagamento", "cartão", "pix", "boleto", "dinheiro"],
+      "mustNotInclude": [],
+      "minConfidenceLevel": "medium",
+      "maxFallbackAllowed": false,
+      "minAvgSimilarity": 0.70,
+      "maxTotalMs": 5000,
+      "maxCostUsd": 0.02,
+      "minChunks": 1
+    }
+  },
+  {
+    "id": "test-005",
+    "organizationId": "org-example-001",
+    "siteId": "site-example-001",
+    "question": "Informações sobre política de devolução",
+    "expected": {
+      "mustIncludeAny": ["devolução", "troca", "reembolso", "política"],
+      "mustNotInclude": [],
+      "minConfidenceLevel": "medium",
+      "maxFallbackAllowed": false,
+      "minAvgSimilarity": 0.72,
+      "maxTotalMs": 5000,
+      "maxCostUsd": 0.02,
+      "minChunks": 1
+    }
+  }
+]
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,852 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  logo        String?
+  settings    String   @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  users User[]
+  sites Site[]
+
+  // FASE 3: Novos relacionamentos IA-native
+  embeddings     Embedding[]
+  aiInteractions AIInteraction[]
+  aiMetrics      AIMetric[]
+  aiPrompts      AIPrompt[]
+
+  // FASE 6: Chat sessions
+  chatSessions ChatSession[]
+
+  // FASE 6: AI Response Cache
+  aiResponseCaches AIResponseCache[]
+
+  // FASE 7: Embedding Chunks
+  embeddingChunks EmbeddingChunk[]
+
+  @@map("organizations")
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  name        String?
+  password    String?
+  role        String    @default("viewer") // admin, editor, author, viewer
+  avatar      String?
+  isActive    Boolean   @default(true)
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  pages      Page[]
+  aiContents AIContent[]
+
+  // FASE 3: Novos relacionamentos IA-native
+  aiInteractions   AIInteraction[]
+  aiMetrics        AIMetric[]
+  aiPromptsCreated AIPrompt[]      @relation("AIPromptCreatedBy")
+  aiPromptsUpdated AIPrompt[]      @relation("AIPromptUpdatedBy")
+
+  // FASE 6: Chat sessions
+  chatSessions ChatSession[]
+
+  @@map("users")
+}
+
+model Site {
+  id          String   @id @default(cuid())
+  name        String
+  url         String
+  description String?
+  logo        String?
+  settings    String   @default("{}")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  pages          Page[]
+  categories     Category[]
+  media          Media[]
+  aiContents     AIContent[]
+  aiPluginConfig AIPluginConfig?
+
+  // FASE 3: Novos relacionamentos IA-native
+  embeddings     Embedding[]
+  aiInteractions AIInteraction[]
+  aiMetrics      AIMetric[]
+  aiPrompts      AIPrompt[]
+
+  // FASE 6: Chat sessions
+  chatSessions ChatSession[]
+
+  // FASE 6: AI Response Cache
+  aiResponseCaches AIResponseCache[]
+
+  // FASE 7: Embedding Chunks
+  embeddingChunks EmbeddingChunk[]
+
+  // FASE C: WordPress Integration (WordPress Sync)
+  wpBaseUrl      String? // URL do site WordPress
+  wpAuthType     String? // "basic", "application_password", "jwt", "oauth"
+  wpUsername     String? // Username para autenticação WordPress
+  wpPasswordHash String? // Senha criptografada (AES-256-CBC)
+  wpToken        String? // Token para JWT/OAuth
+  wpConfigured   Boolean   @default(false) // Se credenciais WordPress estão configuradas
+  wpLastSyncAt   DateTime? // Última sincronização com WordPress
+
+  @@map("sites")
+}
+
+model Page {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String
+  content        String?
+  excerpt        String?
+  status         String    @default("draft") // draft, published, archived
+  featuredImage  String?
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  customFields   String    @default("{}")
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Relations
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  templateId String?
+  template   Template? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+
+  // FASE 3: Campos aditivos para embeddings (opcionais)
+  embeddingGeneratedAt DateTime?
+  embeddingModel       String?
+  embeddingVersion     Int       @default(1)
+
+  // FASE 3: Novos relacionamentos IA-native
+  embeddings     Embedding[]
+  aiInteractions AIInteraction[]
+
+  // FASE 7: Embedding Chunks
+  embeddingChunks EmbeddingChunk[]
+
+  // FASE C: WordPress Integration (WordPress Sync)
+  wpPostId   Int? // ID do post/page no WordPress
+  wpSiteUrl  String? // URL do site WordPress de origem
+  wpSyncedAt DateTime? // Última sincronização com WordPress
+  acfFields  String?   @default("{}") // Campos ACF em JSON
+
+  @@unique([siteId, slug])
+  @@unique([siteId, wpPostId], map: "pages_site_wp_post_unique")
+  @@map("pages")
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  content     String
+  fields      String   @default("[]")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  pages Page[]
+
+  // FASE 3: Campos aditivos para embeddings (opcionais)
+  embeddingGeneratedAt DateTime?
+  embeddingModel       String?
+  embeddingVersion     Int       @default(1)
+
+  // FASE 3: Novos relacionamentos IA-native
+  embeddings     Embedding[]
+  EmbeddingChunk EmbeddingChunk[]
+
+  @@map("templates")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String
+  description String?
+  parentId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryHierarchy")
+
+  pages Page[]
+
+  // FASE C: WordPress Integration (WordPress Sync)
+  wpTermId  Int? // ID do term (category) no WordPress
+  wpSiteUrl String? // URL do site WordPress de origem
+
+  @@unique([siteId, slug])
+  @@unique([siteId, wpTermId], map: "categories_site_wp_term_unique")
+  @@map("categories")
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  alt          String?
+  caption      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  // FASE C: WordPress Integration (WordPress Sync)
+  wpMediaId Int? // ID do attachment no WordPress
+  wpSiteUrl String? // URL do site WordPress de origem
+
+  @@unique([siteId, wpMediaId], map: "media_site_wp_media_unique")
+  @@map("media")
+}
+
+model QueueJob {
+  id          String    @id @default(cuid())
+  type        String
+  status      String    @default("pending") // pending, processing, completed, failed
+  data        String
+  result      String?
+  error       String?
+  attempts    Int       @default(0)
+  maxAttempts Int       @default(3)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  processedAt DateTime?
+
+  // FASE 7 ETAPA 4: Campos de lock/heartbeat para múltiplas instâncias
+  lockedBy            String? // ID da instância do worker
+  lockedAt            DateTime? // Quando o lock foi adquirido
+  lockExpiresAt       DateTime? // TTL do lock (quando expira)
+  lastHeartbeatAt     DateTime? // Último heartbeat (worker vivo)
+  processingStartedAt DateTime? // Quando começou o processamento (métricas)
+
+  @@index([status], map: "queue_jobs_status_idx")
+  @@index([createdAt], map: "queue_jobs_created_at_idx")
+  @@index([status, lockExpiresAt], map: "queue_jobs_status_lock_idx") // Para recuperação de stuck jobs
+  @@index([lockedBy], map: "queue_jobs_locked_by_idx") // Para rastreamento por worker
+  @@map("queue_jobs")
+}
+
+model WordPressDiagnostic {
+  id              String   @id @default(cuid())
+  dataExecucao    DateTime
+  resultado       String // Armazena todo o resultado do diagnóstico
+  acoesCorrigidas Boolean  @default(false)
+  feedbackUsuario String?
+  siteUrl         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("wordpress_diagnostics")
+}
+
+model AIContent {
+  id                     String  @id @default(cuid())
+  title                  String
+  slug                   String? // Slug do post (URL amigável)
+  excerpt                String? // Resumo / Descrição curta
+  content                String? // Conteúdo completo do post
+  status                 String  @default("draft") // draft, published, error, generating
+  language               String  @default("pt-BR") // Idioma
+  category               String? // Categoria
+  tags                   String? // Tags separadas por vírgula
+  keywords               String? // Palavra-chave principal
+  secondaryKeywords      String? // Palavras-chave secundárias (JSON array)
+  aiModel                String? // Modelo de IA usado (gpt-4, claude, etc)
+  prompt                 String? // Prompt original usado para gerar
+  additionalInstructions String? // Instruções adicionais para regeneração
+  generationConfig       String? @default("{}") // Configurações de geração (JSON)
+  wordCount              Int? // Quantidade de palavras
+  errorMessage           String? // Mensagem de erro (se status = error)
+  wordpressPostId        Int? // ID do post no WordPress (se publicado)
+  wordpressUrl           String? // URL do post no WordPress
+
+  // SEO e Meta
+  metaDescription  String? // Meta descrição para SEO
+  featuredImage    String? // URL da imagem destacada
+  featuredImageAlt String? // Texto alternativo da imagem destacada
+
+  // Relações
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
+  scheduledAt DateTime? // Data de agendamento (se agendado)
+
+  history AIContentHistory[]
+
+  // FASE 3: Campos aditivos para embeddings (opcionais)
+  embeddingGeneratedAt DateTime?
+  embeddingModel       String?
+  embeddingVersion     Int       @default(1)
+
+  // FASE 3: Novos relacionamentos IA-native
+  embeddings     Embedding[]
+  aiInteractions AIInteraction[]
+
+  // FASE 7: Embedding Chunks
+  embeddingChunks EmbeddingChunk[]
+
+  @@index([siteId], map: "ai_content_site_id_idx")
+  @@index([status], map: "ai_content_status_idx")
+  @@index([siteId, status], map: "ai_content_site_status_idx")
+  @@index([authorId], map: "ai_content_author_idx")
+  @@map("ai_content")
+}
+
+model AIPluginConfig {
+  id            String   @id @default(cuid())
+  siteId        String   @unique
+  site          Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  apiKey        String? // API Key do plugin
+  webhookUrl    String? // URL do webhook no WordPress
+  webhookSecret String? // Secret para validação HMAC
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("ai_plugin_config")
+}
+
+// FASE F.4: Sync Conflicts
+model SyncConflict {
+  id                String    @id @default(cuid())
+  organizationId    String
+  siteId            String
+  entityType        String // 'page', 'post', 'media', 'term'
+  wpId              Int
+  localId           String
+  conflictType      String // 'local_newer', 'wp_newer', 'diverged'
+  detectedAt        DateTime  @default(now())
+  localSnapshotJson String    @default("{}")
+  wpSnapshotJson    String    @default("{}")
+  resolutionStatus  String    @default("open") // 'open', 'resolved', 'ignored'
+  resolvedAt        DateTime?
+  resolvedBy        String?
+  resolutionNote    String?
+
+  @@index([organizationId, siteId])
+  @@index([entityType, wpId])
+  @@index([resolutionStatus])
+  @@map("sync_conflicts")
+}
+
+model AIContentHistory {
+  id        String    @id @default(cuid())
+  contentId String
+  content   AIContent @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  action    String // generate, edit, publish, unpublish, delete, regenerate
+  prompt    String? // Prompt usado (se aplicável)
+  metadata  String? // Metadados adicionais (JSON)
+
+  // FASE 3: Campos aditivos para métricas de IA (opcionais)
+  tokensUsed      Int?
+  costUSD         Float?
+  durationMs      Int?
+  modelUsed       String?
+  providerUsed    String?
+  aiInteractionId String?
+  aiInteraction   AIInteraction? @relation(fields: [aiInteractionId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@map("ai_content_history")
+}
+
+// ============================================
+// FASE 3: NOVAS TABELAS IA-NATIVE
+// ============================================
+
+// 🧠 1. Embedding - Armazena vetores de conteúdo
+model Embedding {
+  id String @id @default(cuid())
+
+  // Relacionamento com conteúdo (um embedding pode ser de Page, AIContent ou Template)
+  pageId String?
+  page   Page?   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  aiContentId String?
+  aiContent   AIContent? @relation(fields: [aiContentId], references: [id], onDelete: Cascade)
+
+  templateId String?
+  template   Template? @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  // Multi-tenancy (OBRIGATÓRIO - garantia de isolamento)
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  organizationId String // Denormalizado para performance (evita JOINs em busca vetorial)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  // Dados do embedding (pgvector)
+  // Nota: Prisma não suporta nativamente vector, usamos Unsupported e gerenciamos via SQL raw
+  embedding  Unsupported("vector(1536)") // pgvector - OpenAI ada-002 padrão (1536 dimensões)
+  model      String                      @default("text-embedding-ada-002") // Modelo usado para gerar embedding
+  dimensions Int                         @default(1536) // Dimensões do vetor
+
+  // Metadados
+  sourceType  String // "page", "ai_content", "template" (tipo de conteúdo origem)
+  contentHash String // Hash SHA-256 do conteúdo original (evitar duplicatas)
+  language    String @default("pt-BR")
+
+  // Versionamento
+  version  Int     @default(1) // Versão do embedding (incrementa se conteúdo mudar)
+  isActive Boolean @default(true) // Embedding ativo ou obsoleto
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Índices para performance e isolamento multi-tenant
+  @@index([siteId, sourceType, isActive], name: "embedding_site_source_active_idx")
+  @@index([organizationId, sourceType], name: "embedding_org_source_idx")
+  @@index([contentHash, model, version], name: "embedding_hash_model_version_idx")
+  @@index([model, dimensions], name: "embedding_model_dimensions_idx")
+  @@map("embeddings")
+}
+
+// 🤖 2. AIInteraction - Rastreia TODA interação com IA
+model AIInteraction {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (OBRIGATÓRIO)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Relacionamento com conteúdo (opcional - nem toda interação tem conteúdo associado)
+  aiContentId String?
+  aiContent   AIContent? @relation(fields: [aiContentId], references: [id], onDelete: SetNull)
+
+  pageId String?
+  page   Page?   @relation(fields: [pageId], references: [id], onDelete: SetNull)
+
+  // Tipo de interação
+  type   String // "rag_query", "content_generation", "regeneration", "diagnostic", "suggestion", "editing_review"
+  status String @default("pending") // "pending", "processing", "completed", "failed"
+
+  // Prompt e contexto
+  prompt        String // Prompt original do usuário
+  promptVersion String? // Versão do prompt usado (referência a AIPrompt.id)
+  context       String? @default("{}") // JSON - contexto usado (RAG chunks, etc)
+
+  // Modelo usado
+  provider    String // "openai", "gemini", "claude"
+  model       String // "gpt-4o-mini", "gemini-2.0-flash", "claude-3-sonnet", etc
+  temperature Float? @default(0.7)
+  maxTokens   Int?
+
+  // Resposta
+  response     String? // Resposta da IA
+  finishReason String? // "stop", "length", "content_filter", "function_call", etc
+
+  // Métricas de tokens
+  promptTokens     Int?
+  completionTokens Int?
+  totalTokens      Int?
+
+  // Métricas de custo
+  costUSD Float? // Custo em USD
+  costBRL Float? // Custo em BRL (se aplicável)
+
+  // Métricas de performance
+  durationMs          Int? // Tempo total em milissegundos
+  embeddingDurationMs Int? // Tempo para gerar/buscar embeddings (se aplicável)
+  aiCallDurationMs    Int? // Tempo da chamada à IA
+
+  // RAG específico
+  ragUsed                Boolean @default(false)
+  ragChunksCount         Int? // Quantidade de chunks usados no contexto RAG
+  ragSimilarityThreshold Float?  @default(0.7) // Threshold de similaridade usado na busca
+
+  // Erros
+  errorMessage String?
+  errorCode    String?
+  retryCount   Int     @default(0)
+
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+
+  // Relacionamento com histórico
+  aiContentHistories AIContentHistory[]
+
+  // FASE 6: Relacionamento com mensagens de chat
+  chatMessages ChatMessage[]
+
+  // Índices para performance e isolamento multi-tenant
+  @@index([organizationId, type, status], name: "ai_interaction_org_type_status_idx")
+  @@index([siteId, createdAt], name: "ai_interaction_site_created_idx")
+  @@index([userId, createdAt], name: "ai_interaction_user_created_idx")
+  @@index([provider, model], name: "ai_interaction_provider_model_idx")
+  @@index([createdAt], name: "ai_interaction_created_at_idx")
+  @@map("ai_interactions")
+}
+
+// 📊 3. AIMetric - Métricas agregadas (performance para dashboards)
+model AIMetric {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (opcionais para permitir agregação em diferentes níveis)
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Agregação temporal
+  period      String // "hour", "day", "week", "month"
+  periodStart DateTime // Início do período
+  periodEnd   DateTime // Fim do período
+
+  // Agregação por tipo
+  type     String? // "rag_query", "content_generation", "regeneration", etc (null = todos os tipos)
+  provider String? // "openai", "gemini", "claude", etc (null = todos os providers)
+  model    String? // Modelo específico (null = todos os modelos)
+
+  // Métricas agregadas
+  totalRequests      Int @default(0)
+  successfulRequests Int @default(0)
+  failedRequests     Int @default(0)
+
+  totalTokens      BigInt @default(0)
+  promptTokens     BigInt @default(0)
+  completionTokens BigInt @default(0)
+
+  totalCostUSD Decimal @default(0) @db.Decimal(10, 4)
+  totalCostBRL Decimal @default(0) @db.Decimal(10, 4)
+
+  avgDurationMs Int? // Duração média em ms
+  p50DurationMs Int? // Percentil 50 (mediana)
+  p95DurationMs Int? // Percentil 95
+  p99DurationMs Int? // Percentil 99
+
+  // RAG específico
+  ragRequestsCount  Int    @default(0)
+  avgRagChunksCount Float? // Média de chunks por requisição RAG
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Índices e constraints
+  @@unique([organizationId, siteId, userId, period, periodStart, type, provider, model], name: "ai_metric_unique_idx")
+  @@index([organizationId, period, periodStart], name: "ai_metric_org_period_idx")
+  @@index([siteId, period, periodStart], name: "ai_metric_site_period_idx")
+  @@index([periodStart, periodEnd], name: "ai_metric_period_range_idx")
+  @@map("ai_metrics")
+}
+
+// 🧾 4. AIPrompt - Versionamento de prompts
+model AIPrompt {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (opcionais para permitir prompts globais, por organização ou por site)
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  // Identificação
+  name        String // Nome do prompt (ex: "content_generation_blog_post")
+  slug        String // Slug único (ex: "content-gen-blog-post")
+  description String? // Descrição do prompt
+
+  // Versionamento
+  version   Int     @default(1)
+  isActive  Boolean @default(true)
+  isDefault Boolean @default(false) // Versão padrão para esta categoria
+
+  // Conteúdo
+  prompt    String // Template do prompt
+  variables String @default("[]") // JSON array - variáveis disponíveis (ex: ["title", "keywords", "language"])
+
+  // Configurações recomendadas
+  provider    String? // "openai", "gemini", "claude", etc (null = qualquer provider)
+  model       String? // Modelo recomendado (null = qualquer modelo)
+  temperature Float?  @default(0.7)
+  maxTokens   Int?
+
+  // Categoria
+  category String // "content_generation", "rag_query", "diagnostic", "editing", "rewrite", etc
+
+  // Metadados
+  tags     String? // Tags separadas por vírgula (ex: "blog,seo,pt-br")
+  examples String? @default("[]") // JSON array - exemplos de uso
+
+  // Auditoria
+  createdBy     String? // userId que criou
+  createdByUser User?   @relation("AIPromptCreatedBy", fields: [createdBy], references: [id], onDelete: SetNull)
+  updatedBy     String? // userId que atualizou
+  updatedByUser User?   @relation("AIPromptUpdatedBy", fields: [updatedBy], references: [id], onDelete: SetNull)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Índices e constraints
+  @@unique([slug, version], name: "ai_prompt_slug_version_idx")
+  @@index([organizationId, siteId, category, isActive], name: "ai_prompt_org_site_category_idx")
+  @@index([category, isDefault], name: "ai_prompt_category_default_idx")
+  @@map("ai_prompts")
+}
+
+// ============================================
+// FASE 6: CHAT SESSIONS E MENSAGENS
+// ============================================
+
+// 💬 ChatSession - Sessões de conversa persistidas
+model ChatSession {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (OBRIGATÓRIO)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Metadados da sessão
+  title    String? // Título gerado automaticamente ou definido pelo usuário
+  metadata String? @default("{}") // JSON - metadados adicionais
+
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastMessageAt DateTime? // Última mensagem na sessão
+
+  // Relacionamentos
+  messages ChatMessage[]
+
+  // Índices para performance e isolamento multi-tenant
+  @@index([organizationId, siteId, createdAt], name: "chat_session_org_site_created_idx")
+  @@index([userId, createdAt], name: "chat_session_user_created_idx")
+  @@index([lastMessageAt], name: "chat_session_last_message_idx")
+  @@map("chat_sessions")
+}
+
+// 💬 ChatMessage - Mensagens individuais em uma sessão
+model ChatMessage {
+  id String @id @default(cuid())
+
+  // Relacionamento com sessão (OBRIGATÓRIO)
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  // Conteúdo da mensagem
+  role    String // "system" | "user" | "assistant"
+  content String // Conteúdo da mensagem
+
+  // Metadados de IA (quando role = "assistant")
+  tokens          Int? // Tokens usados nesta mensagem
+  provider        String? // "openai" | "gemini"
+  model           String? // Modelo usado
+  aiInteractionId String? // Referência à interação completa
+  aiInteraction   AIInteraction? @relation(fields: [aiInteractionId], references: [id], onDelete: SetNull)
+
+  // Metadados RAG (quando aplicável)
+  ragSources  String? @default("[]") // JSON array - fontes usadas no RAG
+  ragMetadata String? @default("{}") // JSON - metadados do RAG (similaridade, chunks, etc)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+
+  // Índices
+  @@index([sessionId, createdAt], name: "chat_message_session_created_idx")
+  @@index([aiInteractionId], name: "chat_message_ai_interaction_idx")
+  @@map("chat_messages")
+}
+
+// 💾 AIResponseCache - Cache opcional de respostas (PostgreSQL)
+model AIResponseCache {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (OBRIGATÓRIO)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  // Cache key (hash da pergunta + contexto)
+  cacheKey String
+
+  // Resposta em cache
+  response String // JSON da resposta completa
+
+  // Metadados
+  provider String // "openai" | "gemini"
+  model    String // Modelo usado
+
+  // Expiração
+  expiresAt DateTime
+
+  // Estatísticas
+  hitCount Int @default(0)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Índices
+  @@unique([organizationId, siteId, cacheKey], name: "ai_response_cache_key_tenant_idx")
+  @@index([expiresAt], name: "ai_response_cache_expires_idx")
+  @@index([organizationId, siteId, createdAt], name: "ai_response_cache_org_site_created_idx")
+  @@map("ai_response_cache")
+}
+
+// ============================================
+// FASE 7: EMBEDDING CHUNKS (RAG Melhorado)
+// ============================================
+
+// 🧩 EmbeddingChunk - Chunks menores e melhores para recuperação
+model EmbeddingChunk {
+  id String @id @default(cuid())
+
+  // Relacionamento com conteúdo origem
+  pageId String?
+  page   Page?   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  aiContentId String?
+  aiContent   AIContent? @relation(fields: [aiContentId], references: [id], onDelete: Cascade)
+
+  templateId String?
+  template   Template? @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  // Multi-tenancy (OBRIGATÓRIO)
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  organizationId String // Denormalizado para performance
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  // Dados do chunk
+  sourceType String // "page", "ai_content", "template"
+  sourceId   String // ID do conteúdo origem
+
+  chunkIndex Int // Índice do chunk no conteúdo (0, 1, 2, ...)
+  chunkText  String // Texto do chunk
+  chunkHash  String // Hash SHA-256 do chunk (evita duplicatas)
+
+  // Embedding (pgvector)
+  embedding  Unsupported("vector(1536)") // pgvector
+  model      String                      @default("text-embedding-ada-002")
+  dimensions Int                         @default(1536)
+  provider   String                      @default("openai")
+
+  // Versionamento
+  version  Int     @default(1)
+  isActive Boolean @default(true)
+
+  // Metadados
+  language String @default("pt-BR")
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Índices para performance e isolamento multi-tenant
+  @@index([siteId, sourceType, sourceId, isActive], name: "embedding_chunk_site_source_active_idx")
+  @@index([organizationId, siteId, sourceType], name: "embedding_chunk_org_site_source_idx")
+  @@index([chunkHash, model, version], name: "embedding_chunk_hash_model_version_idx")
+  @@index([sourceId, chunkIndex], name: "embedding_chunk_source_index_idx")
+  @@map("embedding_chunks")
+}
+
+// FASE 8 ETAPA 4: Feedback de respostas da IA
+model AIResponseFeedback {
+  id String @id @default(cuid())
+
+  // Multi-tenancy (OBRIGATÓRIO)
+  organizationId String
+  siteId         String
+
+  // Relacionamento com interação (FK lógica)
+  aiInteractionId String
+
+  // Usuário (opcional)
+  userId String?
+
+  // Feedback
+  rating     Int // +1 = positivo | -1 = negativo
+  reason     String? // enum: INCORRECT, INCOMPLETE, CONFUSING, TOO_SLOW, TOO_GENERIC, HELPFUL, CLEAR, OTHER
+  commentTag String? // opcional, categórico
+
+  // Timestamps
+  createdAt DateTime @default(now())
+
+  // Índices para performance e isolamento multi-tenant
+  @@index([organizationId, siteId], name: "ai_feedback_org_site_idx")
+  @@index([aiInteractionId], name: "ai_feedback_interaction_idx")
+  @@index([rating], name: "ai_feedback_rating_idx")
+  @@index([createdAt], name: "ai_feedback_created_at_idx")
+  @@map("ai_response_feedback")
+}

@@ -1,0 +1,78 @@
+name: Release Gate
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  release-gate:
+    name: 🚦 Release Gate
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Generate Prisma Client
+        run: npm run db:generate
+      
+      - name: Run Release Gate
+        id: gate
+        run: npm run release-gate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GATE_CHECK_REGRESSION: 'true'
+          GATE_CHECK_ALERTS: 'false' # Desabilitar em CI (sem acesso ao servidor)
+        continue-on-error: true
+      
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-gate-reports
+          path: |
+            tests/ai/reports/
+      
+      - name: Comment on PR
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **Release Gate bloqueou este PR**\n\nOs testes de regressão RAG falharam. Por favor, revise as mudanças e corrija os problemas antes de fazer merge.\n\nVeja os relatórios nos artifacts do workflow.'
+            })
+      
+      - name: Fail job if gate failed
+        if: steps.gate.outcome == 'failure'
+        run: exit 1
+      
+      - name: Success message
+        if: success()
+        run: |
+          echo "✅ Release Gate passou - deploy permitido"
+
+
+
+
+
+
+
+

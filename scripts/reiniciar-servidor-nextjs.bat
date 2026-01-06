@@ -1,0 +1,13 @@
+@echo off
+echo Parando processos Node.js...
+taskkill /F /IM node.exe /T >nul 2>&1
+echo Aguardando 2 segundos...
+timeout /t 2 /nobreak >nul
+echo Limpando cache Next.js...
+if exist .next rmdir /s /q .next
+echo Iniciando servidor Next.js na porta 4000...
+set PORT=4000
+npm run dev
+
+
+

@@ -1,0 +1,113 @@
+════════════════════════════════════════════════════════════════════════════════
+📝 PROMPT PARA CHATGPT - GERAÇÃO DE CONTEÚDO PRESSEL V1
+════════════════════════════════════════════════════════════════════════════════
+
+Você é um especialista em criação de conteúdo para páginas de pressel (pre-sell pages) otimizadas para SEO e conversão.
+
+Sua tarefa é gerar um JSON estruturado para criação automática de uma página WordPress usando o template "Pressel V1".
+
+════════════════════════════════════════════════════════════════════════════════
+📋 INFORMAÇÕES DO PROJETO
+════════════════════════════════════════════════════════════════════════════════
+
+**NICHO:** [DESCREVA O NICHO - Ex: Artesanato, Culinária, Tecnologia, etc.]
+
+**PRODUTO/SERVIÇO:** [DESCREVA O PRODUTO/SERVIÇO - Ex: Curso de Crochê, E-book de Receitas, etc.]
+
+**PÚBLICO-ALVO:** [DESCREVA O PÚBLICO - Ex: Iniciantes em crochê, Donas de casa, etc.]
+
+**IDIOMA:** [pt-BR / en-US / es-ES]
+
+**PALAVRA-CHAVE PRINCIPAL:** [Ex: "aprender crochê", "receitas fáceis", etc.]
+
+**OBJETIVO DA PÁGINA:** [Ex: Gerar leads, Pré-venda de curso, Divulgar produto afiliado]
+
+**LINKS DOS BOTÕES:** 
+- Botão 1: [URL DO LINK 1]
+- Botão 2: [URL DO LINK 2] (opcional)
+- Botão 3: [URL DO LINK 3] (opcional)
+
+════════════════════════════════════════════════════════════════════════════════
+📐 ESTRUTURA DO JSON A SER GERADO
+════════════════════════════════════════════════════════════════════════════════
+
+MODELOS DISPONÍVEIS:
+• "modelo_v1" ou "modelo_brasileiro" → Template pressel-oficial.php (padrão)
+• "modelo_v2" ou "modelo_internacional" → Template presell-enus.php
+• "modelo_v3" ou "modelo_minimalista" → Template presell-minimal.php
+• "modelo_v4" ou "modelo_ecommerce" → Template presell-ecommerce.php
+• "modelo_v5" ou "modelo_afiliado" → Template presell-affiliate.php
+
+Gere um JSON seguindo EXATAMENTE esta estrutura:
+
+{
+  "page_title": "TÍTULO PRINCIPAL OTIMIZADO PARA SEO (50-70 caracteres)",
+  "page_model": "modelo_v1",
+  "page_template": "pressel-oficial.php",
+  "post_status": "publish",
+  "acf_fields": {
+    "hero_description": "SUBTÍTULO CHAMATIVO (máx 200 caracteres)",
+    "link_h1": "",
+    "botao_tipo_selecao": "normal",
+    "titulo_da_secao": "TÍTULO DA SEÇÃO DE BOTÕES",
+    "cor_botao": "#2352AE",
+    "texto_botao_p1": "TEXTO BOTÃO 1 (máx 28 caracteres)",
+    "link_botao_p1": "URL_BOTAO_1",
+    "texto_botao_p2": "TEXTO BOTÃO 2 (máx 28 caracteres)",
+    "link_botao_p2": "URL_BOTAO_2",
+    "texto_botao_p3": "TEXTO BOTÃO 3 (máx 28 caracteres)",
+    "link_botao_p3": "URL_BOTAO_3",
+    "texto_usuario": "TEXTO INFORMATIVO (ex: Você permanecerá no mesmo site)",
+    "titulo_h2_": "PRIMEIRO TÍTULO H2",
+    "info_content": "<p>PARÁGRAFO 1 COM INFORMAÇÕES RELEVANTES</p><p>PARÁGRAFO 2 EXPANDINDO O TEMA</p><p>PARÁGRAFO 3 COM MAIS DETALHES</p>",
+    "titulo_h2_02": "SEGUNDO TÍTULO H2",
+    "info_content_2": "<p>CONTEÚDO COMPLEMENTAR PARÁGRAFO 1</p><p>PARÁGRAFO 2 COM INFORMAÇÕES ADICIONAIS</p>",
+    "titulo_beneficios": "TÍTULO DA SEÇÃO DE BENEFÍCIOS",
+    "titulo_beneficios_1": "TÍTULO DO BENEFÍCIO 1",
+    "_beneficio_text_1": "DESCRIÇÃO CLARA DO BENEFÍCIO 1",
+    "titulo_beneficios_2": "TÍTULO DO BENEFÍCIO 2",
+    "_beneficio_text_2": "DESCRIÇÃO CLARA DO BENEFÍCIO 2",
+    "titulo_beneficios_3": "TÍTULO DO BENEFÍCIO 3",
+    "_beneficio_text_3": "DESCRIÇÃO CLARA DO BENEFÍCIO 3",
+    "titulo_beneficios_4": "TÍTULO DO BENEFÍCIO 4",
+    "_beneficio_text_4": "DESCRIÇÃO CLARA DO BENEFÍCIO 4",
+    "titulo_faq": "TÍTULO DA SEÇÃO FAQ",
+    "pergunta_1": "PERGUNTA FREQUENTE 1?",
+    "resposta_1": "RESPOSTA COMPLETA E ÚTIL PARA PERGUNTA 1",
+    "pergunta_2": "PERGUNTA FREQUENTE 2?",
+    "resposta_2": "RESPOSTA COMPLETA E ÚTIL PARA PERGUNTA 2",
+    "pergunta_3": "PERGUNTA FREQUENTE 3?",
+    "resposta_3": "RESPOSTA COMPLETA E ÚTIL PARA PERGUNTA 3",
+    "aviso": "TEXTO DE AVISO LEGAL/DISCLAIMER"
+  },
+  "seo": {
+    "meta_title": "TÍTULO SEO (máx 60 caracteres)",
+    "meta_description": "DESCRIÇÃO SEO PERSUASIVA (máx 160 caracteres)",
+    "focus_keyword": "PALAVRA-CHAVE PRINCIPAL"
+  },
+  "featured_image": "URL_DA_IMAGEM_DESTACADA (opcional)"
+}
+
+════════════════════════════════════════════════════════════════════════════════
+🚀 AGORA PREENCHA AS INFORMAÇÕES DO SEU PROJETO E COLE NO CHATGPT!
+════════════════════════════════════════════════════════════════════════════════
+
+**NICHO:** 
+
+**PRODUTO/SERVIÇO:** 
+
+**PÚBLICO-ALVO:** 
+
+**IDIOMA:** 
+
+**PALAVRA-CHAVE PRINCIPAL:** 
+
+**OBJETIVO DA PÁGINA:** 
+
+**LINKS DOS BOTÕES:** 
+- Botão 1: 
+- Botão 2: 
+- Botão 3: 
+
+════════════════════════════════════════════════════════════════════════════════
+

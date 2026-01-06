@@ -1,0 +1,45 @@
+{
+  "page_title": "Teste ACF Real - Campos Configurados",
+  "page_content": "Esta é uma página de teste usando os campos ACF que já estão configurados no seu site WordPress.",
+  "page_excerpt": "Teste com campos ACF reais",
+  "page_status": "publish",
+  "page_slug": "teste-acf-real-campos-configurados",
+  "page_template": "pressel-v3.php",
+  "acf_fields": {
+    "sub_titulo": "Subtítulo da Primeira Dobra - Teste ACF",
+    "link_int": "https://exemplo.com/link-interno",
+    "titulo_da_secao": "Título da Seção - Botão Sugestão",
+    "cor_botao": "#FF6B35",
+    "texto_botao_p1": "Botão Principal 1",
+    "link_botao_p1": "https://exemplo.com/botao1",
+    "texto_botao_p2": "Botão Principal 2", 
+    "link_botao_p2": "https://exemplo.com/botao2",
+    "texto_botao_p3": "Botão Principal 3",
+    "link_botao_p3": "https://exemplo.com/botao3",
+    "titulo_h2": "Título H2 - Campo de Texto",
+    "paragrafo": "Este é um parágrafo de teste usando o campo de texto ACF configurado no seu site. O sistema Pressel Automation está testando a integração com os campos ACF existentes.",
+    "hero_title": "Título do Hero - Teste",
+    "hero_subtitle": "Subtítulo do Hero - Teste",
+    "hero_image": "https://via.placeholder.com/1200x600/FF6B35/FFFFFF?text=Hero+ACF+Test",
+    "cta_button_text": "Botão CTA - Teste",
+    "cta_button_link": "#teste-acf",
+    "seo_title": "Teste ACF Real - SEO",
+    "seo_description": "Descrição SEO para teste com campos ACF reais",
+    "seo_keywords": "teste, acf, campos, wordpress, pressel"
+  },
+  "meta_data": {
+    "created_by": "Pressel Automation",
+    "creation_date": "2024-10-24",
+    "test_mode": false,
+    "source": "cms_pressel_automation",
+    "acf_groups_used": ["Primeira Dobra", "Botão Sugestão", "Campo de Texto"]
+  }
+}
+
+
+
+
+
+
+
+

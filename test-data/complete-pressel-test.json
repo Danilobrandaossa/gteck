@@ -1,0 +1,106 @@
+{
+  "page_title": "Página Completa de Teste - Pressel Automation",
+  "page_content": "Esta é uma página de teste completa criada pelo sistema Pressel Automation. Ela inclui todos os campos possíveis para demonstrar a funcionalidade completa do sistema.",
+  "page_excerpt": "Página de teste completa com todos os campos ACF, SEO e metadados",
+  "page_status": "publish",
+  "page_slug": "pagina-completa-teste-pressel",
+  "page_template": "page.php",
+  "acf_fields": {
+    "hero_title": "Título Principal da Página",
+    "hero_subtitle": "Subtítulo explicativo da página",
+    "hero_image": "https://via.placeholder.com/1200x600/FF6B35/FFFFFF?text=Hero+Image",
+    "hero_description": "Descrição do hero da página",
+    "content_sections": [
+      {
+        "title": "Seção 1 - Introdução",
+        "content": "Conteúdo da primeira seção com informações importantes",
+        "image": "https://via.placeholder.com/600x400/66BB6A/FFFFFF?text=Section+1",
+        "order": 1
+      },
+      {
+        "title": "Seção 2 - Desenvolvimento", 
+        "content": "Conteúdo da segunda seção com mais detalhes",
+        "image": "https://via.placeholder.com/600x400/90CAF9/FFFFFF?text=Section+2",
+        "order": 2
+      },
+      {
+        "title": "Seção 3 - Conclusão",
+        "content": "Conteúdo da terceira seção com conclusões",
+        "image": "https://via.placeholder.com/600x400/FFD54F/FFFFFF?text=Section+3",
+        "order": 3
+      }
+    ],
+    "cta_button_text": "Saiba Mais",
+    "cta_button_link": "#contact",
+    "cta_button_color": "#FF6B35",
+    "contact_email": "contato@exemplo.com",
+    "contact_phone": "+55 11 99999-9999",
+    "social_links": {
+      "facebook": "https://facebook.com/exemplo",
+      "instagram": "https://instagram.com/exemplo",
+      "linkedin": "https://linkedin.com/company/exemplo"
+    },
+    "seo_title": "Página Completa de Teste - SEO Otimizado",
+    "seo_description": "Descrição SEO completa para teste de página automatizada com Pressel Automation",
+    "seo_keywords": "teste, automatização, wordpress, cms, pressel, acf, seo",
+    "seo_og_image": "https://via.placeholder.com/1200x630/FF6B35/FFFFFF?text=OG+Image",
+    "seo_og_title": "Página Completa de Teste - Pressel Automation",
+    "seo_og_description": "Descrição para redes sociais da página de teste",
+    "custom_css": ".custom-class { color: #FF6B35; }",
+    "custom_js": "console.log('Página carregada via Pressel Automation');",
+    "featured_image": "https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Featured+Image",
+    "gallery_images": [
+      "https://via.placeholder.com/400x300/2196F3/FFFFFF?text=Gallery+1",
+      "https://via.placeholder.com/400x300/E91E63/FFFFFF?text=Gallery+2",
+      "https://via.placeholder.com/400x300/9C27B0/FFFFFF?text=Gallery+3"
+    ],
+    "video_url": "https://www.youtube.com/watch?v=exemplo",
+    "audio_file": "https://exemplo.com/audio.mp3",
+    "download_file": "https://exemplo.com/documento.pdf",
+    "price": "R$ 99,90",
+    "currency": "BRL",
+    "availability": "in_stock",
+    "rating": 4.5,
+    "reviews_count": 127,
+    "tags": ["teste", "automatização", "wordpress", "cms", "pressel"],
+    "categories": ["Tecnologia", "Automação", "WordPress"],
+    "author": "Pressel Automation",
+    "publish_date": "2024-10-24",
+    "expiry_date": "2025-10-24",
+    "featured": true,
+    "sticky": false,
+    "password_protected": false,
+    "comment_status": "open",
+    "ping_status": "open"
+  },
+  "meta_data": {
+    "created_by": "Pressel Automation",
+    "creation_date": "2024-10-24",
+    "test_mode": false,
+    "source": "cms_pressel_automation",
+    "version": "1.0.0",
+    "template_version": "pressel-v3",
+    "acf_version": "6.0.0",
+    "wordpress_version": "6.4.0",
+    "theme": "Pressel Theme",
+    "plugins": ["Advanced Custom Fields", "Yoast SEO", "Contact Form 7"],
+    "custom_fields_count": 25,
+    "processing_time": "2.5s",
+    "memory_usage": "45MB",
+    "cache_enabled": true,
+    "cdn_enabled": false,
+    "ssl_enabled": true,
+    "mobile_optimized": true,
+    "seo_score": 95,
+    "performance_score": 88,
+    "accessibility_score": 92
+  }
+}
+
+
+
+
+
+
+
+

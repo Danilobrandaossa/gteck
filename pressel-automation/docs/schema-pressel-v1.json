@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pressel V1 Schema",
+  "description": "Schema para criação automática de páginas Pressel V1 no WordPress",
+  "type": "object",
+  "required": ["page_title", "acf_fields"],
+  "properties": {
+    "page_title": {
+      "type": "string",
+      "description": "Título principal da página (será usado como H1 e título do post)",
+      "minLength": 10,
+      "maxLength": 100,
+      "examples": ["Como Fazer Crochê Passo a Passo - Guia Completo 2024"]
+    },
+    "page_model": {
+      "type": "string",
+      "description": "Modelo de página a ser usado (sistema detecta automaticamente o template)",
+      "enum": ["modelo_v1", "modelo_v2", "modelo_v3", "modelo_v4", "modelo_v5", "modelo_brasileiro", "modelo_internacional", "modelo_minimalista", "modelo_ecommerce", "modelo_afiliado"],
+      "default": "modelo_v1",
+      "examples": ["modelo_v1", "modelo_v2", "modelo_brasileiro", "modelo_internacional"]
+    },
+    "page_template": {
+      "type": "string",
+      "description": "Nome do arquivo do template (opcional - sistema detecta automaticamente se page_model for fornecido)",
+      "default": "pressel-oficial.php",
+      "examples": ["pressel-oficial.php", "presell-v2.php", "presell-enus.php"]
+    },
+    "page_slug": {
+      "type": "string",
+      "description": "Slug/URL amigável da página (gerado automaticamente do título se não fornecido)",
+      "pattern": "^[a-z0-9-]+$",
+      "examples": ["como-fazer-croche", "aprenda-croche-2024", "tutorial-croche-iniciantes"]
+    },
+    "post_status": {
+      "type": "string",
+      "enum": ["draft", "publish", "pending"],
+      "default": "publish",
+      "description": "Status da publicação (draft = rascunho, publish = publicado)"
+    },
+    "acf_fields": {
+      "type": "object",
+      "description": "Todos os campos ACF do template Pressel V1",
+      "required": [
+        "hero_description",
+        "titulo_da_secao",
+        "texto_usuario",
+        "titulo_h2_",
+        "info_content",
+        "titulo_beneficios",
+        "titulo_faq"
+      ],
+      "properties": {
+        "hero_description": {
+          "type": "string",
+          "description": "Subtítulo/descrição que aparece logo abaixo do H1",
+          "maxLength": 200
+        },
+        "link_h1": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link opcional no título H1"
+        },
+        "botao_tipo_selecao": {
+          "type": "string",
+          "enum": ["normal", "rewarded"],
+          "default": "normal"
+        },
+        "titulo_da_secao": {
+          "type": "string",
+          "description": "Título da seção de botões"
+        },
+        "cor_botao": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#2352AE"
+        },
+        "texto_botao_p1": {
+          "type": "string",
+          "maxLength": 28
+        },
+        "link_botao_p1": {
+          "type": "string",
+          "format": "uri"
+        },
+        "texto_botao_p2": {
+          "type": "string",
+          "maxLength": 28
+        },
+        "link_botao_p2": {
+          "type": "string",
+          "format": "uri"
+        },
+        "texto_botao_p3": {
+          "type": "string",
+          "maxLength": 28
+        },
+        "link_botao_p3": {
+          "type": "string",
+          "format": "uri"
+        },
+        "texto_usuario": {
+          "type": "string"
+        },
+        "titulo_h2_": {
+          "type": "string"
+        },
+        "info_content": {
+          "type": "string",
+          "description": "Aceita HTML"
+        },
+        "titulo_h2_02": {
+          "type": "string"
+        },
+        "info_content_2": {
+          "type": "string",
+          "description": "Aceita HTML"
+        },
+        "titulo_beneficios": {
+          "type": "string"
+        },
+        "titulo_beneficios_1": { "type": "string" },
+        "_beneficio_text_1": { "type": "string" },
+        "titulo_beneficios_2": { "type": "string" },
+        "_beneficio_text_2": { "type": "string" },
+        "titulo_beneficios_3": { "type": "string" },
+        "_beneficio_text_3": { "type": "string" },
+        "titulo_beneficios_4": { "type": "string" },
+        "_beneficio_text_4": { "type": "string" },
+        "titulo_faq": { "type": "string" },
+        "pergunta_1": { "type": "string" },
+        "resposta_1": { "type": "string" },
+        "pergunta_2": { "type": "string" },
+        "resposta_2": { "type": "string" },
+        "pergunta_3": { "type": "string" },
+        "resposta_3": { "type": "string" },
+        "aviso": {
+          "type": "string",
+          "enum": ["aviso_pt", "aviso_en", "aviso_es"],
+          "description": "Tipo de aviso legal: aviso_pt (português), aviso_en (inglês), aviso_es (espanhol)"
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "meta_title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "meta_description": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "focus_keyword": {
+          "type": "string"
+        }
+      }
+    },
+    "featured_image": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}
+

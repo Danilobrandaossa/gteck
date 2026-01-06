@@ -1,0 +1,172 @@
+[
+  {
+    "from": "RELATORIO-AUDITORIA-V4.md",
+    "to": "docs/relatorios/RELATORIO-AUDITORIA-V4.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-CENTRALIZACAO-SINCRONIZACAO.md",
+    "to": "docs/relatorios/RELATORIO-CENTRALIZACAO-SINCRONIZACAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-CONFIGURACAO-APIS.md",
+    "to": "docs/relatorios/RELATORIO-CONFIGURACAO-APIS.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-CONSOLIDADO-FINAL.md",
+    "to": "docs/relatorios/RELATORIO-CONSOLIDADO-FINAL.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-CORRECAO-SINCRONIZACAO.md",
+    "to": "docs/relatorios/RELATORIO-CORRECAO-SINCRONIZACAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-CORRECOES-REVISAO.md",
+    "to": "docs/relatorios/RELATORIO-CORRECOES-REVISAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-DADOS-SINCRONIZACAO-MONETIZACAO.md",
+    "to": "docs/relatorios/RELATORIO-DADOS-SINCRONIZACAO-MONETIZACAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-DOCKER-STATUS.md",
+    "to": "docs/relatorios/RELATORIO-DOCKER-STATUS.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-FINAL-IMPLEMENTACOES.md",
+    "to": "docs/relatorios/RELATORIO-FINAL-IMPLEMENTACOES.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-IMPLEMENTACAO-COMPLETA.md",
+    "to": "docs/relatorios/RELATORIO-IMPLEMENTACAO-COMPLETA.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-INTEGRACAO-APIS-SETTINGS.md",
+    "to": "docs/relatorios/RELATORIO-INTEGRACAO-APIS-SETTINGS.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-LABORATORIO-IA.md",
+    "to": "docs/relatorios/RELATORIO-LABORATORIO-IA.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-MELHORIAS-SINCRONIZACAO.md",
+    "to": "docs/relatorios/RELATORIO-MELHORIAS-SINCRONIZACAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-MONITORAMENTO-DOCKER.md",
+    "to": "docs/relatorios/RELATORIO-MONITORAMENTO-DOCKER.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-PRESSEL-AUTOMATION.md",
+    "to": "docs/relatorios/RELATORIO-PRESSEL-AUTOMATION.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-QA-COMPLETO.md",
+    "to": "docs/relatorios/RELATORIO-QA-COMPLETO.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-SINCRONIZACAO-INTELIGENTE.md",
+    "to": "docs/relatorios/RELATORIO-SINCRONIZACAO-INTELIGENTE.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-SOLUCAO-STATUS-400.md",
+    "to": "docs/relatorios/RELATORIO-SOLUCAO-STATUS-400.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-STATUS-APIS-IA.md",
+    "to": "docs/relatorios/RELATORIO-STATUS-APIS-IA.md",
+    "status": "moved"
+  },
+  {
+    "from": "RELATORIO-VERIFICACAO-FINAL.md",
+    "to": "docs/relatorios/RELATORIO-VERIFICACAO-FINAL.md",
+    "status": "moved"
+  },
+  {
+    "from": "ATIVAR-DEBUG-LOG.md",
+    "to": "docs/ATIVAR-DEBUG-LOG.md",
+    "status": "moved"
+  },
+  {
+    "from": "CHECKLIST-COMPLETO-CMS-WORDPRESS.md",
+    "to": "docs/CHECKLIST-COMPLETO-CMS-WORDPRESS.md",
+    "status": "moved"
+  },
+  {
+    "from": "COMO-CRIAR-JSON-V4.md",
+    "to": "docs/COMO-CRIAR-JSON-V4.md",
+    "status": "moved"
+  },
+  {
+    "from": "CORRECAO-TEMPLATE-V4.md",
+    "to": "docs/CORRECAO-TEMPLATE-V4.md",
+    "status": "moved"
+  },
+  {
+    "from": "GUIA-CADASTRO-IDEAL.md",
+    "to": "docs/GUIA-CADASTRO-IDEAL.md",
+    "status": "moved"
+  },
+  {
+    "from": "GUIA-CONFIGURACAO-WORDPRESS-SIMPLIFICADO.md",
+    "to": "docs/GUIA-CONFIGURACAO-WORDPRESS-SIMPLIFICADO.md",
+    "status": "moved"
+  },
+  {
+    "from": "GUIA-CONFIGURACAO-WORDPRESS.md",
+    "to": "docs/GUIA-CONFIGURACAO-WORDPRESS.md",
+    "status": "moved"
+  },
+  {
+    "from": "GUIA-CONFIGURACAO.md",
+    "to": "docs/GUIA-CONFIGURACAO.md",
+    "status": "moved"
+  },
+  {
+    "from": "MELHORIAS-ESTRUTURA-CMS.md",
+    "to": "docs/MELHORIAS-ESTRUTURA-CMS.md",
+    "status": "moved"
+  },
+  {
+    "from": "RESUMO-SOLUCAO-V4.md",
+    "to": "docs/RESUMO-SOLUCAO-V4.md",
+    "status": "moved"
+  },
+  {
+    "from": "SOLUCAO-PROBLEMA-V4.md",
+    "to": "docs/SOLUCAO-PROBLEMA-V4.md",
+    "status": "moved"
+  },
+  {
+    "from": "TESTE-UPLOAD-JSON.md",
+    "to": "docs/TESTE-UPLOAD-JSON.md",
+    "status": "moved"
+  },
+  {
+    "from": "wp-config-fix.txt",
+    "to": "archive/wp-config-fix.txt",
+    "status": "moved"
+  },
+  {
+    "from": "update-api-keys.bat",
+    "to": "archive/update-api-keys.bat",
+    "status": "moved"
+  }
+]

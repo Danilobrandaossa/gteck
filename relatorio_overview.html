@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Relatório do Projeto — Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --bg:#0f1115; --card:#151823; --muted:#9aa4b2; --ok:#2ecc71; --warn:#f1c40f; --err:#e74c3c; --wip:#8e44ad; --accent:#3b82f6; --bar:#23293a; --text:#e5e7eb; }
+  body { margin:0; font:14px/1.5 Inter,system-ui,Segoe UI,Roboto; background:var(--bg); color:var(--text); }
+  header, footer { padding:16px 24px; }
+  header h1 { margin:0 0 6px; font-size:20px; }
+  header .meta { color:var(--muted); font-size:12px; }
+  .grid { display:grid; gap:16px; padding:16px 24px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
+  .card { background:var(--card); border:1px solid #222737; border-radius:16px; padding:16px; box-shadow:0 8px 20px rgba(0,0,0,.25); }
+  .kpi { font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .big { font-size:28px; font-weight:700; }
+  .progress { background:var(--bar); border-radius:999px; height:10px; overflow:hidden; }
+  .progress > div { height:100%; background:linear-gradient(90deg, var(--accent), #22c55e); width:0%; transition:width .6s ease; }
+  .legend { display:flex; gap:10px; flex-wrap:wrap; font-size:12px; color:var(--muted); }
+  .dot{display:inline-block;width:10px;height:10px;border-radius:999px;margin-right:6px;vertical-align:middle}
+  .ok{background:var(--ok)} .warn{background:var(--warn)} .err{background:var(--err)} .wip{background:var(--wip)}
+  table { width:100%; border-collapse:collapse; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid #23293a; }
+  th { color:#b5becc; font-weight:600; }
+  .tag { font-size:11px; padding:3px 8px; border-radius:999px; background:#23293a; }
+  .tag.ok{background:rgba(46,204,113,.2); color:#9be7b3}
+  .tag.err{background:rgba(231,76,60,.2); color:#ffb4ac}
+  .tag.wip{background:rgba(142,68,173,.2); color:#e3c5ff}
+  .tag.testing{background:rgba(241,196,15,.2); color:#ffe28a}
+  footer { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Relatório do Projeto — Overview</h1>
+  <div class="meta">Gerado em: <span id="generatedAt"></span> • Versão da análise: <span id="version"></span></div>
+  <div class="legend">
+    <span><span class="dot ok"></span>Pronto</span>
+    <span><span class="dot testing" style="background:var(--warn)"></span>Em teste</span>
+    <span><span class="dot err"></span>Com erro</span>
+    <span><span class="dot wip"></span>Incompleto</span>
+  </div>
+</header>
+
+<section class="grid" id="kpis"></section>
+
+<section class="grid" id="progress"></section>
+
+<section class="grid">
+  <div class="card">
+    <h3>Alta Prioridade</h3>
+    <table id="highPriorityTable">
+      <thead><tr><th>Seção</th><th>Tarefa</th><th>Ação</th><th>Status</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Atualizações Recentes</h3>
+    <table id="recentUpdatesTable">
+      <thead><tr><th>Seção</th><th>Item</th><th>Status</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Este arquivo é descartável. Regerar a cada execução para refletir o progresso atual.
+</footer>
+
+<script>
+(function(){
+  const data = /*__INJECT_JSON__*/ {"generatedAt":"2025-11-10T16:15:00-03:00","totals":{"frontend":{"ready":24,"testing":1,"error":0,"wip":0},"backend":{"ready":18,"testing":3,"error":1,"wip":2},"database":{"ready":10,"testing":2,"error":0,"wip":1},"integrations":{"ready":8,"testing":1,"error":0,"wip":1},"infra":{"ready":7,"testing":1,"error":0,"wip":0},"security":{"ready":8,"testing":1,"error":0,"wip":1}},"highPriority":[{"section":"backend","title":"Expandir cobertura de testes automatizados","action":"Criar suíte de integração e2e para rotas críticas e filas","status":"wip"},{"section":"security","title":"Implementar auditoria contínua de secrets e rotação","action":"Adotar cofre de segredos e agenda de rotação trimestral","status":"testing"},{"section":"qa","title":"Planejar rodada completa de QA manual/automático","action":"Definir cenários, priorizar casos críticos e preparar ambiente de staging","status":"wip"}],"recentUpdates":[{"section":"frontend","title":"Skip link, foco visível e ajustes Lighthouse aplicados","status":"ready"},{"section":"security","title":"Middleware de CORS, rate limiting e CSRF aplicado","status":"ready"},{"section":"backend","title":"Handler padronizado de erros e logs estruturados","status":"ready"},{"section":"database","title":"Índices críticos e seeds realistas revisados","status":"ready"},{"section":"integrations","title":"Endpoint de health-check para WordPress/IA/n8n","status":"ready"},{"section":"infra","title":"Workflow de CI (lint, build) e guia de monitoramento","status":"ready"}],"meta":{"analysisVersion":"overview-v3","analysisHash":"local-dev"}};
+  const $ = (sel)=>document.querySelector(sel);
+  const kpis = $('#kpis'); const progress = $('#progress');
+
+  function pct(s){ const t=s.ready+s.testing+s.error+s.wip; return t? Math.round((s.ready/t)*100):0; }
+  function chip(status){ const map={ready:'ok', error:'err', wip:'wip', testing:'testing'}; const label={ready:'Pronto', error:'Com erro', wip:'Incompleto', testing:'Em teste'}; return '<span class="tag '+map[status]+'">'+label[status]+'</span>'; }
+
+  // Cabeçalho
+  $('#generatedAt').textContent = data.generatedAt || '-';
+  $('#version').textContent = (data.meta && data.meta.analysisVersion) || 'v1';
+
+  // Seções
+  const sections = [
+    ['frontend','Frontend'], ['backend','Backend'], ['database','Banco de Dados'],
+    ['integrations','Integrações'], ['infra','Infraestrutura'], ['security','Segurança']
+  ];
+
+  // KPIs + Progress
+  sections.forEach(([key,label])=>{
+    const s = (data.totals && data.totals[key]) || {ready:0,testing:0,error:0,wip:0};
+    const total = s.ready+s.testing+s.error+s.wip;
+    const percent = pct(s);
+
+    // KPI card
+    const c = document.createElement('div');
+    c.className='card';
+    c.innerHTML = `
+      <div class="kpi">${label} — Itens total</div>
+      <div class="big">${total}</div>
+      <div class="kpi">Prontos: ${s.ready} • Em teste: ${s.testing} • Erro: ${s.error} • Incompleto: ${s.wip}</div>
+    `;
+    kpis.appendChild(c);
+
+    // Progress card
+    const p = document.createElement('div');
+    p.className='card';
+    p.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong>${label} — ${percent}% concluído</strong>
+        <span class="kpi">${total? (s.ready+'/'+total): '0/0'}</span>
+      </div>
+      <div class="progress"><div style="width:${percent}%"></div></div>`;
+    progress.appendChild(p);
+  });
+
+  // High Priority
+  const hpBody = document.querySelector('#highPriorityTable tbody');
+  (data.highPriority||[]).forEach(item=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${item.section||'-'}</td><td>${item.title||'-'}</td><td>${item.action||'-'}</td><td>${chip(item.status||'wip')}</td>`;
+    hpBody.appendChild(tr);
+  });
+
+  // Recent Updates
+  const ruBody = document.querySelector('#recentUpdatesTable tbody');
+  (data.recentUpdates||[]).forEach(item=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${item.section||'-'}</td><td>${item.title||'-'}</td><td>${chip(item.status||'testing')}</td>`;
+    ruBody.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,577 @@
+{
+  "auditMetadata": {
+    "date": "2025-01-XX",
+    "version": "2.0",
+    "status": "NEEDS_ADJUSTMENTS",
+    "auditor": "IA Arquiteta de Software",
+    "objective": "Validar viabilidade técnica da funcionalidade: pesquisar criativos vencedores (Meta) → salvar → extrair padrões → gerar prompt otimizado → gerar novo criativo"
+  },
+  "executiveSummary": {
+    "viability": "HIGH",
+    "confidence": 0.80,
+    "status": "NEEDS_ADJUSTMENTS",
+    "summary": "A stack atual possui ~80% dos componentes necessários. A funcionalidade é viável, mas requer ajustes críticos em autenticação, storage e arquitetura de Insights.",
+    "estimatedEffort": "15-25 dias",
+    "criticalGaps": [
+      "OAuth Meta não implementado",
+      "App Review Meta (risco de cronograma 2-4 semanas)",
+      "Storage S3 não configurado",
+      "Dois modos de operação não diferenciados"
+    ]
+  },
+  "stackAnalysis": {
+    "framework": {
+      "name": "Next.js",
+      "version": "14.0.4",
+      "status": "READY",
+      "evidence": [
+        {
+          "path": "package.json",
+          "line": 74,
+          "description": "Next.js 14.0.4 instalado"
+        },
+        {
+          "path": "STACK-TECNOLOGICA.md",
+          "line": "10-30",
+          "description": "Documentação da stack"
+        }
+      ]
+    },
+    "database": {
+      "orm": "Prisma 5.7.1",
+      "database": "PostgreSQL (prod) / SQLite (dev)",
+      "status": "READY",
+      "evidence": [
+        {
+          "path": "prisma/schema.prisma",
+          "line": "1-11",
+          "description": "Schema Prisma configurado"
+        },
+        {
+          "path": "package.json",
+          "line": 38,
+          "description": "@prisma/client instalado"
+        }
+      ]
+    },
+    "queueSystem": {
+      "status": "READY",
+      "evidence": [
+        {
+          "path": "lib/queue-claim.ts",
+          "line": "67-168",
+          "description": "Sistema de claim atômico"
+        },
+        {
+          "path": "lib/embedding-worker.ts",
+          "line": "99-133",
+          "description": "Worker com batch processing"
+        },
+        {
+          "path": "prisma/schema.prisma",
+          "line": "253-278",
+          "description": "Model QueueJob com lock/heartbeat"
+        }
+      ]
+    },
+    "aiSystem": {
+      "status": "READY",
+      "evidence": [
+        {
+          "path": "lib/creative-generator.ts",
+          "line": "132-1079",
+          "description": "Sistema completo de geração de criativos"
+        },
+        {
+          "path": "lib/ai-services.ts",
+          "line": "23-505",
+          "description": "APIs de IA configuradas"
+        },
+        {
+          "path": "app/api/creative/analyze-image/route.ts",
+          "line": "UNKNOWN",
+          "description": "Análise de imagens via GPT-4 Vision"
+        }
+      ]
+    }
+  },
+  "integrationAnalysis": {
+    "metaAdsApi": {
+      "status": "NOT_EXISTS",
+      "evidence": [
+        {
+          "path": "package.json",
+          "line": "35-88",
+          "description": "Nenhuma dependência Meta/Facebook encontrada"
+        },
+        {
+          "path": "env.example",
+          "line": "1-109",
+          "description": "Nenhuma variável Meta/Facebook encontrada"
+        },
+        {
+          "path": "UNKNOWN",
+          "line": "UNKNOWN",
+          "description": "Busca grep por 'meta|facebook|ads' retornou apenas referências a plataforma (não API)"
+        }
+      ]
+    },
+    "oauth": {
+      "status": "NOT_EXISTS",
+      "strategy": "UNKNOWN",
+      "tokenStorage": "UNKNOWN",
+      "refreshMechanism": "UNKNOWN",
+      "evidence": [
+        {
+          "path": "package.json",
+          "line": 75,
+          "description": "next-auth instalado"
+        },
+        {
+          "path": "package.json",
+          "line": 37,
+          "description": "@next-auth/prisma-adapter instalado"
+        },
+        {
+          "path": "app/api/auth/**",
+          "line": "UNKNOWN",
+          "description": "Nenhum arquivo encontrado (busca retornou 0)"
+        },
+        {
+          "path": "app/api/**/oauth/**",
+          "line": "UNKNOWN",
+          "description": "Nenhuma rota OAuth encontrada"
+        },
+        {
+          "path": "lib/auth.ts",
+          "line": "34-118",
+          "description": "Autenticação atual: apenas email/password"
+        }
+      ]
+    }
+  },
+  "storageAnalysis": {
+    "currentStorage": {
+      "type": "LOCAL",
+      "location": "uploads/",
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "lib/pressel-automation-core.ts",
+          "line": 91,
+          "description": "Usa path.join(process.cwd(), 'uploads', ...)"
+        },
+        {
+          "path": "lib/pressel-schema-mapper.ts",
+          "line": 44,
+          "description": "Usa path.join(process.cwd(), 'uploads', ...)"
+        },
+        {
+          "path": "INVENTORY.md",
+          "line": "156-164",
+          "description": "Diretório /uploads documentado"
+        },
+        {
+          "path": "prisma/schema.prisma",
+          "line": "229-251",
+          "description": "Model Media com campo url: String"
+        }
+      ]
+    },
+    "s3Storage": {
+      "status": "NOT_IMPLEMENTED",
+      "variablesExist": true,
+      "codeExists": false,
+      "evidence": [
+        {
+          "path": "env.example",
+          "line": "104-108",
+          "description": "Variáveis AWS existem: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_S3_BUCKET"
+        },
+        {
+          "path": "UNKNOWN",
+          "line": "UNKNOWN",
+          "description": "Busca por '@aws-sdk', 's3', 'AWS_S3' retornou 0 resultados"
+        }
+      ]
+    },
+    "mvpRecommendation": "Armazenar apenas metadata + features extraídas (sem download de assets)"
+  },
+  "operationModes": {
+    "modeA": {
+      "name": "Top Performers de Contas Conectadas",
+      "source": "Meta Marketing API / Insights",
+      "data": "Criativos das contas do usuário conectadas",
+      "metrics": ["CTR", "CPC", "ROAS", "CPA", "Conversions"],
+      "status": "NOT_EXISTS",
+      "evidence": [
+        {
+          "path": "UNKNOWN",
+          "line": "UNKNOWN",
+          "description": "Nenhuma integração Meta existe"
+        }
+      ]
+    },
+    "modeB": {
+      "name": "Pesquisa de Concorrentes",
+      "source": "Meta Ads Library API",
+      "data": "Anúncios públicos de qualquer conta",
+      "limitations": [
+        "NÃO fornece métricas de conversão/CTR/ROAS/CPA de terceiros",
+        "Apenas spend público (se divulgado)",
+        "Data de publicação",
+        "Creative assets"
+      ],
+      "status": "NOT_EXISTS",
+      "evidence": [
+        {
+          "path": "UNKNOWN",
+          "line": "UNKNOWN",
+          "description": "Nenhuma integração Meta existe"
+        }
+      ]
+    }
+  },
+  "insightsArchitecture": {
+    "batchAsyncPattern": {
+      "status": "EXISTS",
+      "evidence": [
+        {
+          "path": "lib/queue-claim.ts",
+          "line": "67-168",
+          "description": "Sistema de claim atômico"
+        },
+        {
+          "path": "lib/wordpress/wordpress-sync-worker-runner.ts",
+          "line": "87-125",
+          "description": "Batch processing para integrações externas"
+        },
+        {
+          "path": "lib/wordpress/wordpress-sync-worker.ts",
+          "line": "49-303",
+          "description": "Exemplo de sync assíncrono com batch"
+        }
+      ]
+    },
+    "recommendation": "Reutilizar arquitetura de WordPress sync para Insights Meta"
+  },
+  "appReviewPermissions": {
+    "requiredPermissions": {
+      "modeA": ["ads_read", "ads_management", "business_management"],
+      "modeB": ["ads_library"]
+    },
+    "preparationStatus": "NOT_EXISTS",
+    "riskLevel": "HIGH",
+    "estimatedTime": "2-4 semanas",
+    "evidence": [
+      {
+        "path": "app/api/auth/**",
+        "line": "UNKNOWN",
+        "description": "Nenhum provider NextAuth configurado"
+      },
+      {
+        "path": "app/api/**/oauth/**",
+        "line": "UNKNOWN",
+        "description": "Nenhuma rota OAuth encontrada"
+      },
+      {
+        "path": "UNKNOWN",
+        "line": "UNKNOWN",
+        "description": "Nenhuma preparação encontrada"
+      }
+    ]
+  },
+  "kpiRanking": {
+    "guardrails": {
+      "status": "NOT_DEFINED",
+      "recommended": {
+        "minSpend": 100,
+        "minConversions": 10,
+        "minImpressions": 1000,
+        "timeWindow": "30 dias",
+        "kpiWeights": {
+          "ctr": 0.3,
+          "roas": 0.4,
+          "cpa": 0.3
+        }
+      }
+    },
+    "implementationLocation": {
+      "service": "lib/meta-ads-service.ts",
+      "worker": "lib/meta-insights-worker.ts",
+      "config": "Tabela MetaCreativeConfig ou variáveis de ambiente"
+    },
+    "evidence": [
+      {
+        "path": "UNKNOWN",
+        "line": "UNKNOWN",
+        "description": "Nenhuma implementação existe"
+      }
+    ]
+  },
+  "topRisks": [
+    {
+      "id": 1,
+      "risk": "App Review Meta demora 2-4 semanas",
+      "probability": "HIGH",
+      "impact": "HIGH",
+      "evidence": "UNKNOWN — Nenhuma preparação",
+      "mitigation": "Iniciar App Review imediatamente"
+    },
+    {
+      "id": 2,
+      "risk": "Ads Library não fornece métricas de conversão",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "evidence": "Documentação Meta",
+      "mitigation": "Usar apenas Marketing API para métricas"
+    },
+    {
+      "id": 3,
+      "risk": "OAuth não implementado",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "evidence": "app/api/auth/** = 0 arquivos",
+      "mitigation": "Implementar provider NextAuth ou custom"
+    },
+    {
+      "id": 4,
+      "risk": "Storage S3 não configurado",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "evidence": "env.example:104-108 + busca código = 0",
+      "mitigation": "MVP: metadata only, depois S3"
+    },
+    {
+      "id": 5,
+      "risk": "Rate limits Meta API",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "evidence": "UNKNOWN",
+      "mitigation": "Implementar cache + rate limiting"
+    },
+    {
+      "id": 6,
+      "risk": "Tokens expiram (60 dias)",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "evidence": "UNKNOWN",
+      "mitigation": "Implementar refresh automático"
+    },
+    {
+      "id": 7,
+      "risk": "Custos GPT-4 Vision (análise)",
+      "probability": "LOW",
+      "impact": "MEDIUM",
+      "evidence": "lib/ai-services.ts:23-505 existe",
+      "mitigation": "Cache de análises, batch processing"
+    },
+    {
+      "id": 8,
+      "risk": "Compliance GDPR/LGPD",
+      "probability": "MEDIUM",
+      "impact": "HIGH",
+      "evidence": "UNKNOWN",
+      "mitigation": "Implementar retenção + exclusão automática"
+    },
+    {
+      "id": 9,
+      "risk": "Performance (muitos criativos)",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "evidence": "lib/queue-claim.ts:67-168 existe",
+      "mitigation": "Processamento assíncrono já existe"
+    },
+    {
+      "id": 10,
+      "risk": "Meta API muda/descontinua",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "evidence": "UNKNOWN",
+      "mitigation": "Usar SDK oficial, versionamento"
+    }
+  ],
+  "componentsNeeded": {
+    "services": [
+      {
+        "file": "lib/meta-ads-service.ts",
+        "description": "Cliente Meta Marketing API",
+        "methods": ["searchTopPerformers()", "getCreativeInsights()", "refreshToken()"]
+      },
+      {
+        "file": "lib/meta-ads-library-service.ts",
+        "description": "Cliente Meta Ads Library API (Fase 2)",
+        "methods": ["searchPublicAds()", "getAdCreative()"]
+      },
+      {
+        "file": "lib/meta-insights-worker.ts",
+        "description": "Worker para buscar insights em batch",
+        "pattern": "Reutiliza wordpress-sync-worker-runner.ts:87-125"
+      }
+    ],
+    "apiRoutes": [
+      {
+        "file": "app/api/meta/oauth/callback/route.ts",
+        "description": "Callback OAuth Meta",
+        "action": "Salvar tokens em MetaAccount"
+      },
+      {
+        "file": "app/api/meta/ads/search-creatives/route.ts",
+        "description": "Buscar criativos top performers",
+        "action": "Aplicar guardrails KPI"
+      }
+    ],
+    "databaseModels": [
+      {
+        "model": "MetaAccount",
+        "description": "Armazenar tokens OAuth e contas conectadas",
+        "fields": ["id", "organizationId", "userId", "metaAccountId", "accessToken", "refreshToken", "expiresAt", "scopes"]
+      },
+      {
+        "model": "MetaCreative",
+        "description": "Armazenar criativos e metadata",
+        "fields": ["id", "organizationId", "metaAccountId", "metaAdId", "imageUrl", "imageFeatures", "metadata", "performance", "theme", "expiresAt"]
+      },
+      {
+        "model": "MetaInsightCache",
+        "description": "Cache de insights para performance",
+        "fields": ["id", "organizationId", "metaAccountId", "cacheKey", "data", "expiresAt"]
+      }
+    ]
+  },
+  "architecturalDecisions": [
+    {
+      "decision": "Modo de Operação",
+      "mvp": "Focar em Modo (A) - Marketing API (métricas completas)",
+      "phase2": "Adicionar Modo (B) - Ads Library (sem métricas)"
+    },
+    {
+      "decision": "Storage MVP",
+      "mvp": "Armazenar apenas metadata + features extraídas (sem download de assets)",
+      "phase2": "Adicionar S3 para assets completos"
+    },
+    {
+      "decision": "OAuth",
+      "strategy": "User Token (cada usuário conecta sua conta Meta)",
+      "storage": "Tabela MetaAccount customizada (mais controle)",
+      "alternative": "NextAuth provider (se quiser reutilizar infra)"
+    },
+    {
+      "decision": "Guardrails KPI",
+      "default": "Min $100 spend, 10 conversões, últimos 30 dias",
+      "configurable": "Por organização via MetaCreativeConfig"
+    }
+  ],
+  "evidenceIndex": [
+    {
+      "id": "E001",
+      "path": "package.json",
+      "line": 74,
+      "description": "Next.js 14.0.4 instalado",
+      "category": "stack"
+    },
+    {
+      "id": "E002",
+      "path": "package.json",
+      "line": 75,
+      "description": "next-auth instalado",
+      "category": "oauth"
+    },
+    {
+      "id": "E003",
+      "path": "package.json",
+      "line": 37,
+      "description": "@next-auth/prisma-adapter instalado",
+      "category": "oauth"
+    },
+    {
+      "id": "E004",
+      "path": "app/api/auth/**",
+      "line": "UNKNOWN",
+      "description": "Nenhum arquivo encontrado (busca retornou 0)",
+      "category": "oauth"
+    },
+    {
+      "id": "E005",
+      "path": "lib/auth.ts",
+      "line": "34-118",
+      "description": "Autenticação atual: apenas email/password",
+      "category": "oauth"
+    },
+    {
+      "id": "E006",
+      "path": "lib/queue-claim.ts",
+      "line": "67-168",
+      "description": "Sistema de claim atômico",
+      "category": "queue"
+    },
+    {
+      "id": "E007",
+      "path": "lib/wordpress/wordpress-sync-worker-runner.ts",
+      "line": "87-125",
+      "description": "Batch processing para integrações externas",
+      "category": "insights"
+    },
+    {
+      "id": "E008",
+      "path": "lib/pressel-automation-core.ts",
+      "line": 91,
+      "description": "Usa path.join(process.cwd(), 'uploads', ...)",
+      "category": "storage"
+    },
+    {
+      "id": "E009",
+      "path": "env.example",
+      "line": "104-108",
+      "description": "Variáveis AWS existem mas não usadas",
+      "category": "storage"
+    },
+    {
+      "id": "E010",
+      "path": "prisma/schema.prisma",
+      "line": "229-251",
+      "description": "Model Media com campo url: String",
+      "category": "storage"
+    },
+    {
+      "id": "E011",
+      "path": "lib/creative-generator.ts",
+      "line": "132-1079",
+      "description": "Sistema completo de geração de criativos",
+      "category": "ai"
+    },
+    {
+      "id": "E012",
+      "path": "lib/ai-services.ts",
+      "line": "23-505",
+      "description": "APIs de IA configuradas",
+      "category": "ai"
+    },
+    {
+      "id": "E013",
+      "path": "package.json",
+      "line": "35-88",
+      "description": "Nenhuma dependência Meta/Facebook encontrada",
+      "category": "integration"
+    },
+    {
+      "id": "E014",
+      "path": "env.example",
+      "line": "1-109",
+      "description": "Nenhuma variável Meta/Facebook encontrada",
+      "category": "integration"
+    },
+    {
+      "id": "E015",
+      "path": "prisma/schema.prisma",
+      "line": "253-278",
+      "description": "Model QueueJob com lock/heartbeat",
+      "category": "queue"
+    }
+  ]
+}
+
+
+
+
+

@@ -1,0 +1,93 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+/build
+/dist
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local env files
+.env
+.env*.local
+env.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Prisma
+*.db
+*.db-journal
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archives (não versionar ZIPs de plugins)
+*.zip
+pressel-automation*.zip
+
+# Test files (temporários)
+test-*.json
+!test-data/
+!uploads/pressel-models/**/*.json
+
+# Uploads (manter estrutura mas não arquivos grandes)
+uploads/**/*
+!uploads/pressel-models/
+!uploads/pressel-models/**/*.json
+!uploads/pressel-models/**/*.md
+!uploads/pressel-models/**/*.php
+
+# Database
+*.db
+*.sqlite
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Build outputs
+*.min.js
+*.min.css
+

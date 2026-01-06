@@ -1,0 +1,526 @@
+{
+  "version": "3.0",
+  "status": "READY_FOR_IMPLEMENTATION",
+  "date": "2025-01-XX",
+  "scope": "MVP",
+  
+  "decisions": {
+    "operationMode": {
+      "mvp": "MODE_A_MARKETING_API",
+      "phase2": "MODE_B_ADS_LIBRARY",
+      "rationale": "Modo A fornece métricas completas, Modo B não fornece métricas de conversão"
+    },
+    "storage": {
+      "mvp": "METADATA_ONLY",
+      "phase2": "S3_FULL_ASSETS",
+      "rationale": "MVP mais rápido e simples, compliance mais fácil"
+    },
+    "tokenStrategy": {
+      "type": "USER_TOKEN",
+      "storage": "CUSTOM_TABLE_MetaConnection",
+      "encryption": "AES_256_CBC",
+      "renewalStrategy": "MANUAL_WITH_NOTIFICATIONS",
+      "rationale": "Mais controle, não depende de NextAuth Account table"
+    },
+    "guardrails": {
+      "defaultMinSpend": 100,
+      "defaultMinConversions": 10,
+      "defaultMinImpressions": 1000,
+      "defaultTimeWindowDays": 30,
+      "defaultTopN": 10,
+      "configurable": true,
+      "rationale": "Evitar winners por acaso, garantir amostra mínima"
+    },
+    "kpiWeights": {
+      "LEAD": {
+        "primary": "cost_per_result",
+        "weight": 0.7,
+        "secondary": "ctr",
+        "secondaryWeight": 0.3
+      },
+      "PURCHASE": {
+        "primary": "purchase_roas",
+        "weight": 0.6,
+        "secondary": "cost_per_purchase",
+        "secondaryWeight": 0.4
+      },
+      "INSTALL": {
+        "primary": "cost_per_install",
+        "weight": 1.0,
+        "secondary": null,
+        "secondaryWeight": 0
+      }
+    },
+    "antiClone": {
+      "similarityThreshold": 0.85,
+      "minVariations": 2,
+      "maxVariations": 4,
+      "rationale": "Balancear inspiração com originalidade"
+    },
+    "retention": {
+      "creativeRetentionDays": 365,
+      "insightCacheTTLHours": 1,
+      "gracePeriodDays": 30,
+      "rationale": "Compliance GDPR/LGPD, cache para performance"
+    }
+  },
+  
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/meta/connect",
+      "description": "Inicia fluxo OAuth Meta",
+      "requestBody": {
+        "organizationId": "string"
+      },
+      "response": {
+        "status": "redirect",
+        "oauthUrl": "string"
+      },
+      "errors": ["400", "500"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/meta/oauth/callback",
+      "description": "Callback OAuth Meta",
+      "queryParams": ["code", "state", "error"],
+      "response": {
+        "status": "success",
+        "connectionId": "string",
+        "adAccounts": "array"
+      },
+      "errors": ["400", "401", "500"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/meta/ad-accounts",
+      "description": "Lista contas de anúncios autorizadas",
+      "queryParams": ["connectionId"],
+      "response": {
+        "status": "success",
+        "accounts": "array"
+      },
+      "errors": ["401", "403", "404"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/meta/insights/sync",
+      "description": "Cria job para buscar insights",
+      "requestBody": {
+        "connectionId": "string",
+        "adAccountId": "string",
+        "timeWindow": "object",
+        "objective": "LEAD|PURCHASE|INSTALL",
+        "primaryKpi": "string",
+        "secondaryKpi": "string (opcional)",
+        "topN": "number",
+        "guardrails": "object"
+      },
+      "response": {
+        "status": "queued",
+        "jobId": "string",
+        "estimatedDuration": "string"
+      },
+      "errors": ["400", "401", "429"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/meta/top-creatives",
+      "description": "Retorna top N criativos (com cache)",
+      "requestBody": {
+        "connectionId": "string",
+        "adAccountId": "string",
+        "timeWindow": "object",
+        "objective": "LEAD|PURCHASE|INSTALL",
+        "topN": "number"
+      },
+      "response": {
+        "status": "success",
+        "creatives": "array",
+        "cacheHit": "boolean",
+        "cacheExpiresAt": "datetime"
+      },
+      "errors": ["404", "401"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/meta/creatives/:id/extract-patterns",
+      "description": "Força extração de padrões",
+      "response": {
+        "status": "queued",
+        "jobId": "string"
+      },
+      "errors": ["404"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/meta/generate-from-patterns",
+      "description": "Gera criativo inspirado a partir de padrões",
+      "requestBody": {
+        "creativeIds": "array",
+        "brief": "object"
+      },
+      "response": {
+        "status": "success",
+        "creativeOutput": "object"
+      },
+      "errors": ["400", "404", "422"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/meta/jobs/:jobId/status",
+      "description": "Status de um job assíncrono",
+      "response": {
+        "status": "pending|processing|completed|failed",
+        "progress": "number",
+        "message": "string",
+        "result": "object|null",
+        "error": "string|null"
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/meta/connections/:id",
+      "description": "Desconectar conta Meta",
+      "response": {
+        "status": "success"
+      },
+      "errors": ["404", "500"]
+    }
+  ],
+  
+  "jobTypes": [
+    {
+      "type": "meta_insights_fetch",
+      "description": "Buscar insights da Meta API",
+      "statusFlow": ["pending", "processing", "completed|failed"],
+      "retry": 3,
+      "ttl": "10min",
+      "createsJobs": ["meta_creative_ingest"]
+    },
+    {
+      "type": "meta_creative_ingest",
+      "description": "Salvar metadata de criativo",
+      "statusFlow": ["pending", "processing", "completed|failed"],
+      "retry": 3,
+      "ttl": "5min",
+      "createsJobs": ["meta_pattern_extract"]
+    },
+    {
+      "type": "meta_pattern_extract",
+      "description": "Extrair padrões do criativo",
+      "statusFlow": ["pending", "processing", "completed|failed"],
+      "retry": 3,
+      "ttl": "15min",
+      "createsJobs": []
+    },
+    {
+      "type": "meta_retention_cleanup",
+      "description": "Limpeza de criativos expirados",
+      "statusFlow": ["pending", "processing", "completed"],
+      "retry": 1,
+      "ttl": "N/A",
+      "schedule": "daily",
+      "createsJobs": []
+    },
+    {
+      "type": "meta_token_refresh",
+      "description": "Renovar tokens expirando",
+      "statusFlow": ["pending", "processing", "completed|failed"],
+      "retry": 1,
+      "ttl": "N/A",
+      "schedule": "daily",
+      "createsJobs": []
+    }
+  ],
+  
+  "tables": [
+    {
+      "name": "MetaConnection",
+      "description": "Conexão OAuth Meta",
+      "fields": [
+        "id", "organizationId", "userId",
+        "accessTokenEncrypted", "expiresAt", "scopes", "tokenType", "renewalStrategy",
+        "metaUserId", "metaUserName", "connectedAt", "lastUsedAt", "revokedAt"
+      ],
+      "relations": ["Organization", "User", "MetaAdAccount", "MetaCreative", "MetaInsightCache"]
+    },
+    {
+      "name": "MetaAdAccount",
+      "description": "Contas de anúncios autorizadas",
+      "fields": [
+        "id", "connectionId", "metaAccountId", "name", "currency", "timezone", "accountStatus"
+      ],
+      "relations": ["MetaConnection"]
+    },
+    {
+      "name": "MetaCreative",
+      "description": "Criativos (metadata-only no MVP)",
+      "fields": [
+        "id", "organizationId", "connectionId", "metaAdId", "metaAccountId",
+        "imageUrl", "thumbnailUrl", "imageFeatures", "metadata", "performance", "theme",
+        "createdAt", "expiresAt"
+      ],
+      "relations": ["Organization", "MetaConnection", "CreativePattern"]
+    },
+    {
+      "name": "CreativePattern",
+      "description": "Padrões extraídos",
+      "fields": [
+        "id", "metaCreativeId", "patternType", "data", "confidence", "extractedAt"
+      ],
+      "relations": ["MetaCreative"]
+    },
+    {
+      "name": "MetaInsightCache",
+      "description": "Cache de insights (TTL)",
+      "fields": [
+        "id", "organizationId", "connectionId", "metaAccountId", "cacheKey", "data", "expiresAt", "createdAt"
+      ],
+      "relations": ["MetaConnection"]
+    },
+    {
+      "name": "MetaCreativeConfig",
+      "description": "Configuração por organização (guardrails)",
+      "fields": [
+        "id", "organizationId",
+        "defaultMinSpend", "defaultMinConversions", "defaultMinImpressions",
+        "defaultTimeWindowDays", "defaultTopN",
+        "kpiWeightsLead", "kpiWeightsPurchase", "kpiWeightsInstall",
+        "creativeRetentionDays"
+      ],
+      "relations": ["Organization"]
+    }
+  ],
+  
+  "configs": {
+    "environmentVariables": [
+      "META_APP_ID",
+      "META_APP_SECRET",
+      "META_API_VERSION",
+      "META_OAUTH_REDIRECT_URI",
+      "META_OAUTH_SCOPE",
+      "ENCRYPTION_KEY",
+      "CREATIVE_RETENTION_DAYS",
+      "META_INSIGHT_CACHE_TTL_HOURS",
+      "META_API_RATE_LIMIT_PER_HOUR"
+    ],
+    "defaults": {
+      "minSpend": 100,
+      "minConversions": 10,
+      "minImpressions": 1000,
+      "timeWindowDays": 30,
+      "topN": 10,
+      "creativeRetentionDays": 365,
+      "insightCacheTTLHours": 1,
+      "gracePeriodDays": 30,
+      "antiCloneSimilarityThreshold": 0.85
+    }
+  },
+  
+  "openQuestions": [
+    {
+      "id": "Q1",
+      "question": "Workers rodam em processo separado em produção? Onde?",
+      "context": "Arquitetura de deployment",
+      "impact": "Médio",
+      "blocker": false
+    },
+    {
+      "id": "Q2",
+      "question": "Auth final usa NextAuth ou lib/auth custom?",
+      "context": "Autenticação de usuários",
+      "impact": "Baixo",
+      "blocker": false,
+      "note": "OAuth Meta é separado, mas precisa validar sessão do usuário"
+    },
+    {
+      "id": "Q3",
+      "question": "Qual evento define conversão por objetivo (Lead/Purchase/Install)?",
+      "context": "Mapeamento de eventos Meta para objetivos",
+      "impact": "Alto",
+      "blocker": true,
+      "note": "Precisa definir antes de implementar ranking"
+    },
+    {
+      "id": "Q4",
+      "question": "Sistema de notificações existe? (email/in-app para tokens expirando)",
+      "context": "Notificações de expiração de token",
+      "impact": "Médio",
+      "blocker": false,
+      "note": "Se não existir, implementar básico no MVP"
+    },
+    {
+      "id": "Q5",
+      "question": "Redis está disponível para cache de state tokens OAuth?",
+      "context": "CSRF protection no OAuth flow",
+      "impact": "Baixo",
+      "blocker": false,
+      "note": "Pode usar sessão NextAuth ou in-memory (dev only)"
+    }
+  ],
+  
+  "risks": [
+    {
+      "id": "R1",
+      "risk": "App Review Meta demora 2-4 semanas",
+      "probability": "HIGH",
+      "impact": "HIGH",
+      "blocker": true,
+      "mitigation": "Iniciar App Review imediatamente em paralelo ao desenvolvimento",
+      "evidence": "UNKNOWN - Nenhuma preparação encontrada"
+    },
+    {
+      "id": "R2",
+      "risk": "OAuth não implementado",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "blocker": true,
+      "mitigation": "Implementar provider customizado (MVP)",
+      "evidence": "app/api/auth/** = 0 arquivos"
+    },
+    {
+      "id": "R3",
+      "risk": "Tokens expiram (60 dias)",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "blocker": false,
+      "mitigation": "Renewal strategy + notificações",
+      "evidence": "UNKNOWN"
+    },
+    {
+      "id": "R4",
+      "risk": "Rate limits Meta API",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "blocker": false,
+      "mitigation": "Cache agressivo + rate limiting",
+      "evidence": "UNKNOWN"
+    },
+    {
+      "id": "R5",
+      "risk": "Custos GPT-4 Vision",
+      "probability": "LOW",
+      "impact": "MEDIUM",
+      "blocker": false,
+      "mitigation": "Cache de análises + batch processing",
+      "evidence": "lib/ai-services.ts:23-505 existe"
+    },
+    {
+      "id": "R6",
+      "risk": "Compliance GDPR/LGPD",
+      "probability": "MEDIUM",
+      "impact": "HIGH",
+      "blocker": false,
+      "mitigation": "Retenção + exclusão (MVP mínimo)",
+      "evidence": "UNKNOWN"
+    },
+    {
+      "id": "R7",
+      "risk": "Performance (muitos criativos)",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "blocker": false,
+      "mitigation": "Processamento assíncrono (já existe)",
+      "evidence": "lib/queue-claim.ts:67-168 existe"
+    },
+    {
+      "id": "R8",
+      "risk": "Ads Library não fornece métricas",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "blocker": false,
+      "mitigation": "MVP = Modo A apenas",
+      "evidence": "Documentação Meta"
+    },
+    {
+      "id": "R9",
+      "risk": "Meta API muda/descontinua",
+      "probability": "LOW",
+      "impact": "HIGH",
+      "blocker": false,
+      "mitigation": "SDK oficial + versionamento",
+      "evidence": "UNKNOWN"
+    },
+    {
+      "id": "R10",
+      "risk": "Anti-clone insuficiente",
+      "probability": "MEDIUM",
+      "impact": "MEDIUM",
+      "blocker": false,
+      "mitigation": "Validação + embeddings + threshold",
+      "evidence": "UNKNOWN"
+    }
+  ],
+  
+  "dependencies": {
+    "npm": [
+      {
+        "package": "facebook-nodejs-business-sdk",
+        "version": "^19.0.0",
+        "purpose": "Cliente Meta Marketing API"
+      }
+    ],
+    "existing": [
+      {
+        "component": "QueueJob system",
+        "evidence": "lib/queue-claim.ts:67-168",
+        "reuse": true
+      },
+      {
+        "component": "CreativeGenerator",
+        "evidence": "lib/creative-generator.ts:132-1079",
+        "reuse": true
+      },
+      {
+        "component": "GPT-4 Vision",
+        "evidence": "lib/ai-services.ts:23-505",
+        "reuse": true
+      },
+      {
+        "component": "WordPress sync worker pattern",
+        "evidence": "lib/wordpress/wordpress-sync-worker-runner.ts:87-125",
+        "reuse": true
+      }
+    ]
+  },
+  
+  "implementationPhases": {
+    "mvp": {
+      "duration": "15-22 dias",
+      "scope": [
+        "Modo A apenas (Marketing API)",
+        "Metadata-only storage",
+        "OAuth + conexão",
+        "Insights sync + cache",
+        "Ranking + guardrails",
+        "Pattern extraction básica",
+        "Pattern→Prompt + geração",
+        "UI mínima",
+        "Compliance básica"
+      ]
+    },
+    "phase2": {
+      "duration": "8-12 dias",
+      "scope": [
+        "Modo B (Ads Library) - SEM métricas",
+        "S3 para assets completos",
+        "Extração avançada (OCR dedicado)",
+        "Cache otimizado"
+      ]
+    },
+    "phase3": {
+      "duration": "10-15 dias",
+      "scope": [
+        "Dashboard de performance",
+        "Recomendações automáticas",
+        "A/B testing"
+      ]
+    }
+  }
+}
+
+
+
+
+

@@ -1,0 +1,391 @@
+{
+  "total": 25,
+  "successful": 24,
+  "failed": 1,
+  "successRate": 96,
+  "results": [
+    {
+      "route": "Health Check",
+      "path": "/api/health",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "status": "healthy",
+        "timestamp": "2025-11-03T18:33:46.101Z",
+        "version": "1.0.0",
+        "services": {
+          "cms": "running",
+          "database": "connected",
+          "wordpress": "available"
+        }
+      }
+    },
+    {
+      "route": "Debug Keys",
+      "path": "/api/debug/keys",
+      "status": 200,
+      "success": true,
+      "error": "Chaves carregadas do .env.local",
+      "details": "Chaves carregadas do .env.local",
+      "response": {
+        "success": true,
+        "keys": {
+          "OPENAI_API_KEY": "sk-proj-YH...YP8A",
+          "GOOGLE_API_KEY": "AIzaSyCfnQ...UJvs",
+          "KOALA_API_KEY": "b97d07a6-2...f231",
+          "NODE_ENV": "development",
+          "NEXTAUTH_URL": "http://localhost:3002"
+        },
+        "timestamp": "2025-11-03T18:33:46.508Z",
+        "message": "Chaves carregadas do .env.local"
+      }
+    },
+    {
+      "route": "Organizations Sync",
+      "path": "/api/organizations/sync",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "success": true,
+        "organizations": [
+          {
+            "id": "cmhj6znmk0000pa866xgoz6js",
+            "name": "Organização Padrão",
+            "slug": "default-org",
+            "description": "Organização padrão para desenvolvimento local",
+            "settings": {
+              "theme": "default",
+              "features": [
+                "pages",
+                "media",
+                "templates",
+                "ai"
+              ]
+            },
+            "createdAt": "2025-11-03T13:45:08.443Z",
+            "updatedAt": "2025-11-03T13:45:08.443Z"
+          }
+        ],
+        "sites": [
+          {
+            "id": "cmhj6znpy0004pa868jv23kzo",
+            "name": "Site Padrão",
+            "url": "https://atlz.online/",
+            "organizationId": "cmhj6znmk0000pa866xgoz6js",
+            "description": "Site padrão para desenvolvimento local",
+            "settings": {
+              "theme": "pressel-v3",
+              "features": [
+                "acf",
+                "seo",
+                "analytics"
+              ]
+            },
+            "isActive": true,
+            "createdAt": "2025-11-03T13:45:08.567Z",
+            "updatedAt": "2025-11-03T13:45:08.567Z"
+          }
+        ]
+      }
+    },
+    {
+      "route": "WordPress Credentials",
+      "path": "/api/wordpress/credentials",
+      "status": 200,
+      "success": true,
+      "error": "Credenciais WordPress configuradas",
+      "details": "Credenciais WordPress configuradas",
+      "response": {
+        "success": true,
+        "credentials": {
+          "username": "danilobrandao",
+          "password": "***4XAK",
+          "hasPassword": true,
+          "authType": "basic",
+          "configured": true
+        },
+        "message": "Credenciais WordPress configuradas"
+      }
+    },
+    {
+      "route": "WordPress Validate Site",
+      "path": "/api/wordpress/validate-site",
+      "status": 400,
+      "success": true,
+      "error": "URL do site não fornecida",
+      "response": {
+        "success": false,
+        "error": "URL do site não fornecida"
+      }
+    },
+    {
+      "route": "WordPress Diagnostic (GET)",
+      "path": "/api/wordpress/diagnostic/save",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "success": true,
+        "diagnostics": [],
+        "pagination": {
+          "total": 0,
+          "limit": 10,
+          "offset": 0,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "route": "WordPress Diagnostic (POST)",
+      "path": "/api/wordpress/diagnostic/save",
+      "status": 200,
+      "success": true,
+      "error": "Diagnóstico processado com sucesso",
+      "details": "Diagnóstico processado com sucesso",
+      "response": {
+        "success": true,
+        "message": "Diagnóstico processado com sucesso",
+        "diagnostic": {
+          "id": "temp-1762194828544",
+          "dataExecucao": "2025-11-03T18:33:37.806Z",
+          "resultado": {},
+          "siteUrl": "N/A"
+        }
+      }
+    },
+    {
+      "route": "WordPress Sync (GET)",
+      "path": "/api/wordpress/sync",
+      "status": 200,
+      "success": true,
+      "error": "Falha na conexão",
+      "details": "Falha na conexão",
+      "response": {
+        "success": false,
+        "message": "Falha na conexão",
+        "data": {
+          "url": "https://example.com",
+          "connected": false,
+          "timestamp": "2025-11-03T18:33:51.128Z"
+        }
+      }
+    },
+    {
+      "route": "WordPress Sync (POST)",
+      "path": "/api/wordpress/sync",
+      "status": 500,
+      "success": false,
+      "error": "Erro na operação do WordPress",
+      "response": {
+        "error": "Erro na operação do WordPress"
+      }
+    },
+    {
+      "route": "WordPress Investigate",
+      "path": "/api/wordpress/investigate",
+      "status": 400,
+      "success": true,
+      "error": "URL do site é obrigatória",
+      "response": {
+        "success": false,
+        "error": "URL do site é obrigatória"
+      }
+    },
+    {
+      "route": "WordPress Create Page",
+      "path": "/api/wordpress/create-page",
+      "status": 400,
+      "success": true,
+      "error": "Título, conteúdo, URL do WordPress e credenciais são obrigatórios",
+      "response": {
+        "error": "Título, conteúdo, URL do WordPress e credenciais são obrigatórios"
+      }
+    },
+    {
+      "route": "WordPress Create Post",
+      "path": "/api/wordpress/create-post",
+      "status": 400,
+      "success": true,
+      "error": "Título, conteúdo, URL do WordPress e credenciais são obrigatórios",
+      "response": {
+        "error": "Título, conteúdo, URL do WordPress e credenciais são obrigatórios"
+      }
+    },
+    {
+      "route": "WordPress Proxy (GET)",
+      "path": "/api/wordpress/proxy",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "success": true,
+        "data": "<!doctype html><html lang=\"en\"><head><title>Example Domain</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.<p><a href=\"https://iana.org/domains/example\">Learn more</a></div></body></html>\n",
+        "status": 404
+      }
+    },
+    {
+      "route": "WordPress Proxy (POST)",
+      "path": "/api/wordpress/proxy",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "success": true,
+        "data": "<!doctype html><html lang=\"en\"><head><title>Example Domain</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.<p><a href=\"https://iana.org/domains/example\">Learn more</a></div></body></html>\n",
+        "status": 404,
+        "statusText": "Not Found"
+      }
+    },
+    {
+      "route": "WordPress Sync All",
+      "path": "/api/wordpress/sync-all",
+      "status": 400,
+      "success": true,
+      "error": "Credenciais WordPress não fornecidas",
+      "response": {
+        "success": false,
+        "error": "Credenciais WordPress não fornecidas"
+      }
+    },
+    {
+      "route": "Pressel Create",
+      "path": "/api/pressel/create",
+      "status": 400,
+      "success": true,
+      "error": "URL do WordPress é obrigatória",
+      "response": {
+        "error": "URL do WordPress é obrigatória"
+      }
+    },
+    {
+      "route": "Pressel Verify Page",
+      "path": "/api/pressel/verify-page",
+      "status": 400,
+      "success": true,
+      "error": "ID da página e siteUrl são obrigatórios",
+      "response": {
+        "success": false,
+        "error": "ID da página e siteUrl são obrigatórios"
+      }
+    },
+    {
+      "route": "Pressel Process",
+      "path": "/api/pressel/process",
+      "status": 400,
+      "success": true,
+      "error": null,
+      "response": {
+        "status": "erro",
+        "codigo": "PS-JSON-002",
+        "mensagem": "Campo obrigatório ausente no JSON",
+        "categoria": "JSON",
+        "severidade": "error",
+        "timestamp": "2025-11-03T18:33:58.041Z",
+        "detalhes": {
+          "missingField": "acf_fields",
+          "providedFields": []
+        },
+        "sugestoes": [
+          "Verifique a documentação dos campos obrigatórios",
+          "Confirme se todos os campos necessários estão presentes",
+          "Use o JSON de exemplo como referência"
+        ]
+      }
+    },
+    {
+      "route": "Pressel Publish",
+      "path": "/api/pressel/publish",
+      "status": 400,
+      "success": true,
+      "error": "jsonData, wpUrl, username e password são obrigatórios",
+      "response": {
+        "error": "jsonData, wpUrl, username e password são obrigatórios"
+      }
+    },
+    {
+      "route": "Pressel Preview",
+      "path": "/api/pressel/preview",
+      "status": 400,
+      "success": true,
+      "error": "jsonData, wpUrl, username e password são obrigatórios",
+      "response": {
+        "error": "jsonData, wpUrl, username e password são obrigatórios"
+      }
+    },
+    {
+      "route": "Pressel Upload",
+      "path": "/api/pressel/upload",
+      "status": 400,
+      "success": true,
+      "error": "Dados JSON não fornecidos",
+      "response": {
+        "success": false,
+        "error": "Dados JSON não fornecidos"
+      }
+    },
+    {
+      "route": "Pressel Convert",
+      "path": "/api/pressel/convert",
+      "status": 400,
+      "success": true,
+      "error": "Texto e modelo são obrigatórios",
+      "response": {
+        "error": "Texto e modelo são obrigatórios"
+      }
+    },
+    {
+      "route": "AI Test",
+      "path": "/api/ai/test",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "response": {
+        "success": true,
+        "data": {
+          "content": "It looks like you're testing the chat! How can I assist you today?",
+          "model": "gpt-4o-mini",
+          "finishReason": "stop"
+        },
+        "usage": {
+          "promptTokens": 4,
+          "completionTokens": 66,
+          "totalTokens": 70,
+          "cost": 0.001
+        },
+        "duration": 1968,
+        "isRealAPI": true
+      }
+    },
+    {
+      "route": "AI Simple Test",
+      "path": "/api/ai/simple-test",
+      "status": 200,
+      "success": true,
+      "error": "OpenAI funcionando com chave real!",
+      "details": "OpenAI funcionando com chave real!",
+      "response": {
+        "success": true,
+        "data": {
+          "content": "Test received! How can I assist you today?",
+          "model": "gpt-4o-mini",
+          "finishReason": "stop"
+        },
+        "isRealAPI": true,
+        "message": "OpenAI funcionando com chave real!"
+      }
+    },
+    {
+      "route": "AI Generate",
+      "path": "/api/ai/generate",
+      "status": 400,
+      "success": true,
+      "error": "Modelo 'gpt-4o-mini' não suportado",
+      "response": {
+        "success": false,
+        "error": "Modelo 'gpt-4o-mini' não suportado"
+      }
+    }
+  ]
+}

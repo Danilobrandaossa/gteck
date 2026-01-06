@@ -1,0 +1,104 @@
+{
+  "modulos_testados": [
+    "/conteudo",
+    "/settings?tab=integrations"
+  ],
+  "conexoes_api": {
+    "openai": "Não configurada",
+    "google": "Não configurada",
+    "anthropic": "Não configurada"
+  },
+  "funcionalidades": [
+    {
+      "nome": "Gerar Texto IA",
+      "status": "Não testado (sem API key)",
+      "tempo_resposta": "N/A",
+      "resultado": "Requer OPENAI_API_KEY no .env.local"
+    }
+  ],
+  "plugin_conectado": true,
+  "erros": [],
+  "warnings": [
+    "OpenAI API Key não configurada - testes reais não executados"
+  ],
+  "logs": [
+    {
+      "endpoint": "/api/ai-plugin-config?siteId=test",
+      "method": "GET",
+      "status": 200,
+      "duration": "856ms",
+      "timestamp": "2025-11-04T17:28:03.191Z"
+    },
+    {
+      "endpoint": "/api/ai-plugin-config/test",
+      "method": "POST",
+      "status": 400,
+      "duration": "877ms",
+      "timestamp": "2025-11-04T17:28:04.075Z"
+    },
+    {
+      "endpoint": "/api/ai-content?siteId=test",
+      "method": "GET",
+      "status": 200,
+      "duration": "469ms",
+      "timestamp": "2025-11-04T17:28:04.554Z"
+    },
+    {
+      "endpoint": "/api/ai-content/webhook",
+      "method": "POST",
+      "status": 200,
+      "duration": "202ms",
+      "timestamp": "2025-11-04T17:28:04.762Z"
+    },
+    {
+      "endpoint": "/api/ai-content/webhook",
+      "method": "POST",
+      "status": 404,
+      "duration": "426ms",
+      "timestamp": "2025-11-04T17:28:05.199Z"
+    },
+    {
+      "endpoint": "/api/health",
+      "method": "GET",
+      "status": 200,
+      "duration": "301ms",
+      "timestamp": "2025-11-04T17:28:05.507Z"
+    },
+    {
+      "endpoint": "/api/ai-content",
+      "method": "GET",
+      "status": 400,
+      "duration": "207ms",
+      "timestamp": "2025-11-04T17:28:05.716Z"
+    },
+    {
+      "endpoint": "/api/ai-plugin-config",
+      "method": "GET",
+      "status": 400,
+      "duration": "99ms",
+      "timestamp": "2025-11-04T17:28:05.818Z"
+    },
+    {
+      "endpoint": "/api/ai-content/generate",
+      "method": "POST",
+      "status": 200,
+      "duration": "101ms",
+      "timestamp": "2025-11-04T17:28:05.922Z"
+    },
+    {
+      "endpoint": "/api/ai-plugin-config/test",
+      "method": "POST",
+      "status": 400,
+      "duration": "10165ms",
+      "timestamp": "2025-11-04T17:28:16.092Z"
+    },
+    {
+      "endpoint": "/api/ai-plugin-config",
+      "method": "POST",
+      "status": 404,
+      "duration": "1483ms",
+      "timestamp": "2025-11-04T17:28:17.583Z"
+    }
+  ],
+  "status_final": "Aprovado com Avisos"
+}

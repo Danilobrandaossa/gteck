@@ -1,0 +1,968 @@
+{
+  "V1": {
+    "template": {
+      "name": "Modelo V1",
+      "slug": "modelo-v1",
+      "description": "Template modelo V1 criado via Pressel Automation",
+      "phpContent": "<?php\r\n/*\r\nTemplate Name: Pressel V1\r\n*/\r\n$base_path = get_stylesheet_directory_uri() . '/assets/img';\r\n?>\r\n\r\n<!DOCTYPE html>\r\n<html <?php language_attributes(); ?>>\r\n\t<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />\r\n<script async src=\"https://scr.actview.net/cdinonline.js\"></script>\r\n<head>\r\n\t\r\n  <link rel=\"dns-prefetch\" href=\"//www.googletagmanager.com\">\r\n  <link rel=\"dns-prefetch\" href=\"//www.googletagservices.com\">\r\n  <link rel=\"dns-prefetch\" href=\"//www.google-analytics.com\">\r\n  <link rel=\"dns-prefetch\" href=\"//www.google.com\">\r\n  <link rel=\"dns-prefetch\" href=\"//adservice.google.com\">\r\n  <link rel=\"dns-prefetch\" href=\"//googleads.g.doubleclick.net\">\r\n  <link rel=\"dns-prefetch\" href=\"//tpc.googlesyndication.com\">\r\n  <link rel='dns-prefetch' as='script' href='https://securepubads.g.doubleclick.net' />\r\n\r\n  <!-- Meta básica -->\r\n  <meta charset=\"<?php bloginfo('charset'); ?>\">\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n\r\n  <!-- Preload e fallback da fonte Inter -->\r\n  <link rel=\"preload\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\" as=\"style\" onload=\"this.rel='stylesheet'\">\r\n  <noscript>\r\n    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\">\r\n  </noscript>\r\n\r\n  <!-- Título da página -->\r\n  <title><?php the_title(); ?></title>\r\n\r\n  <?php wp_head(); ?>\r\n</head>\r\n\r\n<style>\r\n  /* ==========================================================\r\n     ESTILOS GERAIS DO TEMPLATE (SEM CÓDIGO DO POPUP AQUI)\r\n     ========================================================== */\r\n\r\n  body, h1, h2, h3, p {\r\n    margin: 0 !important;\r\n    padding: 0 !important;\r\n    font-family: \"Inter\", sans-serif;\r\n  }\r\n\r\n  .section-anuncio, .campo-ads {\r\n    width: 100%;\r\n    height: 400px !important;\r\n    margin: 0 auto;\r\n    display: flex;\r\n    justify-content: center;\r\n  }\r\n\r\n  /* ====== MENU ====== */\r\n  .conteudo-menu { width: 100%; display: flex; justify-content: space-around; }\r\n  ul>li::before{ display:none; }\r\n  ol li, ul li { margin-top:0; }\r\n\r\n  .menu {\r\n    display:flex; align-items:center; justify-content:center;\r\n    padding:14px 112px; background:#fff; box-shadow:0 4px 41px rgba(0,0,0,.1);\r\n    position:relative;\r\n  }\r\n  .logo { height:30px; }\r\n  .menu .navbar { display:flex; align-items:center; justify-content:space-between; padding:0 40px; }\r\n  .menu .navbar ul { display:flex; list-style:none; justify-content:space-evenly; padding:0; margin:0; gap:24px; }\r\n  .menu .navbar a { font-weight:600; color:#1d1d1b; font-size:15px; text-decoration:none !important; }\r\n  .hamburger { display:none; flex-direction:column; justify-content:space-between; width:34px; height:18px; background:none; border:none; cursor:pointer; }\r\n  .hamburger span { height:3px; width:100%; background:#1d1d1b; border-radius:2px; transition:.3s; }\r\n\r\n  /* ====== HERO ====== */\r\n  .section-hero {\r\n    display:flex; flex-direction:column; max-width:800px; margin:0 auto; align-items:center; justify-content:center;\r\n    padding:30px 112px; position:relative;\r\n  }\r\n  .conteudo-hero { display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:24px; }\r\n  .coluna-titulo { gap:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; }\r\n  .tituloh1 { font-weight:600; color:#150b0b; font-size:32px; text-align:center; }\r\n  a { color:#150b0b; }\r\n  .paragrafo16 { color:#383435; font-size:16px; font-weight:400; text-align:center; line-height:22px; margin:0; }\r\n\r\n  /* ====== SEÇÃO 2 ====== */\r\n  .section-dois { display:flex; flex-direction:column; max-width:100%; margin:0 auto; align-items:center; justify-content:center; padding:30px 112px 40px; background:#f1f1f1; }\r\n  .section-dois .conteudo-dois { max-width:800px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; }\r\n  .section-dois .tituloh2, .tituloh2 { color:#150b0b; font-weight:600; font-size:24px; text-align:left; }\r\n  .section-dois .conteudo-botao { width:800px; display:flex; flex-direction:column; align-items:center; gap:10px; margin:0; }\r\n  .botao { display:flex; align-items:center; justify-content:space-between; padding:0 0 0 16px; width:100%; background:#6f5bf9; border-radius:8px; overflow:hidden; }\r\n  .section-dois .texto-botao { font-weight:400; color:#fff; font-size:16px; text-align:center; white-space:nowrap; }\r\n  .section-dois .conteudo-botao .paragrafo16 { font-size:14px; line-height:18px; }\r\n  .section-dois .icone-botao { width:75px; height:68px; }\r\n\r\n  /* ====== SEÇÃO 3 ====== */\r\n  .section-tres { display:flex; flex-direction:column; max-width:100%; margin:0 auto; align-items:center; justify-content:center; padding:40px 112px; background:#fff; }\r\n  .section-tres .conteudo-paragrafo { max-width:800px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:0; text-align:left; }\r\n  .section-tres .paragrafo16 p { color:#383435; font-size:16px; font-weight:400; line-height:24px; text-align:left; margin-bottom:20px !important; }\r\n\r\n  h2 { text-align:left; margin-bottom:24px !important; }\r\n\r\n  /* ====== SEÇÃO 4 ====== */\r\n  .section-quarto { display:flex; flex-direction:column; max-width:100%; margin:0 auto; align-items:center; justify-content:center; padding:40px 112px; background:#f8f9fc; }\r\n  .section-quarto .conteudo-box-infor { max-width:800px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:32px; }\r\n  .conteudo-box { display:flex; flex-wrap:wrap; gap:28px 14px; justify-content:space-between; margin:0; }\r\n  .box-infor { display:flex; min-width:345px; max-width:358px; flex-direction:column; justify-content:center; align-items:center; gap:8px; flex:1 0 0; }\r\n  h3.tituloh3 { font-weight:600; color:#150b0b; font-size:23px; text-align:center; }\r\n\r\n  /* ====== SEÇÃO 5 (FAQ) ====== */\r\n  .section-cinco { display:flex; flex-direction:column; max-width:100%; margin:0 auto; align-items:center; justify-content:center; padding:40px 112px; }\r\n  .conteudo-faq { max-width:800px; display:flex; flex-direction:column; align-items:center; }\r\n  .section-cinco .faq-item { display:flex; flex-direction:column; border-bottom:1px solid #dededf; padding-bottom:16px; }\r\n  .section-cinco .box-faq { width:800px; display:flex; flex-direction:column; gap:24px; margin:0; }\r\n  .faq-conteudo .paragrafo16 { font-weight:400; color:#383435; font-size:16px; line-height:1.6; text-align:left; }\r\n  .section-cinco .titulo-faq { display:flex; align-items:center; justify-content:space-between; width:100%; cursor:pointer; }\r\n  .section-cinco .titulo-faq h3 { font-size:18px; color:#150b0b; font-weight:600; }\r\n  .section-cinco .faq-conteudo { display:none; padding-top:10px; line-height:1.6; }\r\n  .section-cinco .faq-aberto .faq-conteudo { display:block; }\r\n  .section-tres h3 { font-size:18px; line-height:24px; font-weight:600; text-align:left; margin-bottom:24px; }\r\n  .section-cinco .img { width:24px; height:24px; transition: transform .3s ease-in-out; }\r\n  .section-cinco .faq-aberto .img { transform: rotate(180deg); }\r\n\r\n  /* ====== RODAPÉ ====== */\r\n  .section-seis, .section-sete {\r\n    display:flex; flex-direction:column; width:auto; align-items:center; justify-content:center; gap:10px; padding:20px 112px; position:relative;\r\n  }\r\n  .section-seis { background:#3f3f46; }\r\n  .section-sete { background:#1E1E1E; }\r\n  ul { text-align:left; }\r\n  .section-seis .conteudo-paragrafo, .section-sete .conteudo-paragrafo {\r\n    display:flex; flex-direction:column; width:800px; align-items:center; justify-content:center; gap:16px; position:relative; flex:0 0 auto; align-content:center; text-align:center;\r\n  }\r\n  .section-sete .paragrafo16, .section-seis .paragrafo16 { color:#fff; }\r\n  .section-sete .paragrafo { display:flex; font-weight:400; color:#fff; font-size:14px; text-align:center; line-height:16.2px; white-space:nowrap; flex-direction:row; gap:14px; }\r\n  .section-sete .navbar { display:inline-flex; align-items:center; justify-content:center; gap:8px; position:relative; flex:0 0 auto; }\r\n\r\n  /* ====== MOBILE ====== */\r\n  @media (max-width: 768px) {\r\n    .hamburger { display:flex; width:30px; height:20px; }\r\n    .conteudo-menu { width:100%; display:flex; justify-content:space-between; align-items:center; }\r\n    .menu {\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n        padding: 11px 16px;\r\n        background: #fff;\r\n        box-shadow: 0 4px 41px rgba(0, 0, 0, .1);\r\n        position: relative;\r\n        margin-bottom: 10px;\r\n        margin-top: -6px;\r\n    }\r\n    .menu .navbar { display:none; flex-direction:column; width:100%; padding:20px; position:absolute; top:100%; left:0; background:#fff; box-shadow:0 4px 8px rgba(0,0,0,.05); z-index:999; }\r\n    .menu .navbar.active { display:flex; align-items:flex-start; }\r\n    .menu .navbar ul { flex-direction:column; gap:16px; }\r\n    .menu .navbar a { padding:12px 0; display:block; width:100%; }\r\n\r\n    .section-hero { padding:10px; max-width:100%; }\r\n    .tituloh1 { font-size:24px; line-height:30px; width:358px; }\r\n\r\n    .section-dois, .section-quarto { padding:20px 16px; }\r\n    .paragrafo16 { font-size:15px; line-height:24px; }\r\n    .section-tres, .section-quarto, .section-cinco { padding:40px 16px; }\r\n\r\n    .section-hero .conteudo-hero,\r\n    .section-dois .conteudo-dois,\r\n    .section-tres .conteudo-paragrafo,\r\n    .section-quarto .conteudo-box-infor,\r\n    .section-cinco .conteudo-faq { width:100%; text-align:left; }\r\n\r\n    .section-dois .conteudo-dois{ gap:10px; }\r\n    .section-tres .conteudo-paragrafo{ gap:2px; }\r\n\r\n    .section-quarto .tituloh2, .section-cinco .tituloh2, .section-dois .tituloh2 {\r\n      font-size:20px; line-height:24px; font-weight:600; text-align:left; margin:0;\r\n    }\r\n\r\n    h2.tituloh2 { margin-bottom:12px !important; text-align:center !important; }\r\n    .section-tres h2.tituloh2 { margin-bottom:12px !important; text-align:left !important; }\r\n\r\n    .section-tres .tituloh2{ font-size:20px; text-align:left; line-height:28px; margin-bottom:8px; }\r\n    .section-tres h2 { font-size:20px; text-align:left; margin-bottom:5px !important; line-height:28px; }\r\n\r\n    .section-dois .conteudo-botao { width:100%; gap:12px; }\r\n    .section-dois .conteudo-botao .paragrafo16{ font-size:12px; line-height:18px; }\r\n    .section-dois .botao { width:100%; max-width:100%; }\r\n    .section-dois .texto-botao { font-size:16px; }\r\n    .section-dois .icone-botao { width:17%; height:45%; }\r\n\r\n\t  \r\n\t  .logo {\r\n    height: 20px;\r\n}\r\n\r\n    .section-tres .paragrafo16 p { text-align:left; font-size:15px; line-height:24px; margin-bottom:15px !important; }\r\n    .section-tres h3 { font-size:18px; line-height:24px; font-weight:600; text-align:left; margin-bottom:24px; }\r\n\r\n    .section-quarto .conteudo-box-infor { gap:24px; }\r\n    h3.tituloh3 { font-size:20px; text-align:left; }\r\n    .section-quarto .box-infor { max-width:100%; min-width:327px; flex-direction:column; align-items:flex-start; gap:8px; }\r\n    .section-quarto .paragrafo16 { text-align:left; line-height:24px; font-size:15px; }\r\n\r\n    .section-cinco .box-faq { width:100%; gap:24px; display:flex; flex-direction:column; margin:0; }\r\n    .section-cinco .titulo-faq h3 { font-size:16px; }\r\n    .faq-conteudo .paragrafo16 { font-size:15px; line-height:24px; }\r\n\r\n    .section-seis, .section-sete { padding:20px 16px; }\r\n    .section-seis .conteudo-paragrafo { width:100%; }\r\n    .section-sete .paragrafo { font-size:14px; flex-direction:column; gap:8px; width:100%; }\r\n    .section-sete .conteudo-paragrafo { display:flex; align-items:center; position:relative; flex:0 0 auto; gap:12px; justify-content:center; flex-direction:column; width:100%; }\r\n    .section-sete .navbar { display:inline-flex; align-items:center; justify-content:center; gap:8px; flex-direction:column; }\r\n    .linha { display:none; }\r\n  }\r\n</style>\r\n\r\n<body <?php body_class(); ?>>\r\n\r\n<main class=\"page-pressel-2-0\">\r\n\r\n<header class=\"menu\">\r\n\t<div class=\"conteudo-menu\">\r\n\t\t\r\n\r\n<img \r\n  class=\"logo\" \r\n  src=\"https://cdinonline.com/wp-content/uploads/2025/08/20250806-logo_cdin.svg\" \r\n  alt=\"Logo CDIN\" \r\n  width=\"120\" \r\n  height=\"30\" \r\n/>\r\n\r\n  <button id=\"hamburger\" class=\"hamburger\" aria-label=\"Abrir menu\" aria-expanded=\"false\">\r\n    <span></span><span></span><span></span>\r\n  </button>\r\n\r\n  <nav id=\"navbar\" class=\"navbar\" role=\"navigation\">\r\n    <ul>\r\n      <li><a href=\"https://cdinonline.com/\" class=\"texto-menu\">Home</a></li>\r\n\t\t<li><a href=\"https://cdinonline.com/about-us/\" class=\"texto-menu\">About Us</a></li>\r\n      <li><a href=\"https://cdinonline.com/privacy-policy/\" class=\"texto-menu\">Privacy Policy</a></li>\r\n      <li><a href=\"https://cdinonline.com/terms-of-use/\" class=\"texto-menu\">Terms of use</a></li>\r\n      <li><a href=\"https://cdinonline.com/contact-us/\" class=\"texto-menu\">Contact Us</a></li>\r\n    </ul>\r\n  </nav>\r\n\t\t\t</div>\r\n</header>\r\n\r\n  <!-- ====== HERO ====== -->\r\n  <header class=\"section-hero\">\r\n    <div class=\"conteudo-hero\">\r\n      <div class=\"coluna-titulo\">\r\n        <h1 class=\"tituloh1\">\r\n          <?php if (get_field('link_h1')) : ?>\r\n            <a href=\"<?php echo esc_url(get_field('link_h1')); ?>\" target=\"_self\"><?php the_title(); ?></a>\r\n          <?php else : ?>\r\n            <?php the_title(); ?>\r\n          <?php endif; ?>\r\n        </h1>\r\n        <p class=\"paragrafo16\"><?php echo esc_html(get_field('hero_description') ?: 'Descrição não disponível'); ?></p>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- ====== ADS ====== -->\r\n\t\t<section class=\"ads\">\r\n\t\t\t<div class=\"campo-ads\">\r\n<div id=\"av_top_wrapper\" align=\"center\" style=\"width: 100%;\">\r\n    <div>\r\n        <p style=\"font-size: 10px; text-transform: uppercase; text-align: center;\">\r\n            Advertising\r\n        </p>\r\n        <div id=\"av_top\">\r\n        </div>\r\n    </div>\r\n</div> \r\n\t\t\t</div>\r\n\t\t</section>\r\n\r\n <!-- Seção 2: Botões de Acesso Rápido tese -->\r\n<section class=\"section-dois\">\r\n    <div class=\"conteudo-dois\">\r\n        <h2 class=\"tituloh2\"><?php the_field('titulo_da_secao'); ?></h2>\r\n        <div class=\"conteudo-botao\">\r\n\r\n\t\t\t\t\t\t<?php\r\n\t\t\t// garante $base_path\r\n\t\t\t$base_path = isset($base_path) ? $base_path : get_stylesheet_directory_uri();\r\n\r\n\t\t\t// Cor e tipo comuns à seção\r\n\t\t\t$cor = get_field('cor_botao') ?: '#2352AE';\r\n\t\t\t$tipo_raw = get_field('tipo_botao'); // radio/select (string) ou checkbox (array)\r\n\r\n\t\t\t// normaliza tipo\r\n\t\t\t$tipo = 'normal';\r\n\t\t\tif (is_string($tipo_raw) && $tipo_raw !== '') {\r\n\t\t\t  $tipo = $tipo_raw;\r\n\t\t\t} elseif (is_array($tipo_raw) && !empty($tipo_raw)) {\r\n\t\t\t  $vals = array_map(function($v){ return is_array($v) && isset($v['value']) ? $v['value'] : (string)$v; }, $tipo_raw);\r\n\t\t\t  $tipo = in_array('rewarded', $vals, true) ? 'rewarded' : ($vals[0] ?: 'normal');\r\n\t\t\t}\r\n\t\t\t$tipo = in_array($tipo, ['normal','rewarded'], true) ? $tipo : 'normal';\r\n\r\n\t\t\t// classes e atributos compartilhados pelo tipo\r\n\t\t\t$classe_tipo = ($tipo === 'rewarded') ? ' av-rewarded' : '';\r\n\t\t\t$attr_tipo   = ($tipo === 'rewarded') ? ' data-av-rewarded=\"true\"' : '';\r\n\r\n\t\t\t// renderiza até 3 botões conforme preenchimento\r\n\t\t\tfor ($i = 1; $i <= 3; $i++) {\r\n\t\t\t  $txt  = trim((string) get_field(\"texto_botao_p$i\"));\r\n\t\t\t  if (!$txt) continue; // só mostra se tiver texto\r\n\r\n\t\t\t  $link = get_field(\"link_botao_p$i\") ?: '#';\r\n\t\t\t  $desc = get_field(\"descricao_botao_$i\") ?: \"Saiba mais sobre o botão $i\";\r\n\t\t\t  ?>\r\n\t\t\t  <a href=\"<?php echo esc_url($link); ?>\"\r\n\t\t\t\t class=\"botao<?php echo esc_attr($classe_tipo); ?>\"\r\n\t\t\t\t aria-label=\"<?php echo esc_attr($desc); ?>\"\r\n\t\t\t\t style=\"background-color: <?php echo esc_attr($cor); ?>;\"\r\n\t\t\t\t <?php echo $attr_tipo; ?>>\r\n\t\t\t\t  <span class=\"texto-botao\"><?php echo esc_html($txt); ?></span>\r\n\t\t\t\t  <img class=\"icone-botao\" width=\"48\" height=\"48\"\r\n\t\t\t\t\t   src=\"<?php echo esc_url($base_path . '/icone-botao.svg'); ?>\"\r\n\t\t\t\t\t   alt=\"<?php echo esc_attr(\"Ícone representando $txt\"); ?>\"\r\n\t\t\t\t\t   loading=\"lazy\">\r\n\t\t\t  </a>\r\n\t\t\t  <?php\r\n\t\t\t}\r\n\t\t\t?>\r\n\r\n\r\n            <p class=\"paragrafo16\">Você permanecerá no mesmo site</p>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<!-- Seção 3: Descrição do Serviço -->\r\n<section class=\"section-tres\">\r\n    <div class=\"conteudo-paragrafo\">\r\n        <h2 class=\"tituloh2\"><?php echo esc_html(get_field('titulo_h2_') ?: 'Título não disponível'); ?></h2>\r\n        <div class=\"paragrafo16\">\r\n            <?php echo wp_kses_post(get_field('info_content') ?: '<p>Descrição não disponível no momento.</p>'); ?>\r\n        </div>\r\n        <h2 class=\"tituloh2\"><?php echo esc_html(get_field('titulo_h2_02') ?: 'Subtítulo não disponível'); ?></h2>\r\n        <div class=\"paragrafo16\">\r\n            <?php echo wp_kses_post(get_field('info_content_2') ?: '<p>Descrição não disponível no momento.</p>'); ?>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n  <!-- ====== SEÇÃO 4: BENEFÍCIOS ====== -->\r\n  <section class=\"section-quarto\">\r\n    <div class=\"conteudo-box-infor\">\r\n      <h2 class=\"tituloh2\"><?php the_field('titulo_beneficios'); ?></h2>\r\n      <div class=\"conteudo-box\">\r\n        <?php for ($i = 1; $i <= 4; $i++) :\r\n          $titulo = get_field(\"titulo_beneficios_$i\") ?: \"Benefício $i não disponível\";\r\n          $texto  = get_field(\"_beneficio_text_$i\") ?: \"Texto do benefício $i não disponível.\";\r\n          $icone  = $base_path . \"/icone-$i.svg\";\r\n        ?>\r\n          <div class=\"box-infor\">\r\n            <img class=\"icone-botao\" width=\"48\" height=\"48\" src=\"<?php echo esc_url($icone); ?>\" alt=\"<?php echo esc_attr(\"Ícone de benefício $i\"); ?>\" loading=\"lazy\">\r\n            <h3 class=\"tituloh3\"><?php echo esc_html($titulo); ?></h3>\r\n            <p class=\"paragrafo16\"><?php echo wp_kses_post($texto); ?></p>\r\n          </div>\r\n        <?php endfor; ?>\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n<!-- Seção 5: Perguntas Frequentes -->\r\n<section class=\"section-cinco\">\r\n    <div class=\"conteudo-faq\">\r\n        <h2 class=\"tituloh2\"><?php the_field('titulo_faq'); ?></h2>\r\n        <div class=\"box-faq\">\r\n            <?php for ($i = 1; $i <= 3; $i++) :\r\n                $pergunta = get_field(\"pergunta_$i\") ?: \"Pergunta $i não disponível\";\r\n                $resposta = get_field(\"resposta_$i\") ?: \"Resposta não disponível.\";\r\n                $faq_id = 'faq-'. $i;\r\n            ?>\r\n                <div class=\"faq-item\">\r\n                    <div class=\"titulo-faq\" role=\"button\" tabindex=\"0\"\r\n                         aria-expanded=\"false\" aria-controls=\"<?php echo esc_attr($faq_id); ?>\">\r\n                        <h3><?php echo esc_html($pergunta); ?></h3>\r\n                        <img class=\"img\" src=\"<?php echo esc_url($base_path . '/icone-plus.svg'); ?>\" alt=\"Expandir pergunta <?php echo $i; ?>\" loading=\"lazy\">\r\n                    </div>\r\n                    <div id=\"<?php echo esc_attr($faq_id); ?>\" class=\"faq-conteudo\" hidden>\r\n                        <p class=\"paragrafo16\"><?php echo wp_kses_post($resposta); ?></p>\r\n                    </div>\r\n                </div>\r\n            <?php endfor; ?>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n\r\n\r\n  <!-- Section 6: Legal Notice -->\r\n  <section class=\"section-seis\">\r\n    <div class=\"conteudo-paragrafo\">\r\n      <p class=\"paragrafo16\">\r\n            <p class=\"paragrafo16\"><?php echo esc_html(get_field('aviso') ?: 'Descrição não disponível'); ?></p>\r\n    </div>\r\n  </section>\r\n\r\n<!-- Seção 7: Créditos e Links -->\r\n    <section class=\"section-sete\">\r\n        <div class=\"conteudo-paragrafo\">\r\n            <p class=\"paragrafo\">\r\n                <span class=\"paragrafo16\">CDIN</span>\r\n            <span class=\"paragrafo16\">Copyright © <?php echo date('Y'); ?> </span>\r\n                <span class=\"paragrafo16\">All rights reserved.</span>\r\n            </p>\r\n            <div class=\"navbar\">\r\n                <a href=\"https://cdinonline.com/about-us/\" target=\"_self\"><span class=\"paragrafo16\">About Us</span></a>\r\n                <img class=\"linha\" src=\"https://twgdigitall.com/ps/v1/linha.svg\" alt=\"separador\" />\r\n                <a href=\"https://cdinonline.com/terms-of-use/\" target=\"_self\"><span class=\"paragrafo16\">Terms of use</span></a>\r\n                <img class=\"linha\" src=\"https://twgdigitall.com/ps/v1/linha.svg\" alt=\"separador\" />\r\n                <a href=\"https://cdinonline.com/privacy-policy/\" target=\"_self\"><span class=\"paragrafo16\">Privacy Policy</span></a>\r\n                <img class=\"linha\" src=\"https://twgdigitall.com/ps/v1/linha.svg\" alt=\"separador\" />\r\n                <a href=\"https://cdinonline.com/contact-us/\" target=\"_self\"><span class=\"paragrafo16\">Contact Us</span></a>\r\n            </div>\r\n        </div>\r\n    </section>\r\n\r\n  <!-- ====== SCRIPTS NÃO-POPUP ====== -->\r\n  <script>\r\n    // FAQ\r\n    document.addEventListener(\"DOMContentLoaded\", function () {\r\n      const faqItems = document.querySelectorAll(\".faq-item\");\r\n      faqItems.forEach((item) => {\r\n        const titulo = item.querySelector(\".titulo-faq\");\r\n        titulo.addEventListener(\"click\", () => item.classList.toggle(\"faq-aberto\"));\r\n        titulo.addEventListener(\"keypress\", (e) => { if (e.key === \"Enter\") item.classList.toggle(\"faq-aberto\"); });\r\n      });\r\n    });\r\n\r\n    // Propagar UTM\r\n    window.addEventListener(\"DOMContentLoaded\", function () {\r\n      const params = new URLSearchParams(window.location.search);\r\n      if (params.toString()) {\r\n        document.querySelectorAll('a[href]').forEach(link => {\r\n          try {\r\n            const url = new URL(link.href);\r\n            params.forEach((value, key) => { url.searchParams.set(key, value); });\r\n            link.href = url.toString();\r\n          } catch (e) { /* ignora */ }\r\n        });\r\n      }\r\n    });\r\n\r\n    // Menu hambúrguer\r\n    document.addEventListener(\"DOMContentLoaded\", function () {\r\n      const hamburger = document.getElementById(\"hamburger\");\r\n      const navbar = document.getElementById(\"navbar\");\r\n      if (hamburger && navbar) {\r\n        hamburger.addEventListener(\"click\", function () {\r\n          navbar.classList.toggle(\"active\");\r\n          const expanded = this.getAttribute(\"aria-expanded\") === \"true\";\r\n          this.setAttribute(\"aria-expanded\", !expanded);\r\n        });\r\n      }\r\n    });\r\n  </script>\r\n\r\n  <?php wp_footer(); ?>\r\n</main>\r\n</body>\r\n</html>\r\n",
+      "modelName": "V1"
+    },
+    "acfFields": {
+      "version": "1.0.0",
+      "createdAt": "2025-10-28T20:37:17.886Z",
+      "modelName": "V1",
+      "templateFile": "pressel-oficial.php",
+      "fieldMapping": {
+        "hero_description": {
+          "key": "field_668c2a4e8a11e",
+          "label": "Sub Titulo",
+          "type": "textarea",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "link_h1": {
+          "key": "field_66c4964a7b779",
+          "label": "Link H1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "botao_tipo_selecao": {
+          "key": "field_novo_tipo_botao_2024",
+          "label": "Tipo de Botão",
+          "type": "radio",
+          "required": false,
+          "default_value": "normal",
+          "maxlength": null,
+          "choices": {
+            "normal": "Botão normal",
+            "rewarded": "Botão rewarded (av-rewarded)"
+          }
+        },
+        "titulo_da_secao": {
+          "key": "field_67ec3344ab8cf",
+          "label": "Titulo da Seção Botões",
+          "type": "text",
+          "required": true,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "cor_botao": {
+          "key": "field_681a4eeafe7f2",
+          "label": "Cor Botão",
+          "type": "color_picker",
+          "required": false,
+          "default_value": "#2352AE",
+          "maxlength": null,
+          "choices": null
+        },
+        "texto_botao_p1": {
+          "key": "field_66ba1cd5b66dc",
+          "label": "Texto Botão P1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": 28,
+          "choices": null
+        },
+        "link_botao_p1": {
+          "key": "field_66ba1d4eb66df",
+          "label": "Link Botão P1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "texto_botao_p2": {
+          "key": "field_66ba1d3fb66dd",
+          "label": "Texto Botão P2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": 28,
+          "choices": null
+        },
+        "link_botao_p2": {
+          "key": "field_66ba1d60b66e0",
+          "label": "Link Botão P2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "texto_botao_p3": {
+          "key": "field_66ba1d44b66de",
+          "label": "Texto Botão P3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": 28,
+          "choices": null
+        },
+        "link_botao_p3": {
+          "key": "field_66ba1d6db66e1",
+          "label": "Link Botão P3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "texto_usuario": {
+          "key": "field_681a4f2ffe7f3",
+          "label": "Texto de informação",
+          "type": "text",
+          "required": true,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_h2_": {
+          "key": "field_66ba1f5af0f84",
+          "label": "Titulo H2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "info_content": {
+          "key": "field_66ba1f8af0f85",
+          "label": "Parágrafo",
+          "type": "wysiwyg",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_h2_02": {
+          "key": "field_66ba1fbdf0f86",
+          "label": "Titulo H2 (02)",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "info_content_2": {
+          "key": "field_66ba1fccf0f87",
+          "label": "Parágrafo 2",
+          "type": "wysiwyg",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_beneficios": {
+          "key": "field_66b3cec5501c7",
+          "label": "Titulo Beneficios",
+          "type": "text",
+          "required": true,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_beneficios_1": {
+          "key": "field_66ba251c3fd7e",
+          "label": "Titulo Beneficio 1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "_beneficio_text_1": {
+          "key": "field_66b3cb0bcdff9",
+          "label": "Texto Beneficio 1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_beneficios_2": {
+          "key": "field_66ba25453fd7f",
+          "label": "Titulo Beneficio 2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "_beneficio_text_2": {
+          "key": "field_66b3cb26cdffb",
+          "label": "Texto Beneficio 2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_beneficios_3": {
+          "key": "field_66ba254c3fd80",
+          "label": "Titulo Beneficio 3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "_beneficio_text_3": {
+          "key": "field_66b3cb2ccdffc",
+          "label": "Texto Beneficio 3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_beneficios_4": {
+          "key": "field_66ba25593fd81",
+          "label": "Titulo Beneficio 4",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "_beneficio_text_4": {
+          "key": "field_66b3cb2ecdffd",
+          "label": "Texto Beneficio 4",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "titulo_faq": {
+          "key": "field_67ec3314469d8",
+          "label": "Titulo FAQ",
+          "type": "text",
+          "required": true,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "pergunta_1": {
+          "key": "field_66b3cb7a0e019",
+          "label": "Pergunta 01",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "resposta_1": {
+          "key": "field_66b3cbae0e01e",
+          "label": "Resposta 1",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "pergunta_2": {
+          "key": "field_66b3cb990e01a",
+          "label": "Pergunta 2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "resposta_2": {
+          "key": "field_66b3cbcf0e01f",
+          "label": "Resposta 2",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "pergunta_3": {
+          "key": "field_66b3cb9b0e01b",
+          "label": "Pergunta 3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "resposta_3": {
+          "key": "field_66b3cbd30e020",
+          "label": "Resposta 3",
+          "type": "text",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": null
+        },
+        "aviso": {
+          "key": "field_68939a462daee",
+          "label": "Aviso",
+          "type": "select",
+          "required": false,
+          "default_value": "",
+          "maxlength": null,
+          "choices": {
+            "aviso_pt": "Aviso Legal: Este conteúdo é apenas informativo e não constitui aconselhamento jurídico ou financeiro.",
+            "aviso_en": "Legal Notice: This content is for informational purposes only and does not constitute legal or financial advice.",
+            "aviso_es": "Aviso Legal: Este contenido es solo informativo y no constituye asesoramento legal ni financiero."
+          }
+        }
+      },
+      "fieldTypes": {
+        "hero_description": "textarea",
+        "link_h1": "text",
+        "botao_tipo_selecao": "radio",
+        "titulo_da_secao": "text",
+        "cor_botao": "color_picker",
+        "texto_botao_p1": "text",
+        "link_botao_p1": "text",
+        "texto_botao_p2": "text",
+        "link_botao_p2": "text",
+        "texto_botao_p3": "text",
+        "link_botao_p3": "text",
+        "texto_usuario": "text",
+        "titulo_h2_": "text",
+        "info_content": "wysiwyg",
+        "titulo_h2_02": "text",
+        "info_content_2": "wysiwyg",
+        "titulo_beneficios": "text",
+        "titulo_beneficios_1": "text",
+        "_beneficio_text_1": "text",
+        "titulo_beneficios_2": "text",
+        "_beneficio_text_2": "text",
+        "titulo_beneficios_3": "text",
+        "_beneficio_text_3": "text",
+        "titulo_beneficios_4": "text",
+        "_beneficio_text_4": "text",
+        "titulo_faq": "text",
+        "pergunta_1": "text",
+        "resposta_1": "text",
+        "pergunta_2": "text",
+        "resposta_2": "text",
+        "pergunta_3": "text",
+        "resposta_3": "text",
+        "aviso": "select"
+      },
+      "requiredFields": [
+        "titulo_da_secao",
+        "texto_usuario",
+        "titulo_beneficios",
+        "titulo_faq"
+      ],
+      "totalFields": 33
+    },
+    "jsonStructure": {
+      "page_title": "Exemplo de Página",
+      "page_content": "Conteúdo da página de exemplo",
+      "page_status": "draft",
+      "page_template": "modelo-v1.php",
+      "page_slug": "exemplo-pagina",
+      "acf_fields": {},
+      "seo": {
+        "meta_title": "Exemplo de Página - SEO",
+        "meta_description": "Descrição SEO da página de exemplo",
+        "focus_keyword": "exemplo"
+      },
+      "featured_image": "https://via.placeholder.com/1200x600"
+    },
+    "validationRules": {},
+    "previewData": {
+      "page_title": "Exemplo de Página",
+      "page_content": "Conteúdo da página de exemplo",
+      "page_status": "draft",
+      "page_template": "modelo-v1.php",
+      "page_slug": "exemplo-pagina",
+      "acf_fields": {},
+      "seo": {
+        "meta_title": "Exemplo de Página - SEO",
+        "meta_description": "Descrição SEO da página de exemplo",
+        "focus_keyword": "exemplo"
+      },
+      "featured_image": "https://via.placeholder.com/1200x600"
+    },
+    "createdAt": "2025-10-28T21:04:20.446Z",
+    "version": "1.0.0",
+    "modelName": "V1"
+  },
+  "V4": {
+    "template": {
+      "name": "Modelo V4",
+      "slug": "modelo-v4",
+      "description": "Template modelo V4 criado via Pressel Automation",
+      "phpContent": "<?php\r\n/*\r\nTemplate Name: Pressel V4\r\n*/\r\n?>\r\n\r\n<!DOCTYPE html>\r\n<html <?php language_attributes(); ?>>\r\n<head>\r\n\r\n\t<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8759556148526040\"\r\n     crossorigin=\"anonymous\"></script>\r\n  <meta property=\"og:description\" content=\"\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <meta charset=\"<?php bloginfo('charset'); ?>\">\r\n\r\n  <!-- Preconnect para origens externas -->\r\n  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\r\n  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\r\n  <link rel=\"preconnect\" href=\"https://atlz.online/\" crossorigin>\r\n\r\n  <!-- Preload Google Fonts com swap + fallback -->\r\n  <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap\" rel=\"stylesheet\" media=\"print\" onload=\"this.media='all'\">\r\n  <noscript>\r\n    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap\">\r\n  </noscript>\r\n\r\n \r\n  <?php $lcp_img = get_field('app_image'); if ($lcp_img): ?>\r\n    <link \r\n      rel=\"preload\" \r\n      as=\"image\" \r\n      href=\"<?php echo esc_url($lcp_img); ?>\" \r\n      type=\"image/webp\"\r\n      imagesrcset=\"<?php echo esc_url($lcp_img); ?>\"\r\n      imagesizes=\"306px\"\r\n      fetchpriority=\"high\"\r\n    >\r\n  <?php endif; ?>\r\n\r\n  <title><?php the_title(); ?></title>\r\n  <?php wp_head(); ?>\r\n\t\r\n\t<style>\r\n\t\t/* ===== VARIÁVEIS CSS ===== */\r\n\t\t:root {\r\n\t\t\t--cor-preto: #1d1d1b;\r\n\t\t\t--color-primary: #7aa400;\r\n\t\t\t--color-dark: #171717;\r\n\t\t\t--color-dark-alt: #150b0b;\r\n\t\t\t--color-title-alt: #171717;\r\n\t\t\t--color-text: #4C585C;\r\n\t\t\t--color-white: #ffffff;\r\n\t\t\t--color-light-bg: #f4f6fc;\r\n\t\t\t--color-gray-bg: #f5f5f5;\r\n\t\t\t--color-border: #eaeaea;\r\n\t\t\t--color-divider: #ececec;\r\n\t\t\t--color-branco: #ffffff;\r\n\t\t\t--color-aviso: #f7f7f7;\r\n\t\t}\r\n\r\n\t\t/* ===== RESET E BASE ===== */\r\n\t\t*,\r\n\t\t*::before,\r\n\t\t*::after {\r\n\t\t\tbox-sizing: border-box;\r\n\t\t}\r\n\r\n\t\thtml {\r\n\t\t\tmargin: 0 !important;\r\n\t\t\tscroll-behavior: smooth;\r\n\t\t}\r\n\r\n\t\tbody {\r\n\t\t\tfont-family: \"Roboto\", Helvetica, Arial, sans-serif;\r\n\t\t\tbackground-color: var(--color-white);\r\n\t\t\tcolor: var(--color-dark);\r\n\t\t\tmargin: 0;\r\n\t\t\tpadding: 0;\r\n\t\t\tline-height: 1.6;\r\n\t\t}\r\n\r\n\t\th1, h2, h3 {\r\n\t\t\tmargin: 0;\r\n\t\t\tpadding: 0;\r\n\t\t}\r\n\r\n\t\ta {\r\n\t\t\ttext-decoration: none;\r\n\t\t\tcolor: inherit;\r\n\t\t}\r\n\r\n\t\t/* ===== HEADER/NAVEGAÇÃO ===== */\r\n\t\t.menu {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: center;\r\n\t\t\tbackground-color: var(--color-white);\r\n\t\t\tbox-shadow: 0 4px 41px rgba(0, 0, 0, 0.1);\r\n\t\t\tposition: relative;\r\n\t\t\twidth: 100%;\r\n\t\t\tpadding: 14px 0;\r\n\t\t}\r\n\r\n\t\t.conteudo-menu {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: space-between;\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 1200px;\r\n\t\t\tpadding: 0 20px;\r\n\t\t}\r\n\r\n\t\t.logo {\r\n\t\t\theight: 30px;\r\n\t\t\twidth: auto;\r\n\t\t}\r\n\r\n\t\t.menu .navbar {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t}\r\n\r\n\t\t.menu .navbar ul {\r\n\t\t\tdisplay: flex;\r\n\t\t\tlist-style: none;\r\n\t\t\tmargin: 0;\r\n\t\t\tpadding: 0;\r\n\t\t\tgap: 24px;\r\n\t\t}\r\n\r\n\t\t.menu .navbar a {\r\n\t\t\tfont-weight: 600;\r\n\t\t\tcolor: var(--cor-preto);\r\n\t\t\tfont-size: 15px;\r\n\t\t\ttransition: color 0.3s ease;\r\n\t\t}\r\n\r\n\t\t.menu .navbar a:hover {\r\n\t\t\tcolor: var(--color-primary);\r\n\t\t}\r\n\r\n\t\t/* ===== HAMBURGER MENU ===== */\r\n\t\t.hamburger {\r\n\t\t\tdisplay: none;\r\n\t\t\tflex-direction: column;\r\n\t\t\tjustify-content: space-between;\r\n\t\t\twidth: 34px;\r\n\t\t\theight: 18px;\r\n\t\t\tbackground: none;\r\n\t\t\tborder: none;\r\n\t\t\tcursor: pointer;\r\n\t\t\tpadding: 0;\r\n\t\t}\r\n\r\n\t\t.hamburger span {\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 3px;\r\n\t\t\tbackground: var(--cor-preto);\r\n\t\t\tborder-radius: 2px;\r\n\t\t\ttransition: 0.3s;\r\n\t\t}\r\n\r\n\t\t/* ===== SECTIONS GERAIS ===== */\r\n\t\t.section-hero,\r\n\t\t.section-dois,\r\n\t\t.section-tres,\r\n\t\t.section-cinco,\r\n\t\t.section-nova {\r\n\t\t\twidth: 100%;\r\n\t\t\tpadding: 40px 0;\r\n\t\t}\r\n\r\n\t\t.section-tres,\r\n\t\t.section-cinco {\r\n\t\t\tpadding-top: 60px;\r\n\t\t\tpadding-bottom: 60px;\r\n\t\t}\r\n\r\n\t\t.section-dois {\r\n\t\t\tbackground-color: var(--color-light-bg);\r\n\t\t}\r\n\r\n\t\t.section-nova,\r\n\t\t.section-tres,\r\n\t\t.section-cinco {\r\n\t\t\tbackground-color: var(--color-white);\r\n\t\t}\r\n\r\n\t\t/* ===== CONTEÚDO CENTRALIZADO ===== */\r\n\t\t.hero-content,\r\n\t\t.section-content,\r\n\t\t.benefits-container,\r\n\t\t.author-info {\r\n\t\t\tmax-width: 730px;\r\n\t\t\twidth: 100%;\r\n\t\t\tmargin: 0 auto;\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: center;\r\n\t\t\tgap: 24px;\r\n\t\t\tpadding: 0 20px;\r\n\t\t}\r\n\r\n\t\t/* ===== TIPOGRAFIA ===== */\r\n\t\t.title {\r\n\t\t\tfont-size: 37px;\r\n\t\t\tfont-weight: 700;\r\n\t\t\tcolor: var(--color-dark-alt);\r\n\t\t\ttext-align: center;\r\n\t\t\tline-height: 1.2;\r\n\t\t}\r\n\r\n\t\t.benefits-title,\r\n\t\t.author-title {\r\n\t\t\tfont-weight: 600;\r\n\t\t\tcolor: var(--color-dark-alt);\r\n\t\t\ttext-align: center;\r\n\t\t\tline-height: 1.2;\r\n\t\t\tfont-size: 28px;\r\n\t\t}\r\n\t\t\r\n\t\t.hero-content{\r\n\t\t\tgap: 8px;\r\n\t\t}\r\n\r\n\t\t.subtitle,\r\n\t\t.description,\r\n\t\t.disclaimer,\r\n\t\t.author-description {\r\n\t\t\tfont-weight: 400;\r\n\t\t\tfont-size: 15px;\r\n\t\t\tline-height: 24px;\r\n\t\t\ttext-align: left;\r\n\t\t\tcolor: var(--color-text);\r\n\t\t\tmargin: 0;\r\n\t\t}\r\n\r\n\t\t.benefit-text,\r\n\t\t.author-name {\r\n\t\t\tfont-weight: 500;\r\n\t\t\tfont-size: 18px;\r\n\t\t\tline-height: 24.3px;\r\n\t\t\tcolor: var(--color-text);\r\n\t\t\tmargin: 0;\r\n\t\t}\r\n\r\n\t\t.author-name {\r\n\t\t\tcolor: var(--color-dark-alt);\r\n\t\t\tline-height: 25px;\r\n\t\t}\r\n\r\n\t\t.button-text {\r\n\t\t\tfont-weight: 700;\r\n\t\t\tfont-size: 24px;\r\n\t\t\tline-height: 32px;\r\n\t\t\tcolor: var(--color-white);\r\n\t\t\ttext-align: center;\r\n\t\t}\r\n\r\n\t\t/* ===== DOWNLOAD SECTION ===== */\r\n\t\t.download-info {\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 306px;\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: center;\r\n\t\t\tgap: 14px;\r\n\t\t}\r\n\r\n\t\t.download-box {\r\n\t\t\tbackground-color: var(--color-white);\r\n\t\t\tborder-radius: 8px;\r\n\t\t\tborder: 1px solid var(--color-border);\r\n\t\t\tpadding: 16px;\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\tgap: 14px;\r\n\t\t\talign-items: center;\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\t.download-button {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: center;\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 60px;\r\n\t\t\tbackground-color: var(--color-primary);\r\n\t\t\tborder-radius: 8px;\r\n\t\t\ttext-decoration: none;\r\n\t\t\ttransition: background-color 0.3s ease;\r\n\t\t}\r\n\r\n\t\t.download-button:hover {\r\n\t\t\tbackground-color: #6a9500;\r\n\t\t}\r\n\r\n\t\t/* ===== IMAGENS ===== */\r\n\t\t.section-anuncio,\r\n\t\t.ad-image,\r\n\t\t.app-image,\r\n\t\t.benefit-icon,\r\n\t\t.author-image {\r\n\t\t\twidth: 100%;\r\n\t\t\tdisplay: flex;\r\n\t\t\tjustify-content: center;\r\n\t\t}\r\n\r\n\t\t.section-anuncio {\r\n\t\t\tmin-height: 400px;\r\n\t\t}\r\n\r\n\t\t.ad-image,\r\n\t\t.app-image {\r\n\t\t\tmax-width: 306px;\r\n\t\t\theight: 204px;\r\n\t\t\tborder-radius: 8px;\r\n\t\t}\r\n\r\n\t\t.benefit-icon {\r\n\t\t\twidth: 32px;\r\n\t\t\theight: 32px;\r\n\t\t}\r\n\r\n\t\t.author-image {\r\n\t\t\twidth: 54px;\r\n\t\t\theight: 54px;\r\n\t\t\tborder-radius: 50%;\r\n\t\t\tobject-fit: cover;\r\n\t\t}\r\n\r\n\t\t/* ===== BENEFITS ===== */\r\n\t\t.benefits-list {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\tgap: 16px;\r\n\t\t\twidth: 100%;\r\n\t\t\tmargin: 0;\r\n\t\t\tpadding: 0;\r\n\t\t}\r\n\r\n\t\t.benefit-item {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tgap: 16px;\r\n\t\t\tpadding: 16px;\r\n\t\t\tbackground-color: var(--color-gray-bg);\r\n\t\t\tborder-radius: 4px;\r\n\t\t\tborder-left: 3px solid var(--color-primary);\r\n\t\t}\r\n\r\n\t\t/* ===== AUTHOR SECTION ===== */\r\n\t\t.author-details {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tgap: 16px;\r\n\t\t}\r\n\r\n\t\t.author-bio {\r\n\t\t\tflex: 1;\r\n\t\t}\r\n\r\n\t\t/* ===== FAQ SECTION ===== */\r\n\t\t.section-vantagens {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: center;\r\n\t\t\tgap: 32px;\r\n\t\t\tpadding: 80px 0;\r\n\t\t\tbackground-color: var(--color-aviso);\r\n\t\t}\r\n\r\n\t\t.conteudo-vantagens {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: flex-start;\r\n\t\t\tgap: 32px;\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 800px;\r\n\t\t\tpadding: 0 20px;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .box-faq {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\twidth: 100%;\r\n\t\t\tgap: 24px;\r\n\t\t}\r\n\r\n\t\t.section-vantagens details {\r\n\t\t\twidth: 100%;\r\n\t\t\tbackground-color: #fff;\r\n\t\t\toverflow: hidden;\r\n\t\t\tborder-radius: 10px;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .infor-faq {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: space-between;\r\n\t\t\twidth: 100%;\r\n\t\t\tpadding: 16px 20px;\r\n\t\t\tcursor: pointer;\r\n\t\t\ttransition: background 0.3s;\r\n\t\t\tborder-bottom: 1px solid #ececec;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .titulo-faq {\r\n\t\t\tfont-weight: 600;\r\n\t\t\tcolor: #1d1d1b;\r\n\t\t\tfont-size: 18px;\r\n\t\t\tline-height: 24px;\r\n\t\t\tmargin: 0;\r\n\t\t\twidth: 90%;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .paragrafo-p,\r\n\t\t.section-vantagens .campo-ads {\r\n\t\t\tpadding: 0 25px 25px;\r\n\t\t\tfont-size: 16px;\r\n\t\t\tline-height: 1.5;\r\n\t\t\tcolor: #1d1d1b;\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 728px;\r\n\t\t\tmargin: 0 auto;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .faq-icon,\r\n\t\t.icone-plus,\r\n\t\t.MINUS {\r\n\t\t\twidth: 24px !important;\r\n\t\t\theight: 24px !important;\r\n\t\t\ttransition: transform 0.3s ease;\r\n\t\t}\r\n\r\n\t\t.section-vantagens .titulo {\r\n\t\t\tfont-family: \"Inter-Bold\", Helvetica;\r\n\t\t\tfont-weight: 700;\r\n\t\t\tcolor: #1d1d1b;\r\n\t\t\tfont-size: 24px;\r\n\t\t\ttext-align: center;\r\n\t\t\tline-height: 32px;\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\tdetails {\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\tsummary {\r\n\t\t\tlist-style: none;\r\n\t\t}\r\n\r\n\t\tsummary::-webkit-details-marker {\r\n\t\t\tdisplay: none;\r\n\t\t}\r\n\r\n\t\tdetails[open] .icone-plus {\r\n\t\t\tdisplay: none;\r\n\t\t}\r\n\r\n\t\tdetails:not([open]) .MINUS {\r\n\t\t\tdisplay: none;\r\n\t\t}\r\n\r\n\t\t/* ===== SECTIONS AVISOS ===== */\r\n\t\t.section-aviso,\r\n\t\t.section-sete,\r\n\t\t.section-oito {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: center;\r\n\t\t\tgap: 40px;\r\n\t\t\tpadding: 60px 0;\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\t.section-aviso {\r\n\t\t\tbackground-color: var(--color-aviso);\r\n\t\t}\r\n\r\n\t\t.section-sete {\r\n\t\t\tbackground-color: var(--color-branco);\r\n\t\t}\r\n\r\n\t\t.section-oito {\r\n\t\t\tbackground-color: #3f3f46;\r\n\t\t}\r\n\r\n\t\t.conteudo-aviso,\r\n\t\t.conteudo-oito,\r\n\t\t.conteudo-sete {\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 800px;\r\n\t\t\tpadding: 0 20px;\r\n\t\t}\r\n\r\n\t\tp.paragrafo-p {\r\n\t\t\tfont-size: 15px;\r\n\t\t\tline-height: 1.5;\r\n\t\t\tcolor: var(--color-text);\r\n\t\t}\r\n\r\n\t\tp.paragrafo-pp {\r\n\t\t\tcolor: #fff;\r\n\t\t\tfont-size: 14px;\r\n\t\t\tline-height: 24px;\r\n\t\t}\r\n\r\n\t\t.texto-termo {\r\n\t\t\tfont-weight: 600;\r\n\t\t\tfont-size: 18px;\r\n\t\t\tcolor: #303030;\r\n\t\t\tline-height: 1.4;\r\n\t\t\tmargin-bottom: 8px;\r\n\t\t}\r\n\r\n\t\t.linha,\r\n\t\t.img {\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 1px;\r\n\t\t\tbackground-color: #e0e0e0;\r\n\t\t\tborder: none;\r\n\t\t\tmargin: 24px 0;\r\n\t\t}\r\n\r\n\t\t.section-oito .paragrafo-p {\r\n\t\t\tcolor: #fff;\r\n\t\t}\r\n\r\n\t\tp.disclaimer {\r\n\t\t\tfont-size: 14px;\r\n\t\t\ttext-align: center;\r\n\t\t\tmargin-top: 8px;\r\n\t\t}\r\n\r\n\t\t/* ===== FOOTER ===== */\r\n\t\t.section-nove {\r\n\t\t\tdisplay: flex;\r\n\t\t\tflex-direction: column;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: center;\r\n\t\t\tgap: 10px;\r\n\t\t\tpadding: 20px 0;\r\n\t\t\tbackground-color: var(--color-dark);\r\n\t\t}\r\n\r\n\t\t.section-nove .paragrafo16 {\r\n\t\t\tcolor: #fff;\r\n\t\t\tfont-size: 14px;\r\n\t\t}\r\n\r\n\t\t.section-nove .conteudo-paragrafo {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tflex-direction: column;\r\n\t\t\tjustify-content: center;\r\n\t\t\tgap: 0;\r\n\t\t\twidth: 100%;\r\n\t\t\tmax-width: 1200px;\r\n\t\t\tpadding: 0 20px;\r\n\t\t}\r\n\r\n\t\t.section-nove .paragrafo {\r\n\t\t\tfont-weight: 400;\r\n\t\t\tcolor: var(--color-branco);\r\n\t\t\tfont-size: 14px;\r\n\t\t\ttext-align: center;\r\n\t\t\tline-height: 16.2px;\r\n\t\t\tmargin: 0 !important;\r\n\t\t}\r\n\r\n\t\t.section-nove .navbar {\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: center;\r\n\t\t\tgap: 8px;\r\n\t\t}\r\n\r\n\t\t/* ===== RESPONSIVIDADE ===== */\r\n\t\t@media (max-width: 1024px) {\r\n\t\t\t.conteudo-menu {\r\n\t\t\t\tpadding: 0 16px;\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\t.hero-content,\r\n\t\t\t.section-content,\r\n\t\t\t.benefits-container,\r\n\t\t\t.author-info {\r\n\t\t\t\tmax-width: 600px;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t@media (max-width: 768px) {\r\n\t\t\t/* Menu Mobile */\r\n\t\t\t.hamburger {\r\n\t\t\t\tdisplay: flex;\r\n\t\t\t\twidth: 40px;\r\n\t\t\t\theight: 20px;\r\n\t\t\t}\r\n\r\n\t\t\t.conteudo-menu {\r\n\t\t\t\tpadding: 0 16px;\r\n\t\t\t}\r\n\r\n\t\t\t.menu {\r\n\t\t\t\tpadding: 20px 0;\r\n\t\t\t\tmargin-bottom: 28px;\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t/* ===== SEÇÃO DE ANÚNCIOS ===== */\r\n/* Anti-CLS: reserva altura do bloco de ads */\r\n.ads .campo-ads .section-anuncio {\r\n  width: 100% !important;\r\n  min-width: 300px; /* garante espaço mínimo */\r\n  min-height: 250px; /* altura mínima padrão de ads */\r\n  margin: 0 auto;\r\n  display: block !important;\r\n  text-align: center;\r\n}\r\n\r\n\r\n.ads .campo-ads ins.adsbygoogle .section-anuncio {\r\n  display: block !important;\r\n  margin: 0 auto !important;\r\n  text-align: center !important;\r\n  max-width: 100% !important;\r\n}\r\n\r\nsection.ads {\r\n  padding-bottom: 40px;\r\n}\r\n\r\n\r\n\t\t\t.menu .navbar {\r\n\t\t\t\tdisplay: none;\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t\tposition: fixed;\r\n\t\t\t\ttop: 0;\r\n\t\t\t\tleft: 0;\r\n\t\t\t\twidth: 100vw;\r\n\t\t\t\theight: 100vh;\r\n\t\t\t\tbackground-color: #fff;\r\n\t\t\t\tz-index: 1000;\r\n\t\t\t\tpadding: 40px 24px;\r\n\t\t\t\talign-items: flex-start;\r\n\t\t\t\tjustify-content: flex-start;\r\n\t\t\t\toverflow-y: auto;\r\n\t\t\t}\r\n\r\n\t\t\t.menu .navbar.active {\r\n\t\t\t\tdisplay: flex !important;\r\n\t\t\t}\r\n\r\n\t\t\t.menu .navbar ul {\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t\twidth: 100%;\r\n\t\t\t\tgap: 24px;\r\n\t\t\t}\r\n\r\n\t\t\t.menu .navbar a {\r\n\t\t\t\tfont-size: 18px;\r\n\t\t\t\tfont-weight: 700;\r\n\t\t\t\tpadding: 12px 0;\r\n\t\t\t\tdisplay: block;\r\n\t\t\t\twidth: 100%;\r\n\t\t\t}\r\n\r\n\t\t\t/* Sections */\r\n\t\t\t.section-hero,\r\n\t\t\t.section-dois,\r\n\t\t\t.section-tres,\r\n\t\t\t.section-cinco,\r\n\t\t\t.section-aviso,\r\n\t\t\t.section-sete,\r\n\t\t\t.section-oito,\r\n\t\t\t.section-nova {\r\n\t\t\t\tpadding: 30px 0;\r\n\t\t\t}\r\n\r\n\t\t\t.section-nove {\r\n\t\t\t\tpadding: 20px 0;\r\n\t\t\t}\r\n\r\n\t\t\t/* Typography */\r\n\t\t\t.title {\r\n\t\t\t\tfont-size: 22px;\r\n\t\t\t\tline-height: 30px;\r\n\t\t\t}\r\n\r\n\t\t\t.benefits-title,\r\n\t\t\t.author-title {\r\n\t\t\t\tfont-size: 20px;\r\n\t\t\t}\r\n\r\n\t\t\t.subtitle {\r\n\t\t\t\ttext-align: center;\r\n\t\t\t}\r\n\r\n\t\t\t.benefit-text {\r\n\t\t\t\tfont-size: 16px;\r\n\t\t\t}\r\n\r\n\t\t\t/* Content */\r\n\t\t\t.hero-content,\r\n\t\t\t.section-content,\r\n\t\t\t.benefits-container,\r\n\t\t\t.author-info {\r\n\t\t\t\tmax-width: 100%;\r\n\t\t\t\tpadding: 0 16px;\r\n\t\t\t}\r\n\r\n\t\t\t.download-box {\r\n\t\t\t\tbackground-color: #F7F9FB;\r\n\t\t\t}\r\n\r\n\t\t\t.download-button {\r\n\t\t\t\theight: 65px;\r\n\t\t\t}\r\n\r\n\t\t\t.download-info {\r\n\t\t\t\tgap: 8px;\r\n\t\t\t}\r\n\r\n\t\t\t/* FAQ */\r\n\t\t\t.section-vantagens {\r\n\t\t\t\tpadding: 40px 0;\r\n\t\t\t}\r\n\r\n\t\t\t.conteudo-vantagens {\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t\talign-items: center;\r\n\t\t\t\tpadding: 0 16px;\r\n\t\t\t}\r\n\r\n\t\t\t.section-vantagens .box-faq {\r\n\t\t\t\twidth: 100%;\r\n\t\t\t}\r\n\r\n\t\t\t.section-vantagens details {\r\n\t\t\t\tpadding: 10px 16px;\r\n\t\t\t}\r\n\r\n\t\t\t.section-vantagens .paragrafo-p,\r\n\t\t\t.section-vantagens .campo-ads {\r\n\t\t\t\tpadding: 0;\r\n\t\t\t\tfont-size: 15px;\r\n\t\t\t\tfont-family: \"Inter-Regular\", Helvetica;\r\n\t\t\t\tline-height: 24px;\r\n\t\t\t}\r\n\r\n\t\t\t.section-vantagens .infor-faq {\r\n\t\t\t\tpadding: 0 0 20px 0;\r\n\t\t\t\twidth: 100%;\r\n\t\t\t}\r\n\r\n\t\t\t.section-vantagens .titulo-faq {\r\n\t\t\t\tfont-size: 15px;\r\n\t\t\t\twidth: 90%;\r\n\t\t\t}\r\n\r\n\t\t\t/* Footer */\r\n\t\t\t.section-nove .navbar {\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t}\r\n\r\n\t\t\t.section-nove .paragrafo16 {\r\n\t\t\t\tdisplay: flex;\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t\talign-items: center;\r\n\t\t\t}\r\n\r\n\t\t\t.section-nove .paragrafo {\r\n\t\t\t\tfont-size: 14px;\r\n\t\t\t\tflex-direction: column;\r\n\t\t\t\tgap: 8px;\r\n\t\t\t}\r\n\r\n\t\t\t.section-nove .conteudo-paragrafo {\r\n\t\t\t\tgap: 12px;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t@media (max-width: 480px) {\r\n\t\t\t.title {\r\n\t\t\t\tfont-size: 20px;\r\n\t\t\t\tline-height: 28px;\r\n\t\t\t}\r\n\r\n\t\t\t.benefits-title,\r\n\t\t\t.author-title {\r\n\t\t\t\tfont-size: 18px;\r\n\t\t\t}\r\n\r\n\t\t\t.button-text {\r\n\t\t\t\tfont-size: 20px;\r\n\t\t\t}\r\n\r\n\t\t\t.hero-content,\r\n\t\t\t.section-content,\r\n\t\t\t.benefits-container,\r\n\t\t\t.author-info {\r\n\t\t\t\tpadding: 0 12px;\r\n\t\t\t}\r\n\r\n\t\t\t.conteudo-vantagens,\r\n\t\t\t.conteudo-aviso,\r\n\t\t\t.conteudo-oito,\r\n\t\t\t.conteudo-sete {\r\n\t\t\t\tpadding: 0 12px;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t/* ===== UTILITÁRIOS ===== */\r\n\t\t.text-center {\r\n\t\t\ttext-align: center;\r\n\t\t}\r\n\r\n\t\t.w-full {\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\t.hidden {\r\n\t\t\tdisplay: none;\r\n\t\t}\r\n\r\n\t\t/* ===== ANIMAÇÕES ===== */\r\n\t\t@keyframes fadeIn {\r\n\t\t\tfrom { opacity: 0; transform: translateY(20px); }\r\n\t\t\tto { opacity: 1; transform: translateY(0); }\r\n\t\t}\r\n\r\n\t\t.fade-in {\r\n\t\t\tanimation: fadeIn 0.6s ease-out;\r\n\t\t}\r\n\r\n\t\t/* ===== ACESSIBILIDADE ===== */\r\n\t\t@media (prefers-reduced-motion: reduce) {\r\n\t\t\t* {\r\n\t\t\t\tanimation-duration: 0.01ms !important;\r\n\t\t\t\tanimation-iteration-count: 1 !important;\r\n\t\t\t\ttransition-duration: 0.01ms !important;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t/* ===== PRINT STYLES ===== */\r\n\t\t@media print {\r\n\t\t\t.menu,\r\n\t\t\t.hamburger,\r\n\t\t\t.download-button {\r\n\t\t\t\tdisplay: none !important;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t</style>\r\n\r\n\r\n</head>\r\n\r\n<body <?php body_class(); ?>>\r\n\r\n<main class=\"desktop\">\r\n\t\r\n\t\t<header class=\"menu\">\r\n\t<div class=\"conteudo-menu\">\r\n\t\t\r\n\r\n<img \r\n  class=\"logo\" \r\n  src=\"https://atlz.online/wp-content/uploads/2025/02/20250217-cropped-20250217-logo.png\" \r\n  alt=\"ATLZ\" \r\n  width=\"120\" \r\n  height=\"30\" \r\n/>\r\n\r\n  <button id=\"hamburger\" class=\"hamburger\" aria-label=\"Open menu\" aria-expanded=\"false\">\r\n    <span></span><span></span><span></span>\r\n  </button>\r\n\r\n  <nav id=\"navbar\" class=\"navbar\" role=\"navigation\">\r\n\r\n        <nav id=\"navbar\" class=\"navbar\" role=\"navigation\">\r\n            <ul>\r\n                <li><a href=\"https://atlz.online/\" class=\"texto-menu\">Home</a></li>\r\n                <li><a href=\"https://atlz.online/about-us/\" class=\"texto-menu\">About Us</a></li>\r\n                <li><a href=\"https://atlz.online/terms-of-use/\" class=\"texto-menu\">Terms of Use</a></li>\r\n                <li><a href=\"https://atlz.online/privacy-policy/\" class=\"texto-menu\">Privacy Policy</a></li>\r\n                <li><a href=\"https://atlz.online/contact-us/\" class=\"texto-menu\">Contact</a></li>\r\n            </ul>\r\n        </nav>\r\n  </nav>\r\n\t\t\t</div>\r\n</header>\r\n\r\n<!-- Hero Section -->\r\n<header class=\"section-hero\">\r\n  <div class=\"hero-content\">\r\n    <h1 class=\"title\"><?php the_field('title_h1'); ?></h1>\r\n    <p class=\"subtitle\"><?php the_field('sub_title'); ?></p>\r\n  </div>\r\n</header>\r\n\r\n<section class=\"section-anuncio\">\r\n  <div class=\"campo-ads\">\r\n    <!-- Atlz_top -->\r\n    <ins class=\"adsbygoogle\"\r\n         style=\"display:block\"\r\n         data-ad-client=\"ca-pub-8759556148526040\"\r\n         data-ad-slot=\"6091328648\"\r\n         data-ad-format=\"auto\"\r\n         data-full-width-responsive=\"true\"></ins>\r\n    <script>\r\n      (adsbygoogle = window.adsbygoogle || []).push({});\r\n    </script>\r\n  </div>\r\n</section>\r\n\r\n\r\n<!-- Download -->\r\n<section class=\"section-dois\">\r\n  <div class=\"section-content\">\r\n    <div class=\"download-box\">\r\n      <?php if (has_post_thumbnail()) : ?>\r\n        <img\r\n          class=\"app-image\"\r\n          src=\"<?php echo get_the_post_thumbnail_url(null, 'full'); ?>\"\r\n          alt=\"<?php echo esc_attr(get_the_title()); ?>\"\r\n          width=\"306\"\r\n          height=\"204\"\r\n          loading=\"eager\"\r\n          fetchpriority=\"high\"\r\n          decoding=\"async\"\r\n        />\r\n      <?php endif; ?>\r\n      <div class=\"download-info\">\r\n        <a href=\"<?php the_field('download_button_url'); ?>\" class=\"download-button\">\r\n          <span class=\"button-text\"><?php the_field('download_button_text'); ?></span>\r\n        </a>\r\n        <p class=\"disclaimer\"><?php the_field('disclaimer'); ?></p>\r\n      </div>\r\n    </div>\r\n    <div class=\"description\"><?php the_field('description'); ?></div>\r\n  </div>\r\n</section>\r\n\r\n<!-- Benefícios -->\r\n<section class=\"section-tres\">\r\n  <div class=\"benefits-container\">\r\n    <h2 class=\"benefits-title\"><?php the_field('benefits_title'); ?></h2>\r\n    <ul class=\"benefits-list\">\r\n      <?php if (have_rows('benefits')): while (have_rows('benefits')): the_row(); ?>\r\n        <li class=\"benefit-item\">\r\n          <img class=\"benefit-icon\" src=\"https://twgdigitall.com/ps/v4/icone-botao.svg\" alt=\"<?php the_sub_field('icon_alt'); ?>\" />\r\n          <span class=\"benefit-text\"><?php the_sub_field('benefit_text'); ?></span>\r\n        </li>\r\n      <?php endwhile; endif; ?>\r\n    </ul>\r\n    <div class=\"download-info\">\r\n      <a href=\"<?php the_field('download_button_url'); ?>\" class=\"download-button\">\r\n        <span class=\"button-text\"><?php the_field('download_button_text'); ?></span>\r\n      </a>\r\n      <p class=\"disclaimer\"><?php the_field('disclaimer'); ?></p>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<!-- Download Extra -->\r\n<section class=\"section-nova\">\r\n  <div class=\"section-content\">\r\n    <h2 class=\"titulo\"><?php the_field('title2'); ?></h2>\r\n    <div class=\"description\"><?php the_field('description1'); ?></div>\r\n  </div>\r\n</section>\r\n\r\n<!-- FAQ -->\r\n<section class=\"section-vantagens\">\r\n  <div class=\"conteudo-vantagens\">\r\n    <h2 class=\"titulo\"><?php the_field('faq_title'); ?></h2>\r\n    <div class=\"box-faq\">\r\n      <?php if (have_rows('faqs')): while (have_rows('faqs')): the_row(); ?>\r\n        <details class=\"faq-ads\">\r\n          <summary class=\"infor-faq\">\r\n            <h3 class=\"titulo-faq\"><?php the_sub_field('question'); ?></h3>\r\n            <img class=\"icone-plus\" style=\"width:54px;height:54px;\" src=\"https://twgdigitall.com/ps/v4/plus.svg\" alt=\"Open answer\" />\r\n          </summary>\r\n          <p class=\"paragrafo-p\"><?php the_sub_field('answer'); ?></p>\r\n        </details>\r\n      <?php endwhile; endif; ?>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<!-- Autor -->\r\n<footer class=\"section-cinco\">\r\n  <div class=\"author-info\">\r\n    <h2 class=\"author-title\">This content was written by</h2>\r\n    <div class=\"author-details\">\r\n      <img class=\"author-image\" style=\"width:54px;height:54px;\" src=\"https://twgdigitall.com/ps/v4/autor.avif\" alt=\"Luiz Maciel\" />\r\n      <div class=\"author-bio\">\r\n        <h3 class=\"author-name\">Luiz Maciel</h3>\r\n        <p class=\"author-description\">\r\n          A communication enthusiast, Luiz specializes in developing website content.\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n\r\n<section class=\"section-aviso\">\r\n  <div class=\"conteudo-aviso\">\r\n    <section class=\"avisos\">\r\n      <article class=\"disclaimer\">\r\n        <div class=\"texto\">\r\n          <h2 class=\"texto-termo\">Legal Notice</h2>\r\n          <p class=\"paragrafo-p\">\r\n            Under no circumstance will we require payment to release any kind of product, application, or offer.\r\n            If this happens, contact us immediately. Always read the terms and conditions of the service provider with whom you are interacting.\r\n            <br><br>\r\n            We earn money through advertising and referrals from some—but not all—of the products displayed on this site.\r\n            All content published here is based on quantitative and qualitative research, and our team strives to be as fair as possible when comparing competing options.\r\n          </p>\r\n        </div>\r\n        <hr class=\"linha\" aria-hidden=\"true\" />\r\n      </article>\r\n\r\n      <article class=\"avisos\">\r\n        <div class=\"texto\">\r\n          <h2 class=\"texto-termo\">Advertiser Disclosure</h2>\r\n          <p class=\"paragrafo-p\">\r\n            We are an independent, objective, advertising-supported website. To keep our content free, some recommendations may come from companies from which we receive affiliate compensation.\r\n            <br><br>\r\n            This compensation may affect how, where, and in what order offers appear. Other factors such as our proprietary algorithms and internal data also influence the positioning of products on the site.\r\n          </p>\r\n        </div>\r\n        <hr class=\"img\" aria-hidden=\"true\" />\r\n      </article>\r\n\r\n      <article class=\"avisos\">\r\n        <div class=\"texto\">\r\n          <h2 class=\"texto-termo\">Editorial Note</h2>\r\n          <p class=\"paragrafo-p\">\r\n            The opinions expressed are solely those of the authors. The content has not been reviewed or approved by any entity mentioned.\r\n            Compensation received from affiliate partners does not influence the recommendations or the editorial content produced by our team.\r\n            <br><br>\r\n            Although we strive to provide accurate and up-to-date information, we do not guarantee the completeness or validity of the data presented.\r\n          </p>\r\n        </div>\r\n      </article>\r\n    </section>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section-sete\">\r\n  <div class=\"conteudo-sete\">\r\n    <p class=\"paragrafo-p\">\r\n      Our website serves as an informative hub, offering reliable and impartial content to the public.\r\n      <br><br>\r\n      All content produced by <?php bloginfo('name'); ?> is protected by intellectual property laws.\r\n\r\n      Unauthorized reproduction is strictly prohibited.\r\n    </p>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section-oito\">\r\n  <div class=\"conteudo-oito\">\r\n    <p class=\"paragrafo-pp\">\r\n      LEGAL NOTICE: <?php bloginfo('name'); ?> provides information about entertainment, technology, and general news.\r\n      We emphasize that we have no affiliation with the brands mentioned and never request personal or banking data. Our main goal is to keep our readers informed.\r\n    </p>\r\n  </div>\r\n</section>\r\n\r\n<footer class=\"section-nove\">\r\n  <div class=\"conteudo-paragrafo\">\r\n    <p class=\"paragrafo16\">\r\n      <span class=\"paragrafo16\"><?php bloginfo('name'); ?>. © 2025</span>\r\n      <span class=\"paragrafo16\">All rights reserved.</span>\r\n    </p>\r\n    <nav class=\"navbar\" role=\"navigation\" aria-label=\"Footer\">\r\n      <a href=\"https://atlz.online/\" target=\"_self\"><span class=\"paragrafo16\">Home</span></a>\r\n      <a href=\"https://atlz.online/about-us/\" target=\"_self\"><span class=\"paragrafo16\">About Us</span></a>\r\n      <a href=\"https://atlz.online/terms-of-use/\" target=\"_self\"><span class=\"paragrafo16\">Terms of Use</span></a>\r\n      <a href=\"https://atlz.online/privacy-policy/\" target=\"_self\"><span class=\"paragrafo16\">Privacy Policy</span></a>\r\n\t  <a href=\"https://atlz.online/contact-us/\" target=\"_self\"><span class=\"paragrafo16\">Contact</span></a>\r\n\r\n    </nav>\r\n  </div>\r\n</footer>\r\n\r\n\t<!-- Scripts -->\r\n<script>\r\nwindow.addEventListener(\"DOMContentLoaded\", function () {\r\n  const params = new URLSearchParams(window.location.search);\r\n  if (params.toString()) {\r\n    document.querySelectorAll('a[href]').forEach(link => {\r\n      try {\r\n        const url = new URL(link.href);\r\n        params.forEach((value, key) => {\r\n          url.searchParams.set(key, value);\r\n        });\r\n        link.href = url.toString();\r\n      } catch (e) {}\r\n    });\r\n  }\r\n});\r\n</script>\r\n\r\n<script>\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n  const hamburger = document.getElementById(\"hamburger\");\r\n  const navbar = document.getElementById(\"navbar\");\r\n\r\n  if (hamburger && navbar) {\r\n    hamburger.addEventListener(\"click\", function () {\r\n      navbar.classList.toggle(\"active\");\r\n      const expanded = this.getAttribute(\"aria-expanded\") === \"true\";\r\n      this.setAttribute(\"aria-expanded\", !expanded);\r\n    });\r\n  }\r\n});\r\n</script>\r\n\t\r\n\t\r\n\t  <!-- ===================================================================================\r\n       BLOCO ÚNICO DO POPUP (CSS + HTML/PHP + JS) — MANTENHA TUDO JUNTO APENAS NESTE LOCAL\r\n       =================================================================================== -->\r\n\r\n  <?php if ( get_field('ativar_popup') ) : ?>\r\n\r\n    <!-- CSS do Popup -->\r\n    <style id=\"oc-popup-css\">\r\n      .oc-popup[hidden]{display:none !important;}\r\n      .oc-popup{position:fixed; inset:0; z-index:9999; display:grid; place-items:center; padding:20px;}\r\n      .oc-popup__overlay{position:absolute; inset:0; background:rgba(30,30,30,.85);}\r\n      .oc-popup__content{\r\n        position:relative; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.3);\r\n        width:min(560px,90vw); max-height:min(90vh,820px); overflow:auto; padding:16px;\r\n        display:flex; flex-direction:column; gap:16px; animation:oc-pop-in .18s ease-out;\r\n      }\r\n      @keyframes oc-pop-in{from{transform:translateY(6px);opacity:0} to{transform:translateY(0);opacity:1}}\r\n      .oc-popup__close{position:absolute; top:8px; right:10px; width:36px; height:36px; border:0; border-radius:8px; background:transparent; font-size:28px; line-height:1; cursor:pointer; color:#333;}\r\n      .oc-popup__close:hover{background:#f3f3f6;}\r\n      .oc-popup__title{margin:0; font-size:24px; line-height:32px; font-weight:600; color:#383435; text-align:center;}\r\n      .oc-popup__img{width:358px; max-width:100%; height:auto; border-radius:12px; margin:0 auto; display:block;}\r\n      .oc-popup__btn{display:inline-block; text-align:center; padding:12px 24px; border-radius:8px; font-weight:600; font-size:16px; text-decoration:none; background:#6f5bf9; color:#fff; transition:background-color .2s ease; margin:0 auto;}\r\n      .oc-popup__btn:hover{background:#5746cb;}\r\n      .oc-popup__note{margin:0; font-size:14px; line-height:20px; color:#5a5a5f; text-align:center;}\r\n      @media (max-width:768px){ .oc-popup__title{font-size:22px; line-height:30px;} }\r\n    </style>\r\n\r\n    <!-- HTML/PHP do Popup -->\r\n    <div id=\"oc-popup\" class=\"oc-popup\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"oc-popup-title\" hidden>\r\n      <div class=\"oc-popup__overlay\" data-oc-close></div>\r\n\r\n      <div class=\"oc-popup__content\" role=\"document\">\r\n        <button class=\"oc-popup__close\" type=\"button\" aria-label=\"Fechar popup\" data-oc-close>&times;</button>\r\n\r\n        <?php $oc_titulo = get_field('popup_texto') ?: 'Temos uma oferta imperdível para você!'; ?>\r\n        <h2 id=\"oc-popup-title\" class=\"oc-popup__title\"><?php echo esc_html($oc_titulo); ?></h2>\r\n\r\n        <?php if ( $img = get_field('popup_imagem') ) : ?>\r\n          <img class=\"oc-popup__img\" src=\"<?php echo esc_url($img); ?>\"\r\n               alt=\"<?php echo esc_attr(wp_strip_all_tags($oc_titulo)); ?>\" width=\"358\" height=\"auto\" loading=\"lazy\" />\r\n        <?php endif; ?>\r\n\r\n        <?php\r\n          // Link prioriza \"popup_link\" se existir; senão usa \"link_botao_p1\"\r\n          $oc_link  = get_field('popup_link') ?: get_field('link_botao_p1');\r\n          $oc_label = get_field('popup_texto_botao') ?: 'Aproveitar agora';\r\n        ?>\r\n        <?php if ( $oc_link ) : ?>\r\n          <a class=\"oc-popup__btn\" href=\"<?php echo esc_url($oc_link); ?>\"><?php echo esc_html($oc_label); ?></a>\r\n        <?php endif; ?>\r\n\r\n        <?php if ( $desc = get_field('texto_usuario') ) : ?>\r\n          <p class=\"oc-popup__note\"><?php echo esc_html($desc); ?></p>\r\n        <?php endif; ?>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- JS do Popup -->\r\n    <script id=\"oc-popup-js\">\r\n      (function () {\r\n        const popup = document.getElementById('oc-popup');\r\n        if (!popup) return;\r\n\r\n        const overlay  = popup.querySelector('[data-oc-close]');\r\n        const btnClose = popup.querySelector('.oc-popup__close');\r\n        let opened = false;\r\n        let lastFocused = null;\r\n\r\n        const SESSION_KEY = 'oc_popup_shown';\r\n        const alreadyShown = sessionStorage.getItem(SESSION_KEY) === '1';\r\n\r\n        function lockScroll(lock) {\r\n          document.documentElement.style.overflow = lock ? 'hidden' : '';\r\n          document.body.style.overflow = lock ? 'hidden' : '';\r\n        }\r\n\r\n        function openPopup() {\r\n          if (opened) return;\r\n          opened = true;\r\n          lastFocused = document.activeElement;\r\n          popup.hidden = false;\r\n          lockScroll(true);\r\n          setTimeout(() => { (btnClose || popup).focus({ preventScroll:true }); }, 0);\r\n        }\r\n\r\n        function closePopup() {\r\n          if (!opened) return;\r\n          opened = false;\r\n          popup.hidden = true;\r\n          lockScroll(false);\r\n          if (lastFocused && typeof lastFocused.focus === 'function') {\r\n            lastFocused.focus({ preventScroll:true });\r\n          }\r\n        }\r\n\r\n        if (overlay)  overlay.addEventListener('click', closePopup);\r\n        if (btnClose) btnClose.addEventListener('click', closePopup);\r\n\r\n        document.addEventListener('keydown', function (e) {\r\n          if (e.key === 'Escape' && opened) closePopup();\r\n        });\r\n\r\n        function onScrollCheck() {\r\n          const scrollTop = window.scrollY || document.documentElement.scrollTop;\r\n          const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);\r\n          const winHeight = window.innerHeight;\r\n          const percent = (scrollTop / (docHeight - winHeight)) * 100;\r\n\r\n          if (percent > 50 && !opened) {\r\n            openPopup();\r\n            sessionStorage.setItem(SESSION_KEY, '1');\r\n            window.removeEventListener('scroll', onScrollCheck);\r\n          }\r\n        }\r\n\r\n        if (!alreadyShown) {\r\n          window.addEventListener('scroll', onScrollCheck, { passive: true });\r\n        }\r\n      })();\r\n    </script>\r\n\r\n  <?php endif; ?>\r\n  <!-- =================== FIM DO BLOCO ÚNICO DO POPUP =================== -->\r\n\t\r\n<?php wp_footer(); ?>\r\n\r\n\r\n\r\n</body>\r\n</html>",
+      "modelName": "V4"
+    },
+    "acfFields": [
+      {
+        "key": "group_presell_app_final",
+        "title": "CAMPOS V4",
+        "fields": [
+          {
+            "key": "field_687fe7981cae6",
+            "label": "Idioma",
+            "name": "idioma_footer",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Aqui será responsável em puxar os campos fixos com o texto no idioma",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "choices": {
+              "pt": "Português",
+              "en": "Inglês",
+              "es": "Espanhol"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+          },
+          {
+            "key": "field_title_h1",
+            "label": "Título H1",
+            "name": "title_h1",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_sub_title",
+            "label": "Subtítulo",
+            "name": "sub_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_68adf86cb48f7",
+            "label": "Imagem destaque",
+            "name": "imagem_destaque",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+          },
+          {
+            "key": "field_68d2b74586237",
+            "label": "Class Botão",
+            "name": "tipo_botao",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "choices": {
+              "normal": "Botão normal",
+              "rewarded": "Botão rewarded (av-rewarded)"
+            },
+            "default_value": "mesmo_site",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+          },
+          {
+            "key": "field_download_button_url",
+            "label": "URL do Botão",
+            "name": "download_button_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+          },
+          {
+            "key": "field_download_button_text",
+            "label": "Texto do Botão",
+            "name": "download_button_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_disclaimer",
+            "label": "Texto abaixo do botão",
+            "name": "disclaimer",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_description",
+            "label": "Descrição",
+            "name": "description",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+          },
+          {
+            "key": "field_benefits_title",
+            "label": "Título Benefícios",
+            "name": "benefits_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_benefits",
+            "label": "Benefícios",
+            "name": "benefits",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "layout": "table",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "button_label": "Add Row",
+            "collapsed": "",
+            "sub_fields": [
+              {
+                "key": "field_benefit_text",
+                "label": "Texto do Benefício",
+                "name": "benefit_text",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "parent_repeater": "field_benefits"
+              }
+            ]
+          },
+          {
+            "key": "field_687e43e130ac3",
+            "label": "Titulo 2",
+            "name": "title2",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_687e43b030ac2",
+            "label": "Descrição 2",
+            "name": "description1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+          },
+          {
+            "key": "field_faq_title",
+            "label": "Título FAQ",
+            "name": "faq_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_faqs",
+            "label": "Perguntas Frequentes",
+            "name": "faqs",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "layout": "table",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "button_label": "Add Row",
+            "collapsed": "",
+            "sub_fields": [
+              {
+                "key": "field_question",
+                "label": "Pergunta",
+                "name": "question",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "parent_repeater": "field_faqs"
+              },
+              {
+                "key": "field_answer",
+                "label": "Resposta",
+                "name": "answer",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "",
+                "new_lines": "",
+                "maxlength": "",
+                "placeholder": "",
+                "rows": "",
+                "parent_repeater": "field_faqs"
+              }
+            ]
+          }
+        ],
+        "location": [
+          [
+            {
+              "param": "page_template",
+              "operator": "==",
+              "value": "V4.php"
+            }
+          ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0,
+        "display_title": ""
+      }
+    ],
+    "jsonStructure": {
+      "page_title": "Exemplo de Página",
+      "page_content": "Conteúdo da página de exemplo",
+      "page_status": "draft",
+      "page_template": "modelo-v4.php",
+      "page_slug": "exemplo-pagina",
+      "acf_fields": {
+        "idioma_footer": "pt",
+        "title_h1": "Exemplo de Título H1",
+        "sub_title": "Exemplo de Subtítulo",
+        "imagem_destaque": "https://via.placeholder.com/600x400",
+        "tipo_botao": "normal",
+        "download_button_url": "https://exemplo.com",
+        "download_button_text": "Exemplo de Texto do Botão",
+        "disclaimer": "Exemplo de Texto abaixo do botão",
+        "description": "<p>Conteúdo rico de exemplo</p>",
+        "benefits_title": "Exemplo de Título Benefícios",
+        "benefits": "Valor padrão",
+        "title2": "Exemplo de Titulo 2",
+        "description1": "<p>Conteúdo rico de exemplo</p>",
+        "faq_title": "Exemplo de Título FAQ",
+        "faqs": "Valor padrão"
+      },
+      "seo": {
+        "meta_title": "Exemplo de Página - SEO",
+        "meta_description": "Descrição SEO da página de exemplo",
+        "focus_keyword": "exemplo"
+      },
+      "featured_image": "https://via.placeholder.com/1200x600"
+    },
+    "validationRules": {
+      "idioma_footer": {
+        "required": 1,
+        "type": "select",
+        "label": "Idioma"
+      },
+      "title_h1": {
+        "required": false,
+        "type": "text",
+        "label": "Título H1"
+      },
+      "sub_title": {
+        "required": false,
+        "type": "text",
+        "label": "Subtítulo"
+      },
+      "imagem_destaque": {
+        "required": false,
+        "type": "image",
+        "label": "Imagem destaque"
+      },
+      "tipo_botao": {
+        "required": false,
+        "type": "select",
+        "label": "Class Botão"
+      },
+      "download_button_url": {
+        "required": false,
+        "type": "url",
+        "label": "URL do Botão"
+      },
+      "download_button_text": {
+        "required": false,
+        "type": "text",
+        "label": "Texto do Botão"
+      },
+      "disclaimer": {
+        "required": false,
+        "type": "text",
+        "label": "Texto abaixo do botão"
+      },
+      "description": {
+        "required": false,
+        "type": "wysiwyg",
+        "label": "Descrição"
+      },
+      "benefits_title": {
+        "required": false,
+        "type": "text",
+        "label": "Título Benefícios"
+      },
+      "benefits": {
+        "required": false,
+        "type": "repeater",
+        "label": "Benefícios"
+      },
+      "title2": {
+        "required": false,
+        "type": "text",
+        "label": "Titulo 2"
+      },
+      "description1": {
+        "required": false,
+        "type": "wysiwyg",
+        "label": "Descrição 2"
+      },
+      "faq_title": {
+        "required": false,
+        "type": "text",
+        "label": "Título FAQ"
+      },
+      "faqs": {
+        "required": false,
+        "type": "repeater",
+        "label": "Perguntas Frequentes"
+      }
+    },
+    "previewData": {
+      "page_title": "Exemplo de Página",
+      "page_content": "Conteúdo da página de exemplo",
+      "page_status": "draft",
+      "page_template": "modelo-v4.php",
+      "page_slug": "exemplo-pagina",
+      "acf_fields": {
+        "idioma_footer": "pt",
+        "title_h1": "Exemplo de Título H1",
+        "sub_title": "Exemplo de Subtítulo",
+        "imagem_destaque": "https://via.placeholder.com/600x400",
+        "tipo_botao": "normal",
+        "download_button_url": "https://exemplo.com",
+        "download_button_text": "Exemplo de Texto do Botão",
+        "disclaimer": "Exemplo de Texto abaixo do botão",
+        "description": "<p>Conteúdo rico de exemplo</p>",
+        "benefits_title": "Exemplo de Título Benefícios",
+        "benefits": "Valor padrão",
+        "title2": "Exemplo de Titulo 2",
+        "description1": "<p>Conteúdo rico de exemplo</p>",
+        "faq_title": "Exemplo de Título FAQ",
+        "faqs": "Valor padrão"
+      },
+      "seo": {
+        "meta_title": "Exemplo de Página - SEO",
+        "meta_description": "Descrição SEO da página de exemplo",
+        "focus_keyword": "exemplo"
+      },
+      "featured_image": "https://via.placeholder.com/1200x600"
+    },
+    "createdAt": "2025-10-28T21:04:20.462Z",
+    "version": "1.0.0",
+    "modelName": "V4"
+  }
+}

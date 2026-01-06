@@ -1,0 +1,32 @@
+{
+  "page_title": "Teste Simples - Template e ACF",
+  "page_content": "Esta é uma página de teste simples para verificar se o template e campos ACF estão sendo aplicados corretamente.",
+  "page_excerpt": "Teste simples de template e ACF",
+  "page_status": "publish",
+  "page_slug": "teste-simples-template-acf",
+  "page_template": "pressel-v3.php",
+  "acf_fields": {
+    "hero_title": "Título Principal do Hero",
+    "hero_subtitle": "Subtítulo do Hero",
+    "hero_image": "https://via.placeholder.com/1200x600/FF6B35/FFFFFF?text=Hero+Image",
+    "cta_button_text": "Clique Aqui",
+    "cta_button_link": "#contact",
+    "seo_title": "Teste Simples - SEO",
+    "seo_description": "Descrição SEO para teste simples",
+    "seo_keywords": "teste, template, acf, wordpress"
+  },
+  "meta_data": {
+    "created_by": "Pressel Automation",
+    "creation_date": "2024-10-24",
+    "test_mode": false,
+    "source": "cms_pressel_automation"
+  }
+}
+
+
+
+
+
+
+
+
