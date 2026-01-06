@@ -25,7 +25,6 @@ import {
 export default function APIConfigPage() {
   const { configs, error, deleteConfig, testConnection } = useAPIConfig()
   const [showAddModal, setShowAddModal] = useState(false)
-  const [showEditModal, setShowEditModal] = useState<string | null>(null)
   const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
   const [testingConnection, setTestingConnection] = useState<string | null>(null)
 
@@ -286,8 +285,9 @@ export default function APIConfigPage() {
                     </button>
                     <button 
                       className="cms-btn cms-btn-icon cms-btn-secondary"
-                      onClick={() => setShowEditModal(config.id)}
-                      title="Editar"
+                      onClick={() => {}}
+                      title="Editar (em desenvolvimento)"
+                      disabled
                     >
                       <Edit style={{ width: '1rem', height: '1rem' }} />
                     </button>
