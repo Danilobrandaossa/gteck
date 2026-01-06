@@ -97,3 +97,6 @@ uploads/**/*
 *.avi
 videoplayback.mp4
 
+# Audit and test results
+audit-results.json
+
