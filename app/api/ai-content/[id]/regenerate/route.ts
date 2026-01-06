@@ -70,6 +70,9 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
     }
   })
 
+  // Capturar requestId para uso no catch
+  const currentRequestId = requestId
+
   regenerateContentAsync(id, {
     title: content.title,
     keywords: content.keywords || undefined,
@@ -79,10 +82,9 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
     prompt: newPrompt || content.prompt || `Crie um artigo completo sobre: ${content.title}`,
     additionalInstructions: additionalInstructions || content.additionalInstructions || undefined
   }).catch((error: unknown) => {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    logger.error('Erro ao regenerar conteúdo em background', {
-      requestId,
-      error: errorMessage
+    const errorObj = error instanceof Error ? error : new Error(String(error))
+    logger.error('Erro ao regenerar conteúdo em background', errorObj, {
+      requestId: currentRequestId
     })
     db.aIContent.update({
       where: { id },
@@ -91,10 +93,9 @@ export const POST = withApiHandler(async ({ request, params, requestId }) => {
         errorMessage: error instanceof Error ? error.message : 'Erro desconhecido ao regenerar conteúdo'
       }
     }).catch((err: unknown) => {
-      const errMessage = err instanceof Error ? err.message : String(err)
-      logger.error('Falha ao atualizar status de erro do conteúdo', {
-        requestId,
-        error: errMessage
+      const errObj = err instanceof Error ? err : new Error(String(err))
+      logger.error('Falha ao atualizar status de erro do conteúdo', errObj, {
+        requestId: currentRequestId
       })
     })
   })
