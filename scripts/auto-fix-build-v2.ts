@@ -68,7 +68,23 @@ class BuildAutoFixerV2 {
    * Parseia o primeiro erro do output do build
    */
   private parseBuildError(output: string): BuildError | undefined {
-    // Múltiplos padrões para capturar diferentes formatos
+    // Padrão 1: Erros de sintaxe do Next.js/SWC
+    const syntaxErrorMatch = output.match(/Failed to compile\.\s*\.\/([^\s]+)\s*\n\s*Error:\s*\n\s*x\s+([^\n]+)\s*\n\s*([\s\S]+?)(?=Caused by:|Import trace|> Build failed)/)
+    if (syntaxErrorMatch) {
+      // Extrair linha do erro de sintaxe
+      const lineMatch = syntaxErrorMatch[3].match(/\[([^\]]+):(\d+):(\d+)\]/)
+      if (lineMatch) {
+        return {
+          file: syntaxErrorMatch[1],
+          line: parseInt(lineMatch[2]),
+          col: parseInt(lineMatch[3]),
+          message: syntaxErrorMatch[2] + ' ' + syntaxErrorMatch[3].substring(0, 200),
+          type: 'other'
+        }
+      }
+    }
+
+    // Padrão 2: Type error padrão
     const patterns = [
       /\.\/([^\s]+):(\d+):(\d+)\s*\n\s*Type error: (.+?)(?:\n|$)/s,
       /\.\/([^\s]+):(\d+):(\d+)\s+Type error: (.+?)(?:\n|$)/,
