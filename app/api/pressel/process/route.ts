@@ -140,7 +140,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Função para simular processamento (modo teste)
-async function simulateProcessing(jsonData: any, siteUrl: string, options: any) {
+async function simulateProcessing(jsonData: any, siteUrl: string, _options: any) {
   const steps = []
   
   // Passo 1: Validar JSON
