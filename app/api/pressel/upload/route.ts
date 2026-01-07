@@ -67,7 +67,7 @@ interface WordPressUploadData {
   meta_data: Record<string, unknown>
 }
 
-async function simulateWordPressUpload(siteUrl: string, data: WordPressUploadData): Promise<{
+async function simulateWordPressUpload(siteUrl: string, _data: WordPressUploadData): Promise<{
   success: boolean
   pageId: number
   pageUrl: string
