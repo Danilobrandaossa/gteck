@@ -156,39 +156,4 @@ async function sendToWordPress({
   }
 }
 
-// Função para testar conexão com WordPress
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url)
-    const wordpressUrl = searchParams.get('url')
-    const authType = searchParams.get('authType')
-
-    if (!wordpressUrl) {
-      return NextResponse.json(
-        { error: 'URL do WordPress é obrigatória' },
-        { status: 400 }
-      )
-    }
-
-    // Simular teste de conexão
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    return NextResponse.json({
-      success: true,
-      message: 'Conexão com WordPress estabelecida com sucesso',
-      data: {
-        url: wordpressUrl,
-        authType: authType || 'basic',
-        status: 'connected'
-      }
-    })
-
-  } catch (error) {
-    console.error('Erro ao testar conexão:', error)
-    return NextResponse.json(
-      { error: 'Erro ao testar conexão com WordPress' },
-      { status: 500 }
-    )
-  }
-}
 
