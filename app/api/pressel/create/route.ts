@@ -162,7 +162,6 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const wordpressUrl = searchParams.get('url')
     const authType = searchParams.get('authType')
-    const _credentials = searchParams.get('credentials')
 
     if (!wordpressUrl) {
       return NextResponse.json(

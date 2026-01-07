@@ -175,39 +175,49 @@ class BuildAutoFixer {
     let newContent = lines.join('\n')
     let diff = ''
 
-    // Caso 1: Desestruturação de objeto
-    const destructureMatch = targetLine.match(/(const|let|var)\s*\{([^}]+)\}\s*=/)
-    if (destructureMatch) {
-      const vars = destructureMatch[2].split(',').map(v => v.trim())
-      const filteredVars = vars.filter(v => {
-        const cleanVar = v.split(':')[0].trim()
-        return cleanVar !== varName
-      })
-      
-      if (filteredVars.length < vars.length) {
-        const newLine = targetLine.replace(
-          /\{([^}]+)\}/,
-          `{${filteredVars.join(', ')}}`
-        )
-        newContent = newContent.replace(targetLine, newLine)
-        diff = `- ${targetLine}\n+ ${newLine}`
-      }
+    // Se a variável já começa com _, remover a linha completamente
+    if (varName.startsWith('_')) {
+      // Remover a linha inteira
+      const newLines = [...lines]
+      newLines.splice(error.line - 1, 1)
+      newContent = newLines.join('\n')
+      diff = `- ${targetLine}`
     } else {
-      // Caso 2: Variável simples - prefixar com _
-      const varRegex = new RegExp(`\\b${varName}\\b`, 'g')
-      if (targetLine.includes(`const ${varName}`) || targetLine.includes(`let ${varName}`)) {
-        const newLine = targetLine.replace(
-          new RegExp(`(const|let|var)\\s+${varName}\\b`),
-          `$1 _${varName}`
-        )
-        newContent = newContent.replace(targetLine, newLine)
-        diff = `- ${targetLine}\n+ ${newLine}`
-      } else {
-        // Tentar prefixar todas as ocorrências
-        const newLine = targetLine.replace(varRegex, `_${varName}`)
-        if (newLine !== targetLine) {
+      // Caso 1: Desestruturação de objeto
+      const destructureMatch = targetLine.match(/(const|let|var)\s*\{([^}]+)\}\s*=/)
+      if (destructureMatch) {
+        const vars = destructureMatch[2].split(',').map(v => v.trim())
+        const filteredVars = vars.filter(v => {
+          const cleanVar = v.split(':')[0].trim()
+          return cleanVar !== varName
+        })
+        
+        if (filteredVars.length < vars.length) {
+          const newLine = targetLine.replace(
+            /\{([^}]+)\}/,
+            `{${filteredVars.join(', ')}}`
+          )
           newContent = newContent.replace(targetLine, newLine)
           diff = `- ${targetLine}\n+ ${newLine}`
+        }
+      } else {
+        // Caso 2: Variável simples - prefixar com _
+        if (targetLine.includes(`const ${varName}`) || targetLine.includes(`let ${varName}`) || targetLine.includes(`var ${varName}`)) {
+          const newLine = targetLine.replace(
+            new RegExp(`(const|let|var)\\s+${varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`),
+            `$1 _${varName}`
+          )
+          newContent = newContent.replace(targetLine, newLine)
+          diff = `- ${targetLine}\n+ ${newLine}`
+        } else {
+          // Tentar prefixar todas as ocorrências
+          const escapedVarName = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+          const varRegex = new RegExp(`\\b${escapedVarName}\\b`, 'g')
+          const newLine = targetLine.replace(varRegex, `_${varName}`)
+          if (newLine !== targetLine) {
+            newContent = newContent.replace(targetLine, newLine)
+            diff = `- ${targetLine}\n+ ${newLine}`
+          }
         }
       }
     }
