@@ -9,7 +9,6 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { validateSiteBelongsToOrganization } from '@/lib/tenant-security'
 import { getOrCreateCorrelationId, addCorrelationIdToResponse } from '@/lib/observability/correlation'
 import { StructuredLogger } from '@/lib/observability/logger'
 import { WordPressPushService } from '@/lib/wordpress/wordpress-push'
