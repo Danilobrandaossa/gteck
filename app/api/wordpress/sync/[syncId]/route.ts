@@ -167,6 +167,18 @@ export async function GET(
     // Calcular timestamps
     const startedAt = firstJob.createdAt
     const lastJob = jobs[jobs.length - 1]
+    
+    // ✅ CORREÇÃO: Guard clause para lastJob
+    if (!lastJob) {
+      return addCorrelationIdToResponse(
+        NextResponse.json(
+          { success: false, error: 'Sync jobs not found' },
+          { status: 404 }
+        ),
+        correlationId
+      )
+    }
+    
     const finishedAt = lastJob.processedAt || (status === 'completed' ? lastJob.updatedAt : null)
     const durationMs = finishedAt ? finishedAt.getTime() - startedAt.getTime() : null
 
