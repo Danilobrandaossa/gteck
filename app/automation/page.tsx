@@ -6,20 +6,15 @@ import { ProtectedRoute } from '@/components/auth/protected-route'
 import { 
   Plus, 
   Settings, 
-  Play, 
-  Pause, 
   Trash2, 
   Edit, 
   Clock, 
   Zap, 
   Webhook, 
   Bot, 
-  Mail, 
-  MessageSquare,
   Activity,
   CheckCircle,
-  XCircle,
-  AlertTriangle
+  XCircle
 } from 'lucide-react'
 
 export default function AutomationPage() {
