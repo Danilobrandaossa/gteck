@@ -314,3 +314,5 @@ WHERE "detectedAt" >= NOW() - INTERVAL '30 minutes';
 
 
 
+
+

@@ -342,3 +342,5 @@ O sistema RAG está pronto para **produção em escala** com:
 
 
 
+
+

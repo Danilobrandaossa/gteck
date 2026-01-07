@@ -178,3 +178,5 @@ export function cleanPromptForDalle3(prompt: string): string {
   return cleaned
 }
 
+
+

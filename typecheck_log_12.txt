@@ -1,0 +1,50 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+app/pages/[id]/edit/page.tsx(28,18): error TS18047: 'params' is possibly 'null'.
+app/pressel/page-fixed.tsx(7,1): error TS6133: 'useOrganization' is declared but its value is never read.
+app/settings/page-backup.tsx(16,11): error TS6196: 'Site' is declared but never used.
+app/settings/page-backup.tsx(226,31): error TS2339: Property 'posts' does not exist on type 'Site'.
+app/settings/page-backup.tsx(233,31): error TS2339: Property 'pages' does not exist on type 'Site'.
+app/settings/page-backup.tsx(240,31): error TS2339: Property 'media' does not exist on type 'Site'.
+app/templates/[id]/edit/page.tsx(36,22): error TS18047: 'params' is possibly 'null'.
+app/users/[id]/permissions/page.tsx(28,9): error TS18047: 'params' is possibly 'null'.
+app/users/[id]/permissions/page.tsx(29,50): error TS18047: 'params' is possibly 'null'.
+app/users/[id]/permissions/page.tsx(35,7): error TS18047: 'params' is possibly 'null'.
+hooks/use-site-isolation.ts(2,25): error TS2307: Cannot find module '@/contexts/site-context' or its corresponding type declarations.
+lib/ai-diagnostic-integration.ts(121,43): error TS2349: This expression is not callable.
+  Type 'null' has no call signatures.
+lib/ai-diagnostic-integration.ts(157,42): error TS2349: This expression is not callable.
+  Type 'null' has no call signatures.
+lib/cron-jobs.ts(203,20): error TS2339: Property 'settings' does not exist on type 'never'.
+lib/cron-jobs.ts(204,54): error TS2339: Property 'id' does not exist on type 'never'.
+lib/design-system.ts(175,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+lib/feature-access.ts(216,10): error TS2869: Right operand of ?? is unreachable because the left operand is never nullish.
+lib/feedback/feedback-service.ts(249,9): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(251,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(253,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/image-overlay-service.ts(79,10): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(81,11): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(83,12): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(85,13): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/maintenance/reindex-incremental.ts(58,9): error TS2353: Object literal may only specify known properties, and 'deleted' does not exist in type 'PageWhereInput'.
+tests/ai/hnsw-tuning.test.ts(7,32): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/queue-claim.test.ts(7,44): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/rag-regression.baseline.ts(8,1): error TS6133: 'join' is declared but its value is never read.
+tests/e2e/finops-degradation.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/finops-degradation.test.ts(17,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/ops-health-alerts.test.ts(18,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(16,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(14,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/feedback/feedback-service.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/finops/tenant-cost-policy.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.

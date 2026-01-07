@@ -35,9 +35,9 @@ export class WordPressSync {
   async syncAllContent(): Promise<SyncResult> {
     try {
       console.log('Iniciando sincronização completa do WordPress...')
-      
+
       const errors: string[] = []
-      
+
       // Buscar todos os dados em paralelo
       const [posts, pages, media, categories, tags, users] = await Promise.all([
         this.fetchAllPosts().catch(err => {
@@ -140,7 +140,7 @@ export class WordPressSync {
 
     while (hasMore) {
       console.log(`Buscando posts - página ${page}...`)
-      
+
       const response = await fetch('/api/wordpress/proxy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -156,7 +156,7 @@ export class WordPressSync {
       }
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error('Falha na resposta do proxy')
       }
@@ -175,7 +175,7 @@ export class WordPressSync {
         console.warn('Formato inesperado de dados de posts:', typeof result.data)
         posts = []
       }
-      
+
       console.log(`Posts recebidos: ${posts.length} (tipo: ${typeof posts})`)
 
       if (posts.length === 0) {
@@ -188,7 +188,7 @@ export class WordPressSync {
           console.warn('Posts não é um array:', typeof posts)
         }
         page++
-        
+
         // Limite de segurança para evitar loops infinitos
         if (page > 50) {
           console.warn('Limite de páginas atingido (50)')
@@ -209,7 +209,7 @@ export class WordPressSync {
 
     while (hasMore) {
       console.log(` Buscando páginas - página ${page}...`)
-      
+
       const response = await fetch('/api/wordpress/proxy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -225,7 +225,7 @@ export class WordPressSync {
       }
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error('Falha na resposta do proxy')
       }
@@ -244,7 +244,7 @@ export class WordPressSync {
         console.warn(' Formato inesperado de dados de páginas:', typeof result.data)
         pages = []
       }
-      
+
       console.log(` Páginas recebidas: ${pages.length} (tipo: ${typeof pages})`)
 
       if (pages.length === 0) {
@@ -257,7 +257,7 @@ export class WordPressSync {
           console.warn(' Pages não é um array:', typeof pages)
         }
         page++
-        
+
         if (page > 50) {
           console.warn('Limite de páginas atingido (50)')
           break
@@ -277,7 +277,7 @@ export class WordPressSync {
 
     while (hasMore) {
       console.log(` Buscando mídia - página ${page}...`)
-      
+
       const response = await fetch('/api/wordpress/proxy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -293,7 +293,7 @@ export class WordPressSync {
       }
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error('Falha na resposta do proxy')
       }
@@ -312,7 +312,7 @@ export class WordPressSync {
         console.warn(' Formato inesperado de dados de mídia:', typeof result.data)
         media = []
       }
-      
+
       console.log(` Mídia recebida: ${media.length} (tipo: ${typeof media})`)
 
       if (media.length === 0) {
@@ -325,7 +325,7 @@ export class WordPressSync {
           console.warn(' Media não é um array:', typeof media)
         }
         page++
-        
+
         if (page > 50) {
           console.warn('Limite de páginas atingido (50)')
           break
@@ -340,7 +340,7 @@ export class WordPressSync {
   // Buscar todas as categorias
   private async fetchAllCategories(): Promise<any[]> {
     console.log(' Buscando categorias...')
-    
+
     const response = await fetch('/api/wordpress/proxy', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -356,7 +356,7 @@ export class WordPressSync {
     }
 
     const result = await response.json()
-    
+
     if (!result.success) {
       throw new Error('Falha na resposta do proxy')
     }
@@ -375,7 +375,7 @@ export class WordPressSync {
   // Buscar todas as tags
   private async fetchAllTags(): Promise<any[]> {
     console.log(' Buscando tags...')
-    
+
     const response = await fetch('/api/wordpress/proxy', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -391,7 +391,7 @@ export class WordPressSync {
     }
 
     const result = await response.json()
-    
+
     if (!result.success) {
       throw new Error('Falha na resposta do proxy')
     }
@@ -410,7 +410,7 @@ export class WordPressSync {
   // Buscar todos os usuários
   private async fetchAllUsers(): Promise<any[]> {
     console.log(' Buscando usuários...')
-    
+
     const response = await fetch('/api/wordpress/proxy', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -426,7 +426,7 @@ export class WordPressSync {
     }
 
     const result = await response.json()
-    
+
     if (!result.success) {
       throw new Error('Falha na resposta do proxy')
     }
@@ -441,4 +441,12 @@ export class WordPressSync {
     console.log(` Usuários encontrados: ${users.length}`)
     return users
   }
+
+
+}
+
+
+export const wordPressSyncManager = {
+  getAllSites: () => [] as any[],
+  syncSite: async (id: string) => { console.log('Mock sync site', id) }
 }

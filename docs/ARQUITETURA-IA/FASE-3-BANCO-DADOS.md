@@ -565,3 +565,5 @@ WHERE tablename = 'embeddings' AND indexdef LIKE '%hnsw%';
 
 
 
+
+

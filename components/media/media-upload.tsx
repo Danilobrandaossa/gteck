@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react'
 import { useMedia } from '@/contexts/media-context'
-import { Upload, X, Image, Video, File, Music, AlertCircle, CheckCircle } from 'lucide-react'
+import { Upload, X, Image, Video, File, Music, AlertCircle } from 'lucide-react'
 
 interface MediaUploadProps {
   onUploadComplete?: (media: any) => void

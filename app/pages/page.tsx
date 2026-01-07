@@ -8,7 +8,7 @@ import { useOrganization } from '@/contexts/organization-context'
 // import { WordPressDataManager } from '@/lib/wordpress-data-manager'
 import { EditPageForm } from '@/components/forms/edit-page-form'
 // import { getLayoutStyles, getCardStyles, getButtonStyles, getBadgeStyles } from '@/lib/design-system'
-import { Plus, Search, Filter, MoreHorizontal, Edit, Trash2, Eye, EyeOff, Calendar, User, RefreshCw, Settings } from 'lucide-react'
+import { Plus, Search, Filter, Edit, Trash2, Eye, EyeOff, Calendar, User, Settings } from 'lucide-react'
 
 export default function PagesPage() {
   const { pages, isLoading, error, deletePage, publishPage, unpublishPage } = usePages()
@@ -17,7 +17,7 @@ export default function PagesPage() {
   const [statusFilter, setStatusFilter] = useState('all')
   const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
   const [wordpressPages, setWordpressPages] = useState<any[]>([])
-  const [isLoadingWordPress, setIsLoadingWordPress] = useState(false)
+  const [isLoadingWordPress, _setIsLoadingWordPress] = useState(false)
   // const [wordpressDataManager] = useState(() => WordPressDataManager.getInstance())
   const [showEditModal, setShowEditModal] = useState(false)
   const [selectedPage, setSelectedPage] = useState<any>(null)
@@ -43,7 +43,7 @@ export default function PagesPage() {
   }
 
   // Função para sincronizar páginas do WordPress gradualmente
-  const syncWordPressPages = async () => {
+   async () => {
     console.log(' Sincronização WordPress temporariamente desabilitada')
     // if (!currentSite?.settings?.wordpressUrl || !currentSite?.settings?.wordpressUser || !currentSite?.settings?.wordpressAppPassword) {
     //   console.log(' Credenciais WordPress não configuradas')

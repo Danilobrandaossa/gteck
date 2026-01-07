@@ -59,7 +59,7 @@ export class SmartSyncManager {
   }
 
   // Sincronização inteligente com carregamento gradual
-  async smartSync<T>(
+  async smartSync<_T>(
     baseUrl: string,
     username: string,
     password: string,
@@ -249,7 +249,7 @@ export class SmartSyncManager {
   }
 
   // Iniciar sincronização em segundo plano
-  private startBackgroundSync<T>(
+  private startBackgroundSync<_T>(
     baseUrl: string,
     username: string,
     password: string,
@@ -289,7 +289,7 @@ export class SmartSyncManager {
   }
 
   // Loop de sincronização em segundo plano
-  private async backgroundSyncLoop<T>(
+  private async backgroundSyncLoop<_T>(
     baseUrl: string,
     username: string,
     password: string,

@@ -205,3 +205,5 @@ if (result.success) {
 
 Entregar imagens de **alta qualidade**, alinhadas à **intenção do usuário**, com uma experiência **simples, poderosa e profissional**, **sem limitar a capacidade cognitiva da IA**.
 
+
+

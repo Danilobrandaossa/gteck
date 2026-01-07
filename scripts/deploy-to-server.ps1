@@ -89,3 +89,5 @@ Write-Host "   6. npm run build" -ForegroundColor White
 Write-Host "   7. pm2 start npm --name 'crm-gteck' -- start" -ForegroundColor White
 Write-Host ""
 
+
+

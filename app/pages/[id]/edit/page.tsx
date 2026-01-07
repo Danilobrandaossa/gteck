@@ -11,7 +11,8 @@ import { Save, Eye, ArrowLeft, Settings, Image, FileText } from 'lucide-react'
 export default function EditPagePage() {
   const router = useRouter()
   const params = useParams()
-  const { pages, currentPage, setCurrentPage, updatePage, isLoading } = usePages()
+  if (!params) return null
+  const { pages, currentPage: _currentPage, setCurrentPage, updatePage, isLoading } = usePages()
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -104,7 +105,7 @@ export default function EditPagePage() {
             <p style={{ color: 'var(--gray-600)', marginBottom: '1.5rem' }}>
               A página que você está procurando não existe ou foi removida.
             </p>
-            <button 
+            <button
               className="cms-btn cms-btn-primary"
               onClick={() => router.push('/pages')}
             >
@@ -124,7 +125,7 @@ export default function EditPagePage() {
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <button 
+              <button
                 className="cms-btn cms-btn-secondary"
                 onClick={() => router.push('/pages')}
               >
@@ -136,7 +137,7 @@ export default function EditPagePage() {
               </h1>
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <button 
+              <button
                 className="cms-btn cms-btn-secondary"
                 onClick={handleSave}
                 disabled={isSaving}
@@ -144,7 +145,7 @@ export default function EditPagePage() {
                 <Save style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                 {isSaving ? 'Salvando...' : 'Salvar'}
               </button>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 onClick={handlePublish}
                 disabled={isSaving || formData.status === 'published'}
@@ -154,7 +155,7 @@ export default function EditPagePage() {
               </button>
             </div>
           </div>
-          
+
           {/* Tabs */}
           <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--gray-200)' }}>
             <button
@@ -320,10 +321,10 @@ export default function EditPagePage() {
                   <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--gray-900)' }}>Imagem Destacada</h3>
                 </div>
                 <div className="cms-card-content">
-                  <div style={{ 
-                    border: '2px dashed var(--gray-300)', 
-                    borderRadius: 'var(--radius)', 
-                    padding: '2rem', 
+                  <div style={{
+                    border: '2px dashed var(--gray-300)',
+                    borderRadius: 'var(--radius)',
+                    padding: '2rem',
                     textAlign: 'center',
                     cursor: 'pointer',
                     transition: 'all 0.2s'
@@ -443,10 +444,10 @@ export default function EditPagePage() {
                   </select>
                 </div>
 
-                <div style={{ 
-                  padding: '1rem', 
-                  backgroundColor: 'var(--gray-50)', 
-                  borderRadius: 'var(--radius)', 
+                <div style={{
+                  padding: '1rem',
+                  backgroundColor: 'var(--gray-50)',
+                  borderRadius: 'var(--radius)',
                   fontSize: '0.875rem',
                   color: 'var(--gray-600)'
                 }}>

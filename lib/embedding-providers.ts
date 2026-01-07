@@ -84,7 +84,7 @@ export class OpenAIEmbeddingProvider implements EmbeddingProvider {
       throw new Error('Text cannot be empty')
     }
 
-    const startTime = Date.now()
+     Date.now()
 
     try {
       const response = await fetch(`${this.baseUrl}/embeddings`, {
@@ -170,7 +170,7 @@ export class GeminiEmbeddingProvider implements EmbeddingProvider {
       throw new Error('Text cannot be empty')
     }
 
-    const startTime = Date.now()
+     Date.now()
 
     try {
       const endpoint = `${this.baseUrl}/models/${this.model}:embedContent?key=${this.apiKey}`
@@ -217,7 +217,7 @@ export class GeminiEmbeddingProvider implements EmbeddingProvider {
     }
   }
 
-  calculateCost(tokens: number): number {
+  calculateCost(_tokens: number): number {
     // Gemini Embedding API é gratuito até certo limite, depois $0.0001 por 1K tokens
     // Para simplificar, assumimos custo zero (verificar documentação atualizada)
     return 0
@@ -270,6 +270,8 @@ export async function validateProvider(provider: EmbeddingProvider): Promise<boo
     return false
   }
 }
+
+
 
 
 

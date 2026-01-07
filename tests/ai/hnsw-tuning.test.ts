@@ -4,8 +4,8 @@
  * Testes obrigatórios para tuning HNSW
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { HnswTuningPolicy, calculateEfSearch, detectHnswEfSearchSupport } from '@/lib/hnsw-tuning'
+import { describe, it, expect} from 'vitest'
+import { HnswTuningPolicy, calculateEfSearch } from '@/lib/hnsw-tuning'
 
 describe('HnswTuningPolicy', () => {
   describe('getEfSearch', () => {
@@ -64,6 +64,8 @@ describe('HNSW Tuning Integration', () => {
     }
   })
 })
+
+
 
 
 

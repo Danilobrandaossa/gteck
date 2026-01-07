@@ -5,11 +5,11 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useAI } from '@/contexts/ai-context'
 import { useOrganization } from '@/contexts/organization-context'
-import { getLayoutStyles, getCardStyles, getButtonStyles, getBadgeStyles } from '@/lib/design-system'
-import { Brain, Image, FileText, MessageSquare, Zap, Plus, Play, Clock, CheckCircle, XCircle, RefreshCw, Eye, Download } from 'lucide-react'
+// import { getLayoutStyles, getCardStyles, getButtonStyles, getBadgeStyles } from '@/lib/design-system'
+import { Image, FileText, MessageSquare, Zap, Play, Clock, CheckCircle, XCircle, RefreshCw, Eye, Download } from 'lucide-react'
 
 export default function IAPage() {
-  const { tasks, generatedContent, isLoading, error, isGenerating, currentTask, generatePage, generateImage, generateQuiz, generateAd, cancelTask, retryTask } = useAI()
+  const { tasks, generatedContent, isLoading: _isLoading, error, isGenerating, currentTask, generatePage, generateImage, generateQuiz, generateAd, cancelTask, retryTask } = useAI()
   const { currentOrganization } = useOrganization()
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null)
   const [prompt, setPrompt] = useState('')

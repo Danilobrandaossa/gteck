@@ -1,0 +1,978 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+app/backup/page.tsx(7,60): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/bulk-operations/page.tsx(8,93): error TS6133: 'AlertTriangle' is declared but its value is never read.
+app/bulk-operations/page.tsx(11,23): error TS6133: 'isLoading' is declared but its value is never read.
+app/bulk-operations/page.tsx(11,114): error TS6133: 'deleteItems' is declared but its value is never read.
+app/bulk-operations/page.tsx(13,10): error TS6133: 'selectedOperation' is declared but its value is never read.
+app/bulk-operations/page.tsx(13,29): error TS6133: 'setSelectedOperation' is declared but its value is never read.
+app/bulk-operations/page.tsx(18,9): error TS6133: 'getStatusIcon' is declared but its value is never read.
+app/categories/page.tsx(10,16): error TS6133: 'Search' is declared but its value is never read.
+app/categories/page.tsx(10,24): error TS6133: 'Filter' is declared but its value is never read.
+app/categories/page.tsx(10,32): error TS6133: 'MoreHorizontal' is declared but its value is never read.
+app/categories/page.tsx(10,48): error TS6133: 'Edit' is declared but its value is never read.
+app/categories/page.tsx(10,54): error TS6133: 'Trash2' is declared but its value is never read.
+app/categories/page.tsx(10,62): error TS6133: 'Eye' is declared but its value is never read.
+app/categories/page.tsx(10,67): error TS6133: 'EyeOff' is declared but its value is never read.
+app/categories/page.tsx(10,75): error TS6133: 'ChevronRight' is declared but its value is never read.
+app/categories/page.tsx(10,89): error TS6133: 'ChevronDown' is declared but its value is never read.
+app/categories/page.tsx(10,117): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/categories/page.tsx(13,11): error TS6133: 'categories' is declared but its value is never read.
+app/categories/page.tsx(15,22): error TS6133: 'setSearchTerm' is declared but its value is never read.
+app/categories/page.tsx(16,24): error TS6133: 'setParentFilter' is declared but its value is never read.
+app/categories/page.tsx(17,24): error TS6133: 'setStatusFilter' is declared but its value is never read.
+app/categories/page.tsx(18,10): error TS6133: 'expandedCategories' is declared but its value is never read.
+app/categories/page.tsx(28,9): error TS6133: 'filteredCategories' is declared but its value is never read.
+app/categories/page.tsx(35,9): error TS6133: 'categoryTree' is declared but its value is never read.
+app/categories/page.tsx(37,9): error TS6133: 'toggleExpanded' is declared but its value is never read.
+app/categories/page.tsx(177,9): error TS6133: 'handleToggleStatus' is declared but its value is never read.
+app/conteudo/page.tsx(8,3): error TS6133: 'Plus' is declared but its value is never read.
+app/conteudo/page.tsx(10,3): error TS6133: 'Filter' is declared but its value is never read.
+app/conteudo/page.tsx(15,3): error TS6133: 'Calendar' is declared but its value is never read.
+app/conteudo/page.tsx(19,3): error TS6133: 'Clock' is declared but its value is never read.
+app/conteudo/page.tsx(284,15): error TS6133: 'data' is declared but its value is never read.
+app/criativos/page.tsx(157,9): error TS6133: 'handleImageReferenceChange' is declared but its value is never read.
+app/criativos/page.tsx(159,5): error TS2322: Type '{ analyzed: false; url?: string; file?: File; role?: "style" | "produto" | "inspira├º├úo" | undefined; description?: string; }' is not assignable to type '{ url?: string | undefined; file?: File | undefined; role: "style" | "produto" | "inspira├º├úo"; description?: string | undefined; analyzed?: boolean | undefined; }'.
+  Types of property 'role' are incompatible.
+    Type '"style" | "produto" | "inspira├º├úo" | undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+      Type 'undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+app/criativos/page.tsx(165,5): error TS2322: Type '{ file: File; url: string; analyzed: false; role?: "style" | "produto" | "inspira├º├úo" | undefined; description?: string; }' is not assignable to type '{ url?: string | undefined; file?: File | undefined; role: "style" | "produto" | "inspira├º├úo"; description?: string | undefined; analyzed?: boolean | undefined; }'.
+  Types of property 'role' are incompatible.
+    Type '"style" | "produto" | "inspira├º├úo" | undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+      Type 'undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+app/criativos/page.tsx(176,10): error TS18048: 'ref' is possibly 'undefined'.
+app/criativos/page.tsx(186,32): error TS18048: 'ref' is possibly 'undefined'.
+app/criativos/page.tsx(187,31): error TS18048: 'ref' is possibly 'undefined'.
+app/criativos/page.tsx(231,13): error TS18048: 'ref' is possibly 'undefined'.
+app/criativos/page.tsx(233,20): error TS18048: 'ref' is possibly 'undefined'.
+app/criativos/page.tsx(239,9): error TS2322: Type '{ description: string; analyzed: true; url?: string; file?: File; role?: "style" | "produto" | "inspira├º├úo" | undefined; }' is not assignable to type '{ url?: string | undefined; file?: File | undefined; role: "style" | "produto" | "inspira├º├úo"; description?: string | undefined; analyzed?: boolean | undefined; }'.
+  Types of property 'role' are incompatible.
+    Type '"style" | "produto" | "inspira├º├úo" | undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+      Type 'undefined' is not assignable to type '"style" | "produto" | "inspira├º├úo"'.
+app/dashboard/page.tsx(23,3): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/dashboard/page.tsx(29,9): error TS6198: All destructured elements are unused.
+app/dashboard/page.tsx(66,9): error TS6133: 'syncWordPressData' is declared but its value is never read.
+app/dashboard/page.tsx(393,33): error TS7006: Parameter 'page' implicitly has an 'any' type.
+app/dashboard/page.tsx(393,39): error TS7006: Parameter 'index' implicitly has an 'any' type.
+app/ia/page.tsx(8,1): error TS6192: All imports in import declaration are unused.
+app/ia/page.tsx(9,10): error TS6133: 'Brain' is declared but its value is never read.
+app/ia/page.tsx(9,54): error TS6133: 'Plus' is declared but its value is never read.
+app/ia/page.tsx(12,36): error TS6133: 'isLoading' is declared but its value is never read.
+app/media/page.tsx(10,98): error TS6133: 'Tag' is declared but its value is never read.
+app/media/page.tsx(10,123): error TS6133: 'ChevronLeft' is declared but its value is never read.
+app/media/page.tsx(10,136): error TS6133: 'ChevronRight' is declared but its value is never read.
+app/media/page.tsx(20,26): error TS6133: 'setWordpressMedia' is declared but its value is never read.
+app/media/page.tsx(21,30): error TS6133: 'setIsLoadingWordPress' is declared but its value is never read.
+app/media/page.tsx(27,15): error TS6133: 'nextWordPressPage' is declared but its value is never read.
+app/media/page.tsx(28,19): error TS6133: 'prevWordPressPage' is declared but its value is never read.
+app/media/page.tsx(29,15): error TS6133: 'goToWordPressPage' is declared but its value is never read.
+app/media/page.tsx(31,16): error TS6133: 'isWordPressLoading' is declared but its value is never read.
+app/media/page.tsx(164,35): error TS2554: Expected 0-1 arguments, but got 2.
+app/media/page.tsx(171,35): error TS2554: Expected 0-1 arguments, but got 2.
+app/media/page.tsx(177,31): error TS2554: Expected 0-1 arguments, but got 2.
+app/pages/[id]/edit/page.tsx(14,18): error TS6133: 'currentPage' is declared but its value is never read.
+app/pages/[id]/edit/page.tsx(28,18): error TS18047: 'params' is possibly 'null'.
+app/pages/page.tsx(11,32): error TS6133: 'MoreHorizontal' is declared but its value is never read.
+app/pages/page.tsx(11,91): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/pages/page.tsx(20,30): error TS6133: 'setIsLoadingWordPress' is declared but its value is never read.
+app/pages/page.tsx(46,9): error TS6133: 'syncWordPressPages' is declared but its value is never read.
+app/pressel/page-fixed.tsx(14,3): error TS6133: 'Filter' is declared but its value is never read.
+app/pressel/page-fixed.tsx(15,3): error TS6133: 'MoreHorizontal' is declared but its value is never read.
+app/pressel/page-fixed.tsx(19,3): error TS6133: 'Settings' is declared but its value is never read.
+app/pressel/page-fixed.tsx(20,3): error TS6133: 'Copy' is declared but its value is never read.
+app/pressel/page-fixed.tsx(26,3): error TS6133: 'Palette' is declared but its value is never read.
+app/pressel/page-fixed.tsx(27,3): error TS6133: 'Users' is declared but its value is never read.
+app/pressel/page-fixed.tsx(28,3): error TS6133: 'Calendar' is declared but its value is never read.
+app/pressel/page-fixed.tsx(29,3): error TS6133: 'Tag' is declared but its value is never read.
+app/pressel/page-fixed.tsx(30,11): error TS6133: 'LinkIcon' is declared but its value is never read.
+app/pressel/page-fixed.tsx(31,3): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/pressel/page-fixed.tsx(33,3): error TS6133: 'Pause' is declared but its value is never read.
+app/pressel/page-fixed.tsx(34,3): error TS6133: 'Square' is declared but its value is never read.
+app/pressel/page-fixed.tsx(37,3): error TS6133: 'Download' is declared but its value is never read.
+app/pressel/page-fixed.tsx(41,3): error TS6133: 'Info' is declared but its value is never read.
+app/pressel/page-fixed.tsx(43,3): error TS6133: 'Globe' is declared but its value is never read.
+app/pressel/page-fixed.tsx(44,15): error TS6133: 'FileTextIcon' is declared but its value is never read.
+app/pressel/page-fixed.tsx(46,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+app/pressel/page-fixed.tsx(47,3): error TS6133: 'Star' is declared but its value is never read.
+app/pressel/page-fixed.tsx(52,9): error TS6198: All destructured elements are unused.
+app/pressel/page-fixed.tsx(61,10): error TS6133: 'showJSONUpload' is declared but its value is never read.
+app/pressel/page-fixed.tsx(156,9): error TS6133: 'handleJSONUpload' is declared but its value is never read.
+app/pressel/page.tsx(3,20): error TS6133: 'useEffect' is declared but its value is never read.
+app/pressel/page.tsx(122,13): error TS6133: 'jsonData' is declared but its value is never read.
+app/pressel/page.tsx(169,13): error TS6133: 'jsonData' is declared but its value is never read.
+app/queue/page.tsx(8,39): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/seo/page.tsx(8,1): error TS6192: All imports in import declaration are unused.
+app/seo/page.tsx(9,33): error TS6133: 'CheckCircle' is declared but its value is never read.
+app/seo/page.tsx(9,62): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/seo/page.tsx(9,83): error TS6133: 'Target' is declared but its value is never read.
+app/seo/page.tsx(12,125): error TS6133: 'generateMetaTags' is declared but its value is never read.
+app/seo/page.tsx(14,10): error TS6133: 'selectedAnalysis' is declared but its value is never read.
+app/seo/page.tsx(34,9): error TS6133: 'getIssueIcon' is declared but its value is never read.
+app/settings/page-backup.tsx(3,20): error TS6133: 'useEffect' is declared but its value is never read.
+app/settings/page-backup.tsx(9,3): error TS6133: 'Key' is declared but its value is never read.
+app/settings/page-backup.tsx(11,3): error TS6133: 'Bot' is declared but its value is never read.
+app/settings/page-backup.tsx(13,3): error TS6133: 'Edit' is declared but its value is never read.
+app/settings/page-backup.tsx(14,3): error TS6133: 'Trash2' is declared but its value is never read.
+app/settings/page-backup.tsx(15,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+app/settings/page-backup.tsx(16,3): error TS6133: 'XCircle' is declared but its value is never read.
+app/settings/page-backup.tsx(17,3): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/settings/page-backup.tsx(18,3): error TS6133: 'Save' is declared but its value is never read.
+app/settings/page-backup.tsx(20,3): error TS6133: 'Building2' is declared but its value is never read.
+app/settings/page-backup.tsx(21,3): error TS6133: 'FlaskConical' is declared but its value is never read.
+app/settings/page-backup.tsx(22,3): error TS6133: 'Shield' is declared but its value is never read.
+app/settings/page-backup.tsx(23,3): error TS6133: 'Mail' is declared but its value is never read.
+app/settings/page-backup.tsx(24,3): error TS6133: 'Users' is declared but its value is never read.
+app/settings/page-backup.tsx(25,3): error TS6133: 'MoreHorizontal' is declared but its value is never read.
+app/settings/page-backup.tsx(27,10): error TS6133: 'Modal' is declared but its value is never read.
+app/settings/page-backup.tsx(27,17): error TS6133: 'ConfirmModal' is declared but its value is never read.
+app/settings/page-backup.tsx(29,11): error TS6196: 'Site' is declared but never used.
+app/settings/page-backup.tsx(41,11): error TS6133: 'organizations' is declared but its value is never read.
+app/settings/page-backup.tsx(41,33): error TS6133: 'setSites' is declared but its value is never read.
+app/settings/page-backup.tsx(41,43): error TS6133: 'getOrganizationStats' is declared but its value is never read.
+app/settings/page-backup.tsx(41,65): error TS6133: 'syncWordPressData' is declared but its value is never read.
+app/settings/page-backup.tsx(41,84): error TS6133: 'updateSite' is declared but its value is never read.
+app/settings/page-backup.tsx(45,10): error TS6133: 'showConfirmModal' is declared but its value is never read.
+app/settings/page-backup.tsx(45,28): error TS6133: 'setShowConfirmModal' is declared but its value is never read.
+app/settings/page-backup.tsx(51,10): error TS6133: 'confirmData' is declared but its value is never read.
+app/settings/page-backup.tsx(51,23): error TS6133: 'setConfirmData' is declared but its value is never read.
+app/settings/page-backup.tsx(58,10): error TS6133: 'showAddSiteModal' is declared but its value is never read.
+app/settings/page-backup.tsx(59,10): error TS6133: 'newSite' is declared but its value is never read.
+app/settings/page-backup.tsx(59,19): error TS6133: 'setNewSite' is declared but its value is never read.
+app/settings/page-backup.tsx(238,31): error TS2339: Property 'posts' does not exist on type 'Site'.
+app/settings/page-backup.tsx(244,31): error TS2339: Property 'pages' does not exist on type 'Site'.
+app/settings/page-backup.tsx(250,31): error TS2339: Property 'media' does not exist on type 'Site'.
+app/settings/page.tsx(10,3): error TS6133: 'Settings' is declared but its value is never read.
+app/settings/page.tsx(17,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+app/settings/page.tsx(18,3): error TS6133: 'XCircle' is declared but its value is never read.
+app/settings/page.tsx(19,3): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/settings/page.tsx(20,3): error TS6133: 'Save' is declared but its value is never read.
+app/settings/page.tsx(25,3): error TS6133: 'Mail' is declared but its value is never read.
+app/settings/page.tsx(26,3): error TS6133: 'Users' is declared but its value is never read.
+app/settings/page.tsx(27,3): error TS6133: 'MoreHorizontal' is declared but its value is never read.
+app/settings/page.tsx(28,3): error TS6133: 'FileText' is declared but its value is never read.
+app/settings/page.tsx(29,3): error TS6133: 'FolderOpen' is declared but its value is never read.
+app/settings/page.tsx(30,3): error TS6133: 'Tag' is declared but its value is never read.
+app/settings/page.tsx(38,10): error TS6133: 'getCardStyles' is declared but its value is never read.
+app/settings/page.tsx(38,25): error TS6133: 'getButtonStyles' is declared but its value is never read.
+app/settings/page.tsx(38,42): error TS6133: 'getInputStyles' is declared but its value is never read.
+app/settings/page.tsx(67,33): error TS6133: 'setSites' is declared but its value is never read.
+app/settings/page.tsx(67,43): error TS6133: 'getOrganizationStats' is declared but its value is never read.
+app/settings/page.tsx(67,65): error TS6133: 'syncWordPressData' is declared but its value is never read.
+app/settings/page.tsx(70,22): error TS6133: 'isSyncing' is declared but its value is never read.
+app/settings/page.tsx(70,62): error TS6133: 'syncResult' is declared but its value is never read.
+app/settings/page.tsx(77,10): error TS6133: 'showConfirmModal' is declared but its value is never read.
+app/settings/page.tsx(77,28): error TS6133: 'setShowConfirmModal' is declared but its value is never read.
+app/settings/page.tsx(84,10): error TS6133: 'confirmData' is declared but its value is never read.
+app/settings/page.tsx(84,23): error TS6133: 'setConfirmData' is declared but its value is never read.
+app/settings/page.tsx(278,9): error TS6133: 'handleSyncSite' is declared but its value is never read.
+app/settings/page.tsx(474,9): error TS6133: 'handleEditAPI' is declared but its value is never read.
+app/templates-prompts/page.tsx(97,49): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+app/templates-prompts/page.tsx(97,75): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+app/templates/[id]/edit/page.tsx(8,62): error TS6133: 'Palette' is declared but its value is never read.
+app/templates/[id]/edit/page.tsx(13,22): error TS6133: 'currentTemplate' is declared but its value is never read.
+app/templates/[id]/edit/page.tsx(36,22): error TS18047: 'params' is possibly 'null'.
+app/templates/[id]/edit/page.tsx(105,9): error TS6133: 'updateField' is declared but its value is never read.
+app/templates/page.tsx(186,101): error TS2322: Type '{ style: { width: string; height: string; color: "var(--primary)"; }; title: string; }' is not assignable to type 'IntrinsicAttributes & LucideProps'.
+  Property 'title' does not exist on type 'IntrinsicAttributes & LucideProps'.
+app/templates/page.tsx(188,106): error TS2322: Type '{ style: { width: string; height: string; color: "var(--gray-400)"; }; title: string; }' is not assignable to type 'IntrinsicAttributes & LucideProps'.
+  Property 'title' does not exist on type 'IntrinsicAttributes & LucideProps'.
+app/users/[id]/permissions/page.tsx(8,10): error TS6133: 'Shield' is declared but its value is never read.
+app/users/[id]/permissions/page.tsx(8,35): error TS6133: 'User' is declared but its value is never read.
+app/users/[id]/permissions/page.tsx(8,87): error TS6133: 'BarChart3' is declared but its value is never read.
+app/users/[id]/permissions/page.tsx(13,41): error TS6133: 'isLoading' is declared but its value is never read.
+app/users/[id]/permissions/page.tsx(28,9): error TS18047: 'params' is possibly 'null'.
+app/users/[id]/permissions/page.tsx(29,50): error TS18047: 'params' is possibly 'null'.
+app/users/[id]/permissions/page.tsx(35,7): error TS18047: 'params' is possibly 'null'.
+app/users/page.tsx(8,109): error TS6133: 'Settings' is declared but its value is never read.
+app/wordpress-diagnostic-ai/page.tsx(18,3): error TS6133: 'Star' is declared but its value is never read.
+app/wordpress-diagnostic-ai/page.tsx(21,3): error TS6133: 'Settings' is declared but its value is never read.
+app/wordpress-diagnostic-ai/page.tsx(24,3): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/wordpress-diagnostic-ai/page.tsx(79,10): error TS6133: 'investigationResult' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(4,20): error TS6133: 'useEffect' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(15,3): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(17,3): error TS6133: 'Settings' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(18,3): error TS6133: 'Globe' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(20,3): error TS6133: 'Zap' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(22,3): error TS6133: 'Image' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(23,3): error TS6133: 'Users' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(24,3): error TS6133: 'Database' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(25,3): error TS6133: 'Cpu' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(26,3): error TS6133: 'Wifi' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(27,3): error TS6133: 'Lock' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(28,3): error TS6133: 'Eye' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(29,3): error TS6133: 'BarChart3' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(30,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(31,3): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(33,3): error TS6133: 'Activity' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(35,3): error TS6133: 'Pause' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(36,3): error TS6133: 'Square' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(39,3): error TS6133: 'Target' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(44,11): error TS6133: 'currentOrganization' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(46,10): error TS6133: 'isLoading' is declared but its value is never read.
+app/wordpress-diagnostic/page.tsx(46,21): error TS6133: 'setIsLoading' is declared but its value is never read.
+app/wordpress/page.tsx(8,67): error TS6133: 'EyeOff' is declared but its value is never read.
+app/wordpress/page.tsx(8,75): error TS6133: 'RefreshCw' is declared but its value is never read.
+app/wordpress/page.tsx(8,137): error TS6133: 'AlertCircle' is declared but its value is never read.
+app/wordpress/page.tsx(18,10): error TS6133: 'syncing' is declared but its value is never read.
+app/wordpress/page.tsx(29,45): error TS2304: Cannot find name 'WordPressSite'.
+app/wordpress/page.tsx(40,9): error TS6133: 'handleSyncData' is declared but its value is never read.
+app/wordpress/page.tsx(40,39): error TS2304: Cannot find name 'WordPressSite'.
+app/wordpress/page.tsx(51,35): error TS2304: Cannot find name 'WordPressSite'.
+components/forms/create-category-form.tsx(6,24): error TS6133: 'AlertCircle' is declared but its value is never read.
+components/forms/create-category-form.tsx(16,9): error TS6133: 'currentSite' is declared but its value is never read.
+components/forms/create-page-form.tsx(6,19): error TS6133: 'Eye' is declared but its value is never read.
+components/forms/create-post-form.tsx(5,19): error TS6133: 'Eye' is declared but its value is never read.
+components/forms/create-post-form.tsx(5,24): error TS6133: 'EyeOff' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,10): error TS6133: 'CheckCircle' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,32): error TS6133: 'AlertTriangle' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,47): error TS6133: 'Info' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,59): error TS6133: 'Edit' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,84): error TS6133: 'Code' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,106): error TS6133: 'Palette' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,115): error TS6133: 'Settings' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,125): error TS6133: 'Tag' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,138): error TS6133: 'LinkIcon' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,158): error TS6133: 'Users' is declared but its value is never read.
+components/forms/pressel-model-form.tsx(6,165): error TS6133: 'Calendar' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,32): error TS6133: 'AlertTriangle' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,47): error TS6133: 'Info' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,53): error TS6133: 'Plus' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,59): error TS6133: 'Edit' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,65): error TS6133: 'Trash2' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,78): error TS6133: 'Search' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,120): error TS6133: 'FileText' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,130): error TS6133: 'Palette' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,139): error TS6133: 'Users' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,146): error TS6133: 'Calendar' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,156): error TS6133: 'Tag' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,169): error TS6133: 'LinkIcon' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,179): error TS6133: 'Download' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,189): error TS6133: 'Upload' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,203): error TS6133: 'LayoutTemplate' is declared but its value is never read.
+components/forms/pressel-text-converter.tsx(6,219): error TS6133: 'FlaskConical' is declared but its value is never read.
+components/layout/sidebar.tsx(16,3): error TS6133: 'Building2' is declared but its value is never read.
+components/layout/sidebar.tsx(20,3): error TS6133: 'Globe' is declared but its value is never read.
+components/layout/sidebar.tsx(26,3): error TS6133: 'BookOpen' is declared but its value is never read.
+components/logo.tsx(3,1): error TS6133: 'Image' is declared but its value is never read.
+components/logo.tsx(21,23): error TS6133: 'setUseFallback' is declared but its value is never read.
+components/logo.tsx(66,9): error TS6133: 'isSvg' is declared but its value is never read.
+components/media/media-upload.tsx(5,61): error TS6133: 'CheckCircle' is declared but its value is never read.
+components/pressel/preview-modal.tsx(4,35): error TS6133: 'AlertTriangle' is declared but its value is never read.
+components/pressel/preview-modal.tsx(4,69): error TS6133: 'FileText' is declared but its value is never read.
+components/pressel/preview-modal.tsx(48,11): error TS6133: 'preview' is declared but its value is never read.
+components/protected-feature.tsx(6,25): error TS6133: 'BLOCKED_FEATURE_MESSAGE' is declared but its value is never read.
+components/setup-wizard.tsx(125,23): error TS1117: An object literal cannot have multiple properties with the same name.
+components/ui/page-container.tsx(130,34): error TS6133: 'columns' is declared but its value is never read.
+components/ui/standard-button.tsx(137,15): error TS2554: Expected 0 arguments, but got 1.
+components/ui/standard-card.tsx(48,9): error TS6133: 'hoverStyles' is declared but its value is never read.
+components/ui/sync-logs-modal.tsx(3,20): error TS6133: 'useEffect' is declared but its value is never read.
+contexts/ai-context.tsx(124,9): error TS6133: 'mockGeneratedContent' is declared but its value is never read.
+contexts/media-context.tsx(353,21): error TS2532: Object is possibly 'undefined'.
+contexts/media-context.tsx(364,21): error TS2532: Object is possibly 'undefined'.
+contexts/media-context.tsx(370,19): error TS2532: Object is possibly 'undefined'.
+contexts/organization-context.tsx(117,32): error TS2345: Argument of type 'Organization | undefined' is not assignable to parameter of type 'SetStateAction<Organization | null>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<Organization | null>'.
+contexts/organization-context.tsx(139,24): error TS2345: Argument of type 'Site | undefined' is not assignable to parameter of type 'SetStateAction<Site | null>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<Site | null>'.
+contexts/pressel-context.tsx(693,16): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+contexts/pressel-context.tsx(747,39): error TS6133: 'model' is declared but its value is never read.
+contexts/prompt-templates-context.tsx(35,19): error TS6133: 'setLoading' is declared but its value is never read.
+contexts/seo-context.tsx(183,47): error TS6133: 'analysis' is declared but its value is never read.
+contexts/wordpress-context.tsx(214,27): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(309,29): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(344,29): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(368,29): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(417,32): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(434,26): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(451,27): error TS6133: 'site' is declared but its value is never read.
+contexts/wordpress-context.tsx(451,48): error TS6133: 'params' is declared but its value is never read.
+hooks/use-permissions.ts(24,9): error TS6133: 'isViewer' is declared but its value is never read.
+hooks/use-permissions.ts(65,31): error TS6133: 'siteId' is declared but its value is never read.
+hooks/use-site-isolation.ts(2,25): error TS2307: Cannot find module '@/contexts/site-context' or its corresponding type declarations.
+hooks/use-site-isolation.ts(28,26): error TS6133: 'siteId' is declared but its value is never read.
+hooks/use-site-isolation.ts(154,25): error TS6133: 'currentOrganization' is declared but its value is never read.
+hooks/use-site-isolation.ts(154,46): error TS6133: 'user' is declared but its value is never read.
+hooks/use-site-isolation.ts(213,46): error TS6133: 'user' is declared but its value is never read.
+lib/acf-sync-manager.ts(264,13): error TS7034: Variable 'mostUsedFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/acf-sync-manager.ts(265,13): error TS7034: Variable 'conversionFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/acf-sync-manager.ts(266,13): error TS7034: Variable 'revenueFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/acf-sync-manager.ts(269,9): error TS7005: Variable 'mostUsedFields' implicitly has an 'any[]' type.
+lib/acf-sync-manager.ts(270,9): error TS7005: Variable 'conversionFields' implicitly has an 'any[]' type.
+lib/acf-sync-manager.ts(271,9): error TS7005: Variable 'revenueFields' implicitly has an 'any[]' type.
+lib/acf-sync-manager.ts(289,13): error TS7034: Variable 'recommendations' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/acf-sync-manager.ts(290,13): error TS7034: Variable 'optimizedFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/acf-sync-manager.ts(294,9): error TS7005: Variable 'recommendations' implicitly has an 'any[]' type.
+lib/acf-sync-manager.ts(295,9): error TS7005: Variable 'optimizedFields' implicitly has an 'any[]' type.
+lib/ai-cache-service.ts(15,1): error TS6133: 'db' is declared but its value is never read.
+lib/ai-cache-service.ts(94,48): error TS18048: 'cached' is possibly 'undefined'.
+lib/ai-cache-service.ts(101,11): error TS2353: Object literal may only specify known properties, and 'cacheHit' does not exist in type '{ provider: string; model: string; durationMs: number; fallbackUsed: boolean; }'.
+lib/ai-diagnostic-integration.ts(123,13): error TS6133: 'prompt' is declared but its value is never read.
+lib/ai-diagnostic-integration.ts(159,13): error TS6133: 'prompt' is declared but its value is never read.
+lib/ai-diagnostic-integration.ts(215,21): error TS2802: Type 'Set<any>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/ai-diagnostic-integration.ts(218,28): error TS2802: Type 'Set<any>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/ai-diagnostic-integration.ts(219,28): error TS2802: Type 'Set<any>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/ai-diagnostic-integration.ts(220,24): error TS2802: Type 'Set<any>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/ai-diagnostic-integration.ts(344,11): error TS6133: 'errors' is declared but its value is never read.
+lib/ai-services.ts(139,13): error TS6133: 'organization' is declared but its value is never read.
+lib/ai-services.ts(299,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'undefined'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'undefined'.
+lib/ai-services.ts(331,13): error TS6133: 'lastError' is declared but its value is never read.
+lib/ai-services.ts(338,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'undefined'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'HeadersInit | undefined'.
+      Type '{ 'Content-Type': string; 'x-goog-api-key': string | undefined; }' is not assignable to type 'undefined'.
+lib/ai-services.ts(818,17): error TS6133: 'generateWithKoala' is declared but its value is never read.
+lib/ai-services.ts(819,45): error TS6133: 'maxTokens' is declared but its value is never read.
+lib/ai-services.ts(819,63): error TS6133: 'temperature' is declared but its value is never read.
+lib/api-handler.ts(68,9): error TS2353: Object literal may only specify known properties, and 'route' does not exist in type 'Error'.
+lib/auth.ts(66,9): error TS6133: 'apiSuccess' is declared but its value is never read.
+lib/automation.ts(128,11): error TS2353: Object literal may only specify known properties, and 'triggerId' does not exist in type 'Error'.
+lib/automation.ts(136,30): error TS6133: 'conditions' is declared but its value is never read.
+lib/automation.ts(136,63): error TS6133: 'data' is declared but its value is never read.
+lib/automation.ts(174,20): error TS2339: Property 'retryAttempt' does not exist on type 'Logger'.
+lib/automation.ts(180,14): error TS2339: Property 'webhookCall' does not exist on type 'Logger'.
+lib/automation.ts(184,14): error TS2339: Property 'webhookCall' does not exist on type 'Logger'.
+lib/automation.ts(187,9): error TS2353: Object literal may only specify known properties, and 'webhookId' does not exist in type 'Error'.
+lib/chat-providers.ts(200,36): error TS18048: 'price' is possibly 'undefined'.
+lib/chat-providers.ts(200,78): error TS18048: 'price' is possibly 'undefined'.
+lib/chat-providers.ts(346,36): error TS18048: 'price' is possibly 'undefined'.
+lib/chat-providers.ts(346,78): error TS18048: 'price' is possibly 'undefined'.
+lib/creative-generator.ts(488,18): error TS6133: 'generateExplanation' is declared but its value is never read.
+lib/creative-generator.ts(489,5): error TS6133: 'conceptual' is declared but its value is never read.
+lib/creative-generator.ts(490,5): error TS6133: 'commercial' is declared but its value is never read.
+lib/creative-generator.ts(491,5): error TS6133: 'brief' is declared but its value is never read.
+lib/creative-generator.ts(521,5): error TS6133: 'brief' is declared but its value is never read.
+lib/creative-generator.ts(569,5): error TS6133: 'brief' is declared but its value is never read.
+lib/creative-generator.ts(756,21): error TS6133: 'size' is declared but its value is never read.
+lib/creative-generator.ts(846,46): error TS2345: Argument of type '{ url: string; prompt: string; model: "dall-e-3"; variation: number; }' is not assignable to parameter of type '{ url: string; prompt: string; model: "gemini-imagen"; variation: number; }'.
+  Types of property 'model' are incompatible.
+    Type '"dall-e-3"' is not assignable to type '"gemini-imagen"'.
+lib/creative-generator.ts(851,21): error TS2322: Type '"dall-e-3"' is not assignable to type '"gemini-imagen"'.
+lib/creative-generator.ts(1004,44): error TS2345: Argument of type '{ revisedPrompt: string; url: string; prompt: string; model: "gemini-imagen"; variation: number; }' is not assignable to parameter of type '{ url: string; prompt: string; revisedPrompt?: string | undefined; model: "dall-e-3"; variation: number; }'.
+  Types of property 'model' are incompatible.
+    Type '"gemini-imagen"' is not assignable to type '"dall-e-3"'.
+lib/creative-generator.ts(1013,19): error TS2322: Type '"gemini-imagen"' is not assignable to type '"dall-e-3"'.
+lib/creative-generator.ts(1169,18): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/creative-generator.ts(1180,18): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/creative-generator.ts(1246,18): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/creative-generator.ts(1257,18): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/cron-jobs.ts(2,10): error TS2305: Module '"./wordpress-sync"' has no exported member 'wordPressSyncManager'.
+lib/cron-jobs.ts(3,1): error TS6133: 'automationManager' is declared but its value is never read.
+lib/cron-jobs.ts(71,32): error TS2802: Type 'MapIterator<[string, CronJob]>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/cron-jobs.ts(89,25): error TS2802: Type 'MapIterator<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/cron-jobs.ts(135,32): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/cron-jobs.ts(174,9): error TS2353: Object literal may only specify known properties, and 'jobId' does not exist in type 'Error'.
+lib/design-system-v2.ts(2,1): error TS6133: 'React' is declared but its value is never read.
+lib/design-system.ts(175,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+lib/embedding-providers.ts(87,11): error TS6133: 'startTime' is declared but its value is never read.
+lib/embedding-providers.ts(173,11): error TS6133: 'startTime' is declared but its value is never read.
+lib/embedding-providers.ts(220,17): error TS6133: 'tokens' is declared but its value is never read.
+lib/embedding-service.ts(26,3): error TS6133: 'EmbeddingProvider' is declared but its value is never read.
+lib/embedding-service.ts(30,1): error TS6192: All imports in import declaration are unused.
+lib/embedding-service.ts(75,27): error TS6133: 'DEFAULT_DIMENSIONS' is declared but its value is never read.
+lib/embedding-service.ts(80,27): error TS6133: 'CHUNK_SIZE' is declared but its value is never read.
+lib/embedding-service.ts(81,27): error TS6133: 'CHUNK_OVERLAP' is declared but its value is never read.
+lib/embedding-service.ts(163,51): error TS6133: 'correlationId' is declared but its value is never read.
+lib/embedding-service.ts(230,20): error TS2339: Property 'processEmbeddingChunks' does not exist on type 'typeof EmbeddingService'.
+lib/embedding-service.ts(412,5): error TS6133: 'provider' is declared but its value is never read.
+lib/embedding-service.ts(433,33): error TS2322: Type '{ id: string; } | undefined' is not assignable to type '{ id: string; } | null'.
+  Type 'undefined' is not assignable to type '{ id: string; } | null'.
+lib/embedding-service.ts(446,9): error TS6133: 'sourceFields' is declared but its value is never read.
+lib/embedding-service.ts(447,9): error TS6133: 'sourceValues' is declared but its value is never read.
+lib/embedding-service.ts(554,12): error TS2532: Object is possibly 'undefined'.
+lib/embedding-service.ts(563,5): error TS6133: 'embeddingId' is declared but its value is never read.
+lib/embedding-service.ts(565,5): error TS6133: 'provider' is declared but its value is never read.
+lib/embedding-service.ts(573,11): error TS2353: Object literal may only specify known properties, and 'embeddingGeneratedAt' does not exist in type '(Without<PageUpdateInput, PageUncheckedUpdateInput> & PageUncheckedUpdateInput) | (Without<...> & PageUpdateInput)'.
+lib/embedding-service.ts(579,16): error TS2551: Property 'aiContent' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIContent'?
+lib/embedding-service.ts(591,11): error TS2353: Object literal may only specify known properties, and 'embeddingGeneratedAt' does not exist in type '(Without<TemplateUpdateInput, TemplateUncheckedUpdateInput> & TemplateUncheckedUpdateInput) | (Without<...> & TemplateUpdateInput)'.
+lib/embedding-service.ts(611,16): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/embedding-service.ts(672,35): error TS2551: Property 'aiContent' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIContent'?
+lib/embedding-service.ts(702,22): error TS2322: Type 'null' is not assignable to type 'string | NestedStringFilter<"Template"> | undefined'.
+lib/embedding-worker.ts(160,29): error TS2304: Cannot find name 'extractCorrelationId'.
+lib/embedding-worker.ts(161,34): error TS2552: Cannot find name 'createCorrelationContext'. Did you mean 'correlationContext'?
+lib/embedding-worker.ts(167,22): error TS2552: Cannot find name 'StructuredLogger'. Did you mean 'structuredClone'?
+lib/embedding-worker.ts(178,13): error TS6133: 'processSpan' is declared but its value is never read.
+lib/embedding-worker.ts(178,33): error TS2304: Cannot find name 'withSpan'.
+lib/embedding-worker.ts(275,14): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(283,44): error TS2532: Object is possibly 'undefined'.
+lib/embedding-worker.ts(288,38): error TS2345: Argument of type 'ClaimedJob | undefined' is not assignable to parameter of type 'ClaimedJob'.
+  Type 'undefined' is not assignable to type 'ClaimedJob'.
+lib/embedding-worker.ts(289,20): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(298,23): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(299,23): error TS2339: Property 'lockedAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(300,28): error TS2339: Property 'lockExpiresAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(301,34): error TS2339: Property 'processingStartedAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(308,23): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+lib/embedding-worker.ts(370,27): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/enhanced-wordpress-sync.ts(197,13): error TS7034: Variable 'topPerformingPages' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/enhanced-wordpress-sync.ts(198,13): error TS7034: Variable 'bestACFFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/enhanced-wordpress-sync.ts(199,13): error TS7034: Variable 'optimizationRecommendations' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/enhanced-wordpress-sync.ts(202,9): error TS7005: Variable 'topPerformingPages' implicitly has an 'any[]' type.
+lib/enhanced-wordpress-sync.ts(203,9): error TS7005: Variable 'bestACFFields' implicitly has an 'any[]' type.
+lib/enhanced-wordpress-sync.ts(204,9): error TS7005: Variable 'optimizationRecommendations' implicitly has an 'any[]' type.
+lib/enhanced-wordpress-sync.ts(222,13): error TS7034: Variable 'recommendations' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/enhanced-wordpress-sync.ts(223,13): error TS7034: Variable 'optimizedFields' implicitly has type 'any[]' in some locations where its type cannot be determined.
+lib/enhanced-wordpress-sync.ts(227,9): error TS7005: Variable 'recommendations' implicitly has an 'any[]' type.
+lib/enhanced-wordpress-sync.ts(228,9): error TS7005: Variable 'optimizedFields' implicitly has an 'any[]' type.
+lib/feature-access.ts(216,10): error TS2869: Right operand of ?? is unreachable because the left operand is never nullish.
+lib/feedback/feedback-service.ts(181,9): error TS2353: Object literal may only specify known properties, and '_count' does not exist in type 'AIResponseFeedbackInclude<DefaultArgs>'.
+lib/feedback/feedback-service.ts(248,9): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(250,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(252,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/fidelity-image-generator.ts(49,9): error TS6133: 'words' is declared but its value is never read.
+lib/fidelity-image-generator.ts(333,7): error TS2322: Type 'string' is not assignable to type '"1:1" | "4:5" | "9:16" | "16:9" | undefined'.
+lib/finops/tenant-alerts.ts(8,35): error TS6133: 'TenantCostState' is declared but its value is never read.
+lib/finops/tenant-alerts.ts(128,15): error TS2322: Type 'JsonNull' is not assignable to type 'string | NestedStringFilter<"Site"> | undefined'.
+lib/finops/tenant-alerts.ts(134,15): error TS2322: Type 'JsonNull' is not assignable to type 'string | NestedStringFilter<"Site"> | undefined'.
+lib/gemini-image-service.ts(49,13): error TS6133: 'dimensions' is declared but its value is never read.
+lib/hnsw-tuning.ts(79,3): error TS6133: 'organizationId' is declared but its value is never read.
+lib/hnsw-tuning.ts(80,3): error TS6133: 'siteId' is declared but its value is never read.
+lib/hnsw-tuning.ts(81,3): error TS6133: 'queryVector' is declared but its value is never read.
+lib/hnsw-tuning.ts(100,7): error TS2740: Type '{ similarity: number; }' is missing the following properties from type '(T & { similarity: number; })[]': length, pop, push, concat, and 29 more.
+lib/hnsw-tuning.ts(116,7): error TS2740: Type '{ similarity: number; }' is missing the following properties from type '(T & { similarity: number; })[]': length, pop, push, concat, and 29 more.
+lib/hnsw-tuning.ts(139,7): error TS2740: Type '{ similarity: number; }' is missing the following properties from type '(T & { similarity: number; })[]': length, pop, push, concat, and 29 more.
+lib/hnsw-tuning.ts(154,7): error TS2740: Type '{ similarity: number; }' is missing the following properties from type '(T & { similarity: number; })[]': length, pop, push, concat, and 29 more.
+lib/hnsw-tuning.ts(171,3): error TS6133: 'useCase' is declared but its value is never read.
+lib/image-overlay-service.ts(78,10): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(79,11): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(80,12): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(81,13): error TS18048: 'safeArea' is possibly 'undefined'.
+lib/image-overlay-service.ts(194,3): error TS2322: Type 'SafeArea | undefined' is not assignable to type 'SafeArea'.
+  Type 'undefined' is not assignable to type 'SafeArea'.
+lib/image-overlay-service.ts(227,3): error TS6133: 'config' is declared but its value is never read.
+lib/image-scoring-service.ts(77,25): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(79,18): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(88,21): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(133,21): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(133,46): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(136,29): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(136,54): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(144,28): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(150,15): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(154,15): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(158,15): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(162,15): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(166,15): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(172,14): error TS2532: Object is possibly 'undefined'.
+lib/image-scoring-service.ts(325,47): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/maintenance/reindex-incremental.ts(57,9): error TS2561: Object literal may only specify known properties, but 'published' does not exist in type 'PageWhereInput'. Did you mean to write 'publishedAt'?
+lib/maintenance/reindex-incremental.ts(134,9): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type 'TemplateSelect<DefaultArgs>'.
+lib/maintenance/reindex-incremental.ts(154,27): error TS2339: Property 'site' does not exist on type '{ status: string; id: string; createdAt: Date; updatedAt: Date; templateId: string | null; siteId: string; wpPostId: number | null; title: string; slug: string; content: string | null; ... 11 more ...; categoryId: string | null; }'.
+lib/maintenance/reindex-incremental.ts(169,19): error TS2339: Property 'siteId' does not exist on type '{ fields: string; id: string; name: string; description: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; slug: string; content: string; }'.
+lib/maintenance/reindex-incremental.ts(170,27): error TS2339: Property 'site' does not exist on type '{ fields: string; id: string; name: string; description: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; slug: string; content: string; }'.
+lib/maintenance/reindex-incremental.ts(228,11): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/maintenance/reindex-incremental.ts(268,15): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/maintenance/reindex-incremental.ts(269,15): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/model-identifier.ts(255,42): error TS2802: Type 'Map<string, ModelSignature>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/model-policy-service.ts(10,1): error TS6133: 'db' is declared but its value is never read.
+lib/monetization-sync-manager.ts(119,11): error TS6133: 'baseUrl' is declared but its value is never read.
+lib/monetization-sync-manager.ts(120,11): error TS6133: 'username' is declared but its value is never read.
+lib/monetization-sync-manager.ts(121,11): error TS6133: 'password' is declared but its value is never read.
+lib/monetization-sync-manager.ts(190,7): error TS2740: Type '{ products: any[]; affiliatePrograms: any; adRevenue: any; }' is missing the following properties from type 'MonetizationData': performance, seo, monetization, templates, and 2 more.
+lib/monetization-sync-manager.ts(288,7): error TS2739: Type '{ performance: PerformanceData; seo: SEOMetrics; monetization: MonetizationData; templates: TemplateData; integrations: IntegrationData; growth: GrowthData; }' is missing the following properties from type 'MonetizationData': products, affiliatePrograms, adRevenue
+lib/observability/alerts.ts(32,27): error TS6133: 'DEFAULT_WINDOW_HOURS' is declared but its value is never read.
+lib/observability/alerts.ts(44,125): error TS2554: Expected 1 arguments, but got 2.
+lib/observability/health-snapshot.ts(121,38): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/observability/health-snapshot.ts(129,39): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/observability/health-snapshot.ts(141,36): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/observability/health-snapshot.ts(194,43): error TS2339: Property 'p50_total_ms' does not exist on type '{}'.
+lib/observability/health-snapshot.ts(195,43): error TS2339: Property 'p95_total_ms' does not exist on type '{}'.
+lib/observability/health-snapshot.ts(196,46): error TS2339: Property 'p95_provider_ms' does not exist on type '{}'.
+lib/observability/health-snapshot.ts(199,35): error TS2339: Property 'avg_similarity' does not exist on type '{}'.
+lib/observability/health-snapshot.ts(454,15): error TS2353: Object literal may only specify known properties, and 'embeddingGeneratedAt' does not exist in type 'PageWhereInput'.
+lib/observability/health-snapshot.ts(456,15): error TS2353: Object literal may only specify known properties, and 'embeddingGeneratedAt' does not exist in type 'PageWhereInput'.
+lib/observability/health-snapshot.ts(467,13): error TS2353: Object literal may only specify known properties, and 'path' does not exist in type 'StringFilter<"QueueJob">'.
+lib/observability/health-snapshot.ts(478,13): error TS2353: Object literal may only specify known properties, and 'path' does not exist in type 'StringFilter<"QueueJob">'.
+lib/performance-creative-engine.ts(219,46): error TS2532: Object is possibly 'undefined'.
+lib/performance-optimizer.ts(67,5): error TS6133: 'key' is declared but its value is never read.
+lib/performance-optimizer.ts(85,5): error TS6133: 'fallback' is declared but its value is never read.
+lib/performance-optimizer.ts(87,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(159,23): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(161,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(187,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(192,47): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(194,3): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(209,47): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(210,19): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/performance-optimizer.ts(212,3): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+lib/pressel-automation-core.ts(5,1): error TS6192: All imports in import declaration are unused.
+lib/pressel-automation-core.ts(191,11): error TS6133: 'calculateModelScore' is declared but its value is never read.
+lib/pressel-automation-core.ts(212,11): error TS6133: 'getMatchedFields' is declared but its value is never read.
+lib/pressel-automation-core.ts(742,17): error TS6133: 'updateACFViaACFAPI' is declared but its value is never read.
+lib/pressel-automation-core.ts(921,15): error TS6133: 'result' is declared but its value is never read.
+lib/pressel-automation-core.ts(938,17): error TS6133: 'updateACFViaMetaFields' is declared but its value is never read.
+lib/pressel-automation-core.ts(960,15): error TS6133: 'result' is declared but its value is never read.
+lib/pressel-automation-core.ts(983,56): error TS6133: 'index' is declared but its value is never read.
+lib/pressel-automation-core.ts(1249,9): error TS2554: Expected 3-4 arguments, but got 5.
+lib/pressel-automation-service.ts(2,1): error TS6192: All imports in import declaration are unused.
+lib/pressel-automation-service.ts(51,11): error TS6133: 'acfFieldGroups' is declared but its value is never read.
+lib/pressel-automation-service.ts(555,27): error TS2802: Type 'RegExpStringIterator<RegExpExecArray>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/pressel-automation-service.ts(657,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/pressel-automation-service.ts(731,35): error TS6133: 'textContent' is declared but its value is never read.
+lib/pressel-automation-service.ts(735,35): error TS6133: 'textContent' is declared but its value is never read.
+lib/pressel-automation-service.ts(830,11): error TS2353: Object literal may only specify known properties, and 'post_id' does not exist in type 'PresselPageData'.
+lib/pressel-model-processor.ts(100,18): error TS2532: Object is possibly 'undefined'.
+lib/pressel-model-processor.ts(106,18): error TS2532: Object is possibly 'undefined'.
+lib/pressel-model-processor.ts(112,18): error TS2532: Object is possibly 'undefined'.
+lib/pressel-schema-mapper.ts(83,17): error TS6133: 'fieldKey' is declared but its value is never read.
+lib/pressel-schema-mapper.ts(141,19): error TS6133: 'subFieldKey' is declared but its value is never read.
+lib/pressel-schema-mapper.ts(188,17): error TS6133: 'fieldKey' is declared but its value is never read.
+lib/queue-claim.ts(17,1): error TS6192: All imports in import declaration are unused.
+lib/queue-claim.ts(57,27): error TS6133: 'DEFAULT_HEARTBEAT_INTERVAL_MS' is declared but its value is never read.
+lib/queue-claim.ts(214,5): error TS6133: 'lockTtlMs' is declared but its value is never read.
+lib/rag-confidence.ts(63,9): error TS6133: 'level' is declared but its value is never read.
+lib/rag-rerank.ts(65,27): error TS6133: 'PENALTY_REDUNDANCY' is declared but its value is never read.
+lib/rag-rerank.ts(269,38): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/rag-rerank.ts(270,31): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/rag-rerank.ts(270,43): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/rag-service-stream.ts(8,24): error TS6133: 'ChatMessage' is declared but its value is never read.
+lib/rag-service-stream.ts(12,36): error TS6133: 'extractCorrelationId' is declared but its value is never read.
+lib/rag-service-stream.ts(102,13): error TS2353: Object literal may only specify known properties, and 'correlationId' does not exist in type '{ maxChunks?: number | undefined; similarityThreshold?: number | undefined; contentType?: "page" | "template" | "wp_post" | "wp_page" | "all" | "ai_content" | undefined; question?: string | undefined; }'.
+lib/rag-service-stream.ts(174,34): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/rag-service-stream.ts(247,24): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/rag-service-stream.ts(272,20): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/rag-service.ts(16,1): error TS6133: 'Prisma' is declared but its value is never read.
+lib/rag-service.ts(26,3): error TS6133: 'ChatMessage' is declared but its value is never read.
+lib/rag-service.ts(39,1): error TS6192: All imports in import declaration are unused.
+lib/rag-service.ts(124,27): error TS6133: 'DEFAULT_MAX_CHUNKS' is declared but its value is never read.
+lib/rag-service.ts(128,27): error TS6133: 'MAX_CONTEXT_TOKENS' is declared but its value is never read.
+lib/rag-service.ts(209,11): error TS2322: Type '{ tenantCost: { state: "BLOCKED"; daySpendUsd: number; monthSpendUsd: number; budgetDayUsd: number | null; budgetMonthUsd: number | null; degradationActions: string[]; correlationId: string; }; }' is not assignable to type 'string'.
+lib/rag-service.ts(242,11): error TS2353: Object literal may only specify known properties, and 'cached' does not exist in type '{ provider: string; model: string; durationMs: number; fallbackUsed: boolean; }'.
+lib/rag-service.ts(248,11): error TS2353: Object literal may only specify known properties, and 'confidence' does not exist in type '{ averageSimilarity: number; threshold: number; chunksUsed: number; chunksConsidered: number; }'.
+lib/rag-service.ts(367,13): error TS2353: Object literal may only specify known properties, and 'priority' does not exist in type '{ maxChunks?: number | undefined; similarityThreshold?: number | undefined; contentType?: "page" | "template" | "wp_post" | "wp_page" | "all" | "ai_content" | undefined; question?: string | undefined; }'.
+lib/rag-service.ts(509,40): error TS2551: Property 'aiContent' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIContent'?
+lib/rag-service.ts(555,9): error TS2353: Object literal may only specify known properties, and 'rerankApplied' does not exist in type '{ averageSimilarity: number; threshold: number; chunksUsed: number; chunksConsidered: number; }'.
+lib/rag-service.ts(596,30): error TS2339: Property 'priority' does not exist on type '{ maxChunks?: number | undefined; similarityThreshold?: number | undefined; contentType?: "page" | "template" | "wp_post" | "wp_page" | "all" | "ai_content" | undefined; question?: string | undefined; }'.
+lib/rag-service.ts(672,40): error TS2551: Property 'aiContent' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIContent'?
+lib/rag-service.ts(703,40): error TS2551: Property 'aiContent' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIContent'?
+lib/rag-service.ts(840,9): error TS2353: Object literal may only specify known properties, and 'finishReason' does not exist in type '{ content: string; model: string; provider: string; usage: { promptTokens: number; completionTokens: number; totalTokens: number; }; costUSD: number; }'.
+lib/rag-service.ts(966,5): error TS6133: 'fallbackUsed' is declared but its value is never read.
+lib/rag-service.ts(985,36): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/rate-limiter.ts(56,32): error TS2802: Type 'MapIterator<[string, RateLimitEntry]>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/site-diagnostic-service.ts(51,25): error TS2554: Expected 3 arguments, but got 0.
+lib/site-diagnostic-service.ts(359,53): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(407,53): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(428,19): error TS18048: 'link' is possibly 'undefined'.
+lib/site-diagnostic-service.ts(428,47): error TS18048: 'link' is possibly 'undefined'.
+lib/site-diagnostic-service.ts(431,48): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | Request | URL'.
+      Type 'undefined' is not assignable to type 'string | Request | URL'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'URL | RequestInfo'.
+      Type 'undefined' is not assignable to type 'URL | RequestInfo'.
+lib/site-diagnostic-service.ts(434,38): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/site-diagnostic-service.ts(438,36): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/site-diagnostic-service.ts(475,53): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(549,53): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(613,53): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(630,59): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/site-diagnostic-service.ts(682,55): error TS2339: Property 'makeRequest' does not exist on type 'WordPressAPI'.
+lib/smart-sync-manager.ts(62,18): error TS6133: 'T' is declared but its value is never read.
+lib/smart-sync-manager.ts(252,30): error TS6133: 'T' is declared but its value is never read.
+lib/smart-sync-manager.ts(292,35): error TS6133: 'T' is declared but its value is never read.
+lib/tenant-limits-service.ts(232,16): error TS2551: Property 'aiInteraction' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'aIInteraction'?
+lib/tenant-security.ts(165,37): error TS2339: Property 'join' does not exist on type 'string'.
+lib/tenant-security.ts(179,9): error TS2322: Type 'Awaited<T>' is not assignable to type 'T[]'.
+  Type 'T | (T extends object & { then(onfulfilled: infer F, ...args: infer _): any; } ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : T)' is not assignable to type 'T[]'.
+    Type '(null | undefined) & T' is not assignable to type 'T[]'.
+      Type 'undefined & T' is not assignable to type 'T[]'.
+lib/tenant-security.ts(181,7): error TS2322: Type 'Awaited<T>' is not assignable to type 'T[]'.
+  Type 'T | (T extends object & { then(onfulfilled: infer F, ...args: infer _): any; } ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : T)' is not assignable to type 'T[]'.
+    Type '(null | undefined) & T' is not assignable to type 'T[]'.
+      Type 'undefined & T' is not assignable to type 'T[]'.
+lib/tenant-security.ts(184,7): error TS2322: Type 'Awaited<T>' is not assignable to type 'T[]'.
+  Type 'T | (T extends object & { then(onfulfilled: infer F, ...args: infer _): any; } ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : T)' is not assignable to type 'T[]'.
+    Type '(null | undefined) & T' is not assignable to type 'T[]'.
+      Type 'undefined & T' is not assignable to type 'T[]'.
+lib/tenant-security.ts(189,3): error TS2322: Type 'Awaited<T>' is not assignable to type 'T[]'.
+  Type 'T | (T extends object & { then(onfulfilled: infer F, ...args: infer _): any; } ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : T)' is not assignable to type 'T[]'.
+    Type '(null | undefined) & T' is not assignable to type 'T[]'.
+      Type 'undefined & T' is not assignable to type 'T[]'.
+lib/tenant-security.ts(219,37): error TS2339: Property 'join' does not exist on type 'string'.
+lib/tenant-security.ts(343,20): error TS2339: Property 'filter' does not exist on type 'T & { similarity: number; }'.
+lib/tenant-security.ts(343,27): error TS7006: Parameter 'r' implicitly has an 'any' type.
+lib/tenant-security.ts(346,3): error TS2740: Type '{ similarity: number; }' is missing the following properties from type '(T & { similarity: number; })[]': length, pop, push, concat, and 29 more.
+lib/text-chunking.ts(107,27): error TS2532: Object is possibly 'undefined'.
+lib/text-chunking.ts(108,24): error TS2532: Object is possibly 'undefined'.
+lib/tuning/recommendations.ts(42,5): error TS6133: 'drivers' is declared but its value is never read.
+lib/tuning/tuning-insights.ts(8,1): error TS6133: 'FeedbackService' is declared but its value is never read.
+lib/tuning/tuning-insights.ts(305,11): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(306,9): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(306,39): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(306,65): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(311,11): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(312,9): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(312,45): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(312,77): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(317,11): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(318,9): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(318,45): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(318,77): error TS2532: Object is possibly 'undefined'.
+lib/tuning/tuning-insights.ts(347,9): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+lib/tuning/tuning-insights.ts(348,9): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+lib/tuning/tuning-insights.ts(349,9): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+lib/tuning/tuning-insights.ts(350,9): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+lib/tuning/tuning-insights.ts(351,9): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+lib/veo-video-service.ts(54,11): error TS6133: 'primaryModel' is declared but its value is never read.
+lib/veo-video-service.ts(55,11): error TS6133: 'fallbackModel' is declared but its value is never read.
+lib/veo-video-service.ts(56,11): error TS6133: 'timeoutMs' is declared but its value is never read.
+lib/veo-video-service.ts(57,11): error TS6133: 'maxRetries' is declared but its value is never read.
+lib/veo-video-service.ts(58,11): error TS6133: 'backoffBaseMs' is declared but its value is never read.
+lib/wordpress-api.ts(50,11): error TS6133: 'username' is declared but its value is never read.
+lib/wordpress-api.ts(51,11): error TS6133: 'password' is declared but its value is never read.
+lib/wordpress-data-manager.ts(2,1): error TS6133: 'WordPressAPI' is declared but its value is never read.
+lib/wordpress-diagnostics.ts(908,63): error TS7006: Parameter 'c' implicitly has an 'any' type.
+lib/wordpress-diagnostics.ts(1045,40): error TS6133: 'media' is declared but its value is never read.
+lib/wordpress-diagnostics.ts(1052,11): error TS6133: 'errors' is declared but its value is never read.
+lib/wordpress-full-sync.ts(26,11): error TS6133: 'wpApi' is declared but its value is never read.
+lib/wordpress-integration-service.ts(72,29): error TS6133: 'itemsPerPage' is declared but its value is never read.
+lib/wordpress-integration-service.ts(76,9): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/wordpress-integration-service.ts(76,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(77,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(78,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(85,9): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/wordpress-integration-service.ts(85,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(86,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(87,24): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(127,52): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(130,58): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(130,104): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(158,52): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(161,58): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress-integration-service.ts(161,104): error TS2341: Property 'config' is private and only accessible within class 'WordPressService'.
+lib/wordpress/wordpress-conflict-detector.ts(74,31): error TS2339: Property 'syncConflict' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+lib/wordpress/wordpress-conflict-detector.ts(99,14): error TS2339: Property 'syncConflict' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+lib/wordpress/wordpress-conflict-detector.ts(118,14): error TS2339: Property 'syncConflict' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+lib/wordpress/wordpress-conflict-detector.ts(145,21): error TS2339: Property 'syncConflict' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+lib/wordpress/wordpress-content-normalizer.ts(208,18): error TS6133: 'removeShortcodes' is declared but its value is never read.
+lib/wordpress/wordpress-embedding-trigger.ts(143,7): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-embedding-trigger.ts(155,9): error TS2353: Object literal may only specify known properties, and 'correlationId' does not exist in type 'GenerateEmbeddingParams'.
+lib/wordpress/wordpress-encryption.ts(90,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(arrayBuffer: WithImplicitCoercion<ArrayBufferLike>, byteOffset?: number | undefined, length?: number | undefined): Buffer<ArrayBufferLike>', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'WithImplicitCoercion<ArrayBufferLike>'.
+      Type 'undefined' is not assignable to type 'WithImplicitCoercion<ArrayBufferLike>'.
+  Overload 2 of 4, '(string: WithImplicitCoercion<string>, encoding?: BufferEncoding | undefined): Buffer<ArrayBuffer>', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'WithImplicitCoercion<string>'.
+      Type 'undefined' is not assignable to type 'WithImplicitCoercion<string>'.
+lib/wordpress/wordpress-encryption.ts(97,37): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(data: ArrayBufferView<ArrayBufferLike>, inputEncoding: undefined, outputEncoding: Encoding): string', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'ArrayBufferView<ArrayBufferLike>'.
+      Type 'undefined' is not assignable to type 'ArrayBufferView<ArrayBufferLike>'.
+  Overload 2 of 4, '(data: string, inputEncoding: Encoding | undefined, outputEncoding: Encoding): string', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+lib/wordpress/wordpress-encryption.ts(98,5): error TS2322: Type 'string' is not assignable to type 'NonSharedBuffer & string'.
+  Type 'string' is not assignable to type 'NonSharedBuffer'.
+lib/wordpress/wordpress-encryption.ts(122,33): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/wordpress/wordpress-incremental-sync.ts(16,1): error TS6133: 'EmbeddingService' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(20,1): error TS6133: 'createCorrelationContext' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(71,7): error TS1117: An object literal cannot have multiple properties with the same name.
+lib/wordpress/wordpress-incremental-sync.ts(99,51): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-incremental-sync.ts(130,15): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-incremental-sync.ts(139,15): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-incremental-sync.ts(150,15): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-incremental-sync.ts(161,15): error TS2345: Argument of type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' is not assignable to parameter of type 'StructuredLogger'.
+  Property 'component' is missing in type '{ info: (message: string, context?: LogContext) => void; warn: (message: string, context?: LogContext) => void; error: (message: string, context?: LogContext) => void; debug: (message: string, context?: LogContext) => void; }' but required in type 'StructuredLogger'.
+lib/wordpress/wordpress-incremental-sync.ts(274,5): error TS6133: 'logger' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(327,5): error TS6133: 'logger' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(386,37): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(386,68): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(396,29): error TS2339: Property 'title' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(397,31): error TS2339: Property 'content' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(398,33): error TS2339: Property 'updatedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(560,37): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(560,68): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(567,29): error TS2339: Property 'title' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(568,31): error TS2339: Property 'content' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(569,33): error TS2339: Property 'updatedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(647,37): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(647,68): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-incremental-sync.ts(720,5): error TS6133: 'logger' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(763,5): error TS6133: 'organizationId' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(764,5): error TS6133: 'wpAuthorId' is declared but its value is never read.
+lib/wordpress/wordpress-incremental-sync.ts(791,5): error TS6133: 'wpBaseUrl' is declared but its value is never read.
+lib/wordpress/wordpress-push.ts(11,1): error TS6133: 'findWpPostIdByPageId' is declared but its value is never read.
+lib/wordpress/wordpress-push.ts(171,15): error TS6133: 'wpPost' is declared but its value is never read.
+lib/wordpress/wordpress-push.ts(212,5): error TS6133: 'idempotencyKey' is declared but its value is never read.
+lib/wordpress/wordpress-sync-health.ts(9,1): error TS6133: 'StructuredLogger' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker-runner.ts(11,1): error TS6133: 'StructuredLogger' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker-runner.ts(76,28): error TS2802: Type 'MapIterator<Timeout>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+lib/wordpress/wordpress-sync-worker-runner.ts(109,38): error TS2339: Property 'claimed' does not exist on type 'ClaimResult'.
+lib/wordpress/wordpress-sync-worker.ts(9,1): error TS6133: 'validateTenantContext' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker.ts(15,1): error TS6133: 'EmbeddingService' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker.ts(19,1): error TS6133: 'createCorrelationContext' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker.ts(447,37): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-sync-worker.ts(447,68): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-sync-worker.ts(514,7): error TS2353: Object literal may only specify known properties, and 'skipReason' does not exist in type '{ created: boolean; updated: boolean; embeddingQueued: boolean; embeddingSkipped: boolean; }'.
+lib/wordpress/wordpress-sync-worker.ts(593,37): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-sync-worker.ts(593,68): error TS2339: Property 'wpSyncedAt' does not exist on type '{ id: string; wpPostId: number | null; }'.
+lib/wordpress/wordpress-sync-worker.ts(669,5): error TS6133: 'organizationId' is declared but its value is never read.
+lib/wordpress/wordpress-sync-worker.ts(670,5): error TS6133: 'wpAuthorId' is declared but its value is never read.
+scripts/auto-fix-build-v2.ts(75,25): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(78,11): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(79,26): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(80,25): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(81,48): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(89,66): error TS1501: This regular expression flag is only available when targeting 'es2018' or later.
+scripts/auto-fix-build-v2.ts(91,77): error TS1501: This regular expression flag is only available when targeting 'es2018' or later.
+scripts/auto-fix-build-v2.ts(99,11): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(100,26): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(101,25): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(102,20): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(103,36): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(197,38): error TS2339: Property 'getStart' does not exist on type 'never'.
+  Property 'getStart' does not exist on type 'never'.
+scripts/auto-fix-build-v2.ts(198,36): error TS2339: Property 'getEnd' does not exist on type 'never'.
+  Property 'getEnd' does not exist on type 'never'.
+scripts/auto-fix-build-v2.ts(254,20): error TS2551: Property 'isParameterDeclaration' does not exist on type 'typeof ts'. Did you mean 'isTypeParameterDeclaration'?
+scripts/auto-fix-build-v2.ts(287,9): error TS18048: 'varName' is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(289,36): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(289,67): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build-v2.ts(327,19): error TS18048: 'fullPath' is possibly 'undefined'.
+scripts/auto-fix-build-v2.ts(360,26): error TS6133: 'error' is declared but its value is never read.
+scripts/auto-fix-build-v2.ts(501,41): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build.ts(9,20): error TS6133: 'spawn' is declared but its value is never read.
+scripts/auto-fix-build.ts(75,94): error TS1501: This regular expression flag is only available when targeting 'es2018' or later.
+scripts/auto-fix-build.ts(89,103): error TS1501: This regular expression flag is only available when targeting 'es2018' or later.
+scripts/auto-fix-build.ts(99,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build.ts(100,24): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build.ts(101,23): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build.ts(102,18): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build.ts(103,34): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/auto-fix-build.ts(179,9): error TS18048: 'varName' is possibly 'undefined'.
+scripts/auto-fix-build.ts(195,22): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build.ts(197,28): error TS2532: Object is possibly 'undefined'.
+scripts/auto-fix-build.ts(213,46): error TS18048: 'varName' is possibly 'undefined'.
+scripts/auto-fix-build.ts(220,34): error TS18048: 'varName' is possibly 'undefined'.
+scripts/auto-fix-build.ts(271,19): error TS18048: 'fullPath' is possibly 'undefined'.
+scripts/auto-fix-build.ts(290,24): error TS18048: 'fullPath' is possibly 'undefined'.
+scripts/auto-fix-build.ts(291,10): error TS18048: 'fullPath' is possibly 'undefined'.
+scripts/auto-fix-build.ts(312,26): error TS6133: 'error' is declared but its value is never read.
+scripts/auto-fix-build.ts(458,41): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+scripts/release-gate.ts(188,43): error TS2532: Object is possibly 'undefined'.
+scripts/release-gate.ts(190,50): error TS2532: Object is possibly 'undefined'.
+scripts/test-creative-generator.ts(24,9): error TS2741: Property 'mainPrompt' is missing in type '{ productName: string; productDescription: string; }' but required in type 'CreativeBrief'.
+scripts/test-creative-generator.ts(39,9): error TS2741: Property 'mainPrompt' is missing in type '{ productName: string; platform: "instagram"; imageReferences: ({ url: string; role: "style"; description: string; } | { url: string; role: "produto"; description: string; })[]; }' but required in type 'CreativeBrief'.
+scripts/test-creative-generator.ts(64,11): error TS2741: Property 'mainPrompt' is missing in type '{ productName: string; productDescription: string; targetAudience: string; keyBenefits: string[]; tone: "professional"; platform: "facebook"; maxLength: number; callToAction: string; }' but required in type 'CreativeBrief'.
+scripts/wp-go-live-smoke.ts(21,7): error TS6133: 'CRON_SECRET' is declared but its value is never read.
+tests/ai/hnsw-tuning.test.ts(7,32): error TS6133: 'beforeEach' is declared but its value is never read.
+tests/ai/hnsw-tuning.test.ts(7,44): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/hnsw-tuning.test.ts(8,47): error TS6133: 'detectHnswEfSearchSupport' is declared but its value is never read.
+tests/ai/queue-claim.test.ts(7,44): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/queue-claim.test.ts(8,22): error TS6133: 'ClaimJobsOptions' is declared but its value is never read.
+tests/ai/queue-claim.test.ts(49,14): error TS2532: Object is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(50,14): error TS2532: Object is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(51,14): error TS2532: Object is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(78,14): error TS2532: Object is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(79,14): error TS2532: Object is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(146,37): error TS18048: 'claimedJob' is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(152,40): error TS18048: 'claimedJob' is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(156,22): error TS18048: 'claimedJob' is possibly 'undefined'.
+tests/ai/queue-claim.test.ts(159,26): error TS2339: Property 'lastHeartbeatAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/ai/queue-claim.test.ts(160,48): error TS2339: Property 'lockExpiresAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/ai/queue-claim.test.ts(161,27): error TS2339: Property 'lockExpiresAt' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/ai/queue-claim.test.ts(182,11): error TS2353: Object literal may only specify known properties, and 'lockedBy' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/ai/queue-claim.test.ts(200,28): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/ai/queue-claim.test.ts(218,11): error TS2353: Object literal may only specify known properties, and 'lockedBy' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/ai/queue-claim.test.ts(270,28): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/ai/rag-regression.baseline.ts(8,1): error TS6133: 'join' is declared but its value is never read.
+tests/ai/rag-regression.runner.ts(63,50): error TS2339: Property 'confidence' does not exist on type '{ averageSimilarity: number; threshold: number; chunksUsed: number; chunksConsidered: number; }'.
+tests/ai/rag-regression.runner.ts(64,50): error TS2339: Property 'confidence' does not exist on type '{ averageSimilarity: number; threshold: number; chunksUsed: number; chunksConsidered: number; }'.
+tests/ai/rag-regression.runner.ts(90,43): error TS2339: Property 'correlationId' does not exist on type '{ provider: string; model: string; durationMs: number; fallbackUsed: boolean; }'.
+tests/ai/rag-regression.test.ts(8,36): error TS6133: 'writeFileSync' is declared but its value is never read.
+tests/ai/rag-regression.test.ts(12,1): error TS6133: 'RegressionTestCase' is declared but its value is never read.
+tests/ai/rag-regression.validator.ts(51,11): error TS18048: 'actualLevel' is possibly 'undefined'.
+tests/ai/rag-regression.validator.ts(51,25): error TS18048: 'expectedLevel' is possibly 'undefined'.
+tests/ai/rag-rerank.test.ts(7,32): error TS6133: 'beforeEach' is declared but its value is never read.
+tests/api/health-integrations.test.ts(19,61): error TS2339: Property 'url' does not exist on type 'Request | URL'.
+  Property 'url' does not exist on type 'URL'.
+tests/e2e/finops-degradation.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/finops-degradation.test.ts(17,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/finops-degradation.test.ts(33,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/e2e/finops-degradation.test.ts(121,9): error TS2554: Expected 2 arguments, but got 3.
+tests/e2e/finops-degradation.test.ts(138,43): error TS2339: Property 'degraded' does not exist on type 'PolicyAdjustment'.
+tests/e2e/finops-degradation.test.ts(188,9): error TS2345: Argument of type 'string | boolean | undefined' is not assignable to parameter of type 'boolean'.
+  Type 'undefined' is not assignable to type 'boolean'.
+tests/e2e/finops-degradation.test.ts(245,9): error TS2345: Argument of type 'boolean | undefined' is not assignable to parameter of type 'boolean'.
+  Type 'undefined' is not assignable to type 'boolean'.
+tests/e2e/helpers/test-metrics.ts(100,11): error TS2451: Cannot redeclare block-scoped variable 'successRate'.
+tests/e2e/helpers/test-metrics.ts(145,11): error TS2451: Cannot redeclare block-scoped variable 'successRate'.
+tests/e2e/helpers/test-metrics.ts(211,27): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+tests/e2e/helpers/wp-test-harness.ts(69,7): error TS2322: Type '{ name: string; }' is not assignable to type '(Without<OrganizationCreateInput, OrganizationUncheckedCreateInput> & OrganizationUncheckedCreateInput) | (Without<...> & OrganizationCreateInput)'.
+  Type '{ name: string; }' is not assignable to type 'Without<OrganizationUncheckedCreateInput, OrganizationCreateInput> & OrganizationCreateInput'.
+    Property 'slug' is missing in type '{ name: string; }' but required in type 'OrganizationCreateInput'.
+tests/e2e/helpers/wp-test-harness.ts(83,7): error TS2322: Type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' is not assignable to type '(Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput) | (Without<...> & SiteCreateInput)'.
+  Type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' is not assignable to type 'Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput'.
+    Property 'url' is missing in type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' but required in type 'SiteUncheckedCreateInput'.
+tests/e2e/helpers/wp-test-harness.ts(95,7): error TS2322: Type '{ name: string; }' is not assignable to type '(Without<OrganizationCreateInput, OrganizationUncheckedCreateInput> & OrganizationUncheckedCreateInput) | (Without<...> & OrganizationCreateInput)'.
+  Type '{ name: string; }' is not assignable to type 'Without<OrganizationUncheckedCreateInput, OrganizationCreateInput> & OrganizationCreateInput'.
+    Property 'slug' is missing in type '{ name: string; }' but required in type 'OrganizationCreateInput'.
+tests/e2e/helpers/wp-test-harness.ts(109,7): error TS2322: Type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' is not assignable to type '(Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput) | (Without<...> & SiteCreateInput)'.
+  Type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' is not assignable to type 'Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput'.
+    Property 'url' is missing in type '{ name: string; organizationId: string; wpConfigured: true; wpBaseUrl: string; wpAuthType: string; wpLastSyncAt: Date; }' but required in type 'SiteUncheckedCreateInput'.
+tests/e2e/helpers/wp-test-harness.ts(159,13): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type 'QueueJobWhereInput'.
+tests/e2e/helpers/wp-test-harness.ts(160,13): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type 'QueueJobWhereInput'.
+tests/e2e/helpers/wp-test-harness.ts(276,45): error TS6133: 'method' is declared but its value is never read.
+tests/e2e/helpers/wp-test-harness.ts(289,29): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+tests/e2e/helpers/wp-test-harness.ts(297,29): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+tests/e2e/helpers/wp-test-harness.ts(327,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type 'QueueJobWhereInput'.
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/ops-health-alerts.test.ts(18,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/ops-health-alerts.test.ts(34,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/e2e/ops-health-alerts.test.ts(57,13): error TS6133: 'triggerResult' is declared but its value is never read.
+tests/e2e/ops-health-alerts.test.ts(74,13): error TS2353: Object literal may only specify known properties, and 'path' does not exist in type 'StringFilter<"QueueJob">'.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(16,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/queue-recovery.test.ts(44,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/queue-recovery.test.ts(61,9): error TS2554: Expected 1 arguments, but got 5.
+tests/e2e/queue-recovery.test.ts(71,21): error TS2339: Property 'length' does not exist on type 'ClaimResult'.
+tests/e2e/queue-recovery.test.ts(73,21): error TS2339: Property 'length' does not exist on type 'ClaimResult'.
+tests/e2e/queue-recovery.test.ts(76,36): error TS2339: Property 'length' does not exist on type 'ClaimResult'.
+tests/e2e/queue-recovery.test.ts(81,26): error TS2339: Property 'length' does not exist on type 'ClaimResult'.
+tests/e2e/queue-recovery.test.ts(106,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/queue-recovery.test.ts(120,24): error TS2339: Property 'heartbeat' does not exist on type 'typeof QueueClaim'.
+tests/e2e/queue-recovery.test.ts(125,19): error TS2353: Object literal may only specify known properties, and 'lockedAt' does not exist in type 'QueueJobSelect<DefaultArgs>'.
+tests/e2e/queue-recovery.test.ts(132,21): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/e2e/queue-recovery.test.ts(138,35): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/e2e/queue-recovery.test.ts(142,26): error TS2339: Property 'lockedBy' does not exist on type '{ error: string | null; status: string; result: string | null; id: string; createdAt: Date; updatedAt: Date; type: string; data: string; attempts: number; maxAttempts: number; processedAt: Date | null; }'.
+tests/e2e/queue-recovery.test.ts(164,13): error TS6133: 'stuckJob' is declared but its value is never read.
+tests/e2e/queue-recovery.test.ts(168,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/queue-recovery.test.ts(185,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type 'QueueJobWhereInput'.
+tests/e2e/queue-recovery.test.ts(230,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-full-sync.test.ts(13,1): error TS6133: 'WordPressSyncWorker' is declared but its value is never read.
+tests/e2e/wp-full-sync.test.ts(42,13): error TS6133: 'termsJob' is declared but its value is never read.
+tests/e2e/wp-full-sync.test.ts(46,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/wp-full-sync.test.ts(65,13): error TS6133: 'pagesJob' is declared but its value is never read.
+tests/e2e/wp-full-sync.test.ts(69,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/wp-full-sync.test.ts(135,9): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(13,1): error TS6133: 'WordPressIncrementalPullService' is declared but its value is never read.
+tests/e2e/wp-incremental-webhook.test.ts(14,1): error TS6133: 'crypto' is declared but its value is never read.
+tests/e2e/wp-incremental-webhook.test.ts(46,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/wp-incremental-webhook.test.ts(124,11): error TS2353: Object literal may only specify known properties, and 'siteId' does not exist in type '(Without<QueueJobCreateInput, QueueJobUncheckedCreateInput> & QueueJobUncheckedCreateInput) | (Without<...> & QueueJobCreateInput)'.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-push-loop-prevention.test.ts(19,7): error TS6133: 'pageId' is declared but its value is never read.
+tests/e2e/wp-push-loop-prevention.test.ts(29,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: null; wpSiteUrl: string; wpSyncedAt: null; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: null; wpSiteUrl: string; wpSyncedAt: null; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: null; wpSiteUrl: string; wpSyncedAt: null; }' but required in type 'PageUncheckedCreateInput'.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(25,7): error TS6133: 'pageId2' is declared but its value is never read.
+tests/e2e/wp-rag-quality.test.ts(35,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/e2e/wp-rag-quality.test.ts(48,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/feedback/feedback-service.test.ts(5,32): error TS6133: 'beforeEach' is declared but its value is never read.
+tests/feedback/feedback-service.test.ts(5,44): error TS6133: 'vi' is declared but its value is never read.
+tests/feedback/feedback-service.test.ts(31,23): error TS2367: This comparison appears to be unintentional because the types '-1' and '1' have no overlap.
+tests/feedback/feedback-service.test.ts(37,23): error TS2367: This comparison appears to be unintentional because the types '0' and '1' have no overlap.
+tests/feedback/feedback-service.test.ts(37,39): error TS2367: This comparison appears to be unintentional because the types '0' and '-1' have no overlap.
+tests/feedback/feedback-service.test.ts(79,9): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(81,11): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(83,11): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(88,14): error TS18048: 'byConfidence.high' is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(89,14): error TS18048: 'byConfidence.high' is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(90,14): error TS18048: 'byConfidence.high' is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(91,14): error TS18048: 'byConfidence.medium' is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(92,14): error TS18048: 'byConfidence.low' is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(106,9): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(108,11): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(110,11): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(115,14): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(116,14): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(117,14): error TS2532: Object is possibly 'undefined'.
+tests/feedback/feedback-service.test.ts(118,14): error TS2532: Object is possibly 'undefined'.
+tests/finops/tenant-cost-policy.test.ts(5,32): error TS6133: 'beforeAll' is declared but its value is never read.
+tests/finops/tenant-cost-policy.test.ts(5,43): error TS6133: 'vi' is declared but its value is never read.
+tests/finops/tenant-cost-policy.test.ts(6,35): error TS6133: 'TenantCostState' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(5,32): error TS6133: 'beforeEach' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(5,44): error TS6133: 'vi' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(25,19): error TS6133: 'key' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(116,12): error TS2532: Object is possibly 'undefined'.
+tests/observability/health-snapshot.test.ts(7,32): error TS6133: 'beforeEach' is declared but its value is never read.
+tests/tuning/tuning-insights.test.ts(374,14): error TS2532: Object is possibly 'undefined'.
+tests/tuning/tuning-insights.test.ts(375,14): error TS2532: Object is possibly 'undefined'.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/wordpress/wp-rag-e2e.test.ts(16,1): error TS6133: 'EmbeddingService' is declared but its value is never read.
+tests/wordpress/wp-rag-e2e.test.ts(18,1): error TS6133: 'TenantCostPolicyService' is declared but its value is never read.
+tests/wordpress/wp-rag-e2e.test.ts(30,7): error TS2322: Type '{ name: string; }' is not assignable to type '(Without<OrganizationCreateInput, OrganizationUncheckedCreateInput> & OrganizationUncheckedCreateInput) | (Without<...> & OrganizationCreateInput)'.
+  Type '{ name: string; }' is not assignable to type 'Without<OrganizationUncheckedCreateInput, OrganizationCreateInput> & OrganizationCreateInput'.
+    Property 'slug' is missing in type '{ name: string; }' but required in type 'OrganizationCreateInput'.
+tests/wordpress/wp-rag-e2e.test.ts(37,7): error TS2322: Type '{ name: string; organizationId: string; wpConfigured: true; wpLastSyncAt: Date; }' is not assignable to type '(Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput) | (Without<...> & SiteCreateInput)'.
+  Type '{ name: string; organizationId: string; wpConfigured: true; wpLastSyncAt: Date; }' is not assignable to type 'Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput'.
+    Property 'url' is missing in type '{ name: string; organizationId: string; wpConfigured: true; wpLastSyncAt: Date; }' but required in type 'SiteUncheckedCreateInput'.
+tests/wordpress/wp-rag-e2e.test.ts(68,7): error TS2322: Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type '(Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput) | (Without<...> & PageCreateInput)'.
+  Type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' is not assignable to type 'Without<PageCreateInput, PageUncheckedCreateInput> & PageUncheckedCreateInput'.
+    Property 'authorId' is missing in type '{ title: string; slug: string; content: string; siteId: string; wpPostId: number; wpSiteUrl: string; wpSyncedAt: Date; }' but required in type 'PageUncheckedCreateInput'.
+tests/wordpress/wp-rag-e2e.test.ts(207,7): error TS2322: Type '{ name: string; }' is not assignable to type '(Without<OrganizationCreateInput, OrganizationUncheckedCreateInput> & OrganizationUncheckedCreateInput) | (Without<...> & OrganizationCreateInput)'.
+  Type '{ name: string; }' is not assignable to type 'Without<OrganizationUncheckedCreateInput, OrganizationCreateInput> & OrganizationCreateInput'.
+    Property 'slug' is missing in type '{ name: string; }' but required in type 'OrganizationCreateInput'.
+tests/wordpress/wp-rag-e2e.test.ts(213,7): error TS2322: Type '{ name: string; organizationId: string; }' is not assignable to type '(Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput) | (Without<...> & SiteCreateInput)'.
+  Type '{ name: string; organizationId: string; }' is not assignable to type 'Without<SiteCreateInput, SiteUncheckedCreateInput> & SiteUncheckedCreateInput'.
+    Property 'url' is missing in type '{ name: string; organizationId: string; }' but required in type 'SiteUncheckedCreateInput'.
+tests/wordpress/wp-rag-e2e.test.ts(245,11): error TS2353: Object literal may only specify known properties, and 'path' does not exist in type 'StringFilter<"QueueJob">'.
+vitest.config.ts(15,7): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'reports' does not exist in type '({ provider?: undefined; } & CoverageV8Options) | ({ provider: "custom"; } & CustomProviderOptions) | ({ provider: "istanbul"; } & CoverageIstanbulOptions) | ({ ...; } & CoverageV8Options)'.
+vitest.setup.ts(4,1): error TS2304: Cannot find name 'beforeAll'.

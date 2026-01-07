@@ -6,7 +6,7 @@
  */
 
 import { db } from '@/lib/db'
-import { StructuredLogger } from '@/lib/observability/logger'
+// import {  } from '@/lib/observability/logger'
 
 export interface WordPressSyncHealth {
   siteId: string
@@ -189,6 +189,8 @@ export class WordPressSyncHealthService {
     return Promise.all(healthPromises)
   }
 }
+
+
 
 
 

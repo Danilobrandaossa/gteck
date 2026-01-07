@@ -147,3 +147,5 @@ if (body.creative_type === 'imagem' || body.generateImages === true) {
 
 
 
+
+

@@ -9,14 +9,14 @@ export const designSystem = {
       sidebar: '#FFFFFF',   // Fundo da sidebar (branco)
       header: '#FFFFFF',    // Fundo do header (branco)
     },
-    
+
     // Textos
     text: {
       primary: '#333333',   // Texto principal (cinza escuro)
       secondary: '#666666', // Texto secundário (cinza médio)
       light: '#999999',     // Texto claro (cinza claro)
     },
-    
+
     // Cores de destaque
     accent: {
       orange: '#FF6B35',    // Laranja principal (logo, ativo)
@@ -25,24 +25,24 @@ export const designSystem = {
       info: '#90CAF9',      // Azul informação (revisão)
       system: '#66BB6A',    // Verde sistema (operacional)
     },
-    
+
     // Bordas e divisores
     border: {
       light: '#E5E7EB',     // Bordas claras
       medium: '#D1D5DB',     // Bordas médias
     }
   },
-  
+
   // Sombras
   shadow: {
     card: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
     search: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
   },
-  
+
   // Tipografia
   typography: {
     fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    
+
     // Tamanhos
     sizes: {
       xs: '0.75rem',    // 12px
@@ -53,7 +53,7 @@ export const designSystem = {
       '2xl': '1.5rem', // 24px
       '3xl': '2rem',   // 32px
     },
-    
+
     // Pesos
     weights: {
       normal: '400',
@@ -62,7 +62,7 @@ export const designSystem = {
       bold: '700',
     }
   },
-  
+
   // Espaçamentos
   spacing: {
     xs: '0.25rem',   // 4px
@@ -73,7 +73,7 @@ export const designSystem = {
     '2xl': '2rem',   // 32px
     '3xl': '3rem',   // 48px
   },
-  
+
   // Bordas
   borderRadius: {
     sm: '0.25rem',   // 4px
@@ -81,7 +81,7 @@ export const designSystem = {
     lg: '0.75rem',   // 12px
     xl: '1rem',      // 16px
   },
-  
+
   // Componentes padrão
   components: {
     // Cards
@@ -92,7 +92,7 @@ export const designSystem = {
       padding: '1.5rem',
       border: '1px solid #E5E7EB',
     },
-    
+
     // Botões
     button: {
       primary: {
@@ -124,7 +124,7 @@ export const designSystem = {
         }
       }
     },
-    
+
     // Inputs
     input: {
       backgroundColor: '#FFFFFF',
@@ -139,7 +139,7 @@ export const designSystem = {
         boxShadow: '0 0 0 3px rgba(255, 107, 53, 0.1)',
       }
     },
-    
+
     // Status badges
     badge: {
       published: {
@@ -172,7 +172,7 @@ export const designSystem = {
 
 // Função para aplicar estilos inline seguindo o design system
 export const applyDesignSystem = (component: string, variant?: string) => {
-  const styles = designSystem.components[component]
+  const styles = (designSystem.components as any)[component]
   if (variant && styles[variant]) {
     return styles[variant]
   }

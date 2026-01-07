@@ -7,15 +7,15 @@ import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useCategories } from '@/contexts/categories-context'
 import { useOrganization } from '@/contexts/organization-context'
 import { CreateCategoryForm } from '@/components/forms/create-category-form'
-import { Plus, Search, Filter, MoreHorizontal, Edit, Trash2, Eye, EyeOff, ChevronRight, ChevronDown, Tag, Settings, RefreshCw } from 'lucide-react'
+import { Plus, Tag, Settings } from 'lucide-react'
 
 export default function CategoriesPage() {
-  const { categories, isLoading, error, deleteCategory, toggleCategoryStatus, searchCategories, filterCategories, getCategoryTree } = useCategories()
+  const { categories: _categories, isLoading, error, deleteCategory, toggleCategoryStatus, searchCategories, filterCategories, getCategoryTree } = useCategories()
   const { currentOrganization } = useOrganization()
-  const [searchTerm, setSearchTerm] = useState('')
-  const [parentFilter, setParentFilter] = useState('all')
-  const [statusFilter, setStatusFilter] = useState('all')
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
+  const [searchTerm, _setSearchTerm] = useState('')
+  const [parentFilter, _setParentFilter] = useState('all')
+  const [statusFilter, _setStatusFilter] = useState('all')
+  const [_expandedCategories] = useState<Set<string>>(new Set())
   const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [selectedCategoryType, setSelectedCategoryType] = useState<'pages' | 'pressels' | 'quizzes' | 'articles' | 'general'>('general')
@@ -25,26 +25,16 @@ export default function CategoriesPage() {
   const [isLoadingSiteCategories, setIsLoadingSiteCategories] = useState(false)
   const [isLoadingCmsCategories, setIsLoadingCmsCategories] = useState(false)
 
-  const filteredCategories = searchTerm 
+  searchTerm
     ? searchCategories(searchTerm)
     : filterCategories(
-        parentFilter === 'all' ? undefined : parentFilter === 'root' ? undefined : parentFilter,
-        statusFilter === 'all' ? undefined : statusFilter
-      )
+      parentFilter === 'all' ? undefined : parentFilter === 'root' ? undefined : parentFilter,
+      statusFilter === 'all' ? undefined : statusFilter
+    )
 
-  const categoryTree = getCategoryTree()
+  getCategoryTree()
 
-  const toggleExpanded = (categoryId: string) => {
-    setExpandedCategories(prev => {
-      const newSet = new Set(prev)
-      if (newSet.has(categoryId)) {
-        newSet.delete(categoryId)
-      } else {
-        newSet.add(categoryId)
-      }
-      return newSet
-    })
-  }
+
 
   // Funções para criação de categorias
   const handleCreateCategory = (type: 'pages' | 'pressels' | 'quizzes' | 'articles' | 'general') => {
@@ -68,7 +58,7 @@ export default function CategoriesPage() {
   const loadSiteCategories = async () => {
     console.log(' Carregando categorias do site...')
     setIsLoadingSiteCategories(true)
-    
+
     try {
       // Simular carregamento de categorias do WordPress
       const mockSiteCategories = [
@@ -95,7 +85,7 @@ export default function CategoriesPage() {
           created_at: new Date().toISOString()
         }
       ]
-      
+
       setSiteCategories(mockSiteCategories)
       console.log(' Categorias do site carregadas:', mockSiteCategories.length)
     } catch (error) {
@@ -108,7 +98,7 @@ export default function CategoriesPage() {
   const loadCmsCategories = async () => {
     console.log(' Carregando categorias do CMS...')
     setIsLoadingCmsCategories(true)
-    
+
     try {
       // Simular carregamento de categorias do CMS
       const mockCmsCategories = [
@@ -146,7 +136,7 @@ export default function CategoriesPage() {
           created_at: new Date().toISOString()
         }
       ]
-      
+
       setCmsCategories(mockCmsCategories)
       console.log(' Categorias do CMS carregadas:', mockCmsCategories.length)
     } catch (error) {
@@ -174,7 +164,7 @@ export default function CategoriesPage() {
     }
   }
 
-  const handleToggleStatus = async (id: string) => {
+  async (id: string) => {
     try {
       await toggleCategoryStatus(id)
     } catch (err) {
@@ -190,8 +180,8 @@ export default function CategoriesPage() {
             Categorias
           </h1>
           <p className="cms-text-gray-600 cms-mb-6">
-            {currentOrganization 
-              ? `Gerencie as categorias da organização ${currentOrganization.name}` 
+            {currentOrganization
+              ? `Gerencie as categorias da organização ${currentOrganization.name}`
               : 'Gerencie as categorias do sistema'
             }
           </p>
@@ -200,11 +190,10 @@ export default function CategoriesPage() {
           <div className="cms-flex cms-gap-2 cms-mb-6">
             <button
               onClick={() => setActiveTab('site')}
-              className={`cms-btn cms-px-6 cms-py-3 cms-border-none cms-rounded cms-cursor-pointer cms-text-sm cms-font-medium cms-flex cms-items-center cms-gap-2 ${
-                activeTab === 'site' ? 'cms-text-white' : 'cms-text-gray-700'
-              }`}
-              style={{ 
-                backgroundColor: activeTab === 'site' ? 'var(--primary)' : 'var(--gray-100)' 
+              className={`cms-btn cms-px-6 cms-py-3 cms-border-none cms-rounded cms-cursor-pointer cms-text-sm cms-font-medium cms-flex cms-items-center cms-gap-2 ${activeTab === 'site' ? 'cms-text-white' : 'cms-text-gray-700'
+                }`}
+              style={{
+                backgroundColor: activeTab === 'site' ? 'var(--primary)' : 'var(--gray-100)'
               }}
             >
               <Tag style={{ width: '1rem', height: '1rem' }} />
@@ -212,11 +201,10 @@ export default function CategoriesPage() {
             </button>
             <button
               onClick={() => setActiveTab('cms')}
-              className={`cms-btn cms-px-6 cms-py-3 cms-border-none cms-rounded cms-cursor-pointer cms-text-sm cms-font-medium cms-flex cms-items-center cms-gap-2 ${
-                activeTab === 'cms' ? 'cms-text-white' : 'cms-text-gray-700'
-              }`}
-              style={{ 
-                backgroundColor: activeTab === 'cms' ? 'var(--primary)' : 'var(--gray-100)' 
+              className={`cms-btn cms-px-6 cms-py-3 cms-border-none cms-rounded cms-cursor-pointer cms-text-sm cms-font-medium cms-flex cms-items-center cms-gap-2 ${activeTab === 'cms' ? 'cms-text-white' : 'cms-text-gray-700'
+                }`}
+              style={{
+                backgroundColor: activeTab === 'cms' ? 'var(--primary)' : 'var(--gray-100)'
               }}
             >
               <Settings style={{ width: '1rem', height: '1rem' }} />
@@ -319,7 +307,7 @@ export default function CategoriesPage() {
                     <div key={category.id} className="cms-page-item">
                       <div className="cms-page-info">
                         <div className="cms-flex cms-items-center cms-gap-4">
-                          <div 
+                          <div
                             className="cms-w-10 cms-h-10 cms-rounded cms-flex cms-items-center cms-justify-center cms-text-xl"
                             style={{ backgroundColor: category.color || 'var(--primary-light)' }}
                           >
@@ -387,7 +375,7 @@ export default function CategoriesPage() {
                     <div key={category.id} className="cms-page-item">
                       <div className="cms-page-info">
                         <div className="cms-flex cms-items-center cms-gap-4">
-                          <div 
+                          <div
                             className="cms-w-10 cms-h-10 cms-rounded cms-flex cms-items-center cms-justify-center cms-text-xl"
                             style={{ backgroundColor: category.color || 'var(--primary-light)' }}
                           >
@@ -407,7 +395,7 @@ export default function CategoriesPage() {
                               <span className="cms-text-xs cms-text-gray-500">
                                 {category.slug}
                               </span>
-                              <span 
+                              <span
                                 className="cms-text-xs cms-text-white cms-px-2 cms-py-1 cms-rounded"
                                 style={{ backgroundColor: category.color || 'var(--gray-500)' }}
                               >
@@ -447,13 +435,13 @@ export default function CategoriesPage() {
                   Tem certeza que deseja excluir esta categoria? Esta ação não pode ser desfeita.
                 </p>
                 <div className="cms-flex cms-gap-3 cms-justify-end">
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => setShowDeleteModal(null)}
                   >
                     Cancelar
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-danger"
                     onClick={() => handleDelete(showDeleteModal)}
                   >

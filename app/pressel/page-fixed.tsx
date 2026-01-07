@@ -4,52 +4,35 @@
 import { useState, useEffect } from 'react'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
-import { useOrganization } from '@/contexts/organization-context'
 import { PresselModelForm } from '@/components/forms/pressel-model-form'
 import { PresselTextConverter } from '@/components/forms/pressel-text-converter'
 import { PresselAutomationService, PresselModel, PresselConversionResult } from '@/lib/pressel-automation-service'
 import { 
   Plus, 
   Search, 
-  Filter, 
-  MoreHorizontal, 
   Edit, 
   Trash2, 
   Eye, 
-  Settings, 
-  Copy, 
   Zap, 
   FlaskConical, 
   Code, 
   LayoutTemplate, 
   FileText, 
-  Palette, 
-  Users, 
-  Calendar, 
-  Tag, 
-  Link as LinkIcon, 
-  RefreshCw, 
+  Link as _LinkIcon, 
   Play, 
-  Pause,
-  Square,
   X,
   Upload,
-  Download,
   CheckCircle, 
   XCircle, 
   AlertTriangle,
-  Info,
   Rocket,
-  Globe,
-  FileText as FileTextIcon,
+  FileText as _FileTextIcon,
   BarChart,
-  TrendingUp,
-  Star,
   Clock
 } from 'lucide-react'
 
 export default function PresselPage() {
-  const { currentOrganization, currentSite } = useOrganization()
+//   const { currentOrganization, currentSite } = useOrganization()
   const [models, setModels] = useState<PresselModel[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -58,7 +41,7 @@ export default function PresselPage() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [showTextConverter, setShowTextConverter] = useState(false)
-  const [showJSONUpload, setShowJSONUpload] = useState(false)
+  const [_showJSONUpload, setShowJSONUpload] = useState(false)
   const [selectedModel, setSelectedModel] = useState<PresselModel | null>(null)
   const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
   const [showPreviewModal, setShowPreviewModal] = useState(false)
@@ -153,7 +136,7 @@ export default function PresselPage() {
     setShowTextConverter(true)
   }
 
-  const handleJSONUpload = () => {
+   () => {
     setShowJSONUpload(true)
   }
 

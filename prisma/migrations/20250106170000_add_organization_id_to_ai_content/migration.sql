@@ -57,3 +57,5 @@ ALTER TABLE "ai_content_new" RENAME TO "ai_content";
 -- AddForeignKey
 ALTER TABLE "ai_content" ADD CONSTRAINT "ai_content_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "organizations"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+
+

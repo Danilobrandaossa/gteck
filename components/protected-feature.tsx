@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/auth-context'
-import { isPathEnabled, BLOCKED_FEATURE_MESSAGE } from '@/lib/feature-access'
+import { isPathEnabled } from '@/lib/feature-access'
 
 interface ProtectedFeatureProps {
   path: string

@@ -5,18 +5,14 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useOrganization } from '@/contexts/organization-context'
 import { 
-  Plus, 
   Search, 
-  Filter, 
   Edit, 
   Trash2, 
   Eye, 
   EyeOff, 
-  Calendar, 
   RefreshCw,
   CheckCircle2,
   XCircle,
-  Clock,
   Loader2,
   Sparkles,
   X,
@@ -281,7 +277,7 @@ export default function ConteudoPage() {
       })
 
       if (response.ok) {
-        const data = await response.json()
+         await response.json()
         setShowGenerateModal(false)
         setAiSuggestion('')
         setGenerateForm({

@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import { useOrganization } from '@/contexts/organization-context'
-import { X, Save, Eye, FileText } from 'lucide-react'
+import { X, Save, FileText } from 'lucide-react'
 
 interface CreatePageFormProps {
   isOpen: boolean

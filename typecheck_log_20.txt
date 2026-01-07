@@ -1,0 +1,11 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.

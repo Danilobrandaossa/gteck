@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import { useOrganization } from '@/contexts/organization-context'
-import { X, Save, Tag, AlertCircle } from 'lucide-react'
+import { X, Save, Tag } from 'lucide-react'
 
 interface CreateCategoryFormProps {
   isOpen: boolean
@@ -13,7 +13,7 @@ interface CreateCategoryFormProps {
 }
 
 export function CreateCategoryForm({ isOpen, onClose, onSuccess, categoryType }: CreateCategoryFormProps) {
-  const { currentSite } = useOrganization()
+  const { currentSite: _currentSite } = useOrganization()
   const [formData, setFormData] = useState({
     name: '',
     slug: '',

@@ -205,11 +205,14 @@ export class WordPressContentNormalizer {
   /**
    * Remove shortcodes WordPress (básico)
    */
-  private static removeShortcodes(text: string): string {
+// @ts-ignore
+  private static _removeShortcodes(text: string): string {
     // Remover shortcodes simples [shortcode] ou [shortcode param="value"]
     return text.replace(/\[[^\]]+\]/g, '')
   }
 }
+
+
 
 
 

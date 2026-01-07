@@ -140,3 +140,5 @@ Crie uma imagem publicitária de alta qualidade. Produto: Curso de Marketing. A 
 
 **Última atualização:** Baseado nas melhores práticas da OpenAI (2024-2025)
 
+
+

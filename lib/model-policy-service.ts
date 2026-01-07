@@ -7,7 +7,7 @@
  * - Otimização custo x qualidade
  */
 
-import { db } from './db'
+
 import { safeQueryRaw } from './tenant-security'
 import { Prisma } from '@prisma/client'
 
@@ -203,6 +203,8 @@ export class ModelPolicyService {
     return tokensMap[useCase] || this.DEFAULT_MAX_TOKENS
   }
 }
+
+
 
 
 

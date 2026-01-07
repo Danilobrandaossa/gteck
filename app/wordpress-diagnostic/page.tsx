@@ -1,7 +1,7 @@
 // Página de Diagnóstico Avançado do WordPress
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useOrganization } from '@/contexts/organization-context'
@@ -12,38 +12,20 @@ import {
   CheckCircle, 
   XCircle, 
   Info, 
-  RefreshCw, 
   Download, 
-  Settings,
-  Globe,
   Shield,
-  Zap,
   FileText,
-  Image,
-  Users,
-  Database,
-  Cpu,
-  Wifi,
-  Lock,
-  Eye,
-  BarChart3,
-  TrendingUp,
-  AlertCircle,
   Clock,
-  Activity,
   Play,
-  Pause,
-  Square,
   X,
   FileBarChart,
-  Target,
   Lightbulb
 } from 'lucide-react'
 
 export default function WordPressDiagnosticPage() {
-  const { currentOrganization, currentSite } = useOrganization()
+  const { currentOrganization: _currentOrganization, currentSite } = useOrganization()
   const [activeTab, setActiveTab] = useState<'simple' | 'compliance'>('simple')
-  const [isLoading, setIsLoading] = useState(false)
+  const [_isLoading, _setIsLoading] = useState(false)
   const [diagnosticResults, setDiagnosticResults] = useState<any>(null)
   const [isRunningDiagnostic, setIsRunningDiagnostic] = useState(false)
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false)

@@ -18,7 +18,7 @@ import { createHmac } from 'crypto'
 // Configuração
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 const ADMIN_HEALTH_SECRET = process.env.ADMIN_HEALTH_SECRET || ''
-const CRON_SECRET = process.env.CRON_SECRET || ''
+ process.env._CRON_SECRET || ''
 
 // Argumentos
 const args = process.argv.slice(2)
@@ -240,6 +240,8 @@ if (allPassed) {
   console.log('\n❌ Alguns testes falharam!')
   process.exit(1)
 }
+
+
 
 
 

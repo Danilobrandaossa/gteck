@@ -196,7 +196,7 @@ export function isFeatureEnabled(featureId: string, userRole?: string): boolean 
   if (userRole === 'admin') {
     return true
   }
-  
+
   const feature = FEATURES[featureId]
   return feature?.status === 'enabled'
 }
@@ -211,9 +211,9 @@ export function isPathEnabled(path: string, userRole?: string): boolean {
   if (userRole === 'admin') {
     return true
   }
-  
+
   const feature = Object.values(FEATURES).find(f => f.path === path)
-  return feature?.status === 'enabled' ?? false
+  return feature?.status === 'enabled'
 }
 
 /**
@@ -233,6 +233,8 @@ export function getEnabledFeatures(): Feature[] {
 /**
  * Mensagem padronizada para funcionalidades bloqueadas
  */
-export const BLOCKED_FEATURE_MESSAGE = 
+export const BLOCKED_FEATURE_MESSAGE =
   'Essa funcionalidade ainda está em fase de validação e será liberada gradualmente. No momento, apenas o recurso /criativos está disponível.'
+
+
 

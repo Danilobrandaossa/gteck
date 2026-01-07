@@ -5,30 +5,17 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useBulkOperations } from '@/contexts/bulk-operations-context'
 import { useOrganization } from '@/contexts/organization-context'
-import { Upload, Download, Zap, Trash2, Copy, RefreshCw, Play, Pause, CheckCircle, XCircle, AlertTriangle, Clock, FileText, Database, Globe } from 'lucide-react'
+import { Upload, Download, Zap, Trash2, Copy, RefreshCw, Pause, FileText, Database, Globe } from 'lucide-react'
 
 export default function BulkOperationsPage() {
-  const { operations, isLoading, error, isProcessing, currentOperation, importData, exportData, generateContent, deleteItems, cancelOperation, retryOperation } = useBulkOperations()
+  const { operations, isLoading: _isLoading, error, isProcessing, currentOperation, importData, exportData, generateContent, deleteItems: _deleteItems, cancelOperation, retryOperation } = useBulkOperations()
   const { currentOrganization } = useOrganization()
-  const [selectedOperation, setSelectedOperation] = useState<string | null>(null)
+  const [_selectedOperation, _setSelectedOperation] = useState<string | null>(null)
   const [showImportModal, setShowImportModal] = useState(false)
   const [showExportModal, setShowExportModal] = useState(false)
   const [showGenerateModal, setShowGenerateModal] = useState(false)
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return <CheckCircle style={{ width: '1rem', height: '1rem', color: 'var(--success)' }} />
-      case 'failed':
-        return <XCircle style={{ width: '1rem', height: '1rem', color: 'var(--danger)' }} />
-      case 'processing':
-        return <Play style={{ width: '1rem', height: '1rem', color: 'var(--warning)' }} />
-      case 'cancelled':
-        return <Pause style={{ width: '1rem', height: '1rem', color: 'var(--gray-400)' }} />
-      default:
-        return <Clock style={{ width: '1rem', height: '1rem', color: 'var(--gray-400)' }} />
-    }
-  }
+
 
   const getStatusText = (status: string) => {
     switch (status) {
@@ -156,7 +143,7 @@ export default function BulkOperationsPage() {
             Operações em Massa
           </h1>
           <p style={{ color: 'var(--gray-600)' }}>
-            {currentOrganization 
+            {currentOrganization
               ? `Execute operações em massa na organização ${currentOrganization.name}`
               : 'Execute operações em massa no seu conteúdo'
             }
@@ -165,11 +152,11 @@ export default function BulkOperationsPage() {
 
         {/* Error Message */}
         {error && (
-          <div style={{ 
-            padding: '0.75rem', 
-            backgroundColor: 'var(--error-light)', 
-            border: '1px solid var(--red-300)', 
-            borderRadius: 'var(--radius)', 
+          <div style={{
+            padding: '0.75rem',
+            backgroundColor: 'var(--error-light)',
+            border: '1px solid var(--red-300)',
+            borderRadius: 'var(--radius)',
             color: 'var(--danger)',
             fontSize: '0.875rem',
             marginBottom: '1rem'
@@ -212,7 +199,7 @@ export default function BulkOperationsPage() {
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                <button 
+                <button
                   className="cms-btn cms-btn-secondary"
                   onClick={() => cancelOperation(currentOperation.id)}
                 >
@@ -229,14 +216,14 @@ export default function BulkOperationsPage() {
           <div className="cms-card">
             <div className="cms-card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <div style={{ 
-                  width: '3rem', 
-                  height: '3rem', 
-                  backgroundColor: 'var(--primary-light)', 
-                  borderRadius: 'var(--radius-lg)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center' 
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  backgroundColor: 'var(--primary-light)',
+                  borderRadius: 'var(--radius-lg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   <Upload style={{ width: '1.5rem', height: '1.5rem', color: 'var(--primary)' }} />
                 </div>
@@ -249,7 +236,7 @@ export default function BulkOperationsPage() {
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 onClick={() => setShowImportModal(true)}
                 disabled={isProcessing}
@@ -264,14 +251,14 @@ export default function BulkOperationsPage() {
           <div className="cms-card">
             <div className="cms-card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <div style={{ 
-                  width: '3rem', 
-                  height: '3rem', 
-                  backgroundColor: 'var(--success-light)', 
-                  borderRadius: 'var(--radius-lg)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center' 
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  backgroundColor: 'var(--success-light)',
+                  borderRadius: 'var(--radius-lg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   <Download style={{ width: '1.5rem', height: '1.5rem', color: 'var(--success)' }} />
                 </div>
@@ -284,7 +271,7 @@ export default function BulkOperationsPage() {
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 onClick={() => setShowExportModal(true)}
                 disabled={isProcessing}
@@ -299,14 +286,14 @@ export default function BulkOperationsPage() {
           <div className="cms-card">
             <div className="cms-card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <div style={{ 
-                  width: '3rem', 
-                  height: '3rem', 
-                  backgroundColor: 'var(--warning-light)', 
-                  borderRadius: 'var(--radius-lg)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center' 
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  backgroundColor: 'var(--warning-light)',
+                  borderRadius: 'var(--radius-lg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   <Zap style={{ width: '1.5rem', height: '1.5rem', color: 'var(--warning)' }} />
                 </div>
@@ -319,7 +306,7 @@ export default function BulkOperationsPage() {
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 onClick={() => setShowGenerateModal(true)}
                 disabled={isProcessing}
@@ -334,14 +321,14 @@ export default function BulkOperationsPage() {
           <div className="cms-card">
             <div className="cms-card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <div style={{ 
-                  width: '3rem', 
-                  height: '3rem', 
-                  backgroundColor: 'var(--info-light)', 
-                  borderRadius: 'var(--radius-lg)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center' 
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  backgroundColor: 'var(--info-light)',
+                  borderRadius: 'var(--radius-lg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   <Database style={{ width: '1.5rem', height: '1.5rem', color: 'var(--info)' }} />
                 </div>
@@ -354,7 +341,7 @@ export default function BulkOperationsPage() {
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 disabled={isProcessing}
                 style={{ width: '100%' }}
@@ -424,12 +411,12 @@ export default function BulkOperationsPage() {
                         </div>
                       )}
                       {operation.error && (
-                        <div style={{ 
-                          marginTop: '0.5rem', 
-                          padding: '0.5rem', 
-                          backgroundColor: 'var(--error-light)', 
-                          border: '1px solid var(--red-300)', 
-                          borderRadius: 'var(--radius)', 
+                        <div style={{
+                          marginTop: '0.5rem',
+                          padding: '0.5rem',
+                          backgroundColor: 'var(--error-light)',
+                          border: '1px solid var(--red-300)',
+                          borderRadius: 'var(--radius)',
                           color: 'var(--danger)',
                           fontSize: '0.875rem'
                         }}>
@@ -451,7 +438,7 @@ export default function BulkOperationsPage() {
                       )}
                       <div style={{ display: 'flex', gap: '0.25rem' }}>
                         {operation.status === 'failed' && (
-                          <button 
+                          <button
                             className="cms-btn cms-btn-icon cms-btn-secondary"
                             onClick={() => retryOperation(operation.id)}
                             title="Tentar novamente"
@@ -460,7 +447,7 @@ export default function BulkOperationsPage() {
                           </button>
                         )}
                         {operation.status === 'processing' && (
-                          <button 
+                          <button
                             className="cms-btn cms-btn-icon cms-btn-secondary"
                             onClick={() => cancelOperation(operation.id)}
                             title="Cancelar"
@@ -500,7 +487,7 @@ export default function BulkOperationsPage() {
               </div>
               <div className="cms-card-content">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleImport('csv')}
                     style={{ justifyContent: 'flex-start' }}
@@ -508,7 +495,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Importar CSV
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleImport('json')}
                     style={{ justifyContent: 'flex-start' }}
@@ -516,7 +503,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Importar JSON
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleImport('wordpress')}
                     style={{ justifyContent: 'flex-start' }}
@@ -526,7 +513,7 @@ export default function BulkOperationsPage() {
                   </button>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => setShowImportModal(false)}
                   >
@@ -560,7 +547,7 @@ export default function BulkOperationsPage() {
               </div>
               <div className="cms-card-content">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleExport('csv')}
                     style={{ justifyContent: 'flex-start' }}
@@ -568,7 +555,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Exportar CSV
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleExport('json')}
                     style={{ justifyContent: 'flex-start' }}
@@ -576,7 +563,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Exportar JSON
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleExport('xml')}
                     style={{ justifyContent: 'flex-start' }}
@@ -586,7 +573,7 @@ export default function BulkOperationsPage() {
                   </button>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => setShowExportModal(false)}
                   >
@@ -620,7 +607,7 @@ export default function BulkOperationsPage() {
               </div>
               <div className="cms-card-content">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleGenerate('pages', 10)}
                     style={{ justifyContent: 'flex-start' }}
@@ -628,7 +615,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Gerar 10 Páginas
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleGenerate('templates', 5)}
                     style={{ justifyContent: 'flex-start' }}
@@ -636,7 +623,7 @@ export default function BulkOperationsPage() {
                     <FileText style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                     Gerar 5 Templates
                   </button>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => handleGenerate('categories', 20)}
                     style={{ justifyContent: 'flex-start' }}
@@ -646,7 +633,7 @@ export default function BulkOperationsPage() {
                   </button>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                  <button 
+                  <button
                     className="cms-btn cms-btn-secondary"
                     onClick={() => setShowGenerateModal(false)}
                   >

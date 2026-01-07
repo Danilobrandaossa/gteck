@@ -79,3 +79,5 @@ O modelo `gemini-pro` é o modelo padrão e mais estável da API Gemini, dispon�
 
 
 
+
+

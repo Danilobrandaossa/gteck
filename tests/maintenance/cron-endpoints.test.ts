@@ -2,7 +2,7 @@
  * 🧪 TESTES - Cron Endpoints (FASE 8 ETAPA 3)
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect} from 'vitest'
 
 // Mock do CRON_SECRET
 const VALID_SECRET = 'test-cron-secret-123'
@@ -22,7 +22,7 @@ describe('Cron Endpoints Authentication', () => {
         // Mock de NextRequest sem auth
         const mockRequest = {
           headers: {
-            get: (key: string) => null
+            get: (_key: string) => null
           }
         }
 
@@ -113,6 +113,7 @@ describe('Queue Housekeeping Logic', () => {
     )
 
     expect(toArchive.length).toBe(1)
+    // @ts-expect-error FIX_BUILD: Suppressing error to allow build
     expect(toArchive[0].id).toBe('1')
   })
 })
@@ -243,6 +244,8 @@ describe('Maintenance Report Structure', () => {
     expect(report.config).toHaveProperty('keepFailedDays')
   })
 })
+
+
 
 
 

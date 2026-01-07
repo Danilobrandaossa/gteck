@@ -4,7 +4,7 @@
  * Testes obrigatórios para health snapshot e alertas
  */
 
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { HealthSnapshotService } from '@/lib/observability/health-snapshot'
 import { AlertService } from '@/lib/observability/alerts'
 
@@ -150,6 +150,8 @@ describe('AlertService', () => {
     })
   })
 })
+
+
 
 
 

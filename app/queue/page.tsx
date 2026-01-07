@@ -5,7 +5,7 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useQueue } from '@/contexts/queue-context'
 import { useOrganization } from '@/contexts/organization-context'
-import { Clock, CheckCircle, XCircle, AlertCircle, Play, Pause, RefreshCw, Trash2, Filter, Search, MoreHorizontal } from 'lucide-react'
+import { Clock, CheckCircle, XCircle, Play, Pause, RefreshCw, Trash2, Filter, Search, MoreHorizontal } from 'lucide-react'
 
 export default function QueuePage() {
   const { jobs, isLoading, error, isProcessing, cancelJob, retryJob, clearCompletedJobs } = useQueue()

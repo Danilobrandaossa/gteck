@@ -26,3 +26,4 @@ echo ""
 echo "✅ Arquivo limpo! Agora execute:"
 echo "   npx tsx scripts/auto-fix-build.ts --apply"
 
+

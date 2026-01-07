@@ -36,3 +36,5 @@ Se você tiver múltiplas versões da logo:
 - `logo-dark.png` - Versão para tema escuro (opcional)
 - `logo-light.png` - Versão para tema claro (opcional)
 
+
+

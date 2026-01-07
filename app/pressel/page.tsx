@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useOrganization } from '@/contexts/organization-context'
@@ -119,7 +119,7 @@ export default function PresselPage() {
     }
 
     try {
-      const jsonData = JSON.parse(jsonContent)
+       JSON.parse(jsonContent)
     } catch (e) {
       setError('JSON inválido. Verifique a sintaxe.')
       return
@@ -166,7 +166,7 @@ export default function PresselPage() {
     }
 
     try {
-      const jsonData = JSON.parse(jsonContent)
+       JSON.parse(jsonContent)
     } catch (e) {
       setError('JSON inválido. Verifique a sintaxe.')
       return

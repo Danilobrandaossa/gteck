@@ -5,7 +5,7 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useUsers } from '@/contexts/users-context'
 import { useOrganization } from '@/contexts/organization-context'
-import { Plus, Search, Filter, MoreHorizontal, Edit, Trash2, Eye, UserCheck, UserX, Shield, Mail, Calendar, Settings } from 'lucide-react'
+import { Plus, Search, Filter, MoreHorizontal, Edit, Trash2, Eye, UserCheck, UserX, Shield, Mail, Calendar } from 'lucide-react'
 
 export default function UsersPage() {
   const { users, isLoading, error, deleteUser, toggleUserStatus, searchUsers, filterUsers } = useUsers()

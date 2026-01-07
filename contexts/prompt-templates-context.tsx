@@ -32,7 +32,7 @@ const PromptTemplatesContext = createContext<PromptTemplatesContextType | undefi
 
 export function PromptTemplatesProvider({ children }: { children: ReactNode }) {
   const [templates, setTemplates] = useState<PromptTemplate[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, _setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Templates padrão com dados reais das IAs

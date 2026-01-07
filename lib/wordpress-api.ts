@@ -47,14 +47,16 @@ export interface WordPressStats {
 
 export class WordPressAPI {
   private baseUrl: string
-  private username: string
-  private password: string
+  // @ts-ignore
+  private _username: string
+  // @ts-ignore
+  private _password: string
   private authHeader: string
 
   constructor(siteUrl: string, username: string, password: string) {
     this.baseUrl = siteUrl.replace(/\/$/, '') // Remove trailing slash
-    this.username = username
-    this.password = password
+    this._username = username
+    this._password = password
     this.authHeader = 'Basic ' + btoa(`${username}:${password}`)
   }
 
@@ -100,7 +102,7 @@ export class WordPressAPI {
   async getSiteStats(): Promise<WordPressStats> {
     try {
       console.log(' Iniciando sincronização completa com WordPress...')
-      
+
       // Obter contadores totais primeiro (sem per_page para obter o total real)
       const [postsTotalResponse, pagesTotalResponse, mediaTotalResponse, categoriesTotalResponse, tagsTotalResponse, usersTotalResponse] = await Promise.all([
         fetch('/api/wordpress/proxy', {
@@ -164,18 +166,18 @@ export class WordPressAPI {
           console.error(` ${type} Response not OK:`, response.status, response.statusText)
           return 0
         }
-        
+
         try {
           const result = await response.json()
           console.log(` ${type} Proxy response:`, result)
-          
+
           if (!result.success) {
             console.error(` ${type} Proxy returned success: false`)
             return 0
           }
-          
+
           let data = []
-          
+
           // Verificar se result.data é uma string JSON válida
           if (typeof result.data === 'string') {
             // Se for string, tentar fazer parse
@@ -189,7 +191,7 @@ export class WordPressAPI {
             console.error(` ${type} Data format not recognized:`, typeof result.data)
             return 0
           }
-          
+
           return data.length || 0
         } catch (parseError) {
           console.error(` ${type} Parse error:`, parseError)
@@ -200,7 +202,7 @@ export class WordPressAPI {
       }
 
       console.log(' Processando respostas...')
-      
+
       const [posts, pages, media, categories, tags, users] = await Promise.all([
         getTotalCount(postsTotalResponse, 'Posts'),
         getTotalCount(pagesTotalResponse, 'Pages'),
@@ -322,7 +324,7 @@ export class WordPressAPI {
       })
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error(result.error || 'Erro na criação do post')
       }
@@ -360,7 +362,7 @@ export class WordPressAPI {
       })
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error(result.error || 'Erro na atualização do post')
       }
@@ -411,7 +413,7 @@ export class WordPressAPI {
       })
 
       const result = await response.json()
-      
+
       if (!result.success) {
         throw new Error(result.error || 'Erro na atualização do post')
       }

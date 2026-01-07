@@ -211,7 +211,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const syncData = async (site: WordPressSite): Promise<void> => {
+  const syncData = async (_site: WordPressSite): Promise<void> => {
     setIsLoading(true)
     setError(null)
     
@@ -306,7 +306,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const createPost = async (site: WordPressSite, postData: Partial<WordPressPost>): Promise<WordPressPost> => {
+  const createPost = async (_site: WordPressSite, postData: Partial<WordPressPost>): Promise<WordPressPost> => {
     setIsLoading(true)
     setError(null)
     
@@ -341,7 +341,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const updatePost = async (site: WordPressSite, id: number, postData: Partial<WordPressPost>): Promise<WordPressPost> => {
+  const updatePost = async (_site: WordPressSite, id: number, postData: Partial<WordPressPost>): Promise<WordPressPost> => {
     setIsLoading(true)
     setError(null)
     
@@ -365,7 +365,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const deletePost = async (site: WordPressSite, id: number): Promise<void> => {
+  const deletePost = async (_site: WordPressSite, id: number): Promise<void> => {
     setIsLoading(true)
     setError(null)
     
@@ -414,7 +414,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const getCategories = async (site: WordPressSite): Promise<WordPressCategory[]> => {
+  const getCategories = async (_site: WordPressSite): Promise<WordPressCategory[]> => {
     setIsLoading(true)
     setError(null)
     
@@ -431,7 +431,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const getTags = async (site: WordPressSite): Promise<WordPressTag[]> => {
+  const getTags = async (_site: WordPressSite): Promise<WordPressTag[]> => {
     setIsLoading(true)
     setError(null)
     
@@ -448,7 +448,7 @@ export function WordPressProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const getPosts = async (site: WordPressSite, params: any = {}): Promise<WordPressPost[]> => {
+  const getPosts = async (_site: WordPressSite, _params: any = {}): Promise<WordPressPost[]> => {
     setIsLoading(true)
     setError(null)
     

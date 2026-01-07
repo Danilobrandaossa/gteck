@@ -80,7 +80,7 @@ export class PresselSchemaMapper {
     const jsonFields = jsonData.acf_fields || {}
 
     // Mapear cada campo do schema
-    for (const [fieldKey, fieldConfig] of Object.entries(schema.campos)) {
+    for (const [_fieldKey, fieldConfig] of Object.entries(schema.campos)) {
       const jsonKey = fieldConfig.json_key
       const acfField = fieldConfig.acf_field
       const jsonValue = jsonFields[jsonKey]
@@ -138,7 +138,7 @@ export class PresselSchemaMapper {
 
     // Mapear cada item do array
     arrayValue.forEach((item, index) => {
-      for (const [subFieldKey, subFieldConfig] of Object.entries(subFields)) {
+      for (const [_subFieldKey, subFieldConfig] of Object.entries(subFields)) {
         const acfSubField = `${fieldName}_${index}_${subFieldConfig.acf_field}`
         const itemValue = item[subFieldConfig.json_key]
 
@@ -185,7 +185,7 @@ export class PresselSchemaMapper {
     const jsonFields = jsonData.acf_fields || {}
     const missing: string[] = []
 
-    for (const [fieldKey, fieldConfig] of Object.entries(schema.campos)) {
+    for (const [_fieldKey, fieldConfig] of Object.entries(schema.campos)) {
       if (fieldConfig.obrigatorio) {
         const jsonValue = jsonFields[fieldConfig.json_key]
         if (jsonValue === undefined || jsonValue === null || jsonValue === '') {

@@ -4,7 +4,7 @@
  * Testes obrigatórios para rerank e diversidade
  */
 
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { RagRerank, RerankChunk } from '@/lib/rag-rerank'
 
 describe('RagRerank', () => {
@@ -103,6 +103,8 @@ describe('RagRerank', () => {
     })
   })
 })
+
+
 
 
 

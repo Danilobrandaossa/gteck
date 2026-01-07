@@ -108,3 +108,5 @@ echo "   pm2 start npm --name 'crm-gteck' -- start"
 echo "   pm2 save"
 echo "   pm2 startup"
 
+
+

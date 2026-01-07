@@ -20,3 +20,4 @@ echo "   rm -rf .next"
 echo "   npm run build"
 echo "   ls -la .next/BUILD_ID"
 
+

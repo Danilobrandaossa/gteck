@@ -1,5 +1,5 @@
 // Sistema de Design V2 - Padronizado e Completo
-import React from 'react'
+import _React from 'react'
 
 // ===== CORES =====
 export const colors = {

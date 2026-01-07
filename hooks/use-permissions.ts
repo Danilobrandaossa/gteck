@@ -21,7 +21,7 @@ export function usePermissions(): Permission {
 
   const isAdmin = user?.role === 'admin'
   const isEditor = user?.role === 'editor'
-  const isViewer = user?.role === 'viewer'
+   user?.role === 'viewer'
 
   return {
     // Apenas ADMIN pode criar organizações e sites
@@ -62,7 +62,7 @@ export function useOrganizationAccess(organizationId: string): boolean {
 }
 
 // Hook para verificar se usuário tem acesso a um site específico
-export function useSiteAccess(siteId: string, organizationId: string): boolean {
+export function useSiteAccess(_siteId: string, organizationId: string): boolean {
   const { user } = useAuth()
   
   // ADMIN tem acesso a todos os sites

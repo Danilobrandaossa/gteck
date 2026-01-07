@@ -46,7 +46,7 @@ export class GeminiImageService {
         '16:9': { width: 1792, height: 1024 }
       }
 
-      const dimensions = aspectRatioMap[request.aspectRatio || '1:1'] || aspectRatioMap['1:1']
+       aspectRatioMap[request.aspectRatio || '1:1'] || aspectRatioMap['1:1']
 
       // Usar o prompt original diretamente - ele já vem completo do creative-generator
       // O creative-generator já adiciona todas as instruções necessárias

@@ -233,3 +233,5 @@ WordPress → Webhook → Queue → Worker → Database → Embeddings
 
 
 
+
+

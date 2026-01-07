@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useOrganization } from '@/contexts/organization-context'
-import { X, Save, Eye, EyeOff } from 'lucide-react'
+import { X, Save } from 'lucide-react'
 
 interface CreatePostFormProps {
   isOpen: boolean

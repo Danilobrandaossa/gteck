@@ -127,7 +127,7 @@ interface GridProps {
   className?: string
 }
 
-export function Grid({ children, columns = 4, gap = '1.5rem', className }: GridProps) {
+export function Grid({ children, columns: _columns = 4, gap = '1.5rem', className }: GridProps) {
   return (
     <div 
       className={className}

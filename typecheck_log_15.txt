@@ -1,0 +1,26 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+lib/ai-diagnostic-integration.ts(123,13): error TS6133: 'prompt' is declared but its value is never read.
+lib/ai-diagnostic-integration.ts(159,13): error TS6133: 'prompt' is declared but its value is never read.
+lib/ai-diagnostic-integration.ts(348,11): error TS6133: 'errors' is declared but its value is never read.
+lib/design-system.ts(175,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+lib/feedback/feedback-service.ts(249,9): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(251,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(253,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+tests/ai/hnsw-tuning.test.ts(7,32): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/queue-claim.test.ts(7,44): error TS6133: 'vi' is declared but its value is never read.
+tests/ai/rag-regression.baseline.ts(8,1): error TS6133: 'join' is declared but its value is never read.
+tests/e2e/finops-degradation.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/feedback/feedback-service.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/finops/tenant-cost-policy.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/maintenance/cron-endpoints.test.ts(5,32): error TS6133: 'vi' is declared but its value is never read.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.

@@ -7,27 +7,16 @@ import { useOrganization } from '@/contexts/organization-context'
 import { useRobustWordPressSync } from '@/hooks/use-robust-wordpress-sync'
 import { useAPIUsage } from '@/hooks/use-api-usage'
 import { 
-  Settings, 
   Key, 
   Globe, 
   Bot, 
   Plus, 
   Edit, 
   Trash2, 
-  CheckCircle, 
-  XCircle,
-  AlertCircle,
-  Save,
   TestTube,
   Building2,
   FlaskConical,
   Shield,
-  Mail,
-  Users,
-  MoreHorizontal,
-  FileText,
-  FolderOpen,
-  Tag,
   Zap,
   Bell,
   Link as LinkIcon
@@ -35,7 +24,7 @@ import {
 import { Modal, ConfirmModal, SuccessModal } from '@/components/ui/modal'
 import { ProgressModal } from '@/components/ui/progress-modal'
 import { CredentialsDiagnostic } from '@/components/ui/credentials-diagnostic'
-import { getCardStyles, getButtonStyles, getInputStyles, getLayoutStyles } from '@/lib/design-system'
+import { getLayoutStyles } from '@/lib/design-system'
 
 interface APIConfig {
   id: string
@@ -64,24 +53,24 @@ interface Site {
 }
 
 export default function SettingsPage() {
-  const { organizations, sites, setSites, getOrganizationStats, syncWordPressData, updateSite, currentOrganization, currentSite } = useOrganization()
+  const { organizations, sites, setSites: _setSites, getOrganizationStats: _getOrganizationStats, syncWordPressData: _syncWordPressData, updateSite, currentOrganization, currentSite } = useOrganization()
   
   // Hook de sincronização WordPress robusta
-  const { isLoading: isSyncing, progress, showProgressModal, syncResult, syncData, closeProgressModal } = useRobustWordPressSync()
+  const { isLoading: _isSyncing, progress, showProgressModal, syncResult: _syncResult, syncData, closeProgressModal } = useRobustWordPressSync()
   
   // Estados para tabs
   const [activeTab, setActiveTab] = useState('organizations')
   
   // Estados para modais
   const [showSuccessModal, setShowSuccessModal] = useState(false)
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [_showConfirmModal, _setShowConfirmModal] = useState(false)
   const [showCredentialsModal, setShowCredentialsModal] = useState(false)
   const [successData, setSuccessData] = useState<{
     title: string
     message: string
     details: string[]
   }>({ title: '', message: '', details: [] })
-  const [confirmData, setConfirmData] = useState<{
+  const [_confirmData, _setConfirmData] = useState<{
     title: string
     message: string
     onConfirm: () => void
@@ -275,7 +264,7 @@ export default function SettingsPage() {
     setShowSuccessModal(true)
   }
 
-  const handleSyncSite = async (siteId: string) => {
+   async (siteId: string) => {
     const site = sites.find((s: any) => s.id === siteId)
     if (!site) return
 
@@ -471,7 +460,7 @@ export default function SettingsPage() {
     }
   }
 
-  const handleEditAPI = (apiId: string) => {
+   (apiId: string) => {
     const api = apiConfigs.find(a => a.id === apiId)
     if (api) {
       setEditingAPI({

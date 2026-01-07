@@ -473,3 +473,5 @@ O sistema existente possui uma **infraestrutura excelente** (Queue, Embeddings, 
 
 
 
+
+

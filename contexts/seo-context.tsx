@@ -180,7 +180,7 @@ export function SEOProvider({ children }: { children: React.ReactNode }) {
       await new Promise(resolve => setTimeout(resolve, 500))
       
       // Filtrar análises pela organização atual
-      const orgAnalyses = mockAnalyses.filter(analysis => 
+      const orgAnalyses = mockAnalyses.filter(_analysis => 
         currentOrganization.id === '1' // Mock: assumindo organização 1
       )
       

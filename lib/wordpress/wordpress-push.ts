@@ -8,7 +8,7 @@
 import { db } from '@/lib/db'
 import { validateTenantContext } from '@/lib/tenant-security'
 import { getWordPressCredentials } from './wordpress-credentials-service'
-import { findWpPostIdByPageId } from './wordpress-sync-map'
+// import {  } from './wordpress-sync-map'
 import { StructuredLogger } from '@/lib/observability/logger'
 import crypto from 'crypto'
 
@@ -168,7 +168,7 @@ export class WordPressPushService {
           throw new Error(`WordPress API error: ${response.status} ${errorText}`)
         }
 
-        const wpPost = await response.json()
+         await response.json()
 
         // Atualizar wpSyncedAt
         await db.page.update({
@@ -209,7 +209,7 @@ export class WordPressPushService {
   static async isCmsOriginated(
     siteId: string,
     wpId: number,
-    idempotencyKey?: string
+    _idempotencyKey?: string
   ): Promise<boolean> {
     // Verificar se há registro recente de push do CMS
     // Por enquanto, verificar se wpSyncedAt é muito recente (< 5 segundos)
@@ -235,6 +235,8 @@ export class WordPressPushService {
     return diff < 5000
   }
 }
+
+
 
 
 

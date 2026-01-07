@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { X, CheckCircle, XCircle, AlertCircle, Clock, RefreshCw } from 'lucide-react'
 
 interface SyncLog {

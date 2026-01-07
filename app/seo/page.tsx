@@ -5,13 +5,13 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useSEO } from '@/contexts/seo-context'
 import { useOrganization } from '@/contexts/organization-context'
-import { getLayoutStyles, getCardStyles, getButtonStyles, getBadgeStyles } from '@/lib/design-system'
-import { Search, AlertTriangle, CheckCircle, Info, Download, RefreshCw, Eye, Zap, Target, FileText, Globe, Settings } from 'lucide-react'
+// import { getLayoutStyles, getCardStyles, getButtonStyles, getBadgeStyles } from '@/lib/design-system'
+import { Search, AlertTriangle, Info, Download, Eye, Zap, FileText, Globe, Settings } from 'lucide-react'
 
 export default function SEOPage() {
-  const { analyses, sitemap, robotsTxt, isLoading, error, analyzePage, generateSitemap, generateRobotsTxt, optimizeContent, generateMetaTags } = useSEO()
+  const { analyses, sitemap, robotsTxt, isLoading, error, analyzePage, generateSitemap, generateRobotsTxt, optimizeContent, generateMetaTags: _generateMetaTags } = useSEO()
   const { currentOrganization } = useOrganization()
-  const [selectedAnalysis, setSelectedAnalysis] = useState<string | null>(null)
+  const [_selectedAnalysis, setSelectedAnalysis] = useState<string | null>(null)
   const [showSitemap, setShowSitemap] = useState(false)
   const [showRobotsTxt, setShowRobotsTxt] = useState(false)
   const [contentToOptimize, setContentToOptimize] = useState('')
@@ -31,7 +31,7 @@ export default function SEOPage() {
     return 'Ruim'
   }
 
-  const getIssueIcon = (type: string) => {
+   (type: string) => {
     switch (type) {
       case 'error':
         return <AlertTriangle style={{ width: '1rem', height: '1rem', color: 'var(--danger)' }} />

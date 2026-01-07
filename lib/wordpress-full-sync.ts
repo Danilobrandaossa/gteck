@@ -23,7 +23,8 @@ export interface SyncResult {
 }
 
 export class WordPressFullSync {
-  private wpApi: WordPressAPI
+// @ts-ignore
+  private _wpApi: WordPressAPI
   private baseUrl: string
   private username: string
   private password: string
@@ -32,7 +33,7 @@ export class WordPressFullSync {
     this.baseUrl = baseUrl
     this.username = username
     this.password = password
-    this.wpApi = new WordPressAPI(baseUrl, username, password)
+    this._wpApi = new WordPressAPI(baseUrl, username, password)
   }
 
   // Sincronizar todos os dados do WordPress

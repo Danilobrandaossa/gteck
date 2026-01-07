@@ -1,0 +1,30 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+lib/feedback/feedback-service.ts(244,21): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(244,51): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(244,97): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(244,120): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(250,11): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(258,19): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(263,9): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(270,22): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(275,9): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(277,23): error TS2552: Cannot find name 'interaction'. Did you mean 'interactions'?
+lib/feedback/feedback-service.ts(277,53): error TS2304: Cannot find name 'interaction'.
+lib/feedback/feedback-service.ts(277,99): error TS2304: Cannot find name 'interaction'.
+lib/feedback/feedback-service.ts(277,122): error TS2304: Cannot find name 'interaction'.
+lib/feedback/feedback-service.ts(283,13): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(291,21): error TS2304: Cannot find name 'interaction'.
+lib/feedback/feedback-service.ts(296,11): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(303,24): error TS2304: Cannot find name 'interaction'.
+lib/feedback/feedback-service.ts(308,11): error TS2304: Cannot find name 'isPositive'.
+lib/feedback/feedback-service.ts(320,11): error TS2304: Cannot find name 'isPositive'.
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.

@@ -1,0 +1,8 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+app/bulk-operations/page.tsx(18,11): error TS1005: ',' expected.
+app/bulk-operations/page.tsx(18,21): error TS1005: ';' expected.
+app/categories/page.tsx(37,15): error TS1005: ',' expected.
+app/categories/page.tsx(37,25): error TS1005: ';' expected.

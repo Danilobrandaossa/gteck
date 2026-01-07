@@ -85,3 +85,4 @@ echo "  pm2 logs crm-gteck --lines 100"
 echo "  pm2 restart crm-gteck"
 echo "  pm2 status"
 
+

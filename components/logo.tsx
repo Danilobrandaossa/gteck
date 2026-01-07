@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import _Image from 'next/image'
 import { useState } from 'react'
 
 interface LogoProps {
@@ -18,7 +18,7 @@ const sizeMap = {
 
 export function Logo({ size = 'medium', showText = false, className = '' }: LogoProps) {
   const [imageError, setImageError] = useState(false)
-  const [useFallback, setUseFallback] = useState(false)
+  const [useFallback, _setUseFallback] = useState(false)
   const [horizontalLogoError, setHorizontalLogoError] = useState(false)
   const [iconError, setIconError] = useState(false)
   
@@ -63,7 +63,7 @@ export function Logo({ size = 'medium', showText = false, className = '' }: Logo
   }
 
   // Para SVG, usar img tag diretamente (melhor compatibilidade)
-  const isSvg = logoPath.endsWith('.svg')
+   logoPath.endsWith('.svg')
 
   // Se showText for true, mostrar apenas a logo horizontal (sem ícone separado)
   if (showText) {

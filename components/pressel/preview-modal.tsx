@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { X, CheckCircle, XCircle, AlertTriangle, Edit, Eye, Rocket, FileText, Settings, Code } from 'lucide-react'
+import { X, CheckCircle, XCircle, Edit, Eye, Rocket, Settings, Code } from 'lucide-react'
 
 interface PreviewData {
   preview: any
@@ -45,7 +45,7 @@ export function PreviewModal({ isOpen, onClose, previewData, jsonData, onEdit, o
 
   if (!isOpen || !previewData) return null
 
-  const { preview, detectedModel, validation, stats } = previewData
+  const { preview: _preview, detectedModel, validation, stats } = previewData
 
   // Criar objeto completo do modelo identificado para exibição
   const modelPreview = {

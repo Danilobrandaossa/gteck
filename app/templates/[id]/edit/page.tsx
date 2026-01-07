@@ -5,12 +5,13 @@ import { useRouter, useParams } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useTemplates } from '@/contexts/templates-context'
-import { ArrowLeft, Save, Eye, Plus, Trash2, Settings, Code, Palette, Type } from 'lucide-react'
+import { ArrowLeft, Save, Eye, Plus, Trash2, Settings, Code, Type } from 'lucide-react'
 
 export default function EditTemplatePage() {
   const router = useRouter()
   const params = useParams()
-  const { templates, currentTemplate, setCurrentTemplate, updateTemplate, isLoading } = useTemplates()
+  if (!params) return null
+  const { templates, currentTemplate: _currentTemplate, setCurrentTemplate, updateTemplate, isLoading } = useTemplates()
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -102,7 +103,7 @@ export default function EditTemplatePage() {
     }))
   }
 
-  const updateField = (fieldId: string, updates: any) => {
+  (fieldId: string, updates: any) => {
     setFormData(prev => ({
       ...prev,
       fields: prev.fields.map(f => f.id === fieldId ? { ...f, ...updates } : f)
@@ -147,7 +148,7 @@ export default function EditTemplatePage() {
             <p style={{ color: 'var(--gray-600)', marginBottom: '1.5rem' }}>
               O template que você está procurando não existe ou foi removido.
             </p>
-            <button 
+            <button
               className="cms-btn cms-btn-primary"
               onClick={() => router.push('/templates')}
             >
@@ -167,7 +168,7 @@ export default function EditTemplatePage() {
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <button 
+              <button
                 className="cms-btn cms-btn-secondary"
                 onClick={() => router.push('/templates')}
               >
@@ -179,7 +180,7 @@ export default function EditTemplatePage() {
               </h1>
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <button 
+              <button
                 className="cms-btn cms-btn-secondary"
                 onClick={handleSave}
                 disabled={isSaving}
@@ -187,7 +188,7 @@ export default function EditTemplatePage() {
                 <Save style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />
                 {isSaving ? 'Salvando...' : 'Salvar'}
               </button>
-              <button 
+              <button
                 className="cms-btn cms-btn-primary"
                 onClick={() => setActiveTab('preview')}
               >
@@ -196,7 +197,7 @@ export default function EditTemplatePage() {
               </button>
             </div>
           </div>
-          
+
           {/* Tabs */}
           <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--gray-200)' }}>
             <button
@@ -448,7 +449,7 @@ export default function EditTemplatePage() {
                     </label>
                   </div>
 
-                  <button 
+                  <button
                     className="cms-btn cms-btn-primary"
                     onClick={addField}
                     disabled={!newField.name || !newField.label}
@@ -523,10 +524,10 @@ export default function EditTemplatePage() {
               <h2 className="cms-card-title">Preview do Template</h2>
             </div>
             <div className="cms-card-content">
-              <div 
-                style={{ 
-                  border: '1px solid var(--gray-300)', 
-                  borderRadius: 'var(--radius-lg)', 
+              <div
+                style={{
+                  border: '1px solid var(--gray-300)',
+                  borderRadius: 'var(--radius-lg)',
                   padding: '1rem',
                   backgroundColor: 'var(--white)'
                 }}
@@ -545,9 +546,9 @@ export default function EditTemplatePage() {
             <div className="cms-card-content">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {formData.fields.map((field) => (
-                  <div key={field.id} style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                  <div key={field.id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '1rem',
                     backgroundColor: 'var(--gray-50)',
@@ -567,13 +568,13 @@ export default function EditTemplatePage() {
                       </div>
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button 
+                      <button
                         className="cms-btn cms-btn-icon cms-btn-secondary"
                         title="Editar campo"
                       >
                         <Settings style={{ width: '1rem', height: '1rem' }} />
                       </button>
-                      <button 
+                      <button
                         className="cms-btn cms-btn-icon cms-btn-secondary"
                         title="Remover campo"
                         onClick={() => removeField(field.id)}

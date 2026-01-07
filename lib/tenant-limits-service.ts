@@ -229,7 +229,7 @@ export class TenantLimitsService {
     reason: 'rate_limit' | 'daily_budget' | 'monthly_budget'
   ): Promise<void> {
     try {
-      await db.aiInteraction.create({
+      await db.aIInteraction.create({
         data: {
           organizationId: config.organizationId,
           siteId: config.siteId,
@@ -255,6 +255,8 @@ export class TenantLimitsService {
     }
   }
 }
+
+
 
 
 

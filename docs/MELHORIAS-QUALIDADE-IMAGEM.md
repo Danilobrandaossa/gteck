@@ -79,3 +79,5 @@ Quando você enviar o prompt que o ChatGPT gerou, vou:
 
 
 
+
+

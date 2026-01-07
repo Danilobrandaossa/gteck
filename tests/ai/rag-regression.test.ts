@@ -5,11 +5,11 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest'
-import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs'
+import { readFileSync, existsSync, mkdirSync } from 'fs'
 import { join } from 'path'
 import { RegressionRunner } from './rag-regression.runner'
 import { RegressionBaselineManager } from './rag-regression.baseline'
-import { RegressionTestCase } from './rag-regression.types'
+// import {  } from './rag-regression.types'
 
 describe('RAG Regression Testing', () => {
   const testDatasetPath = join(__dirname, 'datasets', 'rag-regression.example.json')
@@ -146,6 +146,8 @@ describe('RAG Regression Testing', () => {
     })
   })
 })
+
+
 
 
 

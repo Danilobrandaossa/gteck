@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { PersistenceManager } from '@/lib/persistence-manager'
-import { Download, Upload, RefreshCw, Trash2, CheckCircle, AlertCircle, Database, Shield } from 'lucide-react'
+import { Download, Upload, RefreshCw, Trash2, CheckCircle, Database, Shield } from 'lucide-react'
 
 export default function BackupPage() {
   const [backupData, setBackupData] = useState<any>(null)

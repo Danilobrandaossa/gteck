@@ -2,8 +2,8 @@
  * 🧪 TESTES - Tenant Cost Policy (FASE 8 ETAPA 2)
  */
 
-import { describe, it, expect, beforeAll, vi } from 'vitest'
-import { TenantCostPolicyService, TenantCostState } from '@/lib/finops/tenant-cost-policy'
+import { describe, it, expect} from 'vitest'
+import { TenantCostPolicyService } from '@/lib/finops/tenant-cost-policy'
 
 describe('TenantCostPolicyService', () => {
   describe('getCostState', () => {
@@ -231,6 +231,8 @@ describe('TenantCostPolicyService', () => {
     })
   })
 })
+
+
 
 
 

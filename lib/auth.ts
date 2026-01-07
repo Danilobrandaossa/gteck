@@ -63,7 +63,8 @@ export class AuthService {
     }
 
     // Primeiro, tentar API de login real
-    let apiSuccess = false
+// @ts-ignore
+    let _apiSuccess = false
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',

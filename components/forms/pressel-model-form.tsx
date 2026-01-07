@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { PresselModel } from '@/lib/pressel-automation-service'
-import { CheckCircle, XCircle, AlertTriangle, Info, Plus, Edit, Trash2, Eye, Save, Code, LayoutTemplate, Palette, Settings, Tag, Link as LinkIcon, FileText, Users, Calendar } from 'lucide-react'
+import { XCircle, Plus, Trash2, Eye, Save, LayoutTemplate, Link as _LinkIcon, FileText } from 'lucide-react'
 
 interface PresselModelFormProps {
   isOpen: boolean

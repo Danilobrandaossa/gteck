@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import { PresselAutomationService, PresselConversionResult } from '@/lib/pressel-automation-service'
-import { CheckCircle, XCircle, AlertTriangle, Info, Plus, Edit, Trash2, Eye, Search, RefreshCw, Zap, Rocket, Settings, FileText, Palette, Users, Calendar, Tag, Link as LinkIcon, Download, Upload, Code, LayoutTemplate, FlaskConical } from 'lucide-react'
+import { CheckCircle, XCircle, Eye, RefreshCw, Zap, Rocket, Settings, Link as _LinkIcon, Code } from 'lucide-react'
 
 interface PresselTextConverterProps {
   isOpen: boolean

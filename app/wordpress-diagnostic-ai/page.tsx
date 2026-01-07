@@ -15,13 +15,10 @@ import {
   Eye,
   BarChart3,
   Clock,
-  Star,
   TrendingUp,
   FileText,
-  Settings,
   Play,
   Download,
-  RefreshCw,
   Terminal
 } from 'lucide-react'
 
@@ -76,7 +73,7 @@ export default function WordPressDiagnosticAIPage() {
   const [diagnosticHistory, setDiagnosticHistory] = useState<any[]>([])
   const [showHistory, setShowHistory] = useState(false)
   const [investigationMode, setInvestigationMode] = useState<'standard' | 'investigate' | 'agent'>('standard')
-  const [investigationResult, setInvestigationResult] = useState<any>(null)
+  const [_investigationResult, setInvestigationResult] = useState<any>(null)
 
   const addLogMessage = (message: string) => {
     const timestamp = new Date().toLocaleTimeString()

@@ -23,9 +23,10 @@ async function testCreativeGenerator() {
   console.log('📋 Teste 1: Validação de Briefing')
   const invalidBrief: CreativeBrief = {
     productName: 'Produto com conteúdo proibido sobre violência',
-    productDescription: 'Este produto promove violência e ódio'
+    productDescription: 'Este produto promove violência e ódio',
+    mainPrompt: 'Gerar anúncio para produto proibido'
   }
-  
+
   const validation = CreativeGenerator.validateBriefing(invalidBrief)
   if (!validation.valid) {
     console.log('✅ Validação funcionando - conteúdo proibido detectado')
@@ -38,6 +39,7 @@ async function testCreativeGenerator() {
   console.log('🖼️  Teste 2: Geração de ImagePrompt')
   const briefWithRefs: CreativeBrief = {
     productName: 'Curso de Marketing Digital',
+    mainPrompt: 'Gerar anúncio para curso de marketing',
     platform: 'instagram',
     imageReferences: [
       {
@@ -52,7 +54,7 @@ async function testCreativeGenerator() {
       }
     ]
   }
-  
+
   const imagePrompt = CreativeGenerator.generateImagePrompt(briefWithRefs)
   console.log('✅ ImagePrompt gerado:')
   console.log(`   ${imagePrompt}\n`)
@@ -60,10 +62,11 @@ async function testCreativeGenerator() {
   // Teste 3: Integração com AIService (se API key configurada)
   if (apiKey && !apiKey.startsWith('sk-mock')) {
     console.log('🤖 Teste 3: Integração com AIService')
-    
+
     const validBrief: CreativeBrief = {
       productName: 'Curso Online de Programação',
       productDescription: 'Aprenda programação do zero com certificado',
+      mainPrompt: 'Gerar anúncio para curso de programação',
       targetAudience: 'Iniciantes em tecnologia',
       keyBenefits: ['Certificado válido', 'Acesso vitalício', 'Suporte especializado'],
       tone: 'professional',
@@ -95,7 +98,7 @@ async function testCreativeGenerator() {
 
       console.log('   Gerando criativo...')
       const result = await CreativeGenerator.generateCreative(validBrief, aiService)
-      
+
       if (result.status === 'success') {
         console.log('✅ Criativo gerado com sucesso!')
         console.log(`\n   Copy (${result.metadata?.characterCount} caracteres):`)
@@ -124,10 +127,10 @@ async function testCreativeGenerator() {
     tone: 'professional',
     platform: 'facebook'
   }
-  
+
   console.log('   Request exemplo:')
   console.log(JSON.stringify(exampleRequest, null, 2))
-  
+
   console.log('\n   Response esperado:')
   console.log(JSON.stringify({
     status: 'success',
@@ -148,6 +151,8 @@ testCreativeGenerator().catch(error => {
   console.error('❌ Erro ao executar testes:', error)
   process.exit(1)
 })
+
+
 
 
 

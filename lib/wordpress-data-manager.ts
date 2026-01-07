@@ -1,5 +1,5 @@
 // Gerenciador de Dados WordPress - Sincronização Completa
-import { WordPressAPI } from './wordpress-api'
+// import {  } from './wordpress-api'
 import { GradualSyncManager, SyncProgress } from './gradual-sync-manager'
 
 export interface WordPressData {

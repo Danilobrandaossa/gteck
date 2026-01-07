@@ -5,12 +5,13 @@ import { useParams, useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { ProtectedRoute } from '@/components/auth/protected-route'
 import { useUsers } from '@/contexts/users-context'
-import { Shield, Save, ArrowLeft, User, Settings, FileText, Palette, FolderOpen, Bot, BarChart3 } from 'lucide-react'
+import { Save, ArrowLeft, Settings, FileText, Palette, FolderOpen, Bot } from 'lucide-react'
 
 export default function UserPermissionsPage() {
   const params = useParams()
+  if (!params) return null
   const router = useRouter()
-  const { users, updateUserPermissions, isLoading, error } = useUsers()
+  const { users, updateUserPermissions, isLoading: _isLoading, error } = useUsers()
   const [user, setUser] = useState<any>(null)
   const [permissions, setPermissions] = useState({
     canCreatePages: false,
@@ -43,7 +44,7 @@ export default function UserPermissionsPage() {
 
   const handleSave = async () => {
     if (!user) return
-    
+
     setIsSaving(true)
     try {
       await updateUserPermissions(user.id, permissions)
@@ -101,14 +102,14 @@ export default function UserPermissionsPage() {
       <ProtectedRoute>
         <DashboardLayout>
           <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <div style={{ 
-              width: '3rem', 
-              height: '3rem', 
-              border: '3px solid var(--gray-200)', 
-              borderTop: '3px solid var(--primary)', 
-              borderRadius: '50%', 
-              animation: 'spin 1s linear infinite', 
-              margin: '0 auto 1rem' 
+            <div style={{
+              width: '3rem',
+              height: '3rem',
+              border: '3px solid var(--gray-200)',
+              borderTop: '3px solid var(--primary)',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              margin: '0 auto 1rem'
             }} />
             <p style={{ color: 'var(--gray-600)' }}>Carregando usuário...</p>
           </div>
@@ -122,7 +123,7 @@ export default function UserPermissionsPage() {
       <DashboardLayout>
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-            <button 
+            <button
               className="cms-btn cms-btn-secondary"
               onClick={() => router.back()}
             >
@@ -143,13 +144,13 @@ export default function UserPermissionsPage() {
           <div className="cms-card" style={{ marginBottom: '2rem' }}>
             <div className="cms-card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ 
-                  width: '4rem', 
-                  height: '4rem', 
-                  borderRadius: '50%', 
-                  backgroundColor: 'var(--primary-light)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <div style={{
+                  width: '4rem',
+                  height: '4rem',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--primary-light)',
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   color: 'var(--primary)',
                   fontWeight: 'bold',
@@ -162,16 +163,15 @@ export default function UserPermissionsPage() {
                     {user.name}
                   </h3>
                   <p style={{ color: 'var(--gray-600)', marginBottom: '0.25rem' }}>{user.email}</p>
-                  <span className={`cms-badge ${
-                    user.role === 'admin' ? 'cms-badge-danger' :
-                    user.role === 'editor' ? 'cms-badge-warning' :
-                    user.role === 'author' ? 'cms-badge-info' :
-                    'cms-badge-secondary'
-                  }`}>
+                  <span className={`cms-badge ${user.role === 'admin' ? 'cms-badge-danger' :
+                      user.role === 'editor' ? 'cms-badge-warning' :
+                        user.role === 'author' ? 'cms-badge-info' :
+                          'cms-badge-secondary'
+                    }`}>
                     {user.role === 'admin' ? 'Administrador' :
-                     user.role === 'editor' ? 'Editor' :
-                     user.role === 'author' ? 'Autor' :
-                     'Visualizador'}
+                      user.role === 'editor' ? 'Editor' :
+                        user.role === 'author' ? 'Autor' :
+                          'Visualizador'}
                   </span>
                 </div>
               </div>
@@ -181,11 +181,11 @@ export default function UserPermissionsPage() {
 
         {/* Error Message */}
         {error && (
-          <div style={{ 
-            padding: '0.75rem', 
-            backgroundColor: 'var(--error-light)', 
-            border: '1px solid var(--red-300)', 
-            borderRadius: 'var(--radius)', 
+          <div style={{
+            padding: '0.75rem',
+            backgroundColor: 'var(--error-light)',
+            border: '1px solid var(--red-300)',
+            borderRadius: 'var(--radius)',
             color: 'var(--danger)',
             fontSize: '0.875rem',
             marginBottom: '1rem'
@@ -200,13 +200,13 @@ export default function UserPermissionsPage() {
             <div key={groupIndex} className="cms-card">
               <div className="cms-card-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ 
-                    width: '2rem', 
-                    height: '2rem', 
-                    backgroundColor: 'var(--primary-light)', 
-                    borderRadius: 'var(--radius)', 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                  <div style={{
+                    width: '2rem',
+                    height: '2rem',
+                    backgroundColor: 'var(--primary-light)',
+                    borderRadius: 'var(--radius)',
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
                     color: 'var(--primary)'
                   }}>
@@ -237,10 +237,10 @@ export default function UserPermissionsPage() {
                           {permission.description}
                         </p>
                       </div>
-                      <label style={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '0.5rem', 
+                      <label style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
                         cursor: 'pointer',
                         userSelect: 'none'
                       }}>
@@ -248,9 +248,9 @@ export default function UserPermissionsPage() {
                           type="checkbox"
                           checked={permissions[permission.key as keyof typeof permissions]}
                           onChange={(e) => handlePermissionChange(permission.key, e.target.checked)}
-                          style={{ 
-                            width: '1.25rem', 
-                            height: '1.25rem', 
+                          style={{
+                            width: '1.25rem',
+                            height: '1.25rem',
                             accentColor: 'var(--primary)',
                             cursor: 'pointer'
                           }}
@@ -268,11 +268,11 @@ export default function UserPermissionsPage() {
         </div>
 
         {/* Save Button */}
-        <div style={{ 
-          position: 'sticky', 
-          bottom: '1rem', 
-          display: 'flex', 
-          justifyContent: 'flex-end', 
+        <div style={{
+          position: 'sticky',
+          bottom: '1rem',
+          display: 'flex',
+          justifyContent: 'flex-end',
           marginTop: '2rem',
           padding: '1rem',
           backgroundColor: 'var(--white)',
@@ -280,13 +280,13 @@ export default function UserPermissionsPage() {
           borderRadius: 'var(--radius-lg)',
           boxShadow: 'var(--shadow)'
         }}>
-          <button 
+          <button
             className="cms-btn cms-btn-primary"
             onClick={handleSave}
             disabled={isSaving}
-            style={{ 
-              opacity: isSaving ? 0.7 : 1, 
-              cursor: isSaving ? 'not-allowed' : 'pointer' 
+            style={{
+              opacity: isSaving ? 0.7 : 1,
+              cursor: isSaving ? 'not-allowed' : 'pointer'
             }}
           >
             <Save style={{ width: '1rem', height: '1rem', marginRight: '0.5rem' }} />

@@ -125,3 +125,5 @@ O `CreativeGenerator.generateCreative()` sempre gera copy, mesmo quando `generat
 
 
 
+
+

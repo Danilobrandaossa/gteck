@@ -1,0 +1,21 @@
+
+> cms-modern@1.0.0 typecheck
+> tsc --noEmit
+
+lib/design-system.ts(175,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ card: { backgroundColor: string; borderRadius: string; boxShadow: string; padding: string; border: string; }; button: { primary: { backgroundColor: string; color: string; borderRadius: string; padding: string; ... 5 more ...; '&:hover': { ...; }; }; secondary: { ...; }; }; input: { ...; }; badge: { ...; }; }'.
+lib/feedback/feedback-service.ts(249,9): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(251,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+lib/feedback/feedback-service.ts(253,11): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ high: { total: number; positive: number; negative: number; }; medium: { total: number; positive: number; negative: number; }; low: { total: number; positive: number; negative: number; }; }'.
+tests/api/health-integrations.test.ts(18,20): error TS2304: Cannot find name 'vi'.
+tests/api/health-integrations.test.ts(18,33): error TS7006: Parameter 'input' implicitly has an 'any' type.
+tests/api/health-integrations.test.ts(18,40): error TS7006: Parameter 'init' implicitly has an 'any' type.
+tests/api/health-integrations.test.ts(19,7): error TS2578: Unused '@ts-expect-error' directive.
+tests/api/health-integrations.test.ts(49,5): error TS2304: Cannot find name 'vi'.
+tests/e2e/ops-health-alerts.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/queue-recovery.test.ts(11,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-full-sync.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-incremental-webhook.test.ts(9,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-push-loop-prevention.test.ts(8,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/e2e/wp-rag-quality.test.ts(12,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/wordpress/wp-rag-e2e.test.ts(13,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.

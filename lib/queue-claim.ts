@@ -14,7 +14,7 @@
 
 import { Prisma } from '@prisma/client'
 import { db } from './db'
-import { safeQueryRaw, safeExecuteRaw } from './tenant-security'
+// import { safeQueryRaw, safeExecuteRaw } from './tenant-security'
 
 export interface ClaimJobsOptions {
   batchSize?: number
@@ -54,7 +54,8 @@ export interface WorkerMetrics {
 
 export class QueueClaim {
   private static readonly DEFAULT_LOCK_TTL_MS = parseInt(process.env.JOB_LOCK_TTL_MS || '60000', 10)
-  private static readonly DEFAULT_HEARTBEAT_INTERVAL_MS = parseInt(process.env.JOB_HEARTBEAT_INTERVAL_MS || '10000', 10)
+// @ts-ignore
+  private static readonly _DEFAULT_HEARTBEAT_INTERVAL_MS = parseInt(process.env.JOB_HEARTBEAT_INTERVAL_MS || '10000', 10)
 
   /**
    * Claim atômico de jobs pendentes
@@ -211,7 +212,7 @@ export class QueueClaim {
    */
   static async recoverStuckJobs(
     workerId?: string,
-    lockTtlMs: number = this.DEFAULT_LOCK_TTL_MS
+    _lockTtlMs: number = this.DEFAULT_LOCK_TTL_MS
   ): Promise<{
     recovered: number
     movedToFailed: number

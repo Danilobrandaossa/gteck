@@ -39,7 +39,7 @@ export class RecommendationEngine {
    */
   static generateRecommendations(
     summary: FeedbackSummary,
-    drivers: NegativeDrivers,
+    _drivers: NegativeDrivers,
     correlation: QualityCorrelation
   ): Recommendation[] {
     const recommendations: Recommendation[] = []
@@ -460,6 +460,8 @@ export class RecommendationEngine {
     return recommendations.filter(r => categories.includes(r.category))
   }
 }
+
+
 
 
 
