@@ -175,9 +175,15 @@ class BuildAutoFixer {
     let newContent = lines.join('\n')
     let diff = ''
 
-    // Se a variável já começa com _, remover a linha completamente
+    // Se a variável já começa com _ (mesmo que muitos), remover a linha completamente
     if (varName.startsWith('_')) {
       // Remover a linha inteira
+      const newLines = [...lines]
+      newLines.splice(error.line - 1, 1)
+      newContent = newLines.join('\n')
+      diff = `- ${targetLine}`
+    } else if (targetLine.includes('_credentials') || targetLine.includes('credentials') && targetLine.trim().startsWith('const')) {
+      // Caso especial: se a linha contém credentials e não é usada, remover
       const newLines = [...lines]
       newLines.splice(error.line - 1, 1)
       newContent = newLines.join('\n')
