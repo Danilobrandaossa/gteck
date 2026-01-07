@@ -170,7 +170,7 @@ export async function POST(request: NextRequest) {
     logger.info('WordPress webhook received', {
       action: 'wp_webhook_received',
       event: payload.event,
-      action: payload.action,
+      webhookAction: payload.action,
       wpId: payload.wpId
     })
 
@@ -295,7 +295,7 @@ export async function POST(request: NextRequest) {
       action: 'wp_webhook_processed',
       jobId: job.id,
       event: payload.event,
-      action: payload.action,
+      webhookAction: payload.action,
       wpId: payload.wpId
     })
 
