@@ -83,6 +83,23 @@ export async function GET(
 
     // Parse do primeiro job para obter metadados
     const firstJob = jobs[0]
+
+    if (!firstJob) {
+      return addCorrelationIdToResponse(
+        NextResponse.json(
+          {
+            success: false,
+            error: {
+              code: "SYNC_NOT_FOUND",
+              message: "Nenhum job encontrado para este syncId."
+            }
+          },
+          { status: 404 }
+        ),
+        correlationId
+      )
+    }
+
     const firstJobData = JSON.parse(firstJob.data)
     const { siteId, organizationId } = firstJobData
 
@@ -198,6 +215,7 @@ export async function GET(
     )
   }
 }
+
 
 
 
