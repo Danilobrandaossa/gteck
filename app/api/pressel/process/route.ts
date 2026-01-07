@@ -276,8 +276,22 @@ async function processCompleteJson(jsonData: any, siteUrl: string, options: any,
     data: pageResult
   })
 
+  // Se a criação da página falhou, retornar erro
+  if (!pageResult.success) {
+    return {
+      siteUrl,
+      steps,
+      summary: {
+        totalSteps: steps.length,
+        successfulSteps: steps.filter(s => s.status === 'success').length,
+        failedSteps: steps.filter(s => s.status === 'error').length
+      },
+      error: pageResult.message
+    }
+  }
+
   // Passo 4: Adicionar campos ACF (se habilitado)
-  if (options.addAcfFields && jsonData.acf_fields) {
+  if (options.addAcfFields && jsonData.acf_fields && pageResult.pageId) {
     const acfResult = await simulateAcfFields(siteUrl, pageResult.pageId, jsonData.acf_fields)
     
     steps.push({
@@ -289,7 +303,7 @@ async function processCompleteJson(jsonData: any, siteUrl: string, options: any,
   }
 
   // Passo 5: Adicionar SEO (se habilitado)
-  if (options.addSeo) {
+  if (options.addSeo && pageResult.pageId) {
     const seoResult = await simulateSeoOptimization(siteUrl, pageResult.pageId, jsonData)
     
     steps.push({
@@ -302,9 +316,9 @@ async function processCompleteJson(jsonData: any, siteUrl: string, options: any,
 
   return {
     siteUrl,
-    pageUrl: pageResult.pageUrl,
-    editUrl: pageResult.editUrl,
-    pageId: pageResult.pageId,
+    pageUrl: pageResult.pageUrl || '',
+    editUrl: pageResult.editUrl || '',
+    pageId: pageResult.pageId || 0,
     steps,
     summary: {
       totalSteps: steps.length,
