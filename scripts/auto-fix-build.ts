@@ -45,11 +45,25 @@ class BuildAutoFixer {
         stdio: 'pipe',
         cwd: process.cwd()
       })
+      
+      // Verificar se realmente passou (pode ter "Failed to compile" no output mesmo com exit 0)
+      if (output.includes('Failed to compile') || output.includes('Type error')) {
+        const parsedError = this.parseBuildError(output)
+        return { success: false, error: parsedError, output }
+      }
+      
       return { success: true, output }
     } catch (error: any) {
-      const output = error.stdout?.toString() || error.stderr?.toString() || error.message
-      const parsedError = this.parseBuildError(output)
-      return { success: false, error: parsedError, output }
+      // Capturar tanto stdout quanto stderr
+      const stdout = error.stdout?.toString() || ''
+      const stderr = error.stderr?.toString() || ''
+      const output = stdout + '\n' + stderr
+      
+      // Se não houver output útil, usar a mensagem do erro
+      const fullOutput = output.trim() || error.message || 'Erro desconhecido no build'
+      
+      const parsedError = this.parseBuildError(fullOutput)
+      return { success: false, error: parsedError, output: fullOutput }
     }
   }
 
@@ -57,31 +71,40 @@ class BuildAutoFixer {
    * Parseia o primeiro erro do output do build
    */
   private parseBuildError(output: string): BuildError | undefined {
-    // Padrão: ./path/file.ts:LINE:COL
-    const errorMatch = output.match(/\.\/([^\s]+):(\d+):(\d+)\s*\n\s*Type error: (.+)/)
+    // Padrão 1: ./path/file.ts:LINE:COL\nType error: ...
+    let errorMatch = output.match(/\.\/([^\s]+):(\d+):(\d+)\s*\n\s*Type error: (.+?)(?:\n|$)/s)
     
     if (!errorMatch) {
-      // Tentar padrão alternativo
-      const altMatch = output.match(/\.\/([^\s]+):(\d+):(\d+)\s+Type error: (.+)/)
-      if (altMatch) {
-        return {
-          file: altMatch[1],
-          line: parseInt(altMatch[2]),
-          col: parseInt(altMatch[3]),
-          message: altMatch[4],
-          type: this.classifyError(altMatch[4])
-        }
-      }
-      return undefined
+      // Padrão 2: ./path/file.ts:LINE:COL Type error: ... (mesma linha)
+      errorMatch = output.match(/\.\/([^\s]+):(\d+):(\d+)\s+Type error: (.+?)(?:\n|$)/)
+    }
+    
+    if (!errorMatch) {
+      // Padrão 3: ./path/file.ts:LINE:COL\n (linha seguinte tem o erro)
+      errorMatch = output.match(/\.\/([^\s]+):(\d+):(\d+)\s*\n\s*([^\n]+)/)
+    }
+    
+    if (!errorMatch) {
+      // Padrão 4: Failed to compile.\n\n./path/file.ts:LINE:COL
+      errorMatch = output.match(/Failed to compile[.\s]*\.\/([^\s]+):(\d+):(\d+)\s*\n\s*(.+?)(?:\n|$)/s)
+    }
+    
+    if (!errorMatch) {
+      // Padrão 5: Qualquer linha com ./path/file.ts:LINE:COL seguida de mensagem
+      errorMatch = output.match(/\.\/([^\s:]+):(\d+):(\d+)[\s:]+(.+?)(?:\n|$)/)
     }
 
-    return {
-      file: errorMatch[1],
-      line: parseInt(errorMatch[2]),
-      col: parseInt(errorMatch[3]),
-      message: errorMatch[4],
-      type: this.classifyError(errorMatch[4])
+    if (errorMatch) {
+      return {
+        file: errorMatch[1],
+        line: parseInt(errorMatch[2]),
+        col: parseInt(errorMatch[3]),
+        message: errorMatch[4].trim(),
+        type: this.classifyError(errorMatch[4])
+      }
     }
+
+    return undefined
   }
 
   /**
@@ -362,9 +385,15 @@ class BuildAutoFixer {
 
       if (!buildResult.error) {
         console.log('❌ Erro não pôde ser parseado automaticamente')
-        console.log('\n📄 Output do build:')
+        console.log('\n📄 Output completo do build:')
+        console.log('─'.repeat(60))
         console.log(buildResult.output)
+        console.log('─'.repeat(60))
+        console.log('\n💡 Dica: Procure por linhas com padrão:')
+        console.log('   ./caminho/arquivo.ts:linha:coluna')
+        console.log('   Type error: ...')
         console.log('\n⚠️  Correção manual necessária')
+        console.log('\n📝 Para ajudar na correção, envie o output acima')
         return
       }
 
