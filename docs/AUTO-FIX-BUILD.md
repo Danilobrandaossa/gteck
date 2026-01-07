@@ -7,7 +7,7 @@ Script automatizado que corrige erros comuns que quebram `next build` até o bui
 ### No servidor Linux:
 ```bash
 cd /var/www/crm.gteck.com.br
-tsx scripts/auto-fix-build.ts --apply
+npx tsx scripts/auto-fix-build.ts --apply
 ```
 
 ### Ou usando o wrapper:
