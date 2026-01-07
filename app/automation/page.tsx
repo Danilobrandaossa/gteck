@@ -20,11 +20,9 @@ import {
 export default function AutomationPage() {
   const [activeTab, setActiveTab] = useState<'webhooks' | 'triggers' | 'actions' | 'cron'>('webhooks')
   const [showAddModal, setShowAddModal] = useState(false)
-  const [showEditModal, setShowEditModal] = useState<string | null>(null)
-  const [showDeleteModal, setShowDeleteModal] = useState<string | null>(null)
 
-  // Dados mock para demonstra├º├úo
-  const [webhooks, setWebhooks] = useState([
+  // Dados mock para demonstração
+  const [webhooks] = useState([
     {
       id: '1',
       name: 'n8n Content Created',
@@ -57,7 +55,7 @@ export default function AutomationPage() {
     }
   ])
 
-  const [triggers, setTriggers] = useState([
+  const [triggers] = useState([
     {
       id: '1',
       name: 'Content Created Trigger',
@@ -78,7 +76,7 @@ export default function AutomationPage() {
     }
   ])
 
-  const [cronJobs, setCronJobs] = useState([
+  const [cronJobs] = useState([
     {
       id: '1',
       name: 'WordPress Sync',
@@ -314,14 +312,14 @@ export default function AutomationPage() {
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <button 
                         className="cms-btn cms-btn-icon cms-btn-secondary"
-                        onClick={() => setShowEditModal(webhook.id)}
+                        onClick={() => {}}
                         title="Editar"
                       >
                         <Edit style={{ width: '1rem', height: '1rem' }} />
                       </button>
                       <button 
                         className="cms-btn cms-btn-icon cms-btn-secondary"
-                        onClick={() => setShowDeleteModal(webhook.id)}
+                        onClick={() => {}}
                         title="Excluir"
                         style={{ color: 'var(--danger)' }}
                       >
@@ -410,14 +408,14 @@ export default function AutomationPage() {
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <button 
                         className="cms-btn cms-btn-icon cms-btn-secondary"
-                        onClick={() => setShowEditModal(job.id)}
+                        onClick={() => {}}
                         title="Editar"
                       >
                         <Edit style={{ width: '1rem', height: '1rem' }} />
                       </button>
                       <button 
                         className="cms-btn cms-btn-icon cms-btn-secondary"
-                        onClick={() => setShowDeleteModal(job.id)}
+                        onClick={() => {}}
                         title="Excluir"
                         style={{ color: 'var(--danger)' }}
                       >
